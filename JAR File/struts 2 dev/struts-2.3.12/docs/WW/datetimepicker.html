@@ -1,0 +1,803 @@
+   &lt;id name=\"id\"&gt;\n"
+"            &lt;generator class=\"sequence\"/&gt;\n"
+"        &lt;/id&gt;\n"
+"        &lt;property name=\"name\"/&gt;\n"
+"    &lt;/class&gt;\n"
+"\n"
+"&lt;/hibernate-mapping&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:1188
+#, fuzzy, no-c-format
+msgid ""
+"On the other hand, if a child has multiple parents, a many-to-many "
+"association is appropriate."
+msgstr ""
+"D'autre part, si un enfant peut avoir plusieurs parents, une association "
+"plusieurs-à-plusieurs est plus appropriée : "
+
+#. Tag: title
+#: collection_mapping.xml:1192
+#, no-c-format
+msgid ""
+"Many to many <classname>Parent-Child</classname> relationship using "
+"annotations"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:1195
+#, no-c-format
+msgid ""
+"public class Parent {\n"
+"    @Id\n"
+"    @GeneratedValue\n"
+"    private long id;\n"
+"\n"
+"    @ManyToMany\n"
+"    private Set&lt;Child&gt; children;\n"
+"\n"
+"    // getter/setter\n"
+"    ...\n"
+"}\n"
+"\n"
+"\n"
+"public class Child {\n"
+"   @Id\n"
+"   @GeneratedValue\n"
+"   private long id;\n"
+"\n"
+"   private String name;\n"
+"\n"
+"   \n"
+"   // getter/setter\n"
+"   ...\n"
+"}"
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:1199
+#, no-c-format
+msgid ""
+"Many to many <classname>Parent-Child</classname> relationship using mapping "
+"files"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:1202
+#, no-c-format
+msgid ""
+"&lt;hibernate-mapping&gt;\n"
+"\n"
+"    &lt;class name=\"Parent\"&gt;\n"
+"        &lt;id name=\"id\"&gt;\n"
+"            &lt;generator class=\"sequence\"/&gt;\n"
+"        &lt;/id&gt;\n"
+"        &lt;set name=\"children\" table=\"childset\"&gt;\n"
+"            &lt;key column=\"parent_id\"/&gt;\n"
+"            &lt;many-to-many class=\"Child\" column=\"child_id\"/&gt;\n"
+"        &lt;/set&gt;\n"
+"    &lt;/class&gt;\n"
+"\n"
+"    &lt;class name=\"Child\"&gt;\n"
+"        &lt;id name=\"id\"&gt;\n"
+"            &lt;generator class=\"sequence\"/&gt;\n"
+"        &lt;/id&gt;\n"
+"        &lt;property name=\"name\"/&gt;\n"
+"    &lt;/class&gt;\n"
+"\n"
+"&lt;/hibernate-mapping&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:1205
+#, no-c-format
+msgid "Table definitions:"
+msgstr "Définitions des tables :"
+
+#. Tag: title
+#: collection_mapping.xml:1208
+#, no-c-format
+msgid "Table definitions for many to many releationship"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:1210
+#, no-c-format
+msgid ""
+"create table parent ( id bigint not null primary key )\n"
+"create table child ( id bigint not null primary key, name varchar(255) )\n"
+"create table childset ( parent_id bigint not null,\n"
+"                        child_id bigint not null,\n"
+"                        primary key ( parent_id, child_id ) )\n"
+"alter table childset add constraint childsetfk0 (parent_id) references "
+"parent\n"
+"alter table childset add constraint childsetfk1 (child_id) references child"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:1213
+#, fuzzy, no-c-format
+msgid ""
+"For more examples and a complete explanation of a parent/child relationship "
+"mapping, see <xref linkend=\"example-parentchild\"/> for more information. "
+"Even more complex association mappings are covered in the next chapter."
+msgstr ""
+"Pour plus d'exemples et une revue complète du mappage de la relation parent/"
+"enfant, consultez le <xref linkend=\"example-parentchild\" />. "
+
+#~ msgid ""
+#~ "Hibernate requires that persistent collection-valued fields be declared "
+#~ "as an interface type. For example:"
+#~ msgstr ""
+#~ "Hibernate requiert que les champs contenant des collections persistantes "
+#~ "soient déclarés comme des types d'interface, par exemple : "
+
+#~ msgid "Collection mappings"
+#~ msgstr "Mapper une collection"
+
+#~ msgid ""
+#~ "There are quite a range of mappings that can be generated for collections "
+#~ "that cover many common relational models. We suggest you experiment with "
+#~ "the schema generation tool so that you understand how various mapping "
+#~ "declarations translate to database tables."
+#~ msgstr ""
+#~ "Il y a une grande variété de mappages qui peuvent être générés pour les "
+#~ "collections, couvrant beaucoup de nombreux modèles relationnels communs. "
+#~ "Nous vous suggérons d'expérimenter avec l'outil de génération de schéma "
+#~ "pour cerner comment les différentes déclarations de mappage se traduisent "
+#~ "vers des tables de bases de données. "
+
+#~ msgid "Collection elements"
+#~ msgstr "Les éléments d'une collection"
+
+#~ msgid ""
+#~ "The contained type is referred to as the <emphasis>collection element "
+#~ "type</emphasis>. Collection elements are mapped by <literal>&lt;"
+#~ "element&gt;</literal> or <literal>&lt;composite-element&gt;</literal>, or "
+#~ "in the case of entity references, with <literal>&lt;one-to-many&gt;</"
+#~ "literal> or <literal>&lt;many-to-many&gt;</literal>. The first two map "
+#~ "elements with value semantics, the next two are used to map entity "
+#~ "associations."
+#~ msgstr ""
+#~ "Le type contenu est référencé comme le <emphasis>type de l'élément de la "
+#~ "collection</emphasis>. Les éléments de la collections sont mappés par "
+#~ "<literal>&lt;element&gt;</literal> ou <literal>&lt;composite-element&gt;</"
+#~ "literal>, ou dans le cas des références d'entité, avec <literal>&lt;one-"
+#~ "to-many&gt;</literal> ou <literal>&lt;many-to-many&gt;</literal>. Les "
+#~ "deux premiers mappent des éléments avec une sémantique de valeur, les "
+#~ "deux suivants sont utilisés pour mapper des associations d'entité."
+
+#~ msgid ""
+#~ "All collection mappings, except those with set and bag semantics, need an "
+#~ "<emphasis>index column</emphasis> in the collection table. An index "
+#~ "column is a column that maps to an array index, or <literal>List</"
+#~ "literal> index, or <literal>Map</literal> key. The index of a "
+#~ "<literal>Map</literal> may be of any basic type, mapped with <literal>&lt;"
+#~ "map-key&gt;</literal>. It can be an entity reference mapped with "
+#~ "<literal>&lt;map-key-many-to-many&gt;</literal>, or it can be a composite "
+#~ "type mapped with <literal>&lt;composite-map-key&gt;</literal>. The index "
+#~ "of an array or list is always of type <literal>integer</literal> and is "
+#~ "mapped using the <literal>&lt;list-index&gt;</literal> element. The "
+#~ "mapped column contains sequential integers that are numbered from zero by "
+#~ "default."
+#~ msgstr ""
+#~ "Tous les mappages de collection, exceptés ceux avec les sémantiques "
+#~ "d'ensemble (set) et de sac (bag), ont besoin d'une <emphasis>colonne "
+#~ "d'index</emphasis> dans la table de la collection - une colonne qui mappe "
+#~ "un index de tableau, ou un index de <literal>List</literal>, ou une clé "
+#~ "de <literal>Map</literal>. L'index d'une <literal>Map</literal> peut être "
+#~ "n'importe quel type basique, mappé avec <literal>&lt;map-key&gt;</"
+#~ "literal>, ou peut être une référence d'entité mappée avec <literal>&lt;"
+#~ "map-key-many-to-many&gt;</literal>, ou peut être un type composé, mappé "
+#~ "avec <literal>&lt;composite-map-key&gt;</literal>. L'index d'un tableau "
+#~ "ou d'une liste est toujours de type <literal>integer</literal> et est "
+#~ "mappé en utilisant l'élément <literal>&lt;list-index&gt;</literal>. Les "
+#~ "colonnes mappées contiennent des entiers séquentiels (numérotés à partir "
+#~ "de zéro par défaut). "
+
+#~ msgid ""
+#~ "Any collection of values or many-to-many associations requires a "
+#~ "dedicated <emphasis>collection table</emphasis> with a foreign key column "
+#~ "or columns, <emphasis>collection element column</emphasis> or columns, "
+#~ "and possibly an index column or columns."
+#~ msgstr ""
+#~ "Toute collection de valeurs ou association plusieurs-à-plusieurs requiert "
+#~ "une <emphasis>table de collection</emphasis> avec une(des) colonne(s) de "
+#~ "clé étrangère, une(des) <emphasis>colonne(s) d'élément de la collection</"
+#~ "emphasis> ou des colonnes et éventuellement une(des) colonne(s) d'index. "
+
+#~ msgid ""
+#~ "A <emphasis>many-to-many association</emphasis> is specified using the "
+#~ "<literal>&lt;many-to-many&gt;</literal> element."
+#~ msgstr ""
+#~ "Une association <emphasis>many-to-many</emphasis> est spécifiée en "
+#~ "utilisant l'élément <literal>&lt;many-to-many&gt;</literal>."
+
+#~ msgid ""
+#~ "<literal>column</literal> (optional): the name of the element foreign key "
+#~ "column."
+#~ msgstr ""
+#~ "<literal>colonne</literal> (optionnel) : le nom de la colonne de clés "
+#~ "étrangères des éléments."
+
+#~ msgid ""
+#~ "<literal>formula</literal> (optional): an SQL formula used to evaluate "
+#~ "the element foreign key value."
+#~ msgstr ""
+#~ "<literal>formula</literal> (optionnel): formule SQL utilisée pour évaluer "
+#~ "la valeur des clés étrangères des éléments."
+
+#~ msgid ""
+#~ "<literal>fetch</literal> (optional - defaults to <literal>join</"
+#~ "literal>): enables outer-join or sequential select fetching for this "
+#~ "association. This is a special case; for full eager fetching in a single "
+#~ "<literal>SELECT</literal> of an entity and its many-to-many relationships "
+#~ "to other entities, you would enable <literal>join</literal> fetching,not "
+#~ "only of the collection itself, but also with this attribute on the "
+#~ "<literal>&lt;many-to-many&gt;</literal> nested element."
+#~ msgstr ""
+#~ "<literal>fetch</literal> (optionnel - par défaut <literal>join</"
+#~ "literal>): permet la récupération par jointures externes ou bien par "
+#~ "selects séquentiels pour cette association. Il s'agit d'un cas "
+#~ "particulier de récupération. Pour que la récupération soit toujours "
+#~ "rapportée en un seul <literal>SELECT</literal> d'entité ou à partir de "
+#~ "ses relations many-to-many à d'autres entités, vous devrez activer la "
+#~ "récupération <literal>join</literal>, non seulement pour la collection "
+#~ "elle-même, mais aussi avec cet attribut qui se trouve sur l'élément "
+#~ "<literal>&lt;many-to-many&gt;</literal>."
+
+#~ msgid ""
+#~ "<literal>unique</literal> (optional): enables the DDL generation of a "
+#~ "unique constraint for the foreign-key column. This makes the association "
+#~ "multiplicity effectively one-to-many."
+#~ msgstr ""
+#~ "<literal>unique</literal> (optionnel): permet la génération DDL d'une "
+#~ "seule contrainte pour la colonne de la clé étrangère. Cela transforme la "
+#~ "muticiplicité de l'association en one-to-many."
+
+#~ msgid ""
+#~ "<literal>not-found</literal> (optional - defaults to <literal>exception</"
+#~ "literal>): specifies how foreign keys that reference missing rows will be "
+#~ "handled: <literal>ignore</literal> will treat a missing row as a null "
+#~ "association."
+#~ msgstr ""
+#~ "<literal>not-found</literal> (optionnel - par défaut <literal>exception</"
+#~ "literal>) : spécifie comment les clés étrangères cachées qui référencent "
+#~ "des lignes manquantes seront gérées : <literal>ignore</literal> traitera "
+#~ "une ligne manquante comme une association nulle."
+
+#~ msgid ""
+#~ "<literal>property-ref</literal> (optional): the name of a property of the "
+#~ "associated class that is joined to this foreign key. If not specified, "
+#~ "the primary key of the associated class is used."
+#~ msgstr ""
+#~ "<literal>property-ref</literal> (optionnel): nom d'une propriété de la "
+#~ "classe associée associée à une clé étrangère. Si elle n'est pas précisée, "
+#~ "la clé primaire de la classe associée sera alors utilisée."
+
+#~ msgid "Here are some examples."
+#~ msgstr "Voici quelques exemples :"
+
+#~ msgid "A set of strings:"
+#~ msgstr "Un ensemble de chaînes de caractères :"
+
+#~ msgid ""
+#~ "A bag containing integers with an iteration order determined by the "
+#~ "<literal>order-by</literal> attribute:"
+#~ msgstr ""
+#~ "Un sac contenant des entiers (avec un ordre d'itération déterminé par "
+#~ "l'attribut <literal>order-by</literal>) : "
+
+#~ msgid "An array of entities, in this case, a many-to-many association:"
+#~ msgstr ""
+#~ "Un tableau d'entités - dans ce cas, une association plusieurs-à-"
+#~ "plusieurs : "
+
+#~ msgid "A map from string indices to dates:"
+#~ msgstr "Une map de chaînes de caractères vers des dates :"
+
+#~ msgid "A list of components (this is discussed in the next chapter):"
+#~ msgstr "Une liste de composants (traité dans le prochain chapitre) : "
+
+#~ msgid "One-to-many associations"
+#~ msgstr "Associations un-à-plusieurs"
+
+#~ msgid ""
+#~ "A <emphasis>one-to-many association</emphasis> links the tables of two "
+#~ "classes via a foreign key with no intervening collection table. This "
+#~ "mapping loses certain semantics of normal Java collections:"
+#~ msgstr ""
+#~ "Une <emphasis>association un-à-plusieurs</emphasis> lie les tables de "
+#~ "deux classes par une clé étrangère, sans l'intervention d'une table de "
+#~ "collection. Ce mappage perd certaines sémantiques des collections Java "
+#~ "normales : "
+
+#~ msgid ""
+#~ "The following example shows a map of <literal>Part</literal> entities by "
+#~ "name, where <literal>partName</literal> is a persistent property of "
+#~ "<literal>Part</literal>. Notice the use of a formula-based index:"
+#~ msgstr ""
+#~ "Cet exemple montre une map d'entités <literal>Part</literal> par nom (où "
+#~ "<literal>partName</literal> est une propriété persistante de "
+#~ "<literal>Part</literal>). Notez l'utilisation d'un index basé sur une "
+#~ "formule :"
+
+#~ msgid ""
+#~ "Hibernate supports collections implementing <literal>java.util.SortedMap</"
+#~ "literal> and <literal>java.util.SortedSet</literal>. You must specify a "
+#~ "comparator in the mapping file:"
+#~ msgstr ""
+#~ "Hibernate supporte des collections implémentant <literal>java.util."
+#~ "SortedMap</literal> et <literal>java.util.SortedSet</literal>. Vous devez "
+#~ "spécifier un comparateur dans le fichier de mappage :"
+
+#~ msgid ""
+#~ "A final alternative is to use composite elements, which will be discussed "
+#~ "later."
+#~ msgstr ""
+#~ "Une alternative finale est d'utiliser des éléments composites, dont nous "
+#~ "discuterons plus tard. "
+
+#~ msgid ""
+#~ "Even more complex association mappings are covered in the next chapter."
+#~ msgstr ""
+#~ "Des mappages d'association plus exotiques sont possibles, nous "
+#~ "cataloguerons toutes les possibilités dans le prochain chapitre. "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           # translation of configuration.po to French
+# Myriam Malga <mmalga@redhat.com>, 2007.
+# Xi HUANG <xhuang@redhat.com>, 2007.
+# Corina Roe <croe@redhat.com>, 2009, 2010.
+# translation of Collection_Mapping.po to
+msgid ""
+msgstr ""
+"Project-Id-Version: configuration\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2010-07-20 21:02+0000\n"
+"PO-Revision-Date: 2010-01-05 09:05+1000\n"
+"Last-Translator: Corina Roe <croe@redhat.com>\n"
+"Language-Team: French <i18@redhat.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#. Tag: title
+#: configuration.xml:31
+#, no-c-format
+msgid "Configuration"
+msgstr "Configuration"
+
+#. Tag: para
+#: configuration.xml:33
+#, no-c-format
+msgid ""
+"Hibernate is designed to operate in many different environments and, as "
+"such, there is a broad range of configuration parameters. Fortunately, most "
+"have sensible default values and Hibernate is distributed with an example "
+"<literal>hibernate.properties</literal> file in <literal>etc/</literal> that "
+"displays the various options. Simply put the example file in your classpath "
+"and customize it to suit your needs."
+msgstr ""
+"Hibernate est conçu pour fonctionner dans de nombreux environnements , c'est "
+"pourquoi il existe beaucoup de paramètres de configuration. Heureusement, la "
+"plupart ont des valeurs par défaut appropriées et la Hibernate inclut un "
+"fichier d'exemples <literal>hibernate.properties</literal> dans le "
+"répertoire <literal>etc/</literal> qui fournit  les différentes options. "
+"Vous n'avez qu'à placer ce fichier dans votre classpath et à l'adapter à vos "
+"besoins."
+
+#. Tag: title
+#: configuration.xml:41
+#, no-c-format
+msgid "Programmatic configuration"
+msgstr "Configuration par programmation"
+
+#. Tag: para
+#: configuration.xml:43
+#, no-c-format
+msgid ""
+"An instance of <classname>org.hibernate.cfg.Configuration</classname> "
+"represents an entire set of mappings of an application's Java types to an "
+"SQL database. The <classname>org.hibernate.cfg.Configuration</classname> is "
+"used to build an immutable <interfacename>org.hibernate.SessionFactory</"
+"interfacename>. The mappings are compiled from various XML mapping files."
+msgstr ""
+"Une instance de <literal>org.hibernate.cfg.Configuration</literal> "
+"représente un ensemble de mappages des classes Java d'une application vers "
+"la base de données SQL. La <literal>Configuration</literal> est utilisée "
+"pour construire un objet (immuable) <literal>SessionFactory</literal>. Les "
+"mappages sont constitués d'un ensemble de fichiers de mappage XML. "
+
+#. Tag: para
+#: configuration.xml:51
+#, no-c-format
+msgid ""
+"You can obtain a <classname>org.hibernate.cfg.Configuration</classname> "
+"instance by instantiating it directly and specifying XML mapping documents. "
+"If the mapping files are in the classpath, use <literal>addResource()</"
+"literal>. For example:"
+msgstr ""
+"Vous pouvez obtenir une instance de <literal>Configuration</literal> en "
+"l'instanciant directement et en spécifiant la liste des documents XML de "
+"mappage. Si les fichiers de mappage sont dans le classpath, vous pouvez "
+"utiliser la méthode <literal>addResource()</literal> : "
+
+#. Tag: programlisting
+#: configuration.xml:57
+#, no-c-format
+msgid ""
+"Configuration cfg = new Configuration()\n"
+"    .addResource(\"Item.hbm.xml\")\n"
+"    .addResource(\"Bid.hbm.xml\");"
+msgstr ""
+
+#. Tag: para
+#: configuration.xml:59
+#, no-c-format
+msgid ""
+"An alternative way is to specify the mapped class and allow Hibernate to "
+"find the mapping document for you:"
+msgstr ""
+"Une solution alternative consiste à spécifier la classe mappée et à donner à "
+"Hibernate la possibilité de trouver les documents de mappage pour vous :"
+
+#. Tag: programlisting
+#: configuration.xml:62
+#, no-c-format
+msgid ""
+"Configuration cfg = new Configuration()\n"
+"    .addClass(org.hibernate.auction.Item.class)\n"
+"    .addClass(org.hibernate.auction.Bid.class);"
+msgstr ""
+
+#. Tag: para
+#: configuration.xml:64
+#, no-c-format
+msgid ""
+"Hibernate will then search for mapping files named <filename>/org/hibernate/"
+"auction/Item.hbm.xml</filename> and <filename>/org/hibernate/auction/Bid.hbm."
+"xml</filename> in the classpath. This approach eliminates any hardcoded "
+"filenames."
+msgstr ""
+"Hibernate va rechercher les fichiers de mappages <literal>/org/hibernate/"
+"auction/Item.hbm.xml</literal> et <literal>/org/hibernate/auction/Bid.hbm."
+"xml</literal> dans le classpath. Cette approche élimine les noms de fichiers "
+"en dur. "
+
+#. Tag: para
+#: configuration.xml:69
+#, no-c-format
+msgid ""
+"A <classname>org.hibernate.cfg.Configuration</classname> also allows you to "
+"specify configuration properties. For example:"
+msgstr ""
+"Une <literal>Configuration</literal> vous permet également de préciser des "
+"propriétés de configuration. Par exemple :"
+
+#. Tag: programlisting
+#: configuration.xml:72
+#, no-c-format
+msgid ""
+"Configuration cfg = new Configuration()\n"
+"    .addClass(org.hibernate.auction.Item.class)\n"
+"    .addClass(org.hibernate.auction.Bid.class)\n"
+"    .setProperty(\"hibernate.dialect\", \"org.hibernate.dialect."
+"MySQLInnoDBDialect\")\n"
+"    .setProperty(\"hibernate.connection.datasource\", \"java:comp/env/jdbc/"
+"test\")\n"
+"    .setProperty(\"hibernate.order_updates\", \"true\");"
+msgstr ""
+
+#. Tag: para
+#: configuration.xml:74
+#, no-c-format
+msgid ""
+"This is not the only way to pass configuration properties to Hibernate. Some "
+"alternative options include:"
+msgstr ""
+"Ce n'est pas le seul moyen de passer des propriétés de configuration à "
+"Hibernate. Les différentes options sont : "
+
+#. Tag: para
+#: configuration.xml:79
+#, no-c-format
+msgid ""
+"Pass an instance of <classname>java.util.Properties</classname> to "
+"<literal>Configuration.setProperties()</literal>."
+msgstr ""
+"Passer une instance de <literal>java.util.Properties</literal> à "
+"<literal>Configuration.setProperties()</literal>. "
+
+#. Tag: para
+#: configuration.xml:84
+#, no-c-format
+msgid ""
+"Place a file named <filename>hibernate.properties</filename> in a root "
+"directory of the classpath."
+msgstr ""
+"Placer <literal>hibernate.properties</literal> dans un répertoire racine du "
+"chemin de classe."
+
+#. Tag: para
+#: configuration.xml:89
+#, no-c-format
+msgid ""
+"Set <literal>System</literal> properties using <literal>java -"
+"Dproperty=value</literal>."
+msgstr ""
+"Positionner les propriétés <literal>System</literal> en utilisant "
+"<literal>java -Dproperty=value</literal>."
+
+#. Tag: para
+#: configuration.xml:94
+#, no-c-format
+msgid ""
+"Include <literal>&lt;property&gt;</literal> elements in <literal>hibernate."
+"cfg.xml</literal> (this is discussed later)."
+msgstr ""
+"Inclure des éléments <literal>&lt;property&gt;</literal> dans le fichier "
+"<literal>hibernate.cfg.xml</literal> (voir plus loin). "
+
+#. Tag: para
+#: configuration.xml:99
+#, no-c-format
+msgid ""
+"If you want to get started quickly<filename>hibernate.properties</filename> "
+"is the easiest approach."
+msgstr ""
+"Si vous souhaitez démarrer rapidement, <filename>hibernate.properties</"
+"filename> est l'approche la plus facile."
+
+#. Tag: para
+#: configuration.xml:103
+#, no-c-format
+msgid ""
+"The <classname>org.hibernate.cfg.Configuration</classname> is intended as a "
+"startup-time object that will be discarded once a <literal>SessionFactory</"
+"literal> is created."
+msgstr ""
+"<classname>org.hibernate.cfg.Configuration</classname> est un objet de "
+"démarrage qui sera supprimé une fois qu'une <literal>SessionFactory</"
+"literal> aura été créée."
+
+#. Tag: title
+#: configuration.xml:109
+#, no-c-format
+msgid "Obtaining a SessionFactory"
+msgstr "Obtenir une SessionFactory"
+
+#. Tag: para
+#: configuration.xml:111
+#, fuzzy, no-c-format
+msgid ""
+"When all mappings have been parsed by the <classname>org.hibernate.cfg."
+"Configuration</classname>, the application must obtain a factory for "
+"<interfacename>org.hibernate.Session</interfacename> instances. This factory "
+"is intended to be shared by all application threads:"
+msgstr ""
+"Une fois que tous les mappages ont été parsés par la <literal>Configuration</"
+"literal>, l'application doit obtenir une fabrique d'instances de "
+"<literal>Session</literal>. Cette fabrique sera partagée entre tous les "
+"threads de l'application : "
+
+#. Tag: programlisting
+#: configuration.xml:117
+#, no-c-format
+msgid "SessionFactory sessions = cfg.buildSessionFactory();"
+msgstr ""
+
+#. Tag: para
+#: configuration.xml:119
+#, fuzzy, no-c-format
+msgid ""
+"Hibernate does allow your application to instantiate more than one "
+"<interfacename>org.hibernate.SessionFactory</interfacename>. This is useful "
+"if you are using more than one database."
+msgstr ""
+"Hibernate permet à votre application d'instancier plus d'une "
+"<literal>SessionFactory</literal>. Cela est pratique lorsque vous utilisez "
+"plus d'une base de données. "
+
+#. Tag: title
+#: configuration.xml:125
+#, no-c-format
+msgid "JDBC connections"
+msgstr "Connexions JDBC "
+
+#. Tag: para
+#: configuration.xml:127
+#, no-c-format
+msgid ""
+"It is advisable to have the <interfacename>org.hibernate.SessionFactory</"
+"interfacename> create and pool JDBC connections for you. If you take this "
+"approach, opening a <interfacename>org.hibernate.Session</interfacename> is "
+"as simple as:"
+msgstr ""
+"Il est conseillé que <interfacename>org.hibernate.SessionFactory</"
+"interfacename> crée les connexions JDBC et les mette dans un pool pour vous. "
+"Si vous suivez cette approche, ouvrir une <interfacename>org.hibernate."
+"Session</interfacename> est aussi simple que :"
+
+#. Tag: programlisting
+#: configuration.xml:133
+#, no-c-format
+msgid "Session session = sessions.openSession(); // open a new Session"
+msgstr ""
+
+#. Tag: para
+#: configuration.xml:135
+#, no-c-format
+msgid ""
+"Once you start a task that requires access to the database, a JDBC "
+"connection will be obtained from the pool."
+msgstr ""
+"Dès que vous initierez une action qui requiert un accès à la base de "
+"données, une connexion JDBC sera récupérée dans le pool."
+
+#. Tag: para
+#: configuration.xml:138
+#, no-c-format
+msgid ""
+"Before you can do this, you first need to pass some JDBC connection "
+"properties to Hibernate. All Hibernate property names and semantics are "
+"defined on the class <classname>org.hibernate.cfg.Environment</classname>. "
+"The most important settings for JDBC connection configuration are outlined "
+"below."
+msgstr ""
+"À cet effet, il faut passer les propriétés de la connexion JDBC à Hibernate. "
+"Tous les noms des propriétés Hibernate et leur signification sont définies "
+"dans la classe <literal>org.hibernate.cfg.Environment</literal>. Nous allons "
+"maintenant décrire les paramètres de configuration des connexions JDBC les "
+"plus importants. "
+
+#. Tag: para
+#: configuration.xml:144
+#, no-c-format
+msgid ""
+"Hibernate will obtain and pool connections using <classname>java.sql."
+"DriverManager</classname> if you set the following properties:"
+msgstr ""
+"Hibernate obtiendra des connexions (et les mettra dans un pool) en utilisant "
+"<literal>java.sql.DriverManager</literal> si vous positionnez les paramètres "
+"de la manière suivante : "
+
+#. Tag: title
+#: configuration.xml:149
+#, no-c-format
+msgid "Hibernate JDBC Properties"
+msgstr "Propriétés JDBC de Hibernate"
+
+#. Tag: entry
+#: configuration.xml:158 configuration.xml:236 configuration.xml:327
+#: configuration.xml:495 configuration.xml:657 configuration.xml:753
+#: configuration.xml:826
+#, no-c-format
+msgid "Property name"
+msgstr "Nom de la propriété"
+
+#. Tag: entry
+#: configuration.xml:160 configuration.xml:238 configuration.xml:329
+#: configuration.xml:497 configuration.xml:659 configuration.xml:755
+#: configuration.xml:828
+#, no-c-format
+msgid "Purpose"
+msgstr "Fonction"
+
+#. Tag: property
+#: configuration.xml:166
+#, fuzzy, no-c-format
+msgid "hibernate.connection.driver_class"
+msgstr "<property>hibernate.connection.driver_class</property>"
+
+#. Tag: emphasis
+#: configuration.xml:168
+#, fuzzy, no-c-format
+msgid "JDBC driver class"
+msgstr "<emphasis>Classe de pilote JDBC</emphasis>"
+
+#. Tag: property
+#: configuration.xml:172
+#, fuzzy, no-c-format
+msgid "hibernate.connection.url"
+msgstr "<property>hibernate.connection.url</property>"
+
+#. Tag: emphasis
+#: configuration.xml:174
+#, no-c-format
+msgid "JDBC URL"
+msgstr ""
+
+#. Tag: property
+#: configuration.xml:178 configuration.xml:265
+#, fuzzy, no-c-format
+msgid "hibernate.connection.username"
+msgstr "<property>hibernate.connection.username</property>"
+
+#. Tag: emphasis
+#: configuration.xml:180
+#, no-c-format
+msgid "database user"
+msgstr ""
+
+#. Tag: property
+#: configuration.xml:184 configuration.xml:271
+#, fuzzy, no-c-format
+msgid "hibernate.connection.password"
+msgstr "<property>hibernate.connection.password</property>"
+
+#. Tag: emphasis
+#: configuration.xml:186
+#, fuzzy, no-c-format
+msgid "database user password"
+msgstr "<emphasis>mot de passe de l'utilisateur de base de données</emphasis>"
+
+#. Tag: property
+#: configuration.xml:190
+#, fuzzy, no-c-format
+msgid "hibernate.connection.pool_size"
+msgstr "<property>hibernate.connection.pool_size</property>"
+
+#. Tag: emphasis
+#: configuration.xml:192
+#, fuzzy, no-c-format
+msgid "maximum number of pooled connections"
+msgstr "<emphasis>nombre maximum de connexions dans le pool</emphasis>"
+
+#. Tag: para
+#: configuration.xml:199
+#, no-c-format
+msgid ""
+"Hibernate's own connection pooling algorithm is, however, quite rudimentary. "
+"It is intended to help you get started and is <emphasis>not intended for use "
+"in a production system</emphasis>, or even for performance testing. You "
+"should use a third party pool for best performance and stability. Just "
+"replace the <property>hibernate.connection.pool_size</property> property "
+"with connection pool specific settings. This will turn off Hibernate's "
+"internal pool. For example, you might like to use c3p0."
+msgstr ""
+"L'algorithme natif de pool de connexions de Hibernate est plutôt "
+"rudimentaire. Il a été conçu dans le but de vous aider à démarrer et "
+"<emphasis>n'est pas prévu pour un système en production</emphasis> ou même "
+"pour un test de performance. Utilisez plutôt un pool tiers pour de "
+"meilleures performances et une meilleure stabilité : remplacez la propriété "
+"<literal>hibernate.connection.pool_size</literal> avec les propriétés "
+"spécifiques au pool de connexions que vous avez choisi. Cela désactivera le "
+"pool de connexions interne de Hibernate. Vous pouvez par exemple utiliser "
+"C3P0. "
+
+#. Tag: para
+#: configuration.xml:208
+#, no-c-format
+msgid ""
+"C3P0 is an open source JDBC connection pool distributed along with Hibernate "
+"in the <filename>lib</filename> directory. Hibernate will use its "
+"<classname>org.hibernate.connection.C3P0ConnectionProvider</classname> for "
+"connection pooling if you set <property>hibernate.c3p0.*</property> "
+"properties. If you would like to use Proxool, refer to the packaged "
+"<filename>hibernate.properties</filename> and the Hibernate web site for "
+"more information."
+msgstr ""
+"C3P0 est un pool de connexions JDBC open source distribué avec Hibernate "
+"dans le répertoire <literal>lib</literal>. Hibernate utilisera son provider "
+"<literal>C3P0ConnectionProvider</literal> pour le pool de connexions si vous "
+"configurez les propriétés <literal>hibernate.c3p0.*</literal>. Si vous "
+"voulez utiliser Proxool, référez vous au groupe de propriétés "
+"<literal>hibernate.properties</literal> correspondant et consultez le site "
+"web Hibernate pour plus d'informations. "
+
+#. Tag: para
+#: configuration.xml:216
+#, no-c-format
+msgid ""
+"The following is an example <filename>hibernate.properties</filename> file "
+"for c3p0:"
+msgstr ""
+"Voici un exemple de fichier <literal>hibernate.properties</literal> pour "
+"C3P0: "
+
+#. Tag: programlisting
+#: configuration.xml:219
+#, no-c-format
+msgid ""
+"hibernate.connection.driver_class = org.postgresql.Dr

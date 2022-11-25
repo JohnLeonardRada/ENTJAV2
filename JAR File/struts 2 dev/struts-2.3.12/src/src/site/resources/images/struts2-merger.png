@@ -1,0 +1,613 @@
+bsp;val)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLocale(java.lang.String, java.util.Locale)"><!-- --></A><H3>
+setLocale</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setLocale</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Locale.html?is-external=true" title="class or interface in java.util">Locale</A>&nbsp;locale)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBigDecimal(java.lang.String, java.math.BigDecimal)"><!-- --></A><H3>
+setBigDecimal</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setBigDecimal</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/math/BigDecimal.html?is-external=true" title="class or interface in java.math">BigDecimal</A>&nbsp;number)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBigInteger(java.lang.String, java.math.BigInteger)"><!-- --></A><H3>
+setBigInteger</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setBigInteger</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/math/BigInteger.html?is-external=true" title="class or interface in java.math">BigInteger</A>&nbsp;number)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDate(java.lang.String, java.util.Date)"><!-- --></A><H3>
+setDate</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setDate</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</A>&nbsp;date)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTime(java.lang.String, java.util.Date)"><!-- --></A><H3>
+setTime</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setTime</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</A>&nbsp;date)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTimestamp(java.lang.String, java.util.Date)"><!-- --></A><H3>
+setTimestamp</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setTimestamp</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</A>&nbsp;date)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCalendar(java.lang.String, java.util.Calendar)"><!-- --></A><H3>
+setCalendar</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setCalendar</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?is-external=true" title="class or interface in java.util">Calendar</A>&nbsp;calendar)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCalendarDate(java.lang.String, java.util.Calendar)"><!-- --></A><H3>
+setCalendarDate</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setCalendarDate</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?is-external=true" title="class or interface in java.util">Calendar</A>&nbsp;calendar)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEntity(int, java.lang.Object)"><!-- --></A><H3>
+setEntity</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setEntity</B>(int&nbsp;position,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;val)</PRE>
+<DL>
+<DD>Bind an instance of a mapped persistent class to a JDBC-style query parameter.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>position</CODE> - the position of the parameter in the query
+ string, numbered from <tt>0</tt>.<DD><CODE>val</CODE> - a non-null instance of a persistent class</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEntity(java.lang.String, java.lang.Object)"><!-- --></A><H3>
+setEntity</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setEntity</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;val)</PRE>
+<DL>
+<DD>Bind an instance of a mapped persistent class to a named query parameter.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the parameter<DD><CODE>val</CODE> - a non-null instance of a persistent class</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setResultTransformer(org.hibernate.transform.ResultTransformer)"><!-- --></A><H3>
+setResultTransformer</H3>
+<PRE>
+<A HREF="../../org/hibernate/Query.html" title="interface in org.hibernate">Query</A> <B>setResultTransformer</B>(<A HREF="../../org/hibernate/transform/ResultTransformer.html" title="interface in org.hibernate.transform">ResultTransformer</A>&nbsp;transformer)</PRE>
+<DL>
+<DD>Set a strategy for handling the query results. This can be used to change
+ "shape" of the query result.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>transformer</CODE> - The transformer to apply
+<DT><B>Returns:</B><DD>this (for method chaining)</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Query.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../org/hibernate/PropertyValueException.html" title="class in org.hibernate"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../org/hibernate/QueryException.html" title="class in org.hibernate"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?org/hibernate/Query.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Query.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &copy; 2001-2010 <a href="http://redhat.com">Red Hat, Inc.</a>  All Rights Reserved.
+</BODY>
+</HTML>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- Generated by javadoc (build 1.6.0_07) on Wed Feb 08 19:33:00 CST 2012 -->
+<TITLE>
+Deprecated List (Hibernate JavaDocs)
+</TITLE>
+
+<META NAME="date" CONTENT="2012-02-08">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Deprecated List (Hibernate JavaDocs)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Package</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Use</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Deprecated</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html?deprecated-list.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="deprecated-list.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<CENTER>
+<H2>
+<B>Deprecated API</B></H2>
+</CENTER>
+<HR SIZE="4" NOSHADE>
+<B>Contents</B><UL>
+<LI><A HREF="#interface">Deprecated Interfaces</A>
+<LI><A HREF="#class">Deprecated Classes</A>
+<LI><A HREF="#annotation_type">Deprecated Annotation Types</A>
+<LI><A HREF="#field">Deprecated Fields</A>
+<LI><A HREF="#method">Deprecated Methods</A>
+<LI><A HREF="#constructor">Deprecated Constructors</A>
+<LI><A HREF="#enum_constant">Deprecated Enum Constants</A>
+<LI><A HREF="#annotation_type_member">Deprecated Annotation Type Elements</A>
+</UL>
+
+<A NAME="interface"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Deprecated Interfaces</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/AbstractComponentType.html" title="interface in org.hibernate.type">org.hibernate.type.AbstractComponentType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>in favor of <A HREF="org/hibernate/type/CompositeType.html" title="interface in org.hibernate.type"><CODE>CompositeType</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/cache/Cache.html" title="interface in org.hibernate.cache">org.hibernate.cache.Cache</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 3.3; see <a href="org/hibernate/cache/package.html"/> for details.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/cache/CacheConcurrencyStrategy.html" title="interface in org.hibernate.cache">org.hibernate.cache.CacheConcurrencyStrategy</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 3.3; see <a href="org/hibernate/cache/package.html"/> for details.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/cache/CacheProvider.html" title="interface in org.hibernate.cache">org.hibernate.cache.CacheProvider</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 3.3; see <a href="org/hibernate/cache/package.html"/> for details.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/cfg/ExtendedMappings.html" title="interface in org.hibernate.cfg">org.hibernate.cfg.ExtendedMappings</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>All functionality has been moved up to <A HREF="org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg"><CODE>Mappings</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/hql/ast/tree/ParameterContainer.html" title="interface in org.hibernate.hql.ast.tree">org.hibernate.hql.ast.tree.ParameterContainer</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I></I>&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="class"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Deprecated Classes</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/AbstractBynaryType.html" title="class in org.hibernate.type">org.hibernate.type.AbstractBynaryType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the <A HREF="org/hibernate/type/AbstractStandardBasicType.html" title="class in org.hibernate.type"><CODE>AbstractStandardBasicType</CODE></A> approach instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/AbstractCharArrayType.html" title="class in org.hibernate.type">org.hibernate.type.AbstractCharArrayType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the <A HREF="org/hibernate/type/AbstractStandardBasicType.html" title="class in org.hibernate.type"><CODE>AbstractStandardBasicType</CODE></A> approach instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/AbstractLobType.html" title="class in org.hibernate.type">org.hibernate.type.AbstractLobType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I></I>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/AbstractLongBinaryType.html" title="class in org.hibernate.type">org.hibernate.type.AbstractLongBinaryType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the <A HREF="org/hibernate/type/AbstractStandardBasicType.html" title="class in org.hibernate.type"><CODE>AbstractStandardBasicType</CODE></A> approach instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/AbstractLongStringType.html" title="class in org.hibernate.type">org.hibernate.type.AbstractLongStringType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the <A HREF="org/hibernate/type/AbstractStandardBasicType.html" title="class in org.hibernate.type"><CODE>AbstractStandardBasicType</CODE></A> approach instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/bytecode/cglib/AccessOptimizerAdapter.html" title="class in org.hibernate.bytecode.cglib">org.hibernate.bytecode.cglib.AccessOptimizerAdapter</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/cfg/AnnotationConfiguration.html" title="class in org.hibernate.cfg">org.hibernate.cfg.AnnotationConfiguration</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>All functionality has been moved to <A HREF="org/hibernate/cfg/Configuration.html" title="class in org.hibernate.cfg"><CODE>Configuration</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/cfg/AnnotationConfiguration.ExtendedMappingsImpl.html" title="class in org.hibernate.cfg">org.hibernate.cfg.AnnotationConfiguration.ExtendedMappingsImpl</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/ByteArrayBlobType.html" title="class in org.hibernate.type">org.hibernate.type.ByteArrayBlobType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>replaced by <A HREF="org/hibernate/type/WrappedMaterializedBlobType.html" title="class in org.hibernate.type"><CODE>WrappedMaterializedBlobType</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/bytecode/cglib/BytecodeProviderImpl.html" title="class in org.hibernate.bytecode.cglib">org.hibernate.bytecode.cglib.BytecodeProviderImpl</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/bytecode/cglib/CglibClassTransformer.html" title="class in org.hibernate.bytecode.cglib">org.hibernate.bytecode.cglib.CglibClassTransformer</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/proxy/pojo/cglib/CGLIBLazyInitializer.html" title="class in org.hibernate.proxy.pojo.cglib">org.hibernate.proxy.pojo.cglib.CGLIBLazyInitializer</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/proxy/pojo/cglib/CGLIBProxyFactory.html" title="class in org.hibernate.proxy.pojo.cglib">org.hibernate.proxy.pojo.cglib.CGLIBProxyFactory</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/CharBooleanType.html" title="class in org.hibernate.type">org.hibernate.type.CharBooleanType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the <A HREF="org/hibernate/type/AbstractStandardBasicType.html" title="class in org.hibernate.type"><CODE>AbstractStandardBasicType</CODE></A> approach instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/ejb/CurrentEntityManagerImpl.html" title="class in org.hibernate.ejb">org.hibernate.ejb.CurrentEntityManagerImpl</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>no longer used since getEntityManager is no longer here</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/criterion/Expression.html" title="class in org.hibernate.criterion">org.hibernate.criterion.Expression</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <tt>Restrictions</tt>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/cfg/search/HibernateSearchEventListenerRegister.html" title="class in org.hibernate.cfg.search">org.hibernate.cfg.search.HibernateSearchEventListenerRegister</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of release 3.4.0.CR2, replaced by Hibernate Search's <CODE>org.hibernate.search.cfg.EventListenerRegister</CODE></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/ImmutableType.html" title="class in org.hibernate.type">org.hibernate.type.ImmutableType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the <A HREF="org/hibernate/type/AbstractStandardBasicType.html" title="class in org.hibernate.type"><CODE>AbstractStandardBasicType</CODE></A> approach instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/bytecode/cglib/InstantiationOptimizerAdapter.html" title="class in org.hibernate.bytecode.cglib">org.hibernate.bytecode.cglib.InstantiationOptimizerAdapter</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/tool/instrument/cglib/InstrumentTask.html" title="class in org.hibernate.tool.instrument.cglib">org.hibernate.tool.instrument.cglib.InstrumentTask</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated; use
+ <A HREF="org/hibernate/tool/instrument/javassist/InstrumentTask.html" title="class in org.hibernate.tool.instrument.javassist"><CODE>InstrumentTask</CODE></A> instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/MutableType.html" title="class in org.hibernate.type">org.hibernate.type.MutableType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the <A HREF="org/hibernate/type/AbstractStandardBasicType.html" title="class in org.hibernate.type"><CODE>AbstractStandardBasicType</CODE></A> approach instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/NullableType.html" title="class in org.hibernate.type">org.hibernate.type.NullableType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the <A HREF="org/hibernate/type/AbstractStandardBasicType.html" title="class in org.hibernate.type"><CODE>AbstractStandardBasicType</CODE></A> approach instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/dialect/Oracle9Dialect.html" title="class in org.hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use either Oracle9iDialect or Oracle10gDialect instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/dialect/OracleDialect.html" title="class in org.hibernate.dialect">org.hibernate.dialect.OracleDialect</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use Oracle8iDialect instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/PrimitiveByteArrayBlobType.html" title="class in org.hibernate.type">org.hibernate.type.PrimitiveByteArrayBlobType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>replaced by <A HREF="org/hibernate/type/MaterializedBlobType.html" title="class in org.hibernate.type"><CODE>MaterializedBlobType</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/bytecode/cglib/ProxyFactoryFactoryImpl.html" title="class in org.hibernate.bytecode.cglib">org.hibernate.bytecode.cglib.ProxyFactoryFactoryImpl</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/lob/ReaderInputStream.html" title="class in org.hibernate.lob">org.hibernate.lob.ReaderInputStream</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Should not be used anymore.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/bytecode/cglib/ReflectionOptimizerImpl.html" title="class in org.hibernate.bytecode.cglib">org.hibernate.bytecode.cglib.ReflectionOptimizerImpl</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/proxy/pojo/cglib/SerializableProxy.html" title="class in org.hibernate.proxy.pojo.cglib">org.hibernate.proxy.pojo.cglib.SerializableProxy</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Per HHH-5451 support for cglib as a bytecode provider has been deprecated.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/stat/StatisticsImpl.html" title="class in org.hibernate.stat">org.hibernate.stat.StatisticsImpl</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/stat/ConcurrentStatisticsImpl.html" title="class in org.hibernate.stat"><CODE>ConcurrentStatisticsImpl</CODE></A> instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/type/StringClobType.html" title="class in org.hibernate.type">org.hibernate.type.StringClobType</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>replaced by <A HREF="org/hibernate/type/MaterializedClobType.html" title="class in org.hibernate.type"><CODE>MaterializedClobType</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/dialect/SybaseDialect.html" title="class in org.hibernate.dialect">org.hibernate.dialect.SybaseDialect</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>use <CODE>AbstractTransactSQLDialect</CODE>, <A HREF="org/hibernate/dialect/SybaseASE15Dialect.html" title="class in org.hibernate.dialect"><CODE>SybaseASE15Dialect</CODE></A> or <A HREF="org/hibernate/dialect/SQLServerDialect.html" title="class in org.hibernate.dialect"><CODE>SQLServerDialect</CODE></A>
+ instead depending on need.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/envers/strategy/ValidTimeAuditStrategy.html" title="class in org.hibernate.envers.strategy">org.hibernate.envers.strategy.ValidTimeAuditStrategy</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>use <A HREF="org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/cfg/annotations/Version.html" title="class in org.hibernate.cfg.annotations">org.hibernate.cfg.annotations.Version</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/Version.html" title="class in org.hibernate"><CODE>Version</CODE></A> instead</I>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="annotation_type"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Deprecated Annotation Types</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/annotations/CollectionOfElements.html" title="annotation in org.hibernate.annotations">org.hibernate.annotations.CollectionOfElements</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>use @ElementCollection</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/annotations/ForceDiscriminator.html" title="annotation in org.hibernate.annotations">org.hibernate.annotations.ForceDiscriminator</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>use <A HREF="org/hibernate/annotations/DiscriminatorOptions.html" title="annotation in org.hibernate.annotations"><CODE>DiscriminatorOptions</CODE></A> instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/annotations/MapKey.html" title="annotation in org.hibernate.annotations">org.hibernate.annotations.MapKey</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="http://java.sun.com/javaee/5/docs/api/javax/persistence/MapKeyColumn.html?is-external=true" title="class or interface in javax.persistence"><CODE>MapKeyColumn</CODE></A>
+             This is the default behavior for Map properties marked as @OneToMany, @ManyToMany
+             or @ElementCollection</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/annotations/MapKeyManyToMany.html" title="annotation in org.hibernate.annotations">org.hibernate.annotations.MapKeyManyToMany</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="http://java.sun.com/javaee/5/docs/api/javax/persistence/MapKeyJoinColumn.html?is-external=true" title="class or interface in javax.persistence"><CODE>MapKeyJoinColumn</CODE></A> <A HREF="http://java.sun.com/javaee/5/docs/api/javax/persistence/MapKeyJoinColumns.html?is-external=true" title="class or interface in javax.persistence"><CODE>MapKeyJoinColumns</CODE></A>
+             This is the default behavior for Map properties marked as @OneToMany, @ManyToMany
+             or @ElementCollection</I>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="field"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Deprecated Fields</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#BIG_DECIMAL">org.hibernate.Hibernate.BIG_DECIMAL</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#BIG_DECIMAL"><CODE>StandardBasicTypes.BIG_DECIMAL</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#BIG_INTEGER">org.hibernate.Hibernate.BIG_INTEGER</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#BIG_INTEGER"><CODE>StandardBasicTypes.BIG_INTEGER</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#BINARY">org.hibernate.Hibernate.BINARY</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#BINARY"><CODE>StandardBasicTypes.BINARY</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#BLOB">org.hibernate.Hibernate.BLOB</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#BLOB"><CODE>StandardBasicTypes.BLOB</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#BOOLEAN">org.hibernate.Hibernate.BOOLEAN</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#BOOLEAN"><CODE>StandardBasicTypes.BOOLEAN</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#BYTE">org.hibernate.Hibernate.BYTE</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#BYTE"><CODE>StandardBasicTypes.BYTE</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#CALENDAR">org.hibernate.Hibernate.CALENDAR</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#CALENDAR"><CODE>StandardBasicTypes.CALENDAR</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#CALENDAR_DATE">org.hibernate.Hibernate.CALENDAR_DATE</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#CALENDAR_DATE"><CODE>StandardBasicTypes.CALENDAR_DATE</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hibernate.html#CHAR_ARRAY">org.hibernate.Hibernate.CHAR_ARRAY</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="org/hibernate/type/StandardBasicTypes.html#CHAR_ARRAY"><CODE>StandardBasicTypes.CHAR_ARRAY</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/hibernate/Hiber

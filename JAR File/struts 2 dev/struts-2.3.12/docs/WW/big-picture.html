@@ -1,0 +1,417 @@
+ed?"paused":"playing";
+}else{
+return "stopped";
+}
+return this;
+},_cycle:function(){
+clearTimeout(this._timer);
+if(this._active){
+var curr=new Date().valueOf();
+var step=(curr-this._startTime)/(this._endTime-this._startTime);
+if(step>=1){
+step=1;
+this._percent=100;
+}else{
+this._percent=step*100;
+}
+if((this.easing)&&(dojo.lang.isFunction(this.easing))){
+step=this.easing(step);
+}
+var _3f0=this.curve.getValue(step);
+this.fire("handler",["animate",_3f0]);
+this.fire("onAnimate",[_3f0]);
+if(step<1){
+this._timer=setTimeout(dojo.lang.hitch(this,"_cycle"),this.rate);
+}else{
+this._active=false;
+this.fire("handler",["end"]);
+this.fire("onEnd");
+if(this.repeatCount>0){
+this.repeatCount--;
+this.play(null,true);
+}else{
+if(this.repeatCount==-1){
+this.play(null,true);
+}else{
+if(this._startRepeatCount){
+this.repeatCount=this._startRepeatCount;
+this._startRepeatCount=0;
+}
+}
+}
+}
+}
+return this;
+}});
+dojo.lfx.Combine=function(_3f1){
+dojo.lfx.IAnimation.call(this);
+this._anims=[];
+this._animsEnded=0;
+var _3f2=arguments;
+if(_3f2.length==1&&(dojo.lang.isArray(_3f2[0])||dojo.lang.isArrayLike(_3f2[0]))){
+_3f2=_3f2[0];
+}
+dojo.lang.forEach(_3f2,function(anim){
+this._anims.push(anim);
+anim.connect("onEnd",dojo.lang.hitch(this,"_onAnimsEnded"));
+},this);
+};
+dojo.inherits(dojo.lfx.Combine,dojo.lfx.IAnimation);
+dojo.lang.extend(dojo.lfx.Combine,{_animsEnded:0,play:function(_3f4,_3f5){
+if(!this._anims.length){
+return this;
+}
+this.fire("beforeBegin");
+if(_3f4>0){
+setTimeout(dojo.lang.hitch(this,function(){
+this.play(null,_3f5);
+}),_3f4);
+return this;
+}
+if(_3f5||this._anims[0].percent==0){
+this.fire("onBegin");
+}
+this.fire("onPlay");
+this._animsCall("play",null,_3f5);
+return this;
+},pause:function(){
+this.fire("onPause");
+this._animsCall("pause");
+return this;
+},stop:function(_3f6){
+this.fire("onStop");
+this._animsCall("stop",_3f6);
+return this;
+},_onAnimsEnded:function(){
+this._animsEnded++;
+if(this._animsEnded>=this._anims.length){
+this.fire("onEnd");
+}
+return this;
+},_animsCall:function(_3f7){
+var args=[];
+if(arguments.length>1){
+for(var i=1;i<arguments.length;i++){
+args.push(arguments[i]);
+}
+}
+var _3fa=this;
+dojo.lang.forEach(this._anims,function(anim){
+anim[_3f7](args);
+},_3fa);
+return this;
+}});
+dojo.lfx.Chain=function(_3fc){
+dojo.lfx.IAnimation.call(this);
+this._anims=[];
+this._currAnim=-1;
+var _3fd=arguments;
+if(_3fd.length==1&&(dojo.lang.isArray(_3fd[0])||dojo.lang.isArrayLike(_3fd[0]))){
+_3fd=_3fd[0];
+}
+var _3fe=this;
+dojo.lang.forEach(_3fd,function(anim,i,_401){
+this._anims.push(anim);
+if(i<_401.length-1){
+anim.connect("onEnd",dojo.lang.hitch(this,"_playNext"));
+}else{
+anim.connect("onEnd",dojo.lang.hitch(this,function(){
+this.fire("onEnd");
+}));
+}
+},this);
+};
+dojo.inherits(dojo.lfx.Chain,dojo.lfx.IAnimation);
+dojo.lang.extend(dojo.lfx.Chain,{_currAnim:-1,play:function(_402,_403){
+if(!this._anims.length){
+return this;
+}
+if(_403||!this._anims[this._currAnim]){
+this._currAnim=0;
+}
+var _404=this._anims[this._currAnim];
+this.fire("beforeBegin");
+if(_402>0){
+setTimeout(dojo.lang.hitch(this,function(){
+this.play(null,_403);
+}),_402);
+return this;
+}
+if(_404){
+if(this._currAnim==0){
+this.fire("handler",["begin",this._currAnim]);
+this.fire("onBegin",[this._currAnim]);
+}
+this.fire("onPlay",[this._currAnim]);
+_404.play(null,_403);
+}
+return this;
+},pause:function(){
+if(this._anims[this._currAnim]){
+this._anims[this._currAnim].pause();
+this.fire("onPause",[this._currAnim]);
+}
+return this;
+},playPause:function(){
+if(this._anims.length==0){
+return this;
+}
+if(this._currAnim==-1){
+this._currAnim=0;
+}
+var _405=this._anims[this._currAnim];
+if(_405){
+if(!_405._active||_405._paused){
+this.play();
+}else{
+this.pause();
+}
+}
+return this;
+},stop:function(){
+var _406=this._anims[this._currAnim];
+if(_406){
+_406.stop();
+this.fire("onStop",[this._currAnim]);
+}
+return _406;
+},_playNext:function(){
+if(this._currAnim==-1||this._anims.length==0){
+return this;
+}
+this._currAnim++;
+if(this._anims[this._currAnim]){
+this._anims[this._currAnim].play(null,true);
+}
+return this;
+}});
+dojo.lfx.combine=function(_407){
+var _408=arguments;
+if(dojo.lang.isArray(arguments[0])){
+_408=arguments[0];
+}
+if(_408.length==1){
+return _408[0];
+}
+return new dojo.lfx.Combine(_408);
+};
+dojo.lfx.chain=function(_409){
+var _40a=arguments;
+if(dojo.lang.isArray(arguments[0])){
+_40a=arguments[0];
+}
+if(_40a.length==1){
+return _40a[0];
+}
+return new dojo.lfx.Chain(_40a);
+};
+dojo.provide("dojo.html.common");
+dojo.lang.mixin(dojo.html,dojo.dom);
+dojo.html.body=function(){
+dojo.deprecated("dojo.html.body() moved to dojo.body()","0.5");
+return dojo.body();
+};
+dojo.html.getEventTarget=function(evt){
+if(!evt){
+evt=dojo.global().event||{};
+}
+var t=(evt.srcElement?evt.srcElement:(evt.target?evt.target:null));
+while((t)&&(t.nodeType!=1)){
+t=t.parentNode;
+}
+return t;
+};
+dojo.html.getViewport=function(){
+var _40d=dojo.global();
+var _40e=dojo.doc();
+var w=0;
+var h=0;
+if(dojo.render.html.mozilla){
+w=_40e.documentElement.clientWidth;
+h=_40d.innerHeight;
+}else{
+if(!dojo.render.html.opera&&_40d.innerWidth){
+w=_40d.innerWidth;
+h=_40d.innerHeight;
+}else{
+if(!dojo.render.html.opera&&dojo.exists(_40e,"documentElement.clientWidth")){
+var w2=_40e.documentElement.clientWidth;
+if(!w||w2&&w2<w){
+w=w2;
+}
+h=_40e.documentElement.clientHeight;
+}else{
+if(dojo.body().clientWidth){
+w=dojo.body().clientWidth;
+h=dojo.body().clientHeight;
+}
+}
+}
+}
+return {width:w,height:h};
+};
+dojo.html.getScroll=function(){
+var _412=dojo.global();
+var _413=dojo.doc();
+var top=_412.pageYOffset||_413.documentElement.scrollTop||dojo.body().scrollTop||0;
+var left=_412.pageXOffset||_413.documentElement.scrollLeft||dojo.body().scrollLeft||0;
+return {top:top,left:left,offset:{x:left,y:top}};
+};
+dojo.html.getParentByType=function(node,type){
+var _418=dojo.doc();
+var _419=dojo.byId(node);
+type=type.toLowerCase();
+while((_419)&&(_419.nodeName.toLowerCase()!=type)){
+if(_419==(_418["body"]||_418["documentElement"])){
+return null;
+}
+_419=_419.parentNode;
+}
+return _419;
+};
+dojo.html.getAttribute=function(node,attr){
+node=dojo.byId(node);
+if((!node)||(!node.getAttribute)){
+return null;
+}
+var ta=typeof attr=="string"?attr:new String(attr);
+var v=node.getAttribute(ta.toUpperCase());
+if((v)&&(typeof v=="string")&&(v!="")){
+return v;
+}
+if(v&&v.value){
+return v.value;
+}
+if((node.getAttributeNode)&&(node.getAttributeNode(ta))){
+return (node.getAttributeNode(ta)).value;
+}else{
+if(node.getAttribute(ta)){
+return node.getAttribute(ta);
+}else{
+if(node.getAttribute(ta.toLowerCase())){
+return node.getAttribute(ta.toLowerCase());
+}
+}
+}
+return null;
+};
+dojo.html.hasAttribute=function(node,attr){
+return dojo.html.getAttribute(dojo.byId(node),attr)?true:false;
+};
+dojo.html.getCursorPosition=function(e){
+e=e||dojo.global().event;
+var _421={x:0,y:0};
+if(e.pageX||e.pageY){
+_421.x=e.pageX;
+_421.y=e.pageY;
+}else{
+var de=dojo.doc().documentElement;
+var db=dojo.body();
+_421.x=e.clientX+((de||db)["scrollLeft"])-((de||db)["clientLeft"]);
+_421.y=e.clientY+((de||db)["scrollTop"])-((de||db)["clientTop"]);
+}
+return _421;
+};
+dojo.html.isTag=function(node){
+node=dojo.byId(node);
+if(node&&node.tagName){
+for(var i=1;i<arguments.length;i++){
+if(node.tagName.toLowerCase()==String(arguments[i]).toLowerCase()){
+return String(arguments[i]).toLowerCase();
+}
+}
+}
+return "";
+};
+if(dojo.render.html.ie&&!dojo.render.html.ie70){
+if(window.location.href.substr(0,6).toLowerCase()!="https:"){
+(function(){
+var _426=dojo.doc().createElement("script");
+_426.src="javascript:'dojo.html.createExternalElement=function(doc, tag){ return doc.createElement(tag); }'";
+dojo.doc().getElementsByTagName("head")[0].appendChild(_426);
+})();
+}
+}else{
+dojo.html.createExternalElement=function(doc,tag){
+return doc.createElement(tag);
+};
+}
+dojo.html._callDeprecated=function(_429,_42a,args,_42c,_42d){
+dojo.deprecated("dojo.html."+_429,"replaced by dojo.html."+_42a+"("+(_42c?"node, {"+_42c+": "+_42c+"}":"")+")"+(_42d?"."+_42d:""),"0.5");
+var _42e=[];
+if(_42c){
+var _42f={};
+_42f[_42c]=args[1];
+_42e.push(args[0]);
+_42e.push(_42f);
+}else{
+_42e=args;
+}
+var ret=dojo.html[_42a].apply(dojo.html,args);
+if(_42d){
+return ret[_42d];
+}else{
+return ret;
+}
+};
+dojo.html.getViewportWidth=function(){
+return dojo.html._callDeprecated("getViewportWidth","getViewport",arguments,null,"width");
+};
+dojo.html.getViewportHeight=function(){
+return dojo.html._callDeprecated("getViewportHeight","getViewport",arguments,null,"height");
+};
+dojo.html.getViewportSize=function(){
+return dojo.html._callDeprecated("getViewportSize","getViewport",arguments);
+};
+dojo.html.getScrollTop=function(){
+return dojo.html._callDeprecated("getScrollTop","getScroll",arguments,null,"top");
+};
+dojo.html.getScrollLeft=function(){
+return dojo.html._callDeprecated("getScrollLeft","getScroll",arguments,null,"left");
+};
+dojo.html.getScrollOffset=function(){
+return dojo.html._callDeprecated("getScrollOffset","getScroll",arguments,null,"offset");
+};
+dojo.provide("dojo.uri.Uri");
+dojo.uri=new function(){
+this.dojoUri=function(uri){
+return new dojo.uri.Uri(dojo.hostenv.getBaseScriptUri(),uri);
+};
+this.moduleUri=function(_432,uri){
+var loc=dojo.hostenv.getModuleSymbols(_432).join("/");
+if(!loc){
+return null;
+}
+if(loc.lastIndexOf("/")!=loc.length-1){
+loc+="/";
+}
+var _435=loc.indexOf(":");
+var _436=loc.indexOf("/");
+if(loc.charAt(0)!="/"&&(_435==-1||_435>_436)){
+loc=dojo.hostenv.getBaseScriptUri()+loc;
+}
+return new dojo.uri.Uri(loc,uri);
+};
+this.Uri=function(){
+var uri=arguments[0];
+for(var i=1;i<arguments.length;i++){
+if(!arguments[i]){
+continue;
+}
+var _439=new dojo.uri.Uri(arguments[i].toString());
+var _43a=new dojo.uri.Uri(uri.toString());
+if((_439.path=="")&&(_439.scheme==null)&&(_439.authority==null)&&(_439.query==null)){
+if(_439.fragment!=null){
+_43a.fragment=_439.fragment;
+}
+_439=_43a;
+}else{
+if(_439.scheme==null){
+_439.scheme=_43a.scheme;
+if(_439.authority==null){
+_439.authority=_43a.authority;
+if(_439.path.charAt(0)!="/"){
+var path=_43a.path.substring(0,_43a.path.lastIndexOf("/")+1)+_439.path;
+var segs=path.split("/");
+for(var j=0;j<segs.length;j++){
+if(segs[j]==".

@@ -1,0 +1,10 @@
+ção do botão de ativação do giroscópio pode ser invertida. Se esta opção estiver desativada, o giroscópio será desligado quando o botão for premido."
+	"ControllerBinding_GyroButtonInvert2DScroll_On" "Ação do botão do giroscópio: On"
+	"ControllerBinding_GyroButtonInvert2DScroll_On_Description" "On: O giroscópio do dispositivo irá ligar-se quando o botão for premido."
+	"ControllerBinding_GyroButtonInvert2DScroll_Off" "Ação do botão do giroscópio: Off"
+	"ControllerBinding_GyroButtonInvert2DScroll_Off_Description" "Off: O giroscópio do dispositivo irá desligar-se quando o botão for premido."
+	"ControllerBinding_GyroButtonInvert2DScroll_Toggle" "Ação do botão do giroscópio: Alternar"
+	"ControllerBinding_GyroButtonInvert2DScroll_Toggle_Description" "O giroscópio do dispositivo irá ligar-se/desligar-se quando o botão for premido."
+
+	"ControllerBinding_MouseRegionGyroButtonInvert" "Botão do giroscópio: Inverter"
+	"ControllerBinding_Mou

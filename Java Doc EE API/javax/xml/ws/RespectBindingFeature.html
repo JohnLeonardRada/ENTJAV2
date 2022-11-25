@@ -1,0 +1,248 @@
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildProxyFactoryInternal(org.hibernate.mapping.PersistentClass, org.hibernate.property.Getter, org.hibernate.property.Setter)"><!-- --></A><H3>
+buildProxyFactoryInternal</H3>
+<PRE>
+protected <A HREF="../../../../org/hibernate/proxy/ProxyFactory.html" title="interface in org.hibernate.proxy">ProxyFactory</A> <B>buildProxyFactoryInternal</B>(<A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;persistentClass,
+                                                 <A HREF="../../../../org/hibernate/property/Getter.html" title="interface in org.hibernate.property">Getter</A>&nbsp;idGetter,
+                                                 <A HREF="../../../../org/hibernate/property/Setter.html" title="interface in org.hibernate.property">Setter</A>&nbsp;idSetter)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildInstantiator(org.hibernate.mapping.PersistentClass)"><!-- --></A><H3>
+buildInstantiator</H3>
+<PRE>
+protected <A HREF="../../../../org/hibernate/tuple/Instantiator.html" title="interface in org.hibernate.tuple">Instantiator</A> <B>buildInstantiator</B>(<A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;persistentClass)</PRE>
+<DL>
+<DD>Build an appropriate Instantiator for the given mapped entity.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html#buildInstantiator(org.hibernate.mapping.PersistentClass)">buildInstantiator</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html" title="class in org.hibernate.tuple.entity">AbstractEntityTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>persistentClass</CODE> - The mapping information regarding the mapped entity.
+<DT><B>Returns:</B><DD>An appropriate Instantiator instance.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPropertyValues(java.lang.Object, java.lang.Object[])"><!-- --></A><H3>
+setPropertyValues</H3>
+<PRE>
+public void <B>setPropertyValues</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;entity,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[]&nbsp;values)
+                       throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></PRE>
+<DL>
+<DD>Inject the given values into the given entity.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#setPropertyValues(java.lang.Object, java.lang.Object[])">setPropertyValues</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html" title="interface in org.hibernate.tuple">Tuplizer</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html#setPropertyValues(java.lang.Object, java.lang.Object[])">setPropertyValues</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html" title="class in org.hibernate.tuple.entity">AbstractEntityTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>entity</CODE> - The entity.<DD><CODE>values</CODE> - The values to be injected.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertyValues(java.lang.Object)"><!-- --></A><H3>
+getPropertyValues</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[] <B>getPropertyValues</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;entity)
+                           throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></PRE>
+<DL>
+<DD>Extract the current values contained on the given entity.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getPropertyValues(java.lang.Object)">getPropertyValues</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html" title="interface in org.hibernate.tuple">Tuplizer</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html#getPropertyValues(java.lang.Object)">getPropertyValues</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html" title="class in org.hibernate.tuple.entity">AbstractEntityTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>entity</CODE> - The entity from which to extract values.
+<DT><B>Returns:</B><DD>The current property values.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertyValuesToInsert(java.lang.Object, java.util.Map, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+getPropertyValuesToInsert</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[] <B>getPropertyValuesToInsert</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;entity,
+                                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&nbsp;mergeMap,
+                                          <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                                   throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></PRE>
+<DL>
+<DD>Extract the values of the insertable properties of the entity (including backrefs)
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/EntityTuplizer.html#getPropertyValuesToInsert(java.lang.Object, java.util.Map, org.hibernate.engine.SessionImplementor)">getPropertyValuesToInsert</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/entity/EntityTuplizer.html" title="interface in org.hibernate.tuple.entity">EntityTuplizer</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html#getPropertyValuesToInsert(java.lang.Object, java.util.Map, org.hibernate.engine.SessionImplementor)">getPropertyValuesToInsert</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html" title="class in org.hibernate.tuple.entity">AbstractEntityTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>entity</CODE> - The entity from which to extract.<DD><CODE>mergeMap</CODE> - a map of instances being merged to merged instances<DD><CODE>session</CODE> - The session in which the resuest is being made.
+<DT><B>Returns:</B><DD>The insertable property values.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPropertyValuesWithOptimizer(java.lang.Object, java.lang.Object[])"><!-- --></A><H3>
+setPropertyValuesWithOptimizer</H3>
+<PRE>
+protected void <B>setPropertyValuesWithOptimizer</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;object,
+                                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[]&nbsp;values)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertyValuesWithOptimizer(java.lang.Object)"><!-- --></A><H3>
+getPropertyValuesWithOptimizer</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[] <B>getPropertyValuesWithOptimizer</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;object)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEntityMode()"><!-- --></A><H3>
+getEntityMode</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/EntityMode.html" title="class in org.hibernate">EntityMode</A> <B>getEntityMode</B>()</PRE>
+<DL>
+<DD>Return the entity-mode handled by this tuplizer instance.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The entity-mode</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMappedClass()"><!-- --></A><H3>
+getMappedClass</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A> <B>getMappedClass</B>()</PRE>
+<DL>
+<DD>Return the pojo class managed by this tuplizer.
+ </p>
+ Need to determine how to best handle this for the Tuplizers for EntityModes
+ other than POJO.
+ </p>
+ todo : be really nice to not have this here since it is essentially pojo specific...
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The persistent class.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isLifecycleImplementor()"><!-- --></A><H3>
+isLifecycleImplementor</H3>
+<PRE>
+public boolean <B>isLifecycleImplementor</B>()</PRE>
+<DL>
+<DD>Does the <A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getMappedClass()"><CODE>class</CODE></A> managed by this tuplizer implement
+ the <A HREF="../../../../org/hibernate/classic/Lifecycle.html" title="interface in org.hibernate.classic"><CODE>Lifecycle</CODE></A> interface.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/EntityTuplizer.html#isLifecycleImplementor()">isLifecycleImplementor</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/entity/EntityTuplizer.html" title="interface in org.hibernate.tuple.entity">EntityTuplizer</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html#isLifecycleImplementor()">isLifecycleImplementor</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html" title="class in org.hibernate.tuple.entity">AbstractEntityTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>True if the Lifecycle interface is implemented; false otherwise.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isValidatableImplementor()"><!-- --></A><H3>
+isValidatableImplementor</H3>
+<PRE>
+public boolean <B>isValidatableImplementor</B>()</PRE>
+<DL>
+<DD>Does the <A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getMappedClass()"><CODE>class</CODE></A> managed by this tuplizer implement
+ the <A HREF="../../../../org/hibernate/classic/Validatable.html" title="interface in org.hibernate.classic"><CODE>Validatable</CODE></A> interface.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/EntityTuplizer.html#isValidatableImplementor()">isValidatableImplementor</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/entity/EntityTuplizer.html" title="interface in org.hibernate.tuple.entity">EntityTuplizer</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html#isValidatableImplementor()">isValidatableImplementor</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html" title="class in org.hibernate.tuple.entity">AbstractEntityTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>True if the Validatable interface is implemented; false otherwise.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildPropertyGetter(org.hibernate.mapping.Property, org.hibernate.mapping.PersistentClass)"><!-- --></A><H3>
+buildPropertyGetter</H3>
+<PRE>
+protected <A HREF="../../../../org/hibernate/property/Getter.html" title="interface in org.hibernate.property">Getter</A> <B>buildPropertyGetter</B>(<A HREF="../../../../org/hibernate/mapping/Property.html" title="class in org.hibernate.mapping">Property</A>&nbsp;mappedProperty,
+                                     <A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;mappedEntity)</PRE>
+<DL>
+<DD>Build an appropriate Getter for the given property.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html#buildPropertyGetter(org.hibernate.mapping.Property, org.hibernate.mapping.PersistentClass)">buildPropertyGetter</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html" title="class in org.hibernate.tuple.entity">AbstractEntityTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>mappedProperty</CODE> - The property to be accessed via the built Getter.<DD><CODE>mappedEntity</CODE> - The entity information regarding the mapped entity owning this property.
+<DT><B>Returns:</B><DD>An appropriate Getter instance.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildPropertySetter(org.hibernate.mapping.Property, org.hibernate.mapping.PersistentClass)"><!-- --></A><H3>
+buildPropertySetter</H3>
+<PRE>
+protected <A HREF="../../../../org/hibernate/property/Setter.html" title="interface in org.hibernate.property">Setter</A> <B>buildPropertySetter</B>(<A HREF="../../../../org/hibernate/mapping/Property.html" title="class in org.hibernate.mapping">Property</A>&nbsp;mappedProperty,
+                                     <A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;mappedEntity)</PRE>
+<DL>
+<DD>Build an appropriate Setter for the given property.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html#buildPropertySetter(org.hibernate.mapping.Property, org.hibernate.mapping.PersistentClass)">buildPropertySetter</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/tuple/entity/AbstractEntityTuplizer.html" title="class in org.hibernate.tuple.entity">AbstractEntityTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>mappedProperty</CODE> - The property to be accessed via the built Setter.<DD><CODE>mappedEntity</CODE> - The entity information regarding the mapped entity owning this property.
+<DT><B>Returns:</B><DD>An appropriate Setter instance.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getConcreteProxyClass()"><!-- --></A><H3>
+getConcreteProxyClass</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A> <B>getConcreteProxyClass</B>()</PRE>
+<DL>
+<DD>Returns the java class to which generated proxies will be typed.
+ <p/>
+ todo : look at fully encapsulating <A HREF="../../../../org/hibernate/engine/PersistenceContext.html#narrowProxy(java.lang.Object, org.hibernate.persister.entity.EntityPersister, org.hibernate.engine.EntityKey, java.lang.Object)"><CODE>PersistenceContext.narrowProxy(java.lang.Object, org.hibernate.persister.entity.EntityPersister, org.hibernate.engine.EntityKey, java.lang.Object)</CODE></A> here,
+ since that is the only external use of this method
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The java class to which generated proxies will be typed</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="afterInitialize(java.lang.Object, boolean, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+afterInitialize</H3>
+<PRE>
+public void <B>afterInitialize</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;entity,
+                            boolean&nbsp;lazyPropertiesAreUnfetched,
+                            <A HREF="../../../../org/hibernate/engine/S

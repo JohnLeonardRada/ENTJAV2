@@ -1,0 +1,211 @@
+<html>
+                <head>
+                <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <title>113 FAQ How to use Maven with JSP-Servlet Projects</title>
+                </head>
+                <body>
+                <div class="container">
+                <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <p class="lead"><p><strong>How to use Maven with JSP-Servlet projects</strong></p>
+
+<p>This document explains the step required to use the Maven with JSP-Servlet projects.</p>
+
+
+
+
+
+
+
+
+
+<p>This document assumes you understand the basics of Maven. If not, here's a Maven tutorial:
+- <a href="https://maven.apache.org/guides/index.html" rel="nofollow" target="_blank">https://maven.apache.org/guides/index.html</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>You should already have Maven installed and configured. </p>
+
+
+
+
+
+
+
+<p>- Download: <a href="https://maven.apache.org/download.cgi" rel="nofollow" target="_blank">https://maven.apache.org/download.cgi</a> </p>
+
+
+
+
+
+
+
+<p>- Install: <a href="https://maven.apache.org/install.html" rel="nofollow" target="_blank">https://maven.apache.org/install.html</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>--</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Overview</strong></p>
+
+
+
+
+
+<p><strong></strong>At a high level, you will perform the following steps:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>1. Download Maven version of the project </p>
+
+
+
+
+
+
+
+<p>2. Compile the project</p>
+
+
+
+
+
+
+
+<p>3. Package the project as a WAR file </p>
+
+
+
+
+
+
+
+<p>4. Deploy the WAR file to Tomcat
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+<p>--</p>
+
+
+
+
+
+
+
+<p><strong>Detailed Steps</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>1. Download the Maven version of the project files</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Download: http://www.luv2code.com/downloads/udemy-jsp/jsp-servlet-maven-demo.zip<br></p>
+
+
+
+<p>Unzip the file.
+
+
+
+</p>
+
+
+
+<p>The standard Maven directory structure in your project: </p>
+
+
+
+
+
+
+
+
+
+<p> |-- pom.xml<br> `-- src<br>     `-- main<br>         |-- java<br>         |-- webapp<br>             `-- reso

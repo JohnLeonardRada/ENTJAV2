@@ -1,0 +1,843 @@
+zable, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+initialize</H3>
+<PRE>
+public void <B>initialize</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>&nbsp;key,
+                       <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#initialize(java.io.Serializable, org.hibernate.engine.SessionImplementor)">CollectionPersister</A></CODE></B></DD>
+<DD>Initialize the given collection with the given key
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#initialize(java.io.Serializable, org.hibernate.engine.SessionImplementor)">initialize</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAppropriateInitializer(java.io.Serializable, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+getAppropriateInitializer</H3>
+<PRE>
+protected <A HREF="../../../../org/hibernate/loader/collection/CollectionInitializer.html" title="interface in org.hibernate.loader.collection">CollectionInitializer</A> <B>getAppropriateInitializer</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>&nbsp;key,
+                                                          <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSubselectInitializer(org.hibernate.engine.SubselectFetch, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+createSubselectInitializer</H3>
+<PRE>
+protected abstract <A HREF="../../../../org/hibernate/loader/collection/CollectionInitializer.html" title="interface in org.hibernate.loader.collection">CollectionInitializer</A> <B>createSubselectInitializer</B>(<A HREF="../../../../org/hibernate/engine/SubselectFetch.html" title="class in org.hibernate.engine">SubselectFetch</A>&nbsp;subselect,
+                                                                    <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createCollectionInitializer(org.hibernate.engine.LoadQueryInfluencers)"><!-- --></A><H3>
+createCollectionInitializer</H3>
+<PRE>
+protected abstract <A HREF="../../../../org/hibernate/loader/collection/CollectionInitializer.html" title="interface in org.hibernate.loader.collection">CollectionInitializer</A> <B>createCollectionInitializer</B>(<A HREF="../../../../org/hibernate/engine/LoadQueryInfluencers.html" title="class in org.hibernate.engine">LoadQueryInfluencers</A>&nbsp;loadQueryInfluencers)
+                                                              throws <A HREF="../../../../org/hibernate/MappingException.html" title="class in org.hibernate">MappingException</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/MappingException.html" title="class in org.hibernate">MappingException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCacheAccessStrategy()"><!-- --></A><H3>
+getCacheAccessStrategy</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/cache/access/CollectionRegionAccessStrategy.html" title="interface in org.hibernate.cache.access">CollectionRegionAccessStrategy</A> <B>getCacheAccessStrategy</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getCacheAccessStrategy()">CollectionPersister</A></CODE></B></DD>
+<DD>Get the cache
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getCacheAccessStrategy()">getCacheAccessStrategy</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasCache()"><!-- --></A><H3>
+hasCache</H3>
+<PRE>
+public boolean <B>hasCache</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#hasCache()">CollectionPersister</A></CODE></B></DD>
+<DD>Is this collection role cacheable
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#hasCache()">hasCache</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCollectionType()"><!-- --></A><H3>
+getCollectionType</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/type/CollectionType.html" title="class in org.hibernate.type">CollectionType</A> <B>getCollectionType</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getCollectionType()">CollectionPersister</A></CODE></B></DD>
+<DD>Get the associated <tt>Type</tt>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getCollectionType()">getCollectionType</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSQLWhereString(java.lang.String)"><!-- --></A><H3>
+getSQLWhereString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSQLWhereString</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSQLOrderByString(java.lang.String)"><!-- --></A><H3>
+getSQLOrderByString</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSQLOrderByString</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#getSQLOrderByString(java.lang.String)">QueryableCollection</A></CODE></B></DD>
+<DD>Get the order by SQL
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#getSQLOrderByString(java.lang.String)">getSQLOrderByString</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html" title="interface in org.hibernate.persister.collection">QueryableCollection</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getManyToManyOrderByString(java.lang.String)"><!-- --></A><H3>
+getManyToManyOrderByString</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getManyToManyOrderByString</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#getManyToManyOrderByString(java.lang.String)">QueryableCollection</A></CODE></B></DD>
+<DD>Get the order-by to be applied at the target table of a many to many
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#getManyToManyOrderByString(java.lang.String)">getManyToManyOrderByString</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html" title="interface in org.hibernate.persister.collection">QueryableCollection</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>alias</CODE> - The alias for the many-to-many target table
+<DT><B>Returns:</B><DD>appropriate order-by fragment or empty string.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFetchMode()"><!-- --></A><H3>
+getFetchMode</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/FetchMode.html" title="class in org.hibernate">FetchMode</A> <B>getFetchMode</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#getFetchMode()">QueryableCollection</A></CODE></B></DD>
+<DD>Should we load this collection role by outerjoining?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#getFetchMode()">getFetchMode</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html" title="interface in org.hibernate.persister.collection">QueryableCollection</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasOrdering()"><!-- --></A><H3>
+hasOrdering</H3>
+<PRE>
+public boolean <B>hasOrdering</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#hasOrdering()">CollectionPersister</A></CODE></B></DD>
+<DD>Is this an ordered collection? (An ordered collection is
+ ordered by the initialization operation, not by sorting
+ that happens in memory, as in the case of a sorted collection.)
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#hasOrdering()">hasOrdering</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasManyToManyOrdering()"><!-- --></A><H3>
+hasManyToManyOrdering</H3>
+<PRE>
+public boolean <B>hasManyToManyOrdering</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#hasManyToManyOrdering()">hasManyToManyOrdering</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasWhere()"><!-- --></A><H3>
+hasWhere</H3>
+<PRE>
+public boolean <B>hasWhere</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#hasWhere()">QueryableCollection</A></CODE></B></DD>
+<DD>Does this collection role have a where clause filter?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#hasWhere()">hasWhere</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html" title="interface in org.hibernate.persister.collection">QueryableCollection</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSQLDeleteString()"><!-- --></A><H3>
+getSQLDeleteString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSQLDeleteString</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSQLInsertRowString()"><!-- --></A><H3>
+getSQLInsertRowString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSQLInsertRowString</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSQLUpdateRowString()"><!-- --></A><H3>
+getSQLUpdateRowString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSQLUpdateRowString</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSQLDeleteRowString()"><!-- --></A><H3>
+getSQLDeleteRowString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSQLDeleteRowString</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getKeyType()"><!-- --></A><H3>
+getKeyType</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/type/Type.html" title="interface in org.hibernate.type">Type</A> <B>getKeyType</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#getKeyType()">CollectionMetadata</A></CODE></B></DD>
+<DD>The collection key type
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#getKeyType()">getKeyType</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html" title="interface in org.hibernate.metadata">CollectionMetadata</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getKeyType()">getKeyType</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndexType()"><!-- --></A><H3>
+getIndexType</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/type/Type.html" title="interface in org.hibernate.type">Type</A> <B>getIndexType</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#getIndexType()">CollectionMetadata</A></CODE></B></DD>
+<DD>The collection index type (or null if the collection has no index)
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#getIndexType()">getIndexType</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html" title="interface in org.hibernate.metadata">CollectionMetadata</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getIndexType()">getIndexType</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getElementType()"><!-- --></A><H3>
+getElementType</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/type/Type.html" title="interface in org.hibernate.type">Type</A> <B>getElementType</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#getElementType()">CollectionMetadata</A></CODE></B></DD>
+<DD>The collection element type
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#getElementType()">getElementType</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html" title="interface in org.hibernate.metadata">CollectionMetadata</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getElementType()">getElementType</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getElementClass()"><!-- --></A><H3>
+getElementClass</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A> <B>getElementClass</B>()</PRE>
+<DL>
+<DD>Return the element class of an array, or null otherwise
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getElementClass()">getElementClass</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readElement(java.sql.ResultSet, java.lang.Object, java.lang.String[], org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+readElement</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>readElement</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/ResultSet.html?is-external=true" title="class or interface in java.sql">ResultSet</A>&nbsp;rs,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;owner,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;aliases,
+                          <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                   throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#readElement(java.sql.ResultSet, java.lang.Object, java.lang.String[], org.hibernate.engine.SessionImplementor)">CollectionPersister</A></CODE></B></DD>
+<DD>Read the element from a row of the JDBC <tt>ResultSet</tt>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#readElement(java.sql.ResultSet, java.lang.Object, java.lang.String[], org.hibernate.engine.SessionImplementor)">readElement</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readIndex(java.sql.ResultSet, java.lang.String[], org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+readIndex</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>readIndex</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/ResultSet.html?is-external=true" title="class or interface in java.sql">ResultSet</A>&nbsp;rs,
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;aliases,
+                        <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                 throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#readIndex(java.sql.ResultSet, java.lang.String[], org.hibernate.engine.SessionImplementor)">CollectionPersister</A></CODE></B></DD>
+<DD>Read the index from a row of the JDBC <tt>ResultSet</tt>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#readIndex(java.sql.ResultSet, java.lang.String[], org.hibernate.engine.SessionImplementor)">readIndex</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="decrementIndexByBase(java.lang.Object)"><!-- --></A><H3>
+decrementIndexByBase</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>decrementIndexByBase</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;index)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readIdentifier(java.sql.ResultSet, java.lang.String, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+readIdentifier</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>readIdentifier</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/ResultSet.html?is-external=true" title="class or interface in java.sql">ResultSet</A>&nbsp;rs,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias,
+                             <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                      throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#readIdentifier(java.sql.ResultSet, java.lang.String, org.hibernate.engine.SessionImplementor)">CollectionPersister</A></CODE></B></DD>
+<DD>Read the identifier from a row of the JDBC <tt>ResultSet</tt>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#readIdentifier(java.sql.ResultSet, java.lang.String, org.hibernate.engine.SessionImplementor)">readIdentifier</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readKey(java.sql.ResultSet, java.lang.String[], org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+readKey</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>readKey</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/ResultSet.html?is-external=true" title="class or interface in java.sql">ResultSet</A>&nbsp;rs,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;aliases,
+                      <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+               throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#readKey(java.sql.ResultSet, java.lang.String[], org.hibernate.engine.SessionImplementor)">CollectionPersister</A></CODE></B></DD>
+<DD>Read the key from a row of the JDBC <tt>ResultSet</tt>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#readKey(java.sql.ResultSet, java.lang.String[], org.hibernate.engine.SessionImplementor)">readKey</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeKey(java.sql.PreparedStatement, java.io.Serializable, int, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+writeKey</H3>
+<PRE>
+protected int <B>writeKey</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/PreparedStatement.html?is-external=true" title="class or interface in java.sql">PreparedStatement</A>&nbsp;st,
+                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>&nbsp;key,
+                       int&nbsp;i,
+                       <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD>Write the key to a JDBC <tt>PreparedStatement</tt>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeElement(java.sql.PreparedStatement, java.lang.Object, int, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+writeElement</H3>
+<PRE>
+protected int <B>writeElement</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/PreparedStatement.html?is-external=true" title="class or interface in java.sql">PreparedStatement</A>&nbsp;st,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;elt,
+                           int&nbsp;i,
+                           <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                    throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD>Write the element to a JDBC <tt>PreparedStatement</tt>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeIndex(java.sql.PreparedStatement, java.lang.Object, int, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+writeIndex</H3>
+<PRE>
+protected int <B>writeIndex</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/PreparedStatement.html?is-external=true" title="class or interface in java.sql">PreparedStatement</A>&nbsp;st,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;index,
+                         int&nbsp;i,
+                         <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                  throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD>Write the index to a JDBC <tt>PreparedStatement</tt>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="incrementIndexByBase(java.lang.Object)"><!-- --></A><H3>
+incrementIndexByBase</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>incrementIndexByBase</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;index)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeElementToWhere(java.sql.PreparedStatement, java.lang.Object, int, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+writeElementToWhere</H3>
+<PRE>
+protected int <B>writeElementToWhere</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/PreparedStatement.html?is-external=true" title="class or interface in java.sql">PreparedStatement</A>&nbsp;st,
+                                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;elt,
+                                  int&nbsp;i,
+                                  <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                           throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD>Write the element to a JDBC <tt>PreparedStatement</tt>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeIndexToWhere(java.sql.PreparedStatement, java.lang.Object, int, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+writeIndexToWhere</H3>
+<PRE>
+protected int <B>writeIndexToWhere</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/PreparedStatement.html?is-external=true" title="class or interface in java.sql">PreparedStatement</A>&nbsp;st,
+                                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;index,
+                                int&nbsp;i,
+                                <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                         throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD>Write the index to a JDBC <tt>PreparedStatement</tt>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeIdentifier(java.sql.PreparedStatement, java.lang.Object, int, org.hibernate.engine.SessionImplementor)"><!-- --></A><H3>
+writeIdentifier</H3>
+<PRE>
+public int <B>writeIdentifier</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/PreparedStatement.html?is-external=true" title="class or interface in java.sql">PreparedStatement</A>&nbsp;st,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;id,
+                           int&nbsp;i,
+                           <A HREF="../../../../org/hibernate/engine/SessionImplementor.html" title="interface in org.hibernate.engine">SessionImplementor</A>&nbsp;session)
+                    throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></PRE>
+<DL>
+<DD>Write the identifier to a JDBC <tt>PreparedStatement</tt>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/SQLException.html?is-external=true" title="class or interface in java.sql">SQLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isPrimitiveArray()"><!-- --></A><H3>
+isPrimitiveArray</H3>
+<PRE>
+public boolean <B>isPrimitiveArray</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#isPrimitiveArray()">CollectionMetadata</A></CODE></B></DD>
+<DD>Is the collection a primitive array?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#isPrimitiveArray()">isPrimitiveArray</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html" title="interface in org.hibernate.metadata">CollectionMetadata</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#isPrimitiveArray()">isPrimitiveArray</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isArray()"><!-- --></A><H3>
+isArray</H3>
+<PRE>
+public boolean <B>isArray</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#isArray()">CollectionMetadata</A></CODE></B></DD>
+<DD>Is the collection an array?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html#isArray()">isArray</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/metadata/CollectionMetadata.html" title="interface in org.hibernate.metadata">CollectionMetadata</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#isArray()">isArray</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getKeyColumnAliases(java.lang.String)"><!-- --></A><H3>
+getKeyColumnAliases</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getKeyColumnAliases</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getKeyColumnAliases(java.lang.String)">CollectionPersister</A></CODE></B></DD>
+<DD>Generates the collection's key column aliases, based on the given
+ suffix.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getKeyColumnAliases(java.lang.String)">getKeyColumnAliases</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>suffix</CODE> - The suffix to use in the key column alias generation.
+<DT><B>Returns:</B><DD>The key column aliases.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getElementColumnAliases(java.lang.String)"><!-- --></A><H3>
+getElementColumnAliases</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getElementColumnAliases</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getElementColumnAliases(java.lang.String)">CollectionPersister</A></CODE></B></DD>
+<DD>Generates the collection's element column aliases, based on the given
+ suffix.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getElementColumnAliases(java.lang.String)">getElementColumnAliases</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>suffix</CODE> - The suffix to use in the element column alias generation.
+<DT><B>Returns:</B><DD>The key column aliases.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndexColumnAliases(java.lang.String)"><!-- --></A><H3>
+getIndexColumnAliases</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getIndexColumnAliases</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getIndexColumnAliases(java.lang.String)">CollectionPersister</A></CODE></B></DD>
+<DD>Generates the collection's index column aliases, based on the given
+ suffix.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getIndexColumnAliases(java.lang.String)">getIndexColumnAliases</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>suffix</CODE> - The suffix to use in the index column alias generation.
+<DT><B>Returns:</B><DD>The key column aliases, or null if not indexed.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIdentifierColumnAlias(java.lang.String)"><!-- --></A><H3>
+getIdentifierColumnAlias</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getIdentifierColumnAlias</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getIdentifierColumnAlias(java.lang.String)">CollectionPersister</A></CODE></B></DD>
+<DD>Generates the collection's identifier column aliases, based on the given
+ suffix.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html#getIdentifierColumnAlias(java.lang.String)">getIdentifierColumnAlias</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/CollectionPersister.html" title="interface in org.hibernate.persister.collection">CollectionPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>suffix</CODE> - The suffix to use in the key column alias generation.
+<DT><B>Returns:</B><DD>The key column aliases.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIdentifierColumnName()"><!-- --></A><H3>
+getIdentifierColumnName</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getIdentifierColumnName</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/SQLLoadableCollection.html#getIdentifierColumnName()">getIdentifierColumnName</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/SQLLoadableCollection.html" title="interface in org.hibernate.persister.collection">SQLLoadableCollection</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="selectFragment(java.lang.String, java.lang.String)"><!-- --></A><H3>
+selectFragment</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>selectFragment</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;columnSuffix)</PRE>
+<DL>
+<DD>Generate a list of collection index, key and element columns
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html#selectFragment(java.lang.String, java.lang.String)">selectFragment</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/collection/QueryableCollection.html" title="interface in org.hibernate.persister.collection">QueryableCollection</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateSelectSizeString(boolean)"><!-- --></A><H3>
+generateSelectSizeString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>generateSelectSizeString</B>(boolean&nbsp;isIntegerIndexed)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateDetectRowByIndexString()"><!-- --></A><H3>
+generateDetectRowByIndexString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>generateDetectRowByIndexString</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateSelectRowByIndexString()"><!-- --></A><H3>
+generateSelectRowByIndexString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>generateSelectRowByIndexString</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateDetectRowByElementString()"><!-- --></A><H3>
+generateDetectRowByElementString</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>generateDetectRowByElementString</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateSelectFragment(java.lang.String, java.lang.String)"><!-- --></A><H3>
+generateSelectFragment</H3>
+<PRE>
+protected <A HREF="../../../../org/hibernate/sql/SelectFragment.html" title="class in org.hibernate.sql">SelectFragment</A> <B>generateSelectFragment</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias,
+                                                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;columnSuffix)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="appendElementColumns(org.hibernate.sql.SelectFragment, java.lang.String)"><!-- --></A><H3>
+appendElementColumns</H3>
+<PRE>
+protected void <B>appendElementColumns</B>(<A HREF="../../../../org/hibernate/sql/SelectFragment.html" title="class in org.hibernate.sql">SelectFragment</A>&nbsp;

@@ -1,0 +1,471 @@
+e;
+dojo.io.cookie.deleteCookie=function(name){
+dojo.io.cookie.setCookie(name,"-",0);
+};
+dojo.io.cookie.setObjectCookie=function(name,obj,days,path,_2e3,_2e4,_2e5){
+if(arguments.length==5){
+_2e5=_2e3;
+_2e3=null;
+_2e4=null;
+}
+var _2e6=[],_2e7,_2e8="";
+if(!_2e5){
+_2e7=dojo.io.cookie.getObjectCookie(name);
+}
+if(days>=0){
+if(!_2e7){
+_2e7={};
+}
+for(var prop in obj){
+if(obj[prop]==null){
+delete _2e7[prop];
+}else{
+if((typeof obj[prop]=="string")||(typeof obj[prop]=="number")){
+_2e7[prop]=obj[prop];
+}
+}
+}
+prop=null;
+for(var prop in _2e7){
+_2e6.push(escape(prop)+"="+escape(_2e7[prop]));
+}
+_2e8=_2e6.join("&");
+}
+dojo.io.cookie.setCookie(name,_2e8,days,path,_2e3,_2e4);
+};
+dojo.io.cookie.getObjectCookie=function(name){
+var _2eb=null,_2ec=dojo.io.cookie.getCookie(name);
+if(_2ec){
+_2eb={};
+var _2ed=_2ec.split("&");
+for(var i=0;i<_2ed.length;i++){
+var pair=_2ed[i].split("=");
+var _2f0=pair[1];
+if(isNaN(_2f0)){
+_2f0=unescape(pair[1]);
+}
+_2eb[unescape(pair[0])]=_2f0;
+}
+}
+return _2eb;
+};
+dojo.io.cookie.isSupported=function(){
+if(typeof navigator.cookieEnabled!="boolean"){
+dojo.io.cookie.setCookie("__TestingYourBrowserForCookieSupport__","CookiesAllowed",90,null);
+var _2f1=dojo.io.cookie.getCookie("__TestingYourBrowserForCookieSupport__");
+navigator.cookieEnabled=(_2f1=="CookiesAllowed");
+if(navigator.cookieEnabled){
+this.deleteCookie("__TestingYourBrowserForCookieSupport__");
+}
+}
+return navigator.cookieEnabled;
+};
+if(!dojo.io.cookies){
+dojo.io.cookies=dojo.io.cookie;
+}
+dojo.kwCompoundRequire({common:["dojo.io.common"],rhino:["dojo.io.RhinoIO"],browser:["dojo.io.BrowserIO","dojo.io.cookie"],dashboard:["dojo.io.BrowserIO","dojo.io.cookie"]});
+dojo.provide("dojo.io.*");
+dojo.provide("dojo.event.common");
+dojo.event=new function(){
+this._canTimeout=dojo.lang.isFunction(dj_global["setTimeout"])||dojo.lang.isAlien(dj_global["setTimeout"]);
+function interpolateArgs(args,_2f3){
+var dl=dojo.lang;
+var ao={srcObj:dj_global,srcFunc:null,adviceObj:dj_global,adviceFunc:null,aroundObj:null,aroundFunc:null,adviceType:(args.length>2)?args[0]:"after",precedence:"last",once:false,delay:null,rate:0,adviceMsg:false,maxCalls:-1};
+switch(args.length){
+case 0:
+return;
+case 1:
+return;
+case 2:
+ao.srcFunc=args[0];
+ao.adviceFunc=args[1];
+break;
+case 3:
+if((dl.isObject(args[0]))&&(dl.isString(args[1]))&&(dl.isString(args[2]))){
+ao.adviceType="after";
+ao.srcObj=args[0];
+ao.srcFunc=args[1];
+ao.adviceFunc=args[2];
+}else{
+if((dl.isString(args[1]))&&(dl.isString(args[2]))){
+ao.srcFunc=args[1];
+ao.adviceFunc=args[2];
+}else{
+if((dl.isObject(args[0]))&&(dl.isString(args[1]))&&(dl.isFunction(args[2]))){
+ao.adviceType="after";
+ao.srcObj=args[0];
+ao.srcFunc=args[1];
+var _2f6=dl.nameAnonFunc(args[2],ao.adviceObj,_2f3);
+ao.adviceFunc=_2f6;
+}else{
+if((dl.isFunction(args[0]))&&(dl.isObject(args[1]))&&(dl.isString(args[2]))){
+ao.adviceType="after";
+ao.srcObj=dj_global;
+var _2f6=dl.nameAnonFunc(args[0],ao.srcObj,_2f3);
+ao.srcFunc=_2f6;
+ao.adviceObj=args[1];
+ao.adviceFunc=args[2];
+}
+}
+}
+}
+break;
+case 4:
+if((dl.isObject(args[0]))&&(dl.isObject(args[2]))){
+ao.adviceType="after";
+ao.srcObj=args[0];
+ao.srcFunc=args[1];
+ao.adviceObj=args[2];
+ao.adviceFunc=args[3];
+}else{
+if((dl.isString(args[0]))&&(dl.isString(args[1]))&&(dl.isObject(args[2]))){
+ao.adviceType=args[0];
+ao.srcObj=dj_global;
+ao.srcFunc=args[1];
+ao.adviceObj=args[2];
+ao.adviceFunc=args[3];
+}else{
+if((dl.isString(args[0]))&&(dl.isFunction(args[1]))&&(dl.isObject(args[2]))){
+ao.adviceType=args[0];
+ao.srcObj=dj_global;
+var _2f6=dl.nameAnonFunc(args[1],dj_global,_2f3);
+ao.srcFunc=_2f6;
+ao.adviceObj=args[2];
+ao.adviceFunc=args[3];
+}else{
+if((dl.isString(args[0]))&&(dl.isObject(args[1]))&&(dl.isString(args[2]))&&(dl.isFunction(args[3]))){
+ao.srcObj=args[1];
+ao.srcFunc=args[2];
+var _2f6=dl.nameAnonFunc(args[3],dj_global,_2f3);
+ao.adviceObj=dj_global;
+ao.adviceFunc=_2f6;
+}else{
+if(dl.isObject(args[1])){
+ao.srcObj=args[1];
+ao.srcFunc=args[2];
+ao.adviceObj=dj_global;
+ao.adviceFunc=args[3];
+}else{
+if(dl.isObject(args[2])){
+ao.srcObj=dj_global;
+ao.srcFunc=args[1];
+ao.adviceObj=args[2];
+ao.adviceFunc=args[3];
+}else{
+ao.srcObj=ao.adviceObj=ao.aroundObj=dj_global;
+ao.srcFunc=args[1];
+ao.adviceFunc=args[2];
+ao.aroundFunc=args[3];
+}
+}
+}
+}
+}
+}
+break;
+case 6:
+ao.srcObj=args[1];
+ao.srcFunc=args[2];
+ao.adviceObj=args[3];
+ao.adviceFunc=args[4];
+ao.aroundFunc=args[5];
+ao.aroundObj=dj_global;
+break;
+default:
+ao.srcObj=args[1];
+ao.srcFunc=args[2];
+ao.adviceObj=args[3];
+ao.adviceFunc=args[4];
+ao.aroundObj=args[5];
+ao.aroundFunc=args[6];
+ao.once=args[7];
+ao.delay=args[8];
+ao.rate=args[9];
+ao.adviceMsg=args[10];
+ao.maxCalls=(!isNaN(parseInt(args[11])))?args[11]:-1;
+break;
+}
+if(dl.isFunction(ao.aroundFunc)){
+var _2f6=dl.nameAnonFunc(ao.aroundFunc,ao.aroundObj,_2f3);
+ao.aroundFunc=_2f6;
+}
+if(dl.isFunction(ao.srcFunc)){
+ao.srcFunc=dl.getNameInObj(ao.srcObj,ao.srcFunc);
+}
+if(dl.isFunction(ao.adviceFunc)){
+ao.adviceFunc=dl.getNameInObj(ao.adviceObj,ao.adviceFunc);
+}
+if((ao.aroundObj)&&(dl.isFunction(ao.aroundFunc))){
+ao.aroundFunc=dl.getNameInObj(ao.aroundObj,ao.aroundFunc);
+}
+if(!ao.srcObj){
+dojo.raise("bad srcObj for srcFunc: "+ao.srcFunc);
+}
+if(!ao.adviceObj){
+dojo.raise("bad adviceObj for adviceFunc: "+ao.adviceFunc);
+}
+if(!ao.adviceFunc){
+dojo.debug("bad adviceFunc for srcFunc: "+ao.srcFunc);
+dojo.debugShallow(ao);
+}
+return ao;
+}
+this.connect=function(){
+if(arguments.length==1){
+var ao=arguments[0];
+}else{
+var ao=interpolateArgs(arguments,true);
+}
+if(dojo.lang.isString(ao.srcFunc)&&(ao.srcFunc.toLowerCase()=="onkey")){
+if(dojo.render.html.ie){
+ao.srcFunc="onkeydown";
+this.connect(ao);
+}
+ao.srcFunc="onkeypress";
+}
+if(dojo.lang.isArray(ao.srcObj)&&ao.srcObj!=""){
+var _2f8={};
+for(var x in ao){
+_2f8[x]=ao[x];
+}
+var mjps=[];
+dojo.lang.forEach(ao.srcObj,function(src){
+if((dojo.render.html.capable)&&(dojo.lang.isString(src))){
+src=dojo.byId(src);
+}
+_2f8.srcObj=src;
+mjps.push(dojo.event.connect.call(dojo.event,_2f8));
+});
+return mjps;
+}
+var mjp=dojo.event.MethodJoinPoint.getForMethod(ao.srcObj,ao.srcFunc);
+if(ao.adviceFunc){
+var mjp2=dojo.event.MethodJoinPoint.getForMethod(ao.adviceObj,ao.adviceFunc);
+}
+mjp.kwAddAdvice(ao);
+return mjp;
+};
+this.log=function(a1,a2){
+var _300;
+if((arguments.length==1)&&(typeof a1=="object")){
+_300=a1;
+}else{
+_300={srcObj:a1,srcFunc:a2};
+}
+_300.adviceFunc=function(){
+var _301=[];
+for(var x=0;x<arguments.length;x++){
+_301.push(arguments[x]);
+}
+dojo.debug("("+_300.srcObj+")."+_300.srcFunc,":",_301.join(", "));
+};
+this.kwConnect(_300);
+};
+this.connectBefore=function(){
+var args=["before"];
+for(var i=0;i<arguments.length;i++){
+args.push(arguments[i]);
+}
+return this.connect.apply(this,args);
+};
+this.connectAround=function(){
+var args=["around"];
+for(var i=0;i<arguments.length;i++){
+args.push(arguments[i]);
+}
+return this.connect.apply(this,args);
+};
+this.connectOnce=function(){
+var ao=interpolateArgs(arguments,true);
+ao.once=true;
+return this.connect(ao);
+};
+this.connectRunOnce=function(){
+var ao=interpolateArgs(arguments,true);
+ao.maxCalls=1;
+return this.connect(ao);
+};
+this._kwConnectImpl=function(_309,_30a){
+var fn=(_30a)?"disconnect":"connect";
+if(typeof _309["srcFunc"]=="function"){
+_309.srcObj=_309["srcObj"]||dj_global;
+var _30c=dojo.lang.nameAnonFunc(_309.srcFunc,_309.srcObj,true);
+_309.srcFunc=_30c;
+}
+if(typeof _309["adviceFunc"]=="function"){
+_309.adviceObj=_309["adviceObj"]||dj_global;
+var _30c=dojo.lang.nameAnonFunc(_309.adviceFunc,_309.adviceObj,true);
+_309.adviceFunc=_30c;
+}
+_309.srcObj=_309["srcObj"]||dj_global;
+_309.adviceObj=_309["adviceObj"]||_309["targetObj"]||dj_global;
+_309.adviceFunc=_309["adviceFunc"]||_309["targetFunc"];
+return dojo.event[fn](_309);
+};
+this.kwConnect=function(_30d){
+return this._kwConnectImpl(_30d,false);
+};
+this.disconnect=function(){
+if(arguments.length==1){
+var ao=arguments[0];
+}else{
+var ao=interpolateArgs(arguments,true);
+}
+if(!ao.adviceFunc){
+return;
+}
+if(dojo.lang.isString(ao.srcFunc)&&(ao.srcFunc.toLowerCase()=="onkey")){
+if(dojo.render.html.ie){
+ao.srcFunc="onkeydown";
+this.disconnect(ao);
+}
+ao.srcFunc="onkeypress";
+}
+if(!ao.srcObj[ao.srcFunc]){
+return null;
+}
+var mjp=dojo.event.MethodJoinPoint.getForMethod(ao.srcObj,ao.srcFunc,true);
+mjp.removeAdvice(ao.adviceObj,ao.adviceFunc,ao.adviceType,ao.once);
+return mjp;
+};
+this.kwDisconnect=function(_310){
+return this._kwConnectImpl(_310,true);
+};
+};
+dojo.event.MethodInvocation=function(_311,obj,args){
+this.jp_=_311;
+this.object=obj;
+this.args=[];
+for(var x=0;x<args.length;x++){
+this.args[x]=args[x];
+}
+this.around_index=-1;
+};
+dojo.event.MethodInvocation.prototype.proceed=function(){
+this.around_index++;
+if(this.around_index>=this.jp_.around.length){
+return this.jp_.object[this.jp_.methodname].apply(this.jp_.object,this.args);
+}else{
+var ti=this.jp_.around[this.around_index];
+var mobj=ti[0]||dj_global;
+var meth=ti[1];
+return mobj[meth].call(mobj,this);
+}
+};
+dojo.event.MethodJoinPoint=function(obj,_319){
+this.object=obj||dj_global;
+this.methodname=_319;
+this.methodfunc=this.object[_319];
+this.squelch=false;
+};
+dojo.event.MethodJoinPoint.getForMethod=function(obj,_31b){
+if(!obj){
+obj=dj_global;
+}
+var ofn=obj[_31b];
+if(!ofn){
+ofn=obj[_31b]=function(){
+};
+if(!obj[_31b]){
+dojo.raise("Cannot set do-nothing method on that object "+_31b);
+}
+}else{
+if((typeof ofn!="function")&&(!dojo.lang.isFunction(ofn))&&(!dojo.lang.isAlien(ofn))){
+return null;
+}
+}
+var _31d=_31b+"$joinpoint";
+var _31e=_31b+"$joinpoint$method";
+var _31f=obj[_31d];
+if(!_31f){
+var _320=false;
+if(dojo.event["browser"]){
+if((obj["attachEvent"])||(obj["nodeType"])||(obj["addEventListener"])){
+_320=true;
+dojo.event.browser.addClobberNodeAttrs(obj,[_31d,_31e,_31b]);
+}
+}
+var _321=ofn.length;
+obj[_31e]=ofn;
+_31f=obj[_31d]=new dojo.event.MethodJoinPoint(obj,_31e);
+if(!_320){
+obj[_31b]=function(){
+return _31f.run.apply(_31f,arguments);
+};
+}else{
+obj[_31b]=function(){
+var args=[];
+if(!arguments.length){
+var evt=null;
+try{
+if(obj.ownerDocument){
+evt=obj.ownerDocument.parentWindow.event;
+}else{
+if(obj.documentElement){
+evt=obj.documentElement.ownerDocument.parentWindow.event;
+}else{
+if(obj.event){
+evt=obj.event;
+}else{
+evt=window.event;
+}
+}
+}
+}
+catch(e){
+evt=window.event;
+}
+if(evt){
+args.push(dojo.event.browser.fixEvent(evt,this));
+}
+}else{
+for(var x=0;x<arguments.length;x++){
+if((x==0)&&(dojo.event.browser.isEvent(arguments[x]))){
+args.push(dojo.event.browser.fixEvent(arguments[x],this));
+}else{
+args.push(arguments[x]);
+}
+}
+}
+return _31f.run.apply(_31f,args);
+};
+}
+obj[_31b].__preJoinArity=_321;
+}
+return _31f;
+};
+dojo.lang.extend(dojo.event.MethodJoinPoint,{squelch:false,unintercept:function(){
+this.object[this.methodname]=this.methodfunc;
+this.before=[];
+this.after=[];
+this.around=[];
+},disconnect:dojo.lang.forward("unintercept"),run:function(){
+var obj=this.object||dj_global;
+var args=arguments;
+var _327=[];
+for(var x=0;x<args.length;x++){
+_327[x]=args[x];
+}
+var _329=function(marr){
+if(!marr){
+dojo.debug("Null argument to unrollAdvice()");
+return;
+}
+var _32b=marr[0]||dj_global;
+var _32c=marr[1];
+if(!_32b[_32c]){
+dojo.raise("function \""+_32c+"\" does not exist on \""+_32b+"\"");
+}
+var _32d=marr[2]||dj_global;
+var _32e=marr[3];
+var msg=marr[6];
+var _330=marr[7];
+if(_330>-1){
+if(_330==0){
+return;
+}
+marr[7]--;
+}
+var _331;
+var to={args:[],jp_:this,object:obj,proceed:function(){
+return _32b[_32c].apply(_

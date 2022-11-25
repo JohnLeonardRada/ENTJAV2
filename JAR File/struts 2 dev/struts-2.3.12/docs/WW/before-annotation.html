@@ -1,0 +1,362 @@
+ew Array()),_33a);
+}
+var _33b;
+try{
+if((this["around"])&&(this.around.length>0)){
+var mi=new dojo.event.MethodInvocation(this,obj,args);
+_33b=mi.proceed();
+}else{
+if(this.methodfunc){
+_33b=this.object[this.methodname].apply(this.object,args);
+}
+}
+}
+catch(e){
+if(!this.squelch){
+dojo.debug(e,"when calling",this.methodname,"on",this.object,"with arguments",args);
+dojo.raise(e);
+}
+}
+if((this["after"])&&(this.after.length>0)){
+dojo.lang.forEach(this.after.concat(new Array()),_33a);
+}
+return (this.methodfunc)?_33b:null;
+},getArr:function(kind){
+var type="after";
+if((typeof kind=="string")&&(kind.indexOf("before")!=-1)){
+type="before";
+}else{
+if(kind=="around"){
+type="around";
+}
+}
+if(!this[type]){
+this[type]=[];
+}
+return this[type];
+},kwAddAdvice:function(args){
+this.addAdvice(args["adviceObj"],args["adviceFunc"],args["aroundObj"],args["aroundFunc"],args["adviceType"],args["precedence"],args["once"],args["delay"],args["rate"],args["adviceMsg"],args["maxCalls"]);
+},addAdvice:function(_340,_341,_342,_343,_344,_345,once,_347,rate,_349,_34a){
+var arr=this.getArr(_344);
+if(!arr){
+dojo.raise("bad this: "+this);
+}
+var ao=[_340,_341,_342,_343,_347,rate,_349,_34a];
+if(once){
+if(this.hasAdvice(_340,_341,_344,arr)>=0){
+return;
+}
+}
+if(_345=="first"){
+arr.unshift(ao);
+}else{
+arr.push(ao);
+}
+},hasAdvice:function(_34d,_34e,_34f,arr){
+if(!arr){
+arr=this.getArr(_34f);
+}
+var ind=-1;
+for(var x=0;x<arr.length;x++){
+var aao=(typeof _34e=="object")?(new String(_34e)).toString():_34e;
+var a1o=(typeof arr[x][1]=="object")?(new String(arr[x][1])).toString():arr[x][1];
+if((arr[x][0]==_34d)&&(a1o==aao)){
+ind=x;
+}
+}
+return ind;
+},removeAdvice:function(_355,_356,_357,once){
+var arr=this.getArr(_357);
+var ind=this.hasAdvice(_355,_356,_357,arr);
+if(ind==-1){
+return false;
+}
+while(ind!=-1){
+arr.splice(ind,1);
+if(once){
+break;
+}
+ind=this.hasAdvice(_355,_356,_357,arr);
+}
+return true;
+}});
+dojo.provide("dojo.event.topic");
+dojo.event.topic=new function(){
+this.topics={};
+this.getTopic=function(_35b){
+if(!this.topics[_35b]){
+this.topics[_35b]=new this.TopicImpl(_35b);
+}
+return this.topics[_35b];
+};
+this.registerPublisher=function(_35c,obj,_35e){
+var _35c=this.getTopic(_35c);
+_35c.registerPublisher(obj,_35e);
+};
+this.subscribe=function(_35f,obj,_361){
+var _35f=this.getTopic(_35f);
+_35f.subscribe(obj,_361);
+};
+this.unsubscribe=function(_362,obj,_364){
+var _362=this.getTopic(_362);
+_362.unsubscribe(obj,_364);
+};
+this.destroy=function(_365){
+this.getTopic(_365).destroy();
+delete this.topics[_365];
+};
+this.publishApply=function(_366,args){
+var _366=this.getTopic(_366);
+_366.sendMessage.apply(_366,args);
+};
+this.publish=function(_368,_369){
+var _368=this.getTopic(_368);
+var args=[];
+for(var x=1;x<arguments.length;x++){
+args.push(arguments[x]);
+}
+_368.sendMessage.apply(_368,args);
+};
+};
+dojo.event.topic.TopicImpl=function(_36c){
+this.topicName=_36c;
+this.subscribe=function(_36d,_36e){
+var tf=_36e||_36d;
+var to=(!_36e)?dj_global:_36d;
+return dojo.event.kwConnect({srcObj:this,srcFunc:"sendMessage",adviceObj:to,adviceFunc:tf});
+};
+this.unsubscribe=function(_371,_372){
+var tf=(!_372)?_371:_372;
+var to=(!_372)?null:_371;
+return dojo.event.kwDisconnect({srcObj:this,srcFunc:"sendMessage",adviceObj:to,adviceFunc:tf});
+};
+this._getJoinPoint=function(){
+return dojo.event.MethodJoinPoint.getForMethod(this,"sendMessage");
+};
+this.setSquelch=function(_375){
+this._getJoinPoint().squelch=_375;
+};
+this.destroy=function(){
+this._getJoinPoint().disconnect();
+};
+this.registerPublisher=function(_376,_377){
+dojo.event.connect(_376,_377,this,"sendMessage");
+};
+this.sendMessage=function(_378){
+};
+};
+dojo.provide("dojo.event.browser");
+dojo._ie_clobber=new function(){
+this.clobberNodes=[];
+function nukeProp(node,prop){
+try{
+node[prop]=null;
+}
+catch(e){
+}
+try{
+delete node[prop];
+}
+catch(e){
+}
+try{
+node.removeAttribute(prop);
+}
+catch(e){
+}
+}
+this.clobber=function(_37b){
+var na;
+var tna;
+if(_37b){
+tna=_37b.all||_37b.getElementsByTagName("*");
+na=[_37b];
+for(var x=0;x<tna.length;x++){
+if(tna[x]["__doClobber__"]){
+na.push(tna[x]);
+}
+}
+}else{
+try{
+window.onload=null;
+}
+catch(e){
+}
+na=(this.clobberNodes.length)?this.clobberNodes:document.all;
+}
+tna=null;
+var _37f={};
+for(var i=na.length-1;i>=0;i=i-1){
+var el=na[i];
+try{
+if(el&&el["__clobberAttrs__"]){
+for(var j=0;j<el.__clobberAttrs__.length;j++){
+nukeProp(el,el.__clobberAttrs__[j]);
+}
+nukeProp(el,"__clobberAttrs__");
+nukeProp(el,"__doClobber__");
+}
+}
+catch(e){
+}
+}
+na=null;
+};
+};
+if(dojo.render.html.ie){
+dojo.addOnUnload(function(){
+dojo._ie_clobber.clobber();
+try{
+if((dojo["widget"])&&(dojo.widget["manager"])){
+dojo.widget.manager.destroyAll();
+}
+}
+catch(e){
+}
+if(dojo.widget){
+for(var name in dojo.widget._templateCache){
+if(dojo.widget._templateCache[name].node){
+dojo.dom.destroyNode(dojo.widget._templateCache[name].node);
+dojo.widget._templateCache[name].node=null;
+delete dojo.widget._templateCache[name].node;
+}
+}
+}
+try{
+window.onload=null;
+}
+catch(e){
+}
+try{
+window.onunload=null;
+}
+catch(e){
+}
+dojo._ie_clobber.clobberNodes=[];
+});
+}
+dojo.event.browser=new function(){
+var _384=0;
+this.normalizedEventName=function(_385){
+switch(_385){
+case "CheckboxStateChange":
+case "DOMAttrModified":
+case "DOMMenuItemActive":
+case "DOMMenuItemInactive":
+case "DOMMouseScroll":
+case "DOMNodeInserted":
+case "DOMNodeRemoved":
+case "RadioStateChange":
+return _385;
+break;
+default:
+var lcn=_385.toLowerCase();
+return (lcn.indexOf("on")==0)?lcn.substr(2):lcn;
+break;
+}
+};
+this.clean=function(node){
+if(dojo.render.html.ie){
+dojo._ie_clobber.clobber(node);
+}
+};
+this.addClobberNode=function(node){
+if(!dojo.render.html.ie){
+return;
+}
+if(!node["__doClobber__"]){
+node.__doClobber__=true;
+dojo._ie_clobber.clobberNodes.push(node);
+node.__clobberAttrs__=[];
+}
+};
+this.addClobberNodeAttrs=function(node,_38a){
+if(!dojo.render.html.ie){
+return;
+}
+this.addClobberNode(node);
+for(var x=0;x<_38a.length;x++){
+node.__clobberAttrs__.push(_38a[x]);
+}
+};
+this.removeListener=function(node,_38d,fp,_38f){
+if(!_38f){
+var _38f=false;
+}
+_38d=dojo.event.browser.normalizedEventName(_38d);
+if(_38d=="key"){
+if(dojo.render.html.ie){
+this.removeListener(node,"onkeydown",fp,_38f);
+}
+_38d="keypress";
+}
+if(node.removeEventListener){
+node.removeEventListener(_38d,fp,_38f);
+}
+};
+this.addListener=function(node,_391,fp,_393,_394){
+if(!node){
+return;
+}
+if(!_393){
+var _393=false;
+}
+_391=dojo.event.browser.normalizedEventName(_391);
+if(_391=="key"){
+if(dojo.render.html.ie){
+this.addListener(node,"onkeydown",fp,_393,_394);
+}
+_391="keypress";
+}
+if(!_394){
+var _395=function(evt){
+if(!evt){
+evt=window.event;
+}
+var ret=fp(dojo.event.browser.fixEvent(evt,this));
+if(_393){
+dojo.event.browser.stopEvent(evt);
+}
+return ret;
+};
+}else{
+_395=fp;
+}
+if(node.addEventListener){
+node.addEventListener(_391,_395,_393);
+return _395;
+}else{
+_391="on"+_391;
+if(typeof node[_391]=="function"){
+var _398=node[_391];
+node[_391]=function(e){
+_398(e);
+return _395(e);
+};
+}else{
+node[_391]=_395;
+}
+if(dojo.render.html.ie){
+this.addClobberNodeAttrs(node,[_391]);
+}
+return _395;
+}
+};
+this.isEvent=function(obj){
+return (typeof obj!="undefined")&&(obj)&&(typeof Event!="undefined")&&(obj.eventPhase);
+};
+this.currentEvent=null;
+this.callListener=function(_39b,_39c){
+if(typeof _39b!="function"){
+dojo.raise("listener not a function: "+_39b);
+}
+dojo.event.browser.currentEvent.currentTarget=_39c;
+return _39b.call(_39c,dojo.event.browser.currentEvent);
+};
+this._stopPropagation=function(){
+dojo.event.browser.currentEvent.cancelBubble=true;
+};
+this._preventDefault=function(){
+dojo.event.browser.currentEvent.returnValue=false;
+};
+this.keys={KEY_BACKSPACE:8,KEY_TAB:9,KEY_CLEAR:12,KEY_ENTER:13,KEY_SHIFT:16,KEY_CTRL:17,KEY_ALT:18,KEY_PAUSE:19,KEY_CAPS_LOCK:20,KEY_ESCAPE:27,KEY_SPACE:32,KEY_PAGE_UP:33,KEY_PAGE_DOWN:34,KEY_END:35,KEY_HOME:36,KEY_LEFT_ARROW:37,KEY_UP_ARROW:38,KEY_RIGHT_ARROW:39,KEY_DOWN_ARROW:40,KEY_INSERT:45,KEY_DELETE:46,KEY_HELP:47,KEY_LEFT_WINDOW:91,KEY_RIGHT_WINDOW:92,KEY_SELECT:93,KEY_NUMPAD_0:96,KEY_NUMPAD_1:97,KEY_NUMPAD_2:98,KEY_NUMPAD_3:99,KEY_NUMPAD_4:100,KEY_NUMPAD_5:101,KEY_NUMPAD_6:102,KEY_NUMPAD_7:103,KEY_NUMPAD_8:104,KEY_NUMPAD_9:105,KEY_NUMPAD_MULTIPLY:106,KEY_NUMPAD_PLUS:107,KEY_NUMPAD_ENTER:108,KEY_NUMPAD

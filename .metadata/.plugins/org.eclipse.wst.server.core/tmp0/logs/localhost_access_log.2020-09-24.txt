@@ -1,0 +1,17 @@
+127.0.0.1 - - [24/Sep/2020:08:06:12 +0800] "GET / HTTP/1.1" 404 748
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:06:13 +0800] "GET /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/index.jsp HTTP/1.1" 200 781
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:10:25 +0800] "POST /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/getcoding.action HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:10:25 +0800] "GET /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/display.jsp HTTP/1.1" 200 547
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:10:28 +0800] "GET /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/index.jsp HTTP/1.1" 200 781
+127.0.0.1 - - [24/Sep/2020:08:23:25 +0800] "GET / HTTP/1.1" 404 748
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:23:26 +0800] "GET /www.mvc-model2.demo.com.ph/index.jsp HTTP/1.1" 200 897
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:23:41 +0800] "POST /www.mvc-model2.demo.com.ph/computegrade.action HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:23:41 +0800] "GET /www.mvc-model2.demo.com.ph/display-jsp20.jsp HTTP/1.1" 200 799
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:23:45 +0800] "GET /www.mvc-model2.demo.com.ph/index.jsp HTTP/1.1" 200 897
+127.0.0.1 - - [24/Sep/2020:08:24:08 +0800] "GET / HTTP/1.1" 404 748
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:24:09 +0800] "GET /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/index.jsp HTTP/1.1" 500 3098
+127.0.0.1 - - [24/Sep/2020:08:25:52 +0800] "GET / HTTP/1.1" 404 748
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:25:52 +0800] "GET /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/index.jsp HTTP/1.1" 200 781
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:26:15 +0800] "POST /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/getcoding.action HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:26:15 +0800] "GET /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/display.jsp HTTP/1.1" 200 557
+0:0:0:0:0:0:0:1 - - [24/Sep/2020:08:26:22 +0800] "GET /MP1-ENTJAV2-JSP-Action-Tags-JohnLeonardRada/index.jsp HTTP/1.1" 200 781

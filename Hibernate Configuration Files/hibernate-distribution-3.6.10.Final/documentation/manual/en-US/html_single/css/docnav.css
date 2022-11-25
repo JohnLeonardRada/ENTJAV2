@@ -1,0 +1,164 @@
+_setContent(data.xml);
+for(var i=0;i<data.styles.length;i++){
+if(data.styles[i].path){
+this._styleNodes.push(dojo.html.insertCssFile(data.styles[i].path,dojo.doc(),false,true));
+}else{
+this._styleNodes.push(dojo.html.insertCssText(data.styles[i]));
+}
+}
+if(this.parseContent){
+for(var i=0;i<data.requires.length;i++){
+try{
+eval(data.requires[i]);
+}
+catch(e){
+e.text="ContentPane: error in package loading calls, "+(e.description||e);
+this._handleDefaults(e,"onContentError","debug");
+}
+}
+}
+var _9df=this;
+function asyncParse(){
+if(_9df.executeScripts){
+_9df._executeScripts(data.scripts);
+}
+if(_9df.parseContent){
+var node=_9df.containerNode||_9df.domNode;
+var _9e1=new dojo.xml.Parse();
+var frag=_9e1.parseElement(node,null,true);
+dojo.widget.getParser().createSubComponents(frag,_9df);
+}
+_9df.onResized();
+_9df.onLoad();
+}
+if(dojo.hostenv.isXDomain&&data.requires.length){
+dojo.addOnLoad(asyncParse);
+}else{
+asyncParse();
+}
+}
+},setHandler:function(_9e3){
+var fcn=dojo.lang.isFunction(_9e3)?_9e3:window[_9e3];
+if(!dojo.lang.isFunction(fcn)){
+this._handleDefaults("Unable to set handler, '"+_9e3+"' not a function.","onExecError",true);
+return;
+}
+this.handler=function(){
+return fcn.apply(this,arguments);
+};
+},_runHandler:function(){
+var ret=true;
+if(dojo.lang.isFunction(this.handler)){
+this.handler(this,this.domNode);
+ret=false;
+}
+this.onLoad();
+return ret;
+},_executeScripts:function(_9e6){
+var self=this;
+var tmp="",code="";
+for(var i=0;i<_9e6.length;i++){
+if(_9e6[i].path){
+dojo.io.bind(this._cacheSetting({"url":_9e6[i].path,"load":function(type,_9ec){
+dojo.lang.hitch(self,tmp=";"+_9ec);
+},"error":function(type,_9ee){
+_9ee.text=type+" downloading remote script";
+self._handleDefaults.call(self,_9ee,"onExecError","debug");
+},"mimetype":"text/plain","sync":true},this.cacheContent));
+code+=tmp;
+}else{
+code+=_9e6[i];
+}
+}
+try{
+if(this.scriptSeparation){
+delete this.scriptScope;
+this.scriptScope=new (new Function("_container_",code+"; return this;"))(self);
+}else{
+var djg=dojo.global();
+if(djg.execScript){
+djg.execScript(code);
+}else{
+var djd=dojo.doc();
+var sc=djd.createElement("script");
+sc.appendChild(djd.createTextNode(code));
+(this.containerNode||this.domNode).appendChild(sc);
+}
+}
+}
+catch(e){
+e.text="Error running scripts from content:\n"+e.description;
+this._handleDefaults(e,"onExecError","debug");
+}
+}});
+dojo.provide("dojo.widget.Editor2Toolbar");
+dojo.lang.declare("dojo.widget.HandlerManager",null,function(){
+this._registeredHandlers=[];
+},{registerHandler:function(obj,func){
+if(arguments.length==2){
+this._registeredHandlers.push(function(){
+return obj[func].apply(obj,arguments);
+});
+}else{
+this._registeredHandlers.push(obj);
+}
+},removeHandler:function(func){
+for(var i=0;i<this._registeredHandlers.length;i++){
+if(func===this._registeredHandlers[i]){
+delete this._registeredHandlers[i];
+return;
+}
+}
+dojo.debug("HandlerManager handler "+func+" is not registered, can not remove.");
+},destroy:function(){
+for(var i=0;i<this._registeredHandlers.length;i++){
+delete this._registeredHandlers[i];
+}
+}});
+dojo.widget.Editor2ToolbarItemManager=new dojo.widget.HandlerManager;
+dojo.lang.mixin(dojo.widget.Editor2ToolbarItemManager,{getToolbarItem:function(name){
+var item;
+name=name.toLowerCase();
+for(var i=0;i<this._registeredHandlers.length;i++){
+item=this._registeredHandlers[i](name);
+if(item){
+return item;
+}
+}
+switch(name){
+case "bold":
+case "copy":
+case "cut":
+case "delete":
+case "indent":
+case "inserthorizontalrule":
+case "insertorderedlist":
+case "insertunorderedlist":
+case "italic":
+case "justifycenter":
+case "justifyfull":
+case "justifyleft":
+case "justifyright":
+case "outdent":
+case "paste":
+case "redo":
+case "removeformat":
+case "selectall":
+case "strikethrough":
+case "subscript":
+case "superscript":
+case "underline":
+case "undo":
+case "unlink":
+case "createlink":
+case "insertimage":
+case "htmltoggle":
+item=new dojo.widget.Editor2ToolbarButton(name);
+break;
+case "forecolor":
+case "hilitecolor":
+item=new dojo.widget.Editor2ToolbarColorPaletteButton(name);
+break;
+case "plainformatblock":
+item=new dojo.widget.Editor2ToolbarFormatBlockPlainSelect("formatblock");
+break;

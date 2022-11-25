@@ -1,0 +1,976 @@
+n"
+"        &lt;/set&gt;\n"
+"        &lt;fetch-profile name=\"customer-with-orders\"&gt;\n"
+"            &lt;fetch association=\"orders\" style=\"join\"/&gt;\n"
+"        &lt;/fetch-profile&gt;\n"
+"    &lt;/class&gt;\n"
+"    &lt;class name=\"Order\"&gt;\n"
+"        ...\n"
+"    &lt;/class&gt;\n"
+"&lt;/hibernate-mapping&gt;"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:525
+#, no-c-format
+msgid ""
+"Now normally when you get a reference to a particular customer, that "
+"customer's set of orders will be lazy meaning we will not yet have loaded "
+"those orders from the database. Normally this is a good thing. Now lets say "
+"that you have a certain use case where it is more efficient to load the "
+"customer and their orders together. One way certainly is to use \"dynamic "
+"fetching\" strategies via an HQL or criteria queries. But another option is "
+"to use a fetch profile to achieve that. The following code will load both "
+"the customer <emphasis>and</emphasis>their orders:"
+msgstr ""
+
+#. Tag: title
+#: performance.xml:536
+#, no-c-format
+msgid "Activating a fetch profile for a given <classname>Session</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: performance.xml:539
+#, no-c-format
+msgid ""
+"Session session = ...;\n"
+"session.enableFetchProfile( \"customer-with-orders\" );  // name matches "
+"from mapping\n"
+"Customer customer = (Customer) session.get( Customer.class, customerId );"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:543
+#, no-c-format
+msgid ""
+"<classname>@FetchProfile </classname>definitions are global and it does not "
+"matter on which class you place them. You can place the "
+"<classname>@FetchProfile</classname> annotation either onto a class or "
+"package (package-info.java). In order to define multiple fetch profiles for "
+"the same class or package <classname>@FetchProfiles</classname> can be used."
+msgstr ""
+
+#. Tag: para
+#: performance.xml:551
+#, no-c-format
+msgid ""
+"Currently only join style fetch profiles are supported, but they plan is to "
+"support additional styles. See <ulink url=\"http://opensource.atlassian.com/"
+"projects/hibernate/browse/HHH-3414\">HHH-3414</ulink> for details."
+msgstr ""
+
+#. Tag: title
+#: performance.xml:558
+#, no-c-format
+msgid "Using lazy property fetching"
+msgstr "Utiliser le chargement en différé des propriétés"
+
+#. Tag: para
+#: performance.xml:560
+#, no-c-format
+msgid ""
+"Hibernate3 supports the lazy fetching of individual properties. This "
+"optimization technique is also known as <emphasis>fetch groups</emphasis>. "
+"Please note that this is mostly a marketing feature; optimizing row reads is "
+"much more important than optimization of column reads. However, only loading "
+"some properties of a class could be useful in extreme cases. For example, "
+"when legacy tables have hundreds of columns and the data model cannot be "
+"improved."
+msgstr ""
+"Hibernate3 supporte le chargement en différé de propriétés individuelles. La "
+"technique d'optimisation est également connue sous le nom de <emphasis>fetch "
+"groups</emphasis> (groupes de chargement). Il faut noter qu'il s'agit "
+"principalement d'une fonctionnalité marketing car en pratique l'optimisation "
+"de la lecture d'un enregistrement est beaucoup plus importante que "
+"l'optimisation de la lecture d'une colonne. Cependant, la restriction du "
+"chargement à certaines colonnes peut être pratique dans des cas extrêmes, "
+"lorsque des tables \"legacy\" possèdent des centaines de colonnes et que le "
+"modèle de données ne peut pas être amélioré."
+
+#. Tag: para
+#: performance.xml:568
+#, no-c-format
+msgid ""
+"To enable lazy property loading, set the <literal>lazy</literal> attribute "
+"on your particular property mappings:"
+msgstr ""
+"Pour activer le chargement en différé d'une propriété, il faut mettre "
+"l'attribut <literal>lazy</literal> sur une propriété particulière du "
+"mappage :"
+
+#. Tag: programlisting
+#: performance.xml:571
+#, no-c-format
+msgid ""
+"&lt;class name=\"Document\"&gt;\n"
+"       &lt;id name=\"id\"&gt;\n"
+"        &lt;generator class=\"native\"/&gt;\n"
+"    &lt;/id&gt;\n"
+"    &lt;property name=\"name\" not-null=\"true\" length=\"50\"/&gt;\n"
+"    &lt;property name=\"summary\" not-null=\"true\" length=\"200\" lazy="
+"\"true\"/&gt;\n"
+"    &lt;property name=\"text\" not-null=\"true\" length=\"2000\" lazy=\"true"
+"\"/&gt;\n"
+"&lt;/class&gt;"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:573
+#, no-c-format
+msgid ""
+"Lazy property loading requires buildtime bytecode instrumentation. If your "
+"persistent classes are not enhanced, Hibernate will ignore lazy property "
+"settings and return to immediate fetching."
+msgstr ""
+"Le chargement en différé des propriétés requiert une instrumentation du "
+"bytecode lors de la compilation ! Si les classes persistantes ne sont pas "
+"instrumentées, Hibernate ignorera de manière silencieuse le mode en différé "
+"et retombera dans le mode de chargement immédiat. "
+
+#. Tag: para
+#: performance.xml:577
+#, no-c-format
+msgid "For bytecode instrumentation, use the following Ant task:"
+msgstr ""
+"Pour l'instrumentation du bytecode vous pouvez utiliser la tâche Ant "
+"suivante :"
+
+#. Tag: programlisting
+#: performance.xml:579
+#, no-c-format
+msgid ""
+"&lt;target name=\"instrument\" depends=\"compile\"&gt;\n"
+"    &lt;taskdef name=\"instrument\" classname=\"org.hibernate.tool."
+"instrument.InstrumentTask\"&gt;\n"
+"        &lt;classpath path=\"${jar.path}\"/&gt;\n"
+"        &lt;classpath path=\"${classes.dir}\"/&gt;\n"
+"        &lt;classpath refid=\"lib.class.path\"/&gt;\n"
+"    &lt;/taskdef&gt;\n"
+"\n"
+"    &lt;instrument verbose=\"true\"&gt;\n"
+"        &lt;fileset dir=\"${testclasses.dir}/org/hibernate/auction/model"
+"\"&gt;\n"
+"            &lt;include name=\"*.class\"/&gt;\n"
+"        &lt;/fileset&gt;\n"
+"    &lt;/instrument&gt;\n"
+"&lt;/target&gt;"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:581
+#, no-c-format
+msgid ""
+"A different way of avoiding unnecessary column reads, at least for read-only "
+"transactions, is to use the projection features of HQL or Criteria queries. "
+"This avoids the need for buildtime bytecode processing and is certainly a "
+"preferred solution."
+msgstr ""
+"Une autre façon (meilleure ?) pour éviter de lire plus de colonnes que "
+"nécessaire au moins pour des transactions en lecture seule est d'utiliser "
+"les fonctionnalités de projection des requêtes HQL ou Criteria. Cela évite "
+"de devoir instrumenter le bytecode à la compilation et est certainement une "
+"solution préférable. "
+
+#. Tag: para
+#: performance.xml:586
+#, no-c-format
+msgid ""
+"You can force the usual eager fetching of properties using <literal>fetch "
+"all properties</literal> in HQL."
+msgstr ""
+"Vous pouvez forcer le mode de chargement agressif des propriétés en "
+"utilisant <literal>fetch all properties</literal> dans les requêtes HQL. "
+
+#. Tag: title
+#: performance.xml:592
+#, no-c-format
+msgid "The Second Level Cache"
+msgstr "Le cache de second niveau"
+
+#. Tag: para
+#: performance.xml:594
+#, no-c-format
+msgid ""
+"A Hibernate <literal>Session</literal> is a transaction-level cache of "
+"persistent data. It is possible to configure a cluster or JVM-level "
+"(<literal>SessionFactory</literal>-level) cache on a class-by-class and "
+"collection-by-collection basis. You can even plug in a clustered cache. Be "
+"aware that caches are not aware of changes made to the persistent store by "
+"another application. They can, however, be configured to regularly expire "
+"cached data."
+msgstr ""
+"Une <literal>Session</literal> Hibernate est un cache de niveau "
+"transactionnel de données persistantes. Il est possible de configurer un "
+"cache de cluster ou de JVM (de niveau <literal>SessionFactory</literal>) "
+"défini classe par classe et collection par collection. Vous pouvez même "
+"utiliser votre choix de cache en implémentant le fournisseur associé. Faites "
+"attention, les caches ne sont jamais avertis des modifications faites dans "
+"la base de données par d'autres applications (ils peuvent cependant être "
+"configurés pour régulièrement expirer les données en cache). "
+
+#. Tag: para
+#: performance.xml:602
+#, fuzzy, no-c-format
+msgid ""
+"You have the option to tell Hibernate which caching implementation to use by "
+"specifying the name of a class that implements <literal>org.hibernate.cache."
+"CacheProvider</literal> using the property <literal>hibernate.cache."
+"provider_class</literal>. Hibernate is bundled with a number of built-in "
+"integrations with the open-source cache providers that are listed in <xref "
+"linkend=\"cacheproviders\"/>. You can also implement your own and plug it in "
+"as outlined above. Note that versions prior to Hibernate 3.2 use EhCache as "
+"the default cache provider."
+msgstr ""
+"Vous pouvez choisir une autre implémentation en spécifiant le nom de la "
+"classe qui implémente <literal>org.hibernate.cache.CacheProvider</literal> "
+"en utilisant la propriété <literal>hibernate.cache.provider_class</literal>. "
+"Hibernate est accompagné de plusieurs intégrations imbriquées avec des "
+"fournisseurs de cache open-source (listés ci-dessous) ; par ailleurs vous "
+"pouvez implémenter votre propre fournisseur et le brancher comme indiqué ci-"
+"dessus. Notez que les versions antérieures à 3.2, utilisaient par défaut le "
+"EhCache comme le fournisseur de cache par défaut, ce qui n'est plus le cas. "
+
+#. Tag: title
+#: performance.xml:613
+#, no-c-format
+msgid "Cache Providers"
+msgstr "Fournisseurs de cache"
+
+#. Tag: entry
+#: performance.xml:628 performance.xml:976
+#, no-c-format
+msgid "Cache"
+msgstr "Cache"
+
+#. Tag: entry
+#: performance.xml:630
+#, no-c-format
+msgid "Provider class"
+msgstr "Classe pourvoyeuse"
+
+#. Tag: entry
+#: performance.xml:632
+#, no-c-format
+msgid "Type"
+msgstr "Type"
+
+#. Tag: entry
+#: performance.xml:634
+#, no-c-format
+msgid "Cluster Safe"
+msgstr "Cluster sécurisé"
+
+#. Tag: entry
+#: performance.xml:636
+#, no-c-format
+msgid "Query Cache Supported"
+msgstr "Cache de requêtes supporté"
+
+#. Tag: entry
+#: performance.xml:642 performance.xml:990
+#, no-c-format
+msgid "Hashtable (not intended for production use)"
+msgstr "Table de hachage (ne pas utiliser en production)"
+
+#. Tag: literal
+#: performance.xml:644
+#, fuzzy, no-c-format
+msgid "org.hibernate.cache.HashtableCacheProvider"
+msgstr "<literal>org.hibernate.cache.HashtableCacheProvider</literal>"
+
+#. Tag: entry
+#: performance.xml:646
+#, no-c-format
+msgid "memory"
+msgstr "mémoire"
+
+#. Tag: entry
+#: performance.xml:650 performance.xml:662 performance.xml:674
+#: performance.xml:992 performance.xml:994 performance.xml:996
+#: performance.xml:1004 performance.xml:1006 performance.xml:1008
+#: performance.xml:1016 performance.xml:1018 performance.xml:1020
+#: performance.xml:1028 performance.xml:1030 performance.xml:1040
+#: performance.xml:1046 performance.xml:1052 performance.xml:1058
+#, no-c-format
+msgid "<entry>yes</entry>"
+msgstr ""
+
+#. Tag: entry
+#: performance.xml:654 performance.xml:1002
+#, no-c-format
+msgid "EHCache"
+msgstr "EHCache"
+
+#. Tag: literal
+#: performance.xml:656
+#, fuzzy, no-c-format
+msgid "org.hibernate.cache.EhCacheProvider"
+msgstr "<literal>org.hibernate.cache.EhCacheProvider</literal>"
+
+#. Tag: entry
+#: performance.xml:658 performance.xml:670
+#, no-c-format
+msgid "memory, disk"
+msgstr "mémoire, disque"
+
+#. Tag: entry
+#: performance.xml:666 performance.xml:1014
+#, no-c-format
+msgid "OSCache"
+msgstr "OSCache"
+
+#. Tag: literal
+#: performance.xml:668
+#, fuzzy, no-c-format
+msgid "org.hibernate.cache.OSCacheProvider"
+msgstr "<literal>org.hibernate.cache.OSCacheProvider</literal>"
+
+#. Tag: entry
+#: performance.xml:678 performance.xml:1026
+#, no-c-format
+msgid "SwarmCache"
+msgstr "SwarmCache"
+
+#. Tag: literal
+#: performance.xml:680
+#, fuzzy, no-c-format
+msgid "org.hibernate.cache.SwarmCacheProvider"
+msgstr "<literal>org.hibernate.cache.SwarmCacheProvider</literal>"
+
+#. Tag: entry
+#: performance.xml:682
+#, no-c-format
+msgid "clustered (ip multicast)"
+msgstr "en cluster (multicast ip)"
+
+#. Tag: entry
+#: performance.xml:684
+#, no-c-format
+msgid "yes (clustered invalidation)"
+msgstr "oui (invalidation de cluster)"
+
+#. Tag: entry
+#: performance.xml:690 performance.xml:1038
+#, no-c-format
+msgid "JBoss Cache 1.x"
+msgstr "JBoss Cache 1.x"
+
+#. Tag: literal
+#: performance.xml:692
+#, fuzzy, no-c-format
+msgid "org.hibernate.cache.TreeCacheProvider"
+msgstr "    org.hibernate.cache.TreeCacheProvider"
+
+#. Tag: entry
+#: performance.xml:694 performance.xml:706
+#, no-c-format
+msgid "clustered (ip multicast), transactional"
+msgstr "en cluster (multicast ip), transactionnel"
+
+#. Tag: entry
+#: performance.xml:696
+#, no-c-format
+msgid "yes (replication)"
+msgstr "oui (réplication)"
+
+#. Tag: entry
+#: performance.xml:698 performance.xml:710
+#, no-c-format
+msgid "yes (clock sync req.)"
+msgstr "oui (horloge sync. nécessaire)"
+
+#. Tag: entry
+#: performance.xml:702 performance.xml:1050
+#, no-c-format
+msgid "JBoss Cache 2"
+msgstr "JBoss Cache 2"
+
+#. Tag: literal
+#: performance.xml:704
+#, fuzzy, no-c-format
+msgid "org.hibernate.cache.jbc.JBossCacheRegionFactory"
+msgstr "<literal>org.hibernate.cache.jbc2.JBossCacheRegionFactory</literal>"
+
+#. Tag: entry
+#: performance.xml:708
+#, no-c-format
+msgid "yes (replication or invalidation)"
+msgstr "oui (replication ou invalidation)"
+
+#. Tag: title
+#: performance.xml:717
+#, no-c-format
+msgid "Cache mappings"
+msgstr "Mappages de Cache"
+
+#. Tag: para
+#: performance.xml:719
+#, no-c-format
+msgid ""
+"As we have done in previous chapters we are looking at the two different "
+"possibiltites to configure caching. First configuration via annotations and "
+"then via Hibernate mapping files."
+msgstr ""
+
+#. Tag: para
+#: performance.xml:723
+#, no-c-format
+msgid ""
+"By default, entities are not part of the second level cache and we recommend "
+"you to stick to this setting. However, you can override this by setting the "
+"<literal>shared-cache-mode</literal> element in your <filename>persistence."
+"xml</filename> file or by using the <literal>javax.persistence.sharedCache."
+"mode </literal>property in your configuration. The following values are "
+"possible:"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:732
+#, no-c-format
+msgid ""
+"<literal>ENABLE_SELECTIVE</literal> (Default and recommended value): "
+"entities are not cached unless explicitly marked as cacheable."
+msgstr ""
+
+#. Tag: para
+#: performance.xml:738
+#, no-c-format
+msgid ""
+"<literal>DISABLE_SELECTIVE</literal>: entities are cached unless explicitly "
+"marked as not cacheable."
+msgstr ""
+
+#. Tag: para
+#: performance.xml:743
+#, no-c-format
+msgid ""
+"<literal>ALL</literal>: all entities are always cached even if marked as non "
+"cacheable."
+msgstr ""
+
+#. Tag: para
+#: performance.xml:748
+#, no-c-format
+msgid ""
+"<literal>NONE</literal>: no entity are cached even if marked as cacheable. "
+"This option can make sense to disable second-level cache altogether."
+msgstr ""
+
+#. Tag: para
+#: performance.xml:754
+#, no-c-format
+msgid ""
+"The cache concurrency strategy used by default can be set globaly via the "
+"<literal>hibernate.cache.default_cache_concurrency_strategy</literal> "
+"configuration property. The values for this property are:"
+msgstr ""
+
+#. Tag: literal
+#: performance.xml:761
+#, fuzzy, no-c-format
+msgid "<literal>read-only</literal>"
+msgstr "Les requêtes par <literal>Criteria</literal>"
+
+#. Tag: literal
+#: performance.xml:765
+#, fuzzy, no-c-format
+msgid "<literal>read-write</literal>"
+msgstr "Les requêtes par <literal>Criteria</literal>"
+
+#. Tag: literal
+#: performance.xml:769
+#, fuzzy, no-c-format
+msgid "<literal>nonstrict-read-write</literal>"
+msgstr "nonstrict-read-write (lecture-écriture non stricte)"
+
+#. Tag: literal
+#: performance.xml:773
+#, fuzzy, no-c-format
+msgid "<literal>transactional</literal>"
+msgstr "Les requêtes par <literal>Criteria</literal>"
+
+#. Tag: para
+#: performance.xml:778
+#, no-c-format
+msgid ""
+"It is recommended to define the cache concurrency strategy per entity rather "
+"than using a global one. Use the <classname>@org.hibernate.annotations."
+"Cache</classname> annotation for that."
+msgstr ""
+
+#. Tag: title
+#: performance.xml:785
+#, no-c-format
+msgid ""
+"Definition of cache concurrency strategy via <classname>@Cache</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: performance.xml:788
+#, no-c-format
+msgid ""
+"@Entity \n"
+"@Cacheable\n"
+"@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)\n"
+"public class Forest { ... }"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:791
+#, no-c-format
+msgid ""
+"Hibernate also let's you cache the content of a collection or the "
+"identifiers if the collection contains other entities. Use the "
+"<classname>@Cache</classname> annotation on the collection property."
+msgstr ""
+
+#. Tag: title
+#: performance.xml:797
+#, fuzzy, no-c-format
+msgid "Caching collections using annotations"
+msgstr "Initialisation des collections et des proxies"
+
+#. Tag: programlisting
+#: performance.xml:799
+#, no-c-format
+msgid ""
+"@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)\n"
+"@JoinColumn(name=\"CUST_ID\")\n"
+"@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)\n"
+"public SortedSet&lt;Ticket&gt; getTickets() {\n"
+"    return tickets;\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:802
+#, no-c-format
+msgid ""
+"shows the<literal> @org.hibernate.annotations.Cache</literal> annotations "
+"with its attributes. It allows you to define the caching strategy and region "
+"of a given second level cache."
+msgstr ""
+
+#. Tag: title
+#: performance.xml:808
+#, no-c-format
+msgid "<classname>@Cache</classname> annotation with attributes"
+msgstr ""
+
+#. Tag: programlisting
+#: performance.xml:820
+#, no-c-format
+msgid ""
+"@Cache(\n"
+"    CacheConcurrencyStrategy usage();\n"
+"    String region() default \"\";\n"
+"    String include() default \"all\";\n"
+")"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:824
+#, no-c-format
+msgid ""
+"usage: the given cache concurrency strategy (NONE, READ_ONLY, "
+"NONSTRICT_READ_WRITE, READ_WRITE, TRANSACTIONAL)"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:830
+#, no-c-format
+msgid ""
+"region (optional): the cache region (default to the fqcn of the class or the "
+"fq role name of the collection)"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:835
+#, no-c-format
+msgid ""
+"<literal>include</literal> (optional): all to include all properties, non-"
+"lazy to only include non lazy properties (default all)."
+msgstr ""
+
+#. Tag: para
+#: performance.xml:843
+#, no-c-format
+msgid ""
+"Let's now take a look at Hibernate mapping files. There the <literal>&lt;"
+"cache&gt;</literal> element of a class or collection mapping is used to "
+"configure the second level cache. Looking at <xref linkend=\"example-"
+"hibernate-cache-mapping-element\"/> the parallels to anotations is obvious."
+msgstr ""
+
+#. Tag: title
+#: performance.xml:850
+#, no-c-format
+msgid "The Hibernate <literal>&lt;cache&gt;</literal> mapping element"
+msgstr ""
+
+#. Tag: programlisting
+#: performance.xml:862
+#, no-c-format
+msgid ""
+"&lt;cache\n"
+"    usage=\"transactional|read-write|nonstrict-read-write|read-only\"\n"
+"    region=\"RegionName\"\n"
+"    include=\"all|non-lazy\"\n"
+"/&gt;"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:866
+#, no-c-format
+msgid ""
+"<literal>usage</literal> (required) specifies the caching strategy: "
+"<literal>transactional</literal>, <literal>read-write</literal>, "
+"<literal>nonstrict-read-write</literal> or <literal>read-only</literal>"
+msgstr ""
+"<literal>usage</literal> (requis) spécifie la stratégie de cache : "
+"<literal>transactionel</literal>, <literal>lecture-écriture</literal>, "
+"<literal>lecture-écriture non stricte</literal> ou <literal>lecture seule</"
+"literal>"
+
+#. Tag: para
+#: performance.xml:874
+#, no-c-format
+msgid ""
+"<literal>region</literal> (optional: defaults to the class or collection "
+"role name): specifies the name of the second level cache region"
+msgstr ""
+"<literal>region</literal> (optionnel, par défaut il s'agit du nom de la "
+"classe ou du nom de rôle de la collection) : spécifie le nom de la région du "
+"cache de second niveau"
+
+#. Tag: para
+#: performance.xml:880
+#, no-c-format
+msgid ""
+"<literal>include</literal> (optional: defaults to <literal>all</literal>) "
+"<literal>non-lazy</literal>: specifies that properties of the entity mapped "
+"with <literal>lazy=\"true\"</literal> cannot be cached when attribute-level "
+"lazy fetching is enabled"
+msgstr ""
+"<literal>include</literal> (optionnel, par défaut <literal>all</literal>) "
+"<literal>non-lazy</literal> : spécifie que les propriétés des entités "
+"mappées avec <literal>lazy=\"true\"</literal> ne doivent pas être mises en "
+"cache lorsque le chargement en différé des attributs est activé."
+
+#. Tag: para
+#: performance.xml:890
+#, fuzzy, no-c-format
+msgid ""
+"Alternatively to <literal>&lt;cache&gt;</literal>, you can use <literal>&lt;"
+"class-cache&gt;</literal> and <literal>&lt;collection-cache&gt;</literal> "
+"elements in <literal>hibernate.cfg.xml</literal>."
+msgstr ""
+"Alternativement (voir préférentiellement), vous pouvez spécifier les "
+"éléments <literal>&lt;class-cache&gt;</literal> et <literal>&lt;collection-"
+"cache&gt;</literal> dans <literal>hibernate.cfg.xml</literal>. "
+
+#. Tag: para
+#: performance.xml:895
+#, no-c-format
+msgid "Let's now have a closer look at the different usage strategies"
+msgstr ""
+
+#. Tag: title
+#: performance.xml:900
+#, no-c-format
+msgid "Strategy: read only"
+msgstr "Stratégie : lecture seule"
+
+#. Tag: para
+#: performance.xml:902
+#, no-c-format
+msgid ""
+"If your application needs to read, but not modify, instances of a persistent "
+"class, a <literal>read-only</literal> cache can be used. This is the "
+"simplest and optimal performing strategy. It is even safe for use in a "
+"cluster."
+msgstr ""
+"Si votre application a besoin de lire mais ne modifie jamais les instances "
+"d'une classe, un cache <literal>read-only</literal> peut être utilisé. C'est "
+"la stratégie la plus simple et la plus performante. Elle est même "
+"parfaitement sûre dans un cluster. "
+
+#. Tag: title
+#: performance.xml:909
+#, no-c-format
+msgid "Strategy: read/write"
+msgstr "Stratégie : lecture/écriture"
+
+#. Tag: para
+#: performance.xml:911
+#, no-c-format
+msgid ""
+"If the application needs to update data, a <literal>read-write</literal> "
+"cache might be appropriate. This cache strategy should never be used if "
+"serializable transaction isolation level is required. If the cache is used "
+"in a JTA environment, you must specify the property <literal>hibernate."
+"transaction.manager_lookup_class</literal> and naming a strategy for "
+"obtaining the JTA <literal>TransactionManager</literal>. In other "
+"environments, you should ensure that the transaction is completed when "
+"<literal>Session.close()</literal> or <literal>Session.disconnect()</"
+"literal> is called. If you want to use this strategy in a cluster, you "
+"should ensure that the underlying cache implementation supports locking. The "
+"built-in cache providers <emphasis>do not</emphasis> support locking."
+msgstr ""
+"Si l'application a besoin de mettre à jour des données, un cache "
+"<literal>read-write</literal> peut être approprié. Cette stratégie ne "
+"devrait jamais être utilisée si votre application nécessite un niveau "
+"d'isolation transactionnelle sérialisable. Si le cache est utilisé dans un "
+"environnement JTA, vous devez spécifier la propriété <literal>hibernate."
+"transaction.manager_lookup_class</literal>, fournissant une stratégie pour "
+"obtenir le JTA <literal>TransactionManager</literal>. Dans d'autres "
+"environnements, vous devriez vous assurer que la transation est terminée à "
+"l'appel de <literal>Session.close()</literal> ou <literal>Session.disconnect"
+"()</literal>. Si vous souhaitez utiliser cette stratégie dans un cluster, "
+"vous devriez vous assurer que l'implémentation de cache utilisée supporte le "
+"verrouillage, ce que ne font <emphasis>pas</emphasis> les pourvoyeurs caches "
+"fournis. "
+
+#. Tag: title
+#: performance.xml:927
+#, no-c-format
+msgid "Strategy: nonstrict read/write"
+msgstr "Stratégie : lecture/écriture non stricte"
+
+#. Tag: para
+#: performance.xml:929
+#, no-c-format
+msgid ""
+"If the application only occasionally needs to update data (i.e. if it is "
+"extremely unlikely that two transactions would try to update the same item "
+"simultaneously), and strict transaction isolation is not required, a "
+"<literal>nonstrict-read-write</literal> cache might be appropriate. If the "
+"cache is used in a JTA environment, you must specify <literal>hibernate."
+"transaction.manager_lookup_class</literal>. In other environments, you "
+"should ensure that the transaction is completed when <literal>Session.close()"
+"</literal> or <literal>Session.disconnect()</literal> is called."
+msgstr ""
+"Si l'application a besoin de mettre à jour les données de manière "
+"occasionnelle (il est très peu probable que deux transactions essaient de "
+"mettre à jour le même élément simultanément) et si une isolation "
+"transactionnelle stricte n'est pas nécessaire, un cache <literal>nonstrict-"
+"read-write</literal> peut être approprié. Si le cache est utilisé dans un "
+"environnement JTA, vous devez spécifier <literal>hibernate.transaction."
+"manager_lookup_class</literal>. Dans d'autres environnements, vous devriez "
+"vous assurer que la transation est terminée à l'appel de <literal>Session."
+"close()</literal> ou <literal>Session.disconnect()</literal>."
+
+#. Tag: title
+#: performance.xml:941
+#, no-c-format
+msgid "Strategy: transactional"
+msgstr "Stratégie : transactionelle"
+
+#. Tag: para
+#: performance.xml:943
+#, no-c-format
+msgid ""
+"The <literal>transactional</literal> cache strategy provides support for "
+"fully transactional cache providers such as JBoss TreeCache. Such a cache "
+"can only be used in a JTA environment and you must specify "
+"<literal>hibernate.transaction.manager_lookup_class</literal>."
+msgstr ""
+"La stratégie de cache <literal>transactional</literal> supporte un cache "
+"complètement transactionnel comme, par exemple, JBoss TreeCache. Un tel "
+"cache ne peut être utilisé que dans un environnement JTA et vous devez "
+"spécifier <literal>hibernate.transaction.manager_lookup_class</literal>. "
+
+#. Tag: title
+#: performance.xml:950
+#, no-c-format
+msgid "Cache-provider/concurrency-strategy compatibility"
+msgstr "Support de stratégie de concurrence du fournisseur-cache"
+
+#. Tag: para
+#: performance.xml:953
+#, no-c-format
+msgid ""
+"None of the cache providers support all of the cache concurrency strategies."
+msgstr ""
+"Aucun des caches livrés ne supporte toutes les stratégies de concurrence. Le "
+"tableau suivant montre quels caches sont compatibles avec quelles stratégies "
+"de concurrence. "
+
+#. Tag: para
+#: performance.xml:957
+#, no-c-format
+msgid ""
+"The following table shows which providers are compatible with which "
+"concurrency strategies."
+msgstr ""
+"Aucun des caches livrés ne supporte toutes les stratégies de concurrence. Le "
+"tableau suivant montre quels caches sont compatibles avec quelles stratégies "
+"de concurrence. "
+
+#. Tag: title
+#: performance.xml:961
+#, no-c-format
+msgid "Cache Concurrency Strategy Support"
+msgstr "Support de stratégie de concurrence du cache"
+
+#. Tag: entry
+#: performance.xml:978
+#, no-c-format
+msgid "<entry>read-only</entry>"
+msgstr ""
+
+#. Tag: entry
+#: performance.xml:980
+#, fuzzy, no-c-format
+msgid "<entry>nonstrict-read-write</entry>"
+msgstr "nonstrict-read-write (lecture-écriture non stricte)"
+
+#. Tag: entry
+#: performance.xml:982
+#, no-c-format
+msgid "<entry>read-write</entry>"
+msgstr ""
+
+#. Tag: entry
+#: performance.xml:984
+#, fuzzy, no-c-format
+msgid "<entry>transactional</entry>"
+msgstr "transactional (transactionnel)"
+
+#. Tag: title
+#: performance.xml:1067
+#, no-c-format
+msgid "Managing the caches"
+msgstr "Gérer les caches"
+
+#. Tag: para
+#: performance.xml:1069
+#, no-c-format
+msgid ""
+"Whenever you pass an object to <literal>save()</literal>, <literal>update()</"
+"literal> or <literal>saveOrUpdate()</literal>, and whenever you retrieve an "
+"object using <literal>load()</literal>, <literal>get()</literal>, "
+"<literal>list()</literal>, <literal>iterate()</literal> or <literal>scroll()"
+"</literal>, that object is added to the internal cache of the "
+"<literal>Session</literal>."
+msgstr ""
+"A chaque fois que vous passez un objet à la méthode <literal>save()</"
+"literal>, <literal>update()</literal> ou <literal>saveOrUpdate()</literal> "
+"et à chaque fois que vous récupérez un objet avec <literal>load()</literal>, "
+"<literal>get()</literal>, <literal>list()</literal>, <literal>iterate()</"
+"literal> ou <literal>scroll()</literal>, cet objet est ajouté au cache "
+"interne de la <literal>Session</literal>. "
+
+#. Tag: para
+#: performance.xml:1076
+#, no-c-format
+msgid ""
+"When <literal>flush()</literal> is subsequently called, the state of that "
+"object will be synchronized with the database. If you do not want this "
+"synchronization to occur, or if you are processing a huge number of objects "
+"and need to manage memory efficiently, the <literal>evict()</literal> method "
+"can be used to remove the object and its collections from the first-level "
+"cache."
+msgstr ""
+"Lorsqu'il y a un appel à la méthode <literal>flush()</literal>, l'état de "
+"cet objet va être synchronisé avec la base de données. Si vous ne voulez pas "
+"que cette synchronisation ait lieu ou si vous traitez un grand nombre "
+"d'objets et que vous avez besoin de gérer la mémoire de manière efficace, "
+"vous pouvez utiliser la méthode <literal>evict()</literal> pour supprimer "
+"l'objet et ses collections dépendantes du cache de premier niveau de la "
+"session. "
+
+#. Tag: title
+#: performance.xml:1084
+#, no-c-format
+msgid ""
+"Explcitly evicting a cached instance from the first level cache using "
+"<methodname>Session.evict()</methodname>"
+msgstr ""
+
+#. Tag: programlisting
+#: performance.xml:1087
+#, no-c-format
+msgid ""
+"ScrollableResult cats = sess.createQuery(\"from Cat as cat\").scroll(); //a "
+"huge result set\n"
+"while ( cats.next() ) {\n"
+"    Cat cat = (Cat) cats.get(0);\n"
+"    doSomethingWithACat(cat);\n"
+"    sess.evict(cat);\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:1090
+#, no-c-format
+msgid ""
+"The <literal>Session</literal> also provides a <literal>contains()</literal> "
+"method to determine if an instance belongs to the session cache."
+msgstr ""
+"La <literal>Session</literal> fournit également une méthode <literal>contains"
+"()</literal> pour déterminer si une instance appartient au cache de la "
+"session. "
+
+#. Tag: para
+#: performance.xml:1094
+#, no-c-format
+msgid ""
+"To evict all objects from the session cache, call <literal>Session.clear()</"
+"literal>"
+msgstr ""
+"Pour retirer tous les objets du cache session, appelez <literal>Session.clear"
+"()</literal> "
+
+#. Tag: para
+#: performance.xml:1097
+#, no-c-format
+msgid ""
+"For the second-level cache, there are methods defined on "
+"<literal>SessionFactory</literal> for evicting the cached state of an "
+"instance, entire class, collection instance or entire collection role."
+msgstr ""
+"Pour le cache de second niveau, il existe des méthodes définies dans "
+"<literal>SessionFactory</literal> pour retirer du cache d'une instance, de "
+"la classe entière, d'une instance de collection ou du rôle entier d'une "
+"collection."
+
+#. Tag: title
+#: performance.xml:1103
+#, no-c-format
+msgid ""
+"Second-level cache eviction via <methodname>SessionFactoty.evict() </"
+"methodname>and <methodname>SessionFacyory.evictCollection()</methodname>"
+msgstr ""
+
+#. Tag: programlisting
+#: performance.xml:1107
+#, no-c-format
+msgid ""
+"sessionFactory.evict(Cat.class, catId); //evict a particular Cat\n"
+"sessionFactory.evict(Cat.class);  //evict all Cats\n"
+"sessionFactory.evictCollection(\"Cat.kittens\", catId); //evict a particular "
+"collection of kittens\n"
+"sessionFactory.evictCollection(\"Cat.kittens\"); //evict all kitten "
+"collections"
+msgstr ""
+
+#. Tag: para
+#: performance.xml:1110
+#, no-c-format
+msgid ""
+"The <literal>CacheMode</literal> controls how a particular session interacts "
+"with the second-level cache:"
+msgstr ""
+"Le <literal>CacheMode</literal> contrôle la manière dont une session "
+"particulière interagit avec le cache de second niveau :"
+
+#. Tag: para
+#: performance.xml:1115
+#, no-c-format
+msgid ""
+"<literal>CacheMode.NORMAL</literal>: will read items from and write items to "
+"the second-level cache"
+msgstr ""
+"<literal>CacheMode.NORMAL</liter

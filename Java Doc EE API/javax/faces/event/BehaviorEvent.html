@@ -1,0 +1,216 @@
+/java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="SimpleJtaTransactionImpl(org.hibernate.testing.tm.SimpleJtaTransactionManagerImpl)"><!-- --></A><H3>
+SimpleJtaTransactionImpl</H3>
+<PRE>
+public <B>SimpleJtaTransactionImpl</B>(<A HREF="../../../../org/hibernate/testing/tm/SimpleJtaTransactionManagerImpl.html" title="class in org.hibernate.testing.tm">SimpleJtaTransactionManagerImpl</A>&nbsp;jtaTransactionManager)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getStatus()"><!-- --></A><H3>
+getStatus</H3>
+<PRE>
+public int <B>getStatus</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true#getStatus()" title="class or interface in javax.transaction">getStatus</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true" title="class or interface in javax.transaction">Transaction</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="commit()"><!-- --></A><H3>
+commit</H3>
+<PRE>
+public void <B>commit</B>()
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/RollbackException.html?is-external=true" title="class or interface in javax.transaction">RollbackException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/HeuristicMixedException.html?is-external=true" title="class or interface in javax.transaction">HeuristicMixedException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/HeuristicRollbackException.html?is-external=true" title="class or interface in javax.transaction">HeuristicRollbackException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true#commit()" title="class or interface in javax.transaction">commit</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true" title="class or interface in javax.transaction">Transaction</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/RollbackException.html?is-external=true" title="class or interface in javax.transaction">RollbackException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/HeuristicMixedException.html?is-external=true" title="class or interface in javax.transaction">HeuristicMixedException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/HeuristicRollbackException.html?is-external=true" title="class or interface in javax.transaction">HeuristicRollbackException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="rollback()"><!-- --></A><H3>
+rollback</H3>
+<PRE>
+public void <B>rollback</B>()
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A>,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true#rollback()" title="class or interface in javax.transaction">rollback</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true" title="class or interface in javax.transaction">Transaction</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRollbackOnly()"><!-- --></A><H3>
+setRollbackOnly</H3>
+<PRE>
+public void <B>setRollbackOnly</B>()
+                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A>,
+                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true#setRollbackOnly()" title="class or interface in javax.transaction">setRollbackOnly</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true" title="class or interface in javax.transaction">Transaction</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="registerSynchronization(javax.transaction.Synchronization)"><!-- --></A><H3>
+registerSynchronization</H3>
+<PRE>
+public void <B>registerSynchronization</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Synchronization.html?is-external=true" title="class or interface in javax.transaction">Synchronization</A>&nbsp;synchronization)
+                             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/RollbackException.html?is-external=true" title="class or interface in javax.transaction">RollbackException</A>,
+                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A>,
+                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true#registerSynchronization(javax.transaction.Synchronization)" title="class or interface in javax.transaction">registerSynchronization</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true" title="class or interface in javax.transaction">Transaction</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/RollbackException.html?is-external=true" title="class or interface in javax.transaction">RollbackException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="enlistConnection(java.sql.Connection)"><!-- --></A><H3>
+enlistConnection</H3>
+<PRE>
+public void <B>enlistConnection</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/Connection.html?is-external=true" title="class or interface in java.sql">Connection</A>&nbsp;connection)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnlistedConnection()"><!-- --></A><H3>
+getEnlistedConnection</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/sql/Connection.html?is-external=true" title="class or interface in java.sql">Connection</A> <B>getEnlistedConnection</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="enlistResource(javax.transaction.xa.XAResource)"><!-- --></A><H3>
+enlistResource</H3>
+<PRE>
+public boolean <B>enlistResource</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/xa/XAResource.html?is-external=true" title="class or interface in javax.transaction.xa">XAResource</A>&nbsp;xaResource)
+                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/RollbackException.html?is-external=true" title="class or interface in javax.transaction">RollbackException</A>,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A>,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true#enlistResource(javax.transaction.xa.XAResource)" title="class or interface in javax.transaction">enlistResource</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true" title="class or interface in javax.transaction">Transaction</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/RollbackException.html?is-external=true" title="class or interface in javax.transaction">RollbackException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="delistResource(javax.transaction.xa.XAResource, int)"><!-- --></A><H3>
+delistResource</H3>
+<PRE>
+public boolean <B>delistResource</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/xa/XAResource.html?is-external=true" title="class or interface in javax.transaction.xa">XAResource</A>&nbsp;xaResource,
+                              int&nbsp;i)
+                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A>,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true#delistResource(javax.transaction.xa.XAResource, int)" title="class or interface in javax.transaction">delistResource</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/Transaction.html?is-external=true" title="class or interface in javax.transaction">Transaction</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/javax/transaction/SystemException.html?is-external=true" title="class or interface in javax.transaction">SystemException</A></CODE></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/SimpleJtaTransactionImpl.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree<

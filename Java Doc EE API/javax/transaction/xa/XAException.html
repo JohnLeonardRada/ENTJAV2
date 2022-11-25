@@ -1,0 +1,874 @@
+""
+"可以对原生 sql 查询使用 ResultTransformer。这会返回不受 Hibernate 管理的实"
+"体。 "
+
+#. Tag: programlisting
+#: query_sql.xml:347
+#, fuzzy, no-c-format
+msgid ""
+"sess.createSQLQuery(\"SELECT NAME, BIRTHDATE FROM CATS\")\n"
+"        .setResultTransformer(Transformers.aliasToBean(CatDTO.class))"
+msgstr ""
+"sess.createSQLQuery(\"SELECT NAME, BIRTHDATE FROM CATS\")\n"
+"        .setResultTransformer(Transformers.aliasToBean(CatDTO.class))"
+
+#. Tag: para
+#: query_sql.xml:357
+#, no-c-format
+msgid "a result transformer"
+msgstr "结果转换器（result transformer）"
+
+#. Tag: para
+#: query_sql.xml:361
+#, no-c-format
+msgid ""
+"The above query will return a list of <literal>CatDTO</literal> which has "
+"been instantiated and injected the values of NAME and BIRTHNAME into its "
+"corresponding properties or fields."
+msgstr ""
+"上面的查询将会返回 <literal>CatDTO</literal> 的列表,它将被实例化并且将 NAME "
+"和 BIRTHDAY 的值注射入对应的属性或者字段。"
+
+#. Tag: title
+#: query_sql.xml:367
+#, no-c-format
+msgid "Handling inheritance"
+msgstr "处理继承（Handling inheritance）"
+
+#. Tag: para
+#: query_sql.xml:369
+#, no-c-format
+msgid ""
+"Native SQL queries which query for entities that are mapped as part of an "
+"inheritance must include all properties for the baseclass and all its "
+"subclasses."
+msgstr ""
+"原生 SQL 查询假若其查询结果实体是继承树中的一部分，它必须包含基类和所有子类的"
+"所有属性。 "
+
+#. Tag: title
+#: query_sql.xml:375
+#, no-c-format
+msgid "Parameters"
+msgstr "参数（Parameters）"
+
+#. Tag: para
+#: query_sql.xml:377
+#, no-c-format
+msgid "Native SQL queries support positional as well as named parameters:"
+msgstr "原生查询支持位置参数和命名参数： "
+
+#. Tag: programlisting
+#: query_sql.xml:380
+#, fuzzy, no-c-format
+msgid ""
+"Query query = sess.createSQLQuery(\"SELECT * FROM CATS WHERE NAME like ?\")."
+"addEntity(Cat.class);\n"
+"List pusList = query.setString(0, \"Pus%\").list();\n"
+"     \n"
+"query = sess.createSQLQuery(\"SELECT * FROM CATS WHERE NAME like :name\")."
+"addEntity(Cat.class);\n"
+"List pusList = query.setString(\"name\", \"Pus%\").list();"
+msgstr ""
+"Query query = sess.createSQLQuery(\"SELECT * FROM CATS WHERE NAME like ?\")."
+"addEntity(Cat.class);\n"
+"List pusList = query.setString(0, \"Pus&#37;\").list();\n"
+"     \n"
+"query = sess.createSQLQuery(\"SELECT * FROM CATS WHERE NAME like :name\")."
+"addEntity(Cat.class);\n"
+"List pusList = query.setString(\"name\", \"Pus&#37;\").list();"
+
+#. Tag: title
+#: query_sql.xml:385
+#, no-c-format
+msgid "Named SQL queries"
+msgstr "命名 SQL 查询"
+
+#. Tag: para
+#: query_sql.xml:387
+#, fuzzy, no-c-format
+msgid ""
+"Named SQL queries can also be defined in the mapping document and called in "
+"exactly the same way as a named HQL query (see <xref linkend=\"objectstate-"
+"querying-executing-named\"/>). In this case, you do <emphasis>not</emphasis> "
+"need to call <literal>addEntity()</literal>."
+msgstr ""
+"可以在映射文档中定义查询的名字,然后就可以象调用一个命名的 HQL 查询一样直接调"
+"用命名 SQL 查询.在这种情况下，我们<emphasis>不</emphasis> 需要调用 "
+"<literal>addEntity()</literal> 方法。 "
+
+#. Tag: title
+#: query_sql.xml:394
+#, no-c-format
+msgid "Named sql query using the &lt;sql-query&gt; maping element"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:397
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"persons\"&gt;\n"
+"    &lt;return alias=\"person\" class=\"eg.Person\"/&gt;\n"
+"    SELECT person.NAME AS {person.name},\n"
+"           person.AGE AS {person.age},\n"
+"           person.SEX AS {person.sex}\n"
+"    FROM PERSON person\n"
+"    WHERE person.NAME LIKE :namePattern\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"persons\"&gt;\n"
+"    &lt;return alias=\"person\" class=\"eg.Person\"/&gt;\n"
+"    SELECT person.NAME AS {person.name},\n"
+"           person.AGE AS {person.age},\n"
+"           person.SEX AS {person.sex}\n"
+"    FROM PERSON person\n"
+"    WHERE person.NAME LIKE :namePattern\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: title
+#: query_sql.xml:401
+#, no-c-format
+msgid "Execution of a named query"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:403
+#, fuzzy, no-c-format
+msgid ""
+"List people = sess.getNamedQuery(\"persons\")\n"
+"    .setString(\"namePattern\", namePattern)\n"
+"    .setMaxResults(50)\n"
+"    .list();"
+msgstr ""
+"List people = sess.getNamedQuery(\"persons\")\n"
+"    .setString(\"namePattern\", namePattern)\n"
+"    .setMaxResults(50)\n"
+"    .list();"
+
+#. Tag: para
+#: query_sql.xml:406
+#, no-c-format
+msgid ""
+"The <literal>&lt;return-join&gt;</literal> element is use to join "
+"associations and the <literal>&lt;load-collection&gt;</literal> element is "
+"used to define queries which initialize collections,"
+msgstr ""
+"<literal>&lt;return-join&gt;</literal> 和 <literal>&lt;load-collection&gt;</"
+"literal> 元素是用来连接关联以及将查询定义为预先初始化各个集合的。 "
+
+#. Tag: title
+#: query_sql.xml:411
+#, no-c-format
+msgid "Named sql query with association"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:413
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"personsWith\"&gt;\n"
+"    &lt;return alias=\"person\" class=\"eg.Person\"/&gt;\n"
+"    &lt;return-join alias=\"address\" property=\"person.mailingAddress\"/"
+"&gt;\n"
+"    SELECT person.NAME AS {person.name},\n"
+"           person.AGE AS {person.age},\n"
+"           person.SEX AS {person.sex},\n"
+"           address.STREET AS {address.street},\n"
+"           address.CITY AS {address.city},\n"
+"           address.STATE AS {address.state},\n"
+"           address.ZIP AS {address.zip}\n"
+"    FROM PERSON person\n"
+"    JOIN ADDRESS address\n"
+"        ON person.ID = address.PERSON_ID AND address.TYPE='MAILING'\n"
+"    WHERE person.NAME LIKE :namePattern\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"personsWith\"&gt;\n"
+"    &lt;return alias=\"person\" class=\"eg.Person\"/&gt;\n"
+"    &lt;return-join alias=\"address\" property=\"person.mailingAddress\"/"
+"&gt;\n"
+"    SELECT person.NAME AS {person.name},\n"
+"           person.AGE AS {person.age},\n"
+"           person.SEX AS {person.sex},\n"
+"           adddress.STREET AS {address.street},\n"
+"           adddress.CITY AS {address.city},\n"
+"           adddress.STATE AS {address.state},\n"
+"           adddress.ZIP AS {address.zip}\n"
+"    FROM PERSON person\n"
+"    JOIN ADDRESS adddress\n"
+"        ON person.ID = address.PERSON_ID AND address.TYPE='MAILING'\n"
+"    WHERE person.NAME LIKE :namePattern\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:416
+#, no-c-format
+msgid ""
+"A named SQL query may return a scalar value. You must declare the column "
+"alias and Hibernate type using the <literal>&lt;return-scalar&gt;</literal> "
+"element:"
+msgstr ""
+"一个命名查询可能会返回一个标量值。你必须使用 <literal>&lt;return-scalar&gt;</"
+"literal> 元素来指定字段的别名和 Hibernate 类型："
+
+#. Tag: title
+#: query_sql.xml:421
+#, no-c-format
+msgid "Named query returning a scalar"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:423
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"mySqlQuery\"&gt;\n"
+"    &lt;return-scalar column=\"name\" type=\"string\"/&gt;\n"
+"    &lt;return-scalar column=\"age\" type=\"long\"/&gt;\n"
+"    SELECT p.NAME AS name, \n"
+"           p.AGE AS age,\n"
+"    FROM PERSON p WHERE p.NAME LIKE 'Hiber%'\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"mySqlQuery\"&gt;\n"
+"    &lt;return-scalar column=\"name\" type=\"string\"/&gt;\n"
+"    &lt;return-scalar column=\"age\" type=\"long\"/&gt;\n"
+"    SELECT p.NAME AS name,\n"
+"           p.AGE AS age,\n"
+"    FROM PERSON p WHERE p.NAME LIKE 'Hiber&#37;'\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:426
+#, no-c-format
+msgid ""
+"You can externalize the resultset mapping information in a <literal>&lt;"
+"resultset&gt;</literal> element which will allow you to either reuse them "
+"across several named queries or through the <literal>setResultSetMapping()</"
+"literal> API."
+msgstr ""
+"你可以把结果集映射的信息放在外部的 <literal>&lt;resultset&gt;</literal> 元素"
+"中，这样就可以在多个命名查询间，或者通过 <literal>setResultSetMapping()</"
+"literal> API 来访问。 "
+
+#. Tag: title
+#: query_sql.xml:432
+#, no-c-format
+msgid "&lt;resultset&gt; mapping used to externalize mapping information"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:435
+#, fuzzy, no-c-format
+msgid ""
+"&lt;resultset name=\"personAddress\"&gt;\n"
+"    &lt;return alias=\"person\" class=\"eg.Person\"/&gt;\n"
+"    &lt;return-join alias=\"address\" property=\"person.mailingAddress\"/"
+"&gt;\n"
+"&lt;/resultset&gt;\n"
+"\n"
+"&lt;sql-query name=\"personsWith\" resultset-ref=\"personAddress\"&gt;\n"
+"    SELECT person.NAME AS {person.name},\n"
+"           person.AGE AS {person.age},\n"
+"           person.SEX AS {person.sex},\n"
+"           address.STREET AS {address.street},\n"
+"           address.CITY AS {address.city},\n"
+"           address.STATE AS {address.state},\n"
+"           address.ZIP AS {address.zip}\n"
+"    FROM PERSON person\n"
+"    JOIN ADDRESS address\n"
+"        ON person.ID = address.PERSON_ID AND address.TYPE='MAILING'\n"
+"    WHERE person.NAME LIKE :namePattern\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;resultset name=\"personAddress\"&gt;\n"
+"    &lt;return alias=\"person\" class=\"eg.Person\"/&gt;\n"
+"    &lt;return-join alias=\"address\" property=\"person.mailingAddress\"/"
+"&gt;\n"
+"&lt;/resultset&gt;\n"
+"\n"
+"&lt;sql-query name=\"personsWith\" resultset-ref=\"personAddress\"&gt;\n"
+"    SELECT person.NAME AS {person.name},\n"
+"           person.AGE AS {person.age},\n"
+"           person.SEX AS {person.sex},\n"
+"           adddress.STREET AS {address.street},\n"
+"           adddress.CITY AS {address.city},\n"
+"           adddress.STATE AS {address.state},\n"
+"           adddress.ZIP AS {address.zip}\n"
+"    FROM PERSON person\n"
+"    JOIN ADDRESS adddress\n"
+"        ON person.ID = address.PERSON_ID AND address.TYPE='MAILING'\n"
+"    WHERE person.NAME LIKE :namePattern\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:438
+#, no-c-format
+msgid ""
+"You can, alternatively, use the resultset mapping information in your hbm "
+"files directly in java code."
+msgstr "另外，你可以在 java 代码中直接使用 hbm 文件中的结果集定义信息。 "
+
+#. Tag: title
+#: query_sql.xml:442
+#, no-c-format
+msgid "Programmatically specifying the result mapping information"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:445
+#, fuzzy, no-c-format
+msgid ""
+"List cats = sess.createSQLQuery(\n"
+"        \"select {cat.*}, {kitten.*} from cats cat, cats kitten where kitten."
+"mother = cat.id\"\n"
+"    )\n"
+"    .setResultSetMapping(\"catAndKitten\")\n"
+"    .list();"
+msgstr ""
+"List cats = sess.createSQLQuery(\n"
+"        \"select {cat.*}, {kitten.*} from cats cat, cats kitten where kitten."
+"mother = cat.id\"\n"
+"    )\n"
+"    .setResultSetMapping(\"catAndKitten\")\n"
+"    .list();"
+
+#. Tag: para
+#: query_sql.xml:448
+#, no-c-format
+msgid ""
+"So far we have only looked at externalizing SQL queries using Hibernate "
+"mapping files. The same concept is also available with anntations and is "
+"called named native queries. You can use <classname>@NamedNativeQuery</"
+"classname> (<classname>@NamedNativeQueries</classname>) in conjunction with "
+"<literal>@SqlResultSetMapping</literal> (<literal>@SqlResultSetMappings</"
+"literal>). Like <literal>@NamedQuery</literal>, "
+"<classname>@NamedNativeQuery</classname> and <literal>@SqlResultSetMapping</"
+"literal> can be defined at class level, but their scope is global to the "
+"application. Lets look at a view examples."
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:460
+#, no-c-format
+msgid ""
+"shows how a <literal>resultSetMapping</literal> parameter is defined in "
+"<literal>@NamedNativeQuery</literal>. It represents the name of a defined "
+"<literal>@SqlResultSetMapping</literal>. The resultset mapping declares the "
+"entities retrieved by this native query. Each field of the entity is bound "
+"to an SQL alias (or column name). All fields of the entity including the "
+"ones of subclasses and the foreign key columns of related entities have to "
+"be present in the SQL query. Field definitions are optional provided that "
+"they map to the same column name as the one declared on the class property. "
+"In the example 2 entities, <literal>Night</literal> and <literal>Area</"
+"literal>, are returned and each property is declared and associated to a "
+"column name, actually the column name retrieved by the query."
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:475
+#, no-c-format
+msgid ""
+"In <xref linkend=\"example-implicit-result-set-mapping\"/> the result set "
+"mapping is implicit. We only describe the entity class of the result set "
+"mapping. The property / column mappings is done using the entity mapping "
+"values. In this case the model property is bound to the model_txt column."
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:481
+#, no-c-format
+msgid ""
+"Finally, if the association to a related entity involve a composite primary "
+"key, a <literal>@FieldResult</literal> element should be used for each "
+"foreign key column. The <literal>@FieldResult</literal> name is composed of "
+"the property name for the relationship, followed by a dot (\".\"), followed "
+"by the name or the field or property of the primary key. This can be seen in "
+"<xref linkend=\"example-field-result-annotation-with-associations\"/>."
+msgstr ""
+
+#. Tag: title
+#: query_sql.xml:490
+#, no-c-format
+msgid ""
+"Named SQL query using <classname>@NamedNativeQuery</classname> together with "
+"<classname>@SqlResultSetMapping</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:493
+#, no-c-format
+msgid ""
+"@NamedNativeQuery(name=\"night&amp;area\", query=\"select night.id nid, "
+"night.night_duration, \"\n"
+"    + \" night.night_date, area.id aid, night.area_id, area.name \"\n"
+"    + \"from Night night, Area area where night.area_id = area.id\", \n"
+"                  resultSetMapping=\"joinMapping\")\n"
+"@SqlResultSetMapping(name=\"joinMapping\", entities={\n"
+"    @EntityResult(entityClass=Night.class, fields = {\n"
+"        @FieldResult(name=\"id\", column=\"nid\"),\n"
+"        @FieldResult(name=\"duration\", column=\"night_duration\"),\n"
+"        @FieldResult(name=\"date\", column=\"night_date\"),\n"
+"        @FieldResult(name=\"area\", column=\"area_id\"),\n"
+"        discriminatorColumn=\"disc\"\n"
+"    }),\n"
+"    @EntityResult(entityClass=org.hibernate.test.annotations.query.Area."
+"class, fields = {\n"
+"        @FieldResult(name=\"id\", column=\"aid\"),\n"
+"        @FieldResult(name=\"name\", column=\"name\")\n"
+"    })\n"
+"    }\n"
+")"
+msgstr ""
+
+#. Tag: title
+#: query_sql.xml:497
+#, no-c-format
+msgid "Implicit result set mapping"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:499
+#, no-c-format
+msgid ""
+"@Entity\n"
+"@SqlResultSetMapping(name=\"implicit\",\n"
+"                     entities=@EntityResult(entityClass=SpaceShip.class))\n"
+"@NamedNativeQuery(name=\"implicitSample\", \n"
+"                  query=\"select * from SpaceShip\", \n"
+"                  resultSetMapping=\"implicit\")\n"
+"public class SpaceShip {\n"
+"    private String name;\n"
+"    private String model;\n"
+"    private double speed;\n"
+"\n"
+"    @Id\n"
+"    public String getName() {\n"
+"        return name;\n"
+"    }\n"
+"\n"
+"    public void setName(String name) {\n"
+"        this.name = name;\n"
+"    }\n"
+"\n"
+"    @Column(name=\"model_txt\")\n"
+"    public String getModel() {\n"
+"        return model;\n"
+"    }\n"
+"\n"
+"    public void setModel(String model) {\n"
+"        this.model = model;\n"
+"    }\n"
+"\n"
+"    public double getSpeed() {\n"
+"        return speed;\n"
+"    }\n"
+"\n"
+"    public void setSpeed(double speed) {\n"
+"        this.speed = speed;\n"
+"    }\n"
+"}"
+msgstr ""
+
+#. Tag: title
+#: query_sql.xml:503
+#, no-c-format
+msgid "Using dot notation in @FieldResult for specifying associations"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:506
+#, no-c-format
+msgid ""
+"@Entity\n"
+"@SqlResultSetMapping(name=\"compositekey\",\n"
+"        entities=@EntityResult(entityClass=SpaceShip.class,\n"
+"            fields = {\n"
+"                    @FieldResult(name=\"name\", column = \"name\"),\n"
+"                    @FieldResult(name=\"model\", column = \"model\"),\n"
+"                    @FieldResult(name=\"speed\", column = \"speed\"),\n"
+"                    @FieldResult(name=\"captain.firstname\", column = "
+"\"firstn\"),\n"
+"                    @FieldResult(name=\"captain.lastname\", column = \"lastn"
+"\"),\n"
+"                    @FieldResult(name=\"dimensions.length\", column = "
+"\"length\"),\n"
+"                    @FieldResult(name=\"dimensions.width\", column = \"width"
+"\")\n"
+"                    }),\n"
+"        columns = { @ColumnResult(name = \"surface\"),\n"
+"                    @ColumnResult(name = \"volume\") } )\n"
+"\n"
+"@NamedNativeQuery(name=\"compositekey\",\n"
+"    query=\"select name, model, speed, lname as lastn, fname as firstn, "
+"length, width, length * width as surface from SpaceShip\", \n"
+"    resultSetMapping=\"compositekey\")\n"
+"} )\n"
+"public class SpaceShip {\n"
+"    private String name;\n"
+"    private String model;\n"
+"    private double speed;\n"
+"    private Captain captain;\n"
+"    private Dimensions dimensions;\n"
+"\n"
+"    @Id\n"
+"    public String getName() {\n"
+"        return name;\n"
+"    }\n"
+"\n"
+"    public void setName(String name) {\n"
+"        this.name = name;\n"
+"    }\n"
+"\n"
+"    @ManyToOne(fetch= FetchType.LAZY)\n"
+"    @JoinColumns( {\n"
+"            @JoinColumn(name=\"fname\", referencedColumnName = \"firstname"
+"\"),\n"
+"            @JoinColumn(name=\"lname\", referencedColumnName = \"lastname"
+"\")\n"
+"            } )\n"
+"    public Captain getCaptain() {\n"
+"        return captain;\n"
+"    }\n"
+"\n"
+"    public void setCaptain(Captain captain) {\n"
+"        this.captain = captain;\n"
+"    }\n"
+"\n"
+"    public String getModel() {\n"
+"        return model;\n"
+"    }\n"
+"\n"
+"    public void setModel(String model) {\n"
+"        this.model = model;\n"
+"    }\n"
+"\n"
+"    public double getSpeed() {\n"
+"        return speed;\n"
+"    }\n"
+"\n"
+"    public void setSpeed(double speed) {\n"
+"        this.speed = speed;\n"
+"    }\n"
+"\n"
+"    public Dimensions getDimensions() {\n"
+"        return dimensions;\n"
+"    }\n"
+"\n"
+"    public void setDimensions(Dimensions dimensions) {\n"
+"        this.dimensions = dimensions;\n"
+"    }\n"
+"}\n"
+"\n"
+"@Entity\n"
+"@IdClass(Identity.class)\n"
+"public class Captain implements Serializable {\n"
+"    private String firstname;\n"
+"    private String lastname;\n"
+"\n"
+"    @Id\n"
+"    public String getFirstname() {\n"
+"        return firstname;\n"
+"    }\n"
+"\n"
+"    public void setFirstname(String firstname) {\n"
+"        this.firstname = firstname;\n"
+"    }\n"
+"\n"
+"    @Id\n"
+"    public String getLastname() {\n"
+"        return lastname;\n"
+"    }\n"
+"\n"
+"    public void setLastname(String lastname) {\n"
+"        this.lastname = lastname;\n"
+"    }\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:510
+#, no-c-format
+msgid ""
+"If you retrieve a single entity using the default mapping, you can specify "
+"the <literal>resultClass</literal> attribute instead of "
+"<literal>resultSetMapping</literal>:"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:514
+#, no-c-format
+msgid ""
+"@NamedNativeQuery(name=\"implicitSample\", query=\"select * from SpaceShip"
+"\", resultClass=SpaceShip.class)\n"
+"public class SpaceShip {"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:517
+#, no-c-format
+msgid ""
+"In some of your native queries, you'll have to return scalar values, for "
+"example when building report queries. You can map them in the "
+"<literal>@SqlResultsetMapping</literal> through <literal>@ColumnResult</"
+"literal>. You actually can even mix, entities and scalar returns in the same "
+"native query (this is probably not that common though)."
+msgstr ""
+
+#. Tag: title
+#: query_sql.xml:525
+#, no-c-format
+msgid "Scalar values via <classname>@ColumnResult</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:527
+#, no-c-format
+msgid ""
+"@SqlResultSetMapping(name=\"scalar\", columns=@ColumnResult(name=\"dimension"
+"\"))\n"
+"@NamedNativeQuery(name=\"scalar\", query=\"select length*width as dimension "
+"from SpaceShip\", resultSetMapping=\"scalar\")"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:530
+#, no-c-format
+msgid ""
+"An other query hint specific to native queries has been introduced: "
+"<literal>org.hibernate.callable</literal> which can be true or false "
+"depending on whether the query is a stored procedure or not."
+msgstr ""
+
+#. Tag: title
+#: query_sql.xml:535
+#, no-c-format
+msgid "Using return-property to explicitly specify column/alias names"
+msgstr "使用 return-property 来明确地指定字段／别名"
+
+#. Tag: para
+#: query_sql.xml:538
+#, no-c-format
+msgid ""
+"You can explicitly tell Hibernate what column aliases to use with "
+"<literal>&lt;return-property&gt;</literal>, instead of using the <literal>{}"
+"</literal>-syntax to let Hibernate inject its own aliases.For example:"
+msgstr ""
+"使用 <literal>&lt;return-property&gt;</literal> 你可以明确的告诉 Hibernate 使"
+"用哪些字段别名，这取代了使用 <literal>{}</literal>-语法 来让 Hibernate 注入它"
+"自己的别名。例如："
+
+#. Tag: programlisting
+#: query_sql.xml:543
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"mySqlQuery\"&gt;\n"
+"    &lt;return alias=\"person\" class=\"eg.Person\"&gt;\n"
+"        &lt;return-property name=\"name\" column=\"myName\"/&gt;\n"
+"        &lt;return-property name=\"age\" column=\"myAge\"/&gt;\n"
+"        &lt;return-property name=\"sex\" column=\"mySex\"/&gt;\n"
+"    &lt;/return&gt;\n"
+"    SELECT person.NAME AS myName,\n"
+"           person.AGE AS myAge,\n"
+"           person.SEX AS mySex,\n"
+"    FROM PERSON person WHERE person.NAME LIKE :name\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"mySqlQuery\"&gt;\n"
+"    &lt;return alias=\"person\" class=\"eg.Person\"&gt;\n"
+"        &lt;return-property name=\"name\" column=\"myName\"/&gt;\n"
+"        &lt;return-property name=\"age\" column=\"myAge\"/&gt;\n"
+"        &lt;return-property name=\"sex\" column=\"mySex\"/&gt;\n"
+"    &lt;/return&gt;\n"
+"    SELECT person.NAME AS myName,\n"
+"           person.AGE AS myAge,\n"
+"           person.SEX AS mySex,\n"
+"    FROM PERSON person WHERE person.NAME LIKE :name\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:545
+#, no-c-format
+msgid ""
+"<literal>&lt;return-property&gt;</literal> also works with multiple columns. "
+"This solves a limitation with the <literal>{}</literal>-syntax which cannot "
+"allow fine grained control of multi-column properties."
+msgstr ""
+"<literal>&lt;return-property&gt;</literal> 也可用于多个字段，它解决了使用 "
+"<literal>{}</literal>-语法不能细粒度控制多个字段的限制。 "
+
+#. Tag: programlisting
+#: query_sql.xml:550
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"organizationCurrentEmployments\"&gt;\n"
+"    &lt;return alias=\"emp\" class=\"Employment\"&gt;\n"
+"        &lt;return-property name=\"salary\"&gt;\n"
+"            &lt;return-column name=\"VALUE\"/&gt;\n"
+"            &lt;return-column name=\"CURRENCY\"/&gt;\n"
+"        &lt;/return-property&gt;\n"
+"        &lt;return-property name=\"endDate\" column=\"myEndDate\"/&gt;\n"
+"    &lt;/return&gt;\n"
+"        SELECT EMPLOYEE AS {emp.employee}, EMPLOYER AS {emp.employer},\n"
+"        STARTDATE AS {emp.startDate}, ENDDATE AS {emp.endDate},\n"
+"        REGIONCODE as {emp.regionCode}, EID AS {emp.id}, VALUE, CURRENCY\n"
+"        FROM EMPLOYMENT\n"
+"        WHERE EMPLOYER = :id AND ENDDATE IS NULL\n"
+"        ORDER BY STARTDATE ASC\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"organizationCurrentEmployments\"&gt;\n"
+"    &lt;return alias=\"emp\" class=\"Employment\"&gt;\n"
+"        &lt;return-property name=\"salary\"&gt;\n"
+"            &lt;return-column name=\"VALUE\"/&gt;\n"
+"            &lt;return-column name=\"CURRENCY\"/&gt;\n"
+"        &lt;/return-property&gt;\n"
+"        &lt;return-property name=\"endDate\" column=\"myEndDate\"/&gt;\n"
+"    &lt;/return&gt;\n"
+"        SELECT EMPLOYEE AS {emp.employee}, EMPLOYER AS {emp.employer},\n"
+"        STARTDATE AS {emp.startDate}, ENDDATE AS {emp.endDate},\n"
+"        REGIONCODE as {emp.regionCode}, EID AS {emp.id}, VALUE, CURRENCY\n"
+"        FROM EMPLOYMENT\n"
+"        WHERE EMPLOYER = :id AND ENDDATE IS NULL\n"
+"        ORDER BY STARTDATE ASC\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:552
+#, no-c-format
+msgid ""
+"In this example <literal>&lt;return-property&gt;</literal> was used in "
+"combination with the <literal>{}</literal>-syntax for injection. This allows "
+"users to choose how they want to refer column and properties."
+msgstr ""
+"注意在这个例子中，我们使用了 <literal>&lt;return-property&gt;</literal> 结合 "
+"<literal>{}</literal> 的注入语法。允许用户来选择如何引用字段以及属性。 "
+
+#. Tag: para
+#: query_sql.xml:557
+#, no-c-format
+msgid ""
+"If your mapping has a discriminator you must use <literal>&lt;return-"
+"discriminator&gt;</literal> to specify the discriminator column."
+msgstr ""
+"如果你映射一个识别器（discriminator），你必须使用 <literal>&lt;return-"
+"discriminator&gt;</literal> 来指定识别器字段。"
+
+#. Tag: title
+#: query_sql.xml:563
+#, no-c-format
+msgid "Using stored procedures for querying"
+msgstr "使用存储过程来查询"
+
+#. Tag: para
+#: query_sql.xml:565
+#, no-c-format
+msgid ""
+"Hibernate3 provides support for queries via stored procedures and functions. "
+"Most of the following documentation is equivalent for both. The stored "
+"procedure/function must return a resultset as the first out-parameter to be "
+"able to work with Hibernate. An example of such a stored function in Oracle "
+"9 and higher is as follows:"
+msgstr ""
+"Hibernate 3 引入了对存储过程查询（stored procedure）和函数（function）的支"
+"持。以下的说明中，这二者一般都适用。存储过程／函数必须返回一个结果集，作为 "
+"Hibernate 能够使用的第一个外部参数。下面是一个 Oracle9 和更高版本的存储过程例"
+"子。 "
+
+#. Tag: programlisting
+#: query_sql.xml:571
+#, fuzzy, no-c-format
+msgid ""
+"CREATE OR REPLACE FUNCTION selectAllEmployments\n"
+"    RETURN SYS_REFCURSOR\n"
+"AS\n"
+"    st_cursor SYS_REFCURSOR;\n"
+"BEGIN\n"
+"    OPEN st_cursor FOR\n"
+" SELECT EMPLOYEE, EMPLOYER,\n"
+" STARTDATE, ENDDATE,\n"
+" REGIONCODE, EID, VALUE, CURRENCY\n"
+" FROM EMPLOYMENT;\n"
+"      RETURN  st_cursor;\n"
+" END;"
+msgstr ""
+"CREATE OR REPLACE FUNCTION selectAllEmployments\n"
+"    RETURN SYS_REFCURSOR\n"
+"AS\n"
+"    st_cursor SYS_REFCURSOR;\n"
+"BEGIN\n"
+"    OPEN st_cursor FOR\n"
+" SELECT EMPLOYEE, EMPLOYER,\n"
+" STARTDATE, ENDDATE,\n"
+" REGIONCODE, EID, VALUE, CURRENCY\n"
+" FROM EMPLOYMENT;\n"
+"      RETURN  st_cursor;\n"
+" END;"
+
+#. Tag: para
+#: query_sql.xml:573
+#, no-c-format
+msgid "To use this query in Hibernate you need to map it via a named query."
+msgstr "在 Hibernate 里要要使用这个查询，你需要通过命名查询来映射它。"
+
+#. Tag: programlisting
+#: query_sql.xml:576
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"selectAllEmployees_SP\" callable=\"true\"&gt;\n"
+"    &lt;return alias=\"emp\" class=\"Employment\"&gt;\n"
+"        &lt;return-property name=\"employee\" column=\"EMPLOYEE\"/&gt;\n"
+"        &lt;return-property name=\"employer\" column=\"EMPLOYER\"/&gt;\n"
+"        &lt;return-property name=\"startDate\" column=\"STARTDATE\"/&gt;\n"
+"        &lt;return-property name=\"endDate\" column=\"ENDDATE\"/&gt;\n"
+"        &lt;return-property name=\"regionCode\" column=\"REGIONCODE\"/&gt;\n"
+"        &lt;return-property name=\"id\" column=\"EID\"/&gt;\n"
+"        &lt;return-property name=\"salary\"&gt;\n"
+"            &lt;return-column name=\"VALUE\"/&gt;\n"
+"            &lt;return-column name=\"CURRENCY\"/&gt;\n"
+"        &lt;/return-property&gt;\n"
+"    &lt;/return&gt;\n"
+"    { ? = call selectAllEmployments() }\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"selectAllEmployees_SP\" callable=\"true\"&gt;\n"
+"    &lt;return alias=\"emp\" class=\"Employment\"&gt;\n"
+"        &lt;return-property name=\"employee\" column=\"EMPLOYEE\"/&gt;\n"
+"        &lt;return-property name=\"employer\" column=\"EMPLOYER\"/&gt;\n"
+"        &lt;return-property name=\"startDate\" column=\"STARTDATE\"/&gt;\n"
+"        &lt;return-property name=\"endDate\" column=\"ENDDATE\"/&gt;\n"
+"        &lt;return-property name=\"regionCode\" column=\"REGIONCODE\"/&gt;\n"
+"        &lt;return-property name=\"id\" column=\"EID\"/&gt;\n"
+"        &lt;return-property name=\"salary\"&gt;\n"
+"            &lt;return-column name=\"VALUE\"/&gt;\n"
+"            &lt;return-column name=\"CURRENCY\"/&gt;\n"
+"        &lt;/return-property&gt;\n"
+"    &lt;/return&gt;\n"
+"    { ? = call selectAllEmployments() }\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:578
+#, no-c-format
+msgid ""
+"Stored procedures currently only return scalars and entities. <literal>&lt;"
+"return-join&gt;</literal> and <literal>&lt;load-collection&gt;</literal> are "
+"not supported."
+msgstr ""
+"注意存储过程当前仅仅返回标量和实体现在。不支持 <literal>&lt;return-join&gt;</"
+"literal> 和 <literal>&lt;load-collection&gt;</literal>。 "
+
+#. Tag: title
+#: query_sql.xml:583
+#, no-c-format
+msgid "Rules/limitations for using stored procedures"
+msgstr "使用存储过程的规则和限制"
+
+#. Tag: para
+#: query_sql.xml:585
+#, no-c-format
+msgid ""
+"You cannot use stored procedures with Hibernate unless you follow some "
+"procedure/function rules. If they do not follow those rules they are not "
+"usable with Hibernate. If you still want to use these procedures you have to "
+"execute them via <literal>session.connection()</literal>. The rules are "
+"different for each database, since database vendors have di

@@ -1,0 +1,1102 @@
+l>Product</literal> and "
+"<literal>Part</literal> entities. This association requires the existence of "
+"a foreign key column and possibly an index column to the <literal>Part</"
+"literal> table. This mapping loses certain semantics of normal Java "
+"collections:"
+msgstr ""
+"Une association de <literal>Product</literal> vers <literal>Part</literal> "
+"requiert l'existence d'une clé étrangère et éventuellement une colonne "
+"d'index pour la table <literal>Part</literal>. Une balise <literal>&lt;one-"
+"to-many&gt;</literal> indique que c'est une association un-à-plusieurs. "
+
+#. Tag: para
+#: collection_mapping.xml:156
+#, no-c-format
+msgid ""
+"An instance of the contained entity class cannot belong to more than one "
+"instance of the collection."
+msgstr ""
+"Une instance de la classe de l'entité contenue ne peut pas appartenir à plus "
+"d'une instance de la collection."
+
+#. Tag: para
+#: collection_mapping.xml:161
+#, no-c-format
+msgid ""
+"An instance of the contained entity class cannot appear at more than one "
+"value of the collection index."
+msgstr ""
+"Une instance de la classe de l'entité contenue peut ne pas apparaître à plus "
+"plus d'une valeur d'index de la collection."
+
+#. Tag: para
+#: collection_mapping.xml:166
+#, no-c-format
+msgid ""
+"Looking closer at the used <literal>&lt;one-to-many&gt;</literal> tag we see "
+"that it has the following options."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:170
+#, no-c-format
+msgid "options of &lt;one-to-many&gt; element"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:181
+#, no-c-format
+msgid ""
+"&lt;one-to-many\n"
+"        class=\"ClassName\"\n"
+"        not-found=\"ignore|exception\"\n"
+"        entity-name=\"EntityName\"\n"
+"        node=\"element-name\"\n"
+"        embed-xml=\"true|false\"\n"
+"    /&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:185
+#, no-c-format
+msgid "<literal>class</literal> (required): the name of the associated class."
+msgstr "<literal>class</literal> (requis) : le nom de la classe associée."
+
+#. Tag: para
+#: collection_mapping.xml:190
+#, no-c-format
+msgid ""
+"<literal>not-found</literal> (optional - defaults to <literal>exception</"
+"literal>): specifies how cached identifiers that reference missing rows will "
+"be handled. <literal>ignore</literal> will treat a missing row as a null "
+"association."
+msgstr ""
+"<literal>not-found</literal> (optionnel - par défaut <literal>exception</"
+"literal>) : spécifie comment les identifiants cachés qui référencent des "
+"lignes manquantes seront gérés : <literal>ignore</literal> traitera une "
+"ligne manquante comme une association nulle."
+
+#. Tag: para
+#: collection_mapping.xml:198
+#, no-c-format
+msgid ""
+"<literal>entity-name</literal> (optional): the entity name of the associated "
+"class, as an alternative to <literal>class</literal>."
+msgstr ""
+"<literal>entity-name</literal> (optionnel) : le nom de l'entité de la classe "
+"associée, comme une alternative à <literal>class</literal>. "
+
+#. Tag: para
+#: collection_mapping.xml:206
+#, no-c-format
+msgid ""
+"The <literal>&lt;one-to-many&gt;</literal> element does not need to declare "
+"any columns. Nor is it necessary to specify the <literal>table</literal> "
+"name anywhere."
+msgstr ""
+"Notez que l'élément <literal>&lt;one-to-many&gt;</literal> n'a pas besoin de "
+"déclarer de colonnes. Il n'est pas non plus nécessaire de spécifier le nom "
+"de la <literal>table</literal> à aucun endroit."
+
+#. Tag: para
+#: collection_mapping.xml:211
+#, fuzzy, no-c-format
+msgid ""
+"If the foreign key column of a <literal>&lt;one-to-many&gt;</literal> "
+"association is declared <literal>NOT NULL</literal>, you must declare the "
+"<literal>&lt;key&gt;</literal> mapping <literal>not-null=\"true\"</literal> "
+"or <emphasis>use a bidirectional association</emphasis> with the collection "
+"mapping marked <literal>inverse=\"true\"</literal>. See <xref linkend="
+"\"collections-bidirectional\"/>."
+msgstr ""
+"<emphasis>Note très importante :</emphasis> si la colonne de la clé d'une "
+"association <literal>&lt;one-to-many&gt;</literal> est déclarée <literal>NOT "
+"NULL</literal>, vous devez déclarer le mappage de <literal>&lt;key&gt;</"
+"literal> avec <literal>not-null=\"true\"</literal> ou <emphasis> utiliser "
+"une association bidirectionnelle </emphasis> avec le mappage de la "
+"collection marqué <literal>inverse=\"true\"</literal>. Voir la discussion "
+"sur les associations bidirectionnelles plus tard dans ce chapitre. "
+
+#. Tag: para
+#: collection_mapping.xml:221
+#, fuzzy, no-c-format
+msgid ""
+"Apart from the <literal>&lt;set&gt; </literal>tag as shown in <xref linkend="
+"\"example.collections.set\"/>, there is also <literal>&lt;list&gt;</"
+"literal>, <literal>&lt;map&gt;</literal>, <literal>&lt;bag&gt;</literal>, "
+"<literal>&lt;array&gt;</literal> and <literal>&lt;primitive-array&gt;</"
+"literal> mapping elements. The <literal>&lt;map&gt;</literal> element is "
+"representative:"
+msgstr ""
+"À part <literal>&lt;set&gt;</literal>, il y aussi les éléments de mappage "
+"<literal>&lt;list&gt;</literal>, <literal>&lt;map&gt;</literal>, "
+"<literal>&lt;bag&gt;</literal>, <literal>&lt;array&gt;</literal> et "
+"<literal>&lt;primitive-array&gt;</literal>. L'élément <literal>&lt;map&gt;</"
+"literal> est représentatif : "
+
+#. Tag: title
+#: collection_mapping.xml:229
+#, no-c-format
+msgid "Elements of the &lt;map&gt; mapping"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:262
+#, no-c-format
+msgid ""
+"&lt;map\n"
+"    name=\"propertyName\"\n"
+"    table=\"table_name\"\n"
+"    schema=\"schema_name\"\n"
+"    lazy=\"true|extra|false\"\n"
+"    inverse=\"true|false\"\n"
+"    cascade=\"all|none|save-update|delete|all-delete-orphan|delete-orphan\"\n"
+"    sort=\"unsorted|natural|comparatorClass\"\n"
+"    order-by=\"column_name asc|desc\"\n"
+"    where=\"arbitrary sql where condition\"\n"
+"    fetch=\"join|select|subselect\"\n"
+"    batch-size=\"N\"\n"
+"    access=\"field|property|ClassName\"\n"
+"    optimistic-lock=\"true|false\"\n"
+"    mutable=\"true|false\"\n"
+"    node=\"element-name|.\"\n"
+"    embed-xml=\"true|false\"\n"
+"&gt;\n"
+"\n"
+"    &lt;key .... /&gt;\n"
+"    &lt;map-key .... /&gt;\n"
+"    &lt;element .... /&gt;\n"
+"&lt;/map&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:266
+#, no-c-format
+msgid "<literal>name</literal>: the collection property name"
+msgstr ""
+"<literal>name</literal> : le nom de la propriété contenant la collection "
+
+#. Tag: para
+#: collection_mapping.xml:270
+#, no-c-format
+msgid ""
+"<literal>table</literal> (optional - defaults to property name): the name of "
+"the collection table. It is not used for one-to-many associations."
+msgstr ""
+"<literal>table</literal> (optionnel - par défaut = nom de la propriété) : le "
+"nom de la table de la collection (non utilisé pour les associations un-à-"
+"plusieurs) "
+
+#. Tag: para
+#: collection_mapping.xml:276
+#, no-c-format
+msgid ""
+"<literal>schema</literal> (optional): the name of a table schema to override "
+"the schema declared on the root element"
+msgstr ""
+"<literal>schema</literal> (optionnel) : le nom du schéma pour surcharger le "
+"schéma déclaré dans l'élément racine "
+
+#. Tag: para
+#: collection_mapping.xml:281
+#, no-c-format
+msgid ""
+"<literal>lazy</literal> (optional - defaults to <literal>true</literal>): "
+"disables lazy fetching and specifies that the association is always eagerly "
+"fetched. It can also be used to enable \"extra-lazy\" fetching where most "
+"operations do not initialize the collection. This is suitable for large "
+"collections."
+msgstr ""
+"<literal>lazy</literal> (optionnel - par défaut = <literal>true</literal>) : "
+"peut être utilisé pour désactiver l'initialisation tardive et spécifier que "
+"l'association est toujours rapportée, ou pour activer la récupération extra-"
+"paresseuse (extra-lazy) où la plupart des opérations n'initialisent pas la "
+"collection (approprié pour de très grosses collections)."
+
+#. Tag: para
+#: collection_mapping.xml:290
+#, no-c-format
+msgid ""
+"<literal>inverse</literal> (optional - defaults to <literal>false</"
+"literal>): marks this collection as the \"inverse\" end of a bidirectional "
+"association."
+msgstr ""
+"<literal>inverse</literal> (optionnel - par défaut = <literal>false</"
+"literal>) : définit cette collection comme l'extrémité \"inverse\" de "
+"l'association bidirectionnelle."
+
+#. Tag: para
+#: collection_mapping.xml:296
+#, no-c-format
+msgid ""
+"<literal>cascade</literal> (optional - defaults to <literal>none</literal>): "
+"enables operations to cascade to child entities."
+msgstr ""
+"<literal>cascade</literal> (optionnel - par défaut = <literal>none</"
+"literal>) : active les opérations de cascade vers les entités filles."
+
+#. Tag: para
+#: collection_mapping.xml:302
+#, no-c-format
+msgid ""
+"<literal>sort</literal> (optional): specifies a sorted collection with "
+"<literal>natural</literal> sort order or a given comparator class."
+msgstr ""
+"<literal>sort</literal> (optionnel) : spécifie une collection triée via un "
+"ordre de tri <literal>naturel</literal>, ou via une classe comparateur "
+"donnée."
+
+#. Tag: para
+#: collection_mapping.xml:308
+#, fuzzy, no-c-format
+msgid ""
+"<literal>order-by</literal> (optional): specifies a table column or columns "
+"that define the iteration order of the <literal>Map</literal>, <literal>Set</"
+"literal> or bag, together with an optional <literal>asc</literal> or "
+"<literal>desc</literal>."
+msgstr ""
+"<literal>order-by</literal> (optionnel, seulement à partir du JDK1.4) : "
+"spécifie une colonne de table (ou des colonnes) qui définit l'ordre "
+"d'itération de <literal>Map</literal>, <literal>Set</literal> ou Bag, avec "
+"en option <literal>asc</literal> ou <literal>desc</literal>."
+
+#. Tag: para
+#: collection_mapping.xml:316
+#, no-c-format
+msgid ""
+"<literal>where</literal> (optional): specifies an arbitrary SQL "
+"<literal>WHERE</literal> condition that is used when retrieving or removing "
+"the collection. This is useful if the collection needs to contain only a "
+"subset of the available data."
+msgstr ""
+"<literal>where</literal> (optionnel) : spécifie une condition SQL arbitraire "
+"<literal>WHERE</literal> à utiliser au chargement ou à la suppression d'une "
+"collection (utile si la collection ne doit contenir qu'un sous ensemble des "
+"données disponibles)."
+
+#. Tag: para
+#: collection_mapping.xml:324
+#, no-c-format
+msgid ""
+"<literal>fetch</literal> (optional, defaults to <literal>select</literal>): "
+"chooses between outer-join fetching, fetching by sequential select, and "
+"fetching by sequential subselect."
+msgstr ""
+"<literal>fetch</literal> (optionnel, par défaut = <literal>select</"
+"literal>) : à choisir entre récupération par jointures externes, "
+"récupération par selects séquentiels, et récupération par sous-selects "
+"séquentiels."
+
+#. Tag: para
+#: collection_mapping.xml:331
+#, no-c-format
+msgid ""
+"<literal>batch-size</literal> (optional, defaults to <literal>1</literal>): "
+"specifies a \"batch size\" for lazily fetching instances of this collection."
+msgstr ""
+"<literal>batch-size</literal> (optionnel, par défaut = <literal>1</"
+"literal>) : une \"taille de batch\" utilisée pour charger plusieurs "
+"instances de cette collection."
+
+#. Tag: para
+#: collection_mapping.xml:337
+#, no-c-format
+msgid ""
+"<literal>access</literal> (optional - defaults to <literal>property</"
+"literal>): the strategy Hibernate uses for accessing the collection property "
+"value."
+msgstr ""
+"<literal>access</literal> (optionnel - par défaut = <literal>property</"
+"literal>) : la stratégie que Hibernate doit utiliser pour accéder à la "
+"valeur de la propriété."
+
+#. Tag: para
+#: collection_mapping.xml:343
+#, no-c-format
+msgid ""
+"<literal>optimistic-lock</literal> (optional - defaults to <literal>true</"
+"literal>): specifies that changes to the state of the collection results in "
+"increments of the owning entity's version. For one-to-many associations you "
+"may want to disable this setting."
+msgstr ""
+"<literal>optimistic-lock</literal> (optionnel - par défaut = <literal>true</"
+"literal>) : spécifie que changer l'état des résultats de la collection "
+"entraîne l'incrémentation de la version appartenant à l'entité (Pour une "
+"association un-à-plusieurs, il est souvent raisonnable de désactiver ce "
+"paramètre)."
+
+#. Tag: para
+#: collection_mapping.xml:351
+#, no-c-format
+msgid ""
+"<literal>mutable</literal> (optional - defaults to <literal>true</literal>): "
+"a value of <literal>false</literal> specifies that the elements of the "
+"collection never change. This allows for minor performance optimization in "
+"some cases."
+msgstr ""
+"<literal>mutable</literal> (optionnel - par défaut = <literal>true</"
+"literal>) : une valeur à <literal>false</literal> spécifie que les éléments "
+"de la collection ne changent jamais (une optimisation mineure dans certains "
+"cas)."
+
+#. Tag: para
+#: collection_mapping.xml:360
+#, no-c-format
+msgid ""
+"After exploring the basic mapping of collections in the preceding paragraphs "
+"we will now focus details like physical mapping considerations, indexed "
+"collections and collections of value types."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:365
+#, no-c-format
+msgid "Collection foreign keys"
+msgstr "Les clés étrangères d'une collection"
+
+#. Tag: para
+#: collection_mapping.xml:367
+#, fuzzy, no-c-format
+msgid ""
+"On the database level collection instances are distinguished by the foreign "
+"key of the entity that owns the collection. This foreign key is referred to "
+"as the <emphasis>collection key column</emphasis>, or columns, of the "
+"collection table. The collection key column is mapped by the "
+"<literal>@JoinColumn</literal> annotation respectively the <literal>&lt;"
+"key&gt;</literal> XML element."
+msgstr ""
+"Les instances d'une collection sont distinguées dans la base de données par "
+"la clé étrangère de l'entité qui possède la collection. Cette clé étrangère "
+"est référencée comme la(es) <emphasis>colonne(s) de la clé de la collection</"
+"emphasis> de la table de la collection. La colonne de la clé de la "
+"collection est mappée par l'élément <literal>&lt;key&gt;</literal>."
+
+#. Tag: para
+#: collection_mapping.xml:374
+#, fuzzy, no-c-format
+msgid ""
+"There can be a nullability constraint on the foreign key column. For most "
+"collections, this is implied. For unidirectional one-to-many associations, "
+"the foreign key column is nullable by default, so you may need to specify"
+msgstr ""
+"Il peut y avoir une contrainte de nullité sur la colonne de la clé "
+"étrangère. Pour les associations unidirectionnelles un-à-plusieurs, la "
+"colonne de la clé étrangère peut être nulle par défaut, donc vous pourriez "
+"avoir besoin de spécifier <literal>not-null=\"true\"</literal>. "
+
+#. Tag: programlisting
+#: collection_mapping.xml:379
+#, no-c-format
+msgid "@JoinColumn(nullable=false)"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:381
+#, no-c-format
+msgid "<para>or</para>"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:383
+#, no-c-format
+msgid "&lt;key column=\"productSerialNumber\" not-null=\"true\"/&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:385
+#, fuzzy, no-c-format
+msgid ""
+"The foreign key constraint can use <literal>ON DELETE CASCADE</literal>. In "
+"XML this can be expressed via:"
+msgstr ""
+"La contraite de la clé étrangère peut utiliser <literal>ON DELETE CASCADE</"
+"literal>. "
+
+#. Tag: programlisting
+#: collection_mapping.xml:388
+#, no-c-format
+msgid "&lt;key column=\"productSerialNumber\" on-delete=\"cascade\"/&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:390
+#, no-c-format
+msgid ""
+"In annotations the Hibernate specific annotation @OnDelete has to be used."
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:393
+#, no-c-format
+msgid "@OnDelete(action=OnDeleteAction.CASCADE)"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:395
+#, fuzzy, no-c-format
+msgid ""
+"See <xref lang=\"\" linkend=\"section.key\"/> for more information about the "
+"<literal>&lt;key&gt;</literal> element."
+msgstr ""
+"Voir le chapitre précédent pour une définition complète de l'élément "
+"<literal>&lt;key&gt;</literal>."
+
+#. Tag: title
+#: collection_mapping.xml:400
+#, no-c-format
+msgid "Indexed collections"
+msgstr "Collections indexées"
+
+#. Tag: para
+#: collection_mapping.xml:402
+#, no-c-format
+msgid ""
+"In the following paragraphs we have a closer at the indexed collections "
+"<classname>List</classname> and <classname>Map</classname> how the their "
+"index can be mapped in Hibernate."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:407
+#, no-c-format
+msgid "Lists"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:409
+#, no-c-format
+msgid "Lists can be mapped in two different ways:"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:413
+#, no-c-format
+msgid "as ordered lists, where the order is not materialized in the database"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:418
+#, no-c-format
+msgid "as indexed lists, where the order is materialized in the database"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:423
+#, no-c-format
+msgid ""
+"To order lists in memory, add <literal>@javax.persistence.OrderBy</literal> "
+"to your property. This annotation takes as parameter a list of comma "
+"separated properties (of the target entity) and orders the collection "
+"accordingly (eg <code>firstname asc, age desc</code>), if the string is "
+"empty, the collection will be ordered by the primary key of the target "
+"entity."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:432
+#, no-c-format
+msgid "Ordered lists using <classname>@OrderBy</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:434
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Customer {\n"
+"   @Id @GeneratedValue public Integer getId() { return id; }\n"
+"   public void setId(Integer id) { this.id = id; }\n"
+"   private Integer id;\n"
+"\n"
+"   @OneToMany(mappedBy=\"customer\")\n"
+"   @OrderBy(\"number\")\n"
+"   public List&lt;Order&gt; getOrders() { return orders; }\n"
+"   public void setOrders(List&lt;Order&gt; orders) { this.orders = "
+"orders; }\n"
+"   private List&lt;Order&gt; orders;\n"
+"}\n"
+"\n"
+"@Entity\n"
+"public class Order {\n"
+"   @Id @GeneratedValue public Integer getId() { return id; }\n"
+"   public void setId(Integer id) { this.id = id; }\n"
+"   private Integer id;\n"
+"\n"
+"   public String getNumber() { return number; }\n"
+"   public void setNumber(String number) { this.number = number; }\n"
+"   private String number;\n"
+"\n"
+"   @ManyToOne\n"
+"   public Customer getCustomer() { return customer; }\n"
+"   public void setCustomer(Customer customer) { this.customer = customer; }\n"
+"   private Customer number;\n"
+"}\n"
+"\n"
+"-- Table schema\n"
+"|-------------| |----------|\n"
+"| Order       | | Customer |\n"
+"|-------------| |----------|\n"
+"| id          | | id       |\n"
+"| number      | |----------| \n"
+"| customer_id |\n"
+"|-------------|"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:437
+#, no-c-format
+msgid ""
+"To store the index value in a dedicated column, use the <classname>@javax."
+"persistence.OrderColumn</classname> annotation on your property. This "
+"annotations describes the column name and attributes of the column keeping "
+"the index value. This column is hosted on the table containing the "
+"association foreign key. If the column name is not specified, the default is "
+"the name of the referencing property, followed by underscore, followed by "
+"<literal>ORDER</literal> (in the following example, it would be "
+"<literal>orders_ORDER</literal>)."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:448
+#, no-c-format
+msgid "Explicit index column using <classname>@OrderColumn</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:451
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Customer {\n"
+"   @Id @GeneratedValue public Integer getId() { return id; }\n"
+"   public void setId(Integer id) { this.id = id; }\n"
+"   private Integer id;\n"
+"\n"
+"   @OneToMany(mappedBy=\"customer\")\n"
+"   @OrderColumn(name=\"orders_index\")\n"
+"   public List&lt;Order&gt; getOrders() { return orders; }\n"
+"   public void setOrders(List&lt;Order&gt; orders) { this.orders = "
+"orders; }\n"
+"   private List&lt;Order&gt; orders;\n"
+"}\n"
+"\n"
+"@Entity\n"
+"public class Order {\n"
+"   @Id @GeneratedValue public Integer getId() { return id; }\n"
+"   public void setId(Integer id) { this.id = id; }\n"
+"   private Integer id;\n"
+"\n"
+"   public String getNumber() { return number; }\n"
+"   public void setNumber(String number) { this.number = number; }\n"
+"   private String number;\n"
+"\n"
+"   @ManyToOne\n"
+"   public Customer getCustomer() { return customer; }\n"
+"   public void setCustomer(Customer customer) { this.customer = customer; }\n"
+"   private Customer number;\n"
+"}\n"
+"\n"
+"-- Table schema\n"
+"|--------------| |----------|\n"
+"| Order        | | Customer |\n"
+"|--------------| |----------|\n"
+"| id           | | id       |\n"
+"| number       | |----------| \n"
+"| customer_id  |\n"
+"| orders_order |\n"
+"|--------------|"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:455
+#, no-c-format
+msgid ""
+"We recommend you to convert <classname>the legacy @org.hibernate.annotations."
+"IndexColumn</classname> usages to <classname>@OrderColumn</classname> unless "
+"you are making use of the base property. The <literal>base</literal> "
+"property lets you define the index value of the first element (aka as base "
+"index). The usual value is <literal>0</literal> or <literal>1</literal>. The "
+"default is 0 like in Java."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:464
+#, no-c-format
+msgid ""
+"Looking again at the Hibernate mapping file equivalent, the index of an "
+"array or list is always of type <literal>integer</literal> and is mapped "
+"using the <literal>&lt;list-index&gt;</literal> element. The mapped column "
+"contains sequential integers that are numbered from zero by default."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:471
+#, no-c-format
+msgid "index-list element for indexed collections in xml mapping"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:481
+#, no-c-format
+msgid ""
+"&lt;list-index\n"
+"        column=\"column_name\"\n"
+"        base=\"0|1|...\"/&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:485
+#, no-c-format
+msgid ""
+"<literal>column_name</literal> (required): the name of the column holding "
+"the collection index values."
+msgstr ""
+"<literal>column_name</literal> (champ requis): lenom de la lolonne qui "
+"contient les valeurs 'index' de la collection."
+
+#. Tag: para
+#: collection_mapping.xml:490
+#, no-c-format
+msgid ""
+"<literal>base</literal> (optional - defaults to <literal>0</literal>): the "
+"value of the index column that corresponds to the first element of the list "
+"or array."
+msgstr ""
+"<literal>base</literal> (optionnel - par défaut = <literal>0</literal>) : la "
+"valeur de la colonne 'index' qui correspond au premier élément de la liste "
+"ou de la table."
+
+#. Tag: para
+#: collection_mapping.xml:498
+#, no-c-format
+msgid ""
+"If your table does not have an index column, and you still wish to use "
+"<literal>List</literal> as the property type, you can map the property as a "
+"Hibernate <emphasis>&lt;bag&gt;</emphasis>. A bag does not retain its order "
+"when it is retrieved from the database, but it can be optionally sorted or "
+"ordered."
+msgstr ""
+"Si votre table n'a pas de colonne d'index, et que vous souhaitez tout de "
+"même utiliser <literal>List</literal> comme type de propriété, vous devriez "
+"mapper la propriété comme un <emphasis>&lt;bag&gt;</emphasis> Hibernate. Un "
+"sac (bag) ne garde pas son ordre quand il est récupéré de la base de "
+"données, mais il peut être optionnellement trié ou ordonné. "
+
+#. Tag: title
+#: collection_mapping.xml:506
+#, no-c-format
+msgid "Maps"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:508
+#, no-c-format
+msgid ""
+"The question with <classname>Map</classname>s is where the key value is "
+"stored. There are everal options. Maps can borrow their keys from one of the "
+"associated entity properties or have dedicated columns to store an explicit "
+"key."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:513
+#, no-c-format
+msgid ""
+"To use one of the target entity property as a key of the map, use "
+"<literal>@MapKey(name=\"myProperty\")</literal>, where <literal>myProperty</"
+"literal> is a property name in the target entity. When using "
+"<literal>@MapKey</literal> without the name attribuate, the target entity "
+"primary key is used. The map key uses the same column as the property "
+"pointed out. There is no additional column defined to hold the map key, "
+"because the map key represent a target property. Be aware that once loaded, "
+"the key is no longer kept in sync with the property. In other words, if you "
+"change the property value, the key will not change automatically in your "
+"Java model."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:525
+#, no-c-format
+msgid ""
+"Use of target entity property as map key via <classname>@MapKey</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:528
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Customer {\n"
+"   @Id @GeneratedValue public Integer getId() { return id; }\n"
+"   public void setId(Integer id) { this.id = id; }\n"
+"   private Integer id;\n"
+"\n"
+"   @OneToMany(mappedBy=\"customer\")\n"
+"   @MapKey(name=\"number\")\n"
+"   public Map&lt;String,Order&gt; getOrders() { return orders; }\n"
+"   public void setOrders(Map&lt;String,Order&gt; order) { this.orders = "
+"orders; }\n"
+"   private Map&lt;String,Order&gt; orders;\n"
+"}\n"
+"\n"
+"@Entity\n"
+"public class Order {\n"
+"   @Id @GeneratedValue public Integer getId() { return id; }\n"
+"   public void setId(Integer id) { this.id = id; }\n"
+"   private Integer id;\n"
+"\n"
+"   public String getNumber() { return number; }\n"
+"   public void setNumber(String number) { this.number = number; }\n"
+"   private String number;\n"
+"\n"
+"   @ManyToOne\n"
+"   public Customer getCustomer() { return customer; }\n"
+"   public void setCustomer(Customer customer) { this.customer = customer; }\n"
+"   private Customer number;\n"
+"}\n"
+"\n"
+"-- Table schema\n"
+"|-------------| |----------|\n"
+"| Order       | | Customer |\n"
+"|-------------| |----------|\n"
+"| id          | | id       |\n"
+"| number      | |----------| \n"
+"| customer_id |\n"
+"|-------------|"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:531
+#, no-c-format
+msgid ""
+"Alternatively the map key is mapped to a dedicated column or columns. In "
+"order to customize the mapping use one of the following annotations:"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:537
+#, no-c-format
+msgid ""
+"@<classname>MapKeyColumn</classname> if the map key is a basic type. If you "
+"don't specify the column name, the name of the property followed by "
+"underscore followed by <literal>KEY</literal> is used (for example "
+"<literal>orders_KEY</literal>)."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:544
+#, no-c-format
+msgid ""
+"<classname>@MapKeyEnumerated</classname> / <classname>@MapKeyTemporal</"
+"classname> if the map key type is respectively an enum or a <classname>Date</"
+"classname>."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:550
+#, no-c-format
+msgid ""
+"<classname>@MapKeyJoinColumn</classname>/<classname>@MapKeyJoinColumns</"
+"classname> if the map key type is another entity."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:555
+#, no-c-format
+msgid ""
+"<classname>@AttributeOverride</classname>/<classname>@AttributeOverrides</"
+"classname> when the map key is a embeddable object. Use <literal>key.</"
+"literal> as a prefix for your embeddable object property names."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:562
+#, no-c-format
+msgid ""
+"You can also use <classname>@MapKeyClass</classname> to define the type of "
+"the key if you don't use generics."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:566
+#, no-c-format
+msgid "Map key as basic type using <classname>@MapKeyColumn</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:569
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Customer {\n"
+"   @Id @GeneratedValue public Integer getId() { return id; }\n"
+"   public void setId(Integer id) { this.id = id; }\n"
+"   private Integer id;\n"
+"\n"
+"   @OneToMany @JoinTable(name=\"Cust_Order\")\n"
+"   @MapKeyColumn(name=\"orders_number\")\n"
+"   public Map&lt;String,Order&gt; getOrders() { return orders; }\n"
+"   public void setOrders(Map&lt;String,Order&gt; orders) { this.orders = "
+"orders; }\n"
+"   private Map&lt;String,Order&gt; orders;\n"
+"}\n"
+"\n"
+"@Entity\n"
+"public class Order {\n"
+"   @Id @GeneratedValue public Integer getId() { return id; }\n"
+"   public void setId(Integer id) { this.id = id; }\n"
+"   private Integer id;\n"
+"\n"
+"   public String getNumber() { return number; }\n"
+"   public void setNumber(String number) { this.number = number; }\n"
+"   private String number;\n"
+"\n"
+"   @ManyToOne\n"
+"   public Customer getCustomer() { return customer; }\n"
+"   public void setCustomer(Customer customer) { this.customer = customer; }\n"
+"   private Customer number;\n"
+"}\n"
+"\n"
+"-- Table schema\n"
+"|-------------| |----------| |---------------|\n"
+"| Order       | | Customer | | Cust_Order    |\n"
+"|-------------| |----------| |---------------|\n"
+"| id          | | id       | | customer_id   |\n"
+"| number      | |----------| | order_id      |\n"
+"| customer_id |              | orders_number |\n"
+"|-------------|              |---------------|"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:573
+#, no-c-format
+msgid ""
+"We recommend you to migrate from <classname>@org.hibernate.annotations."
+"MapKey</classname> / <classname>@org.hibernate.annotation.MapKeyManyToMany</"
+"classname> to the new standard approach described above"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:579
+#, fuzzy, no-c-format
+msgid ""
+"Using Hibernate mapping files there exists equivalent concepts to the "
+"descibed annotations. You have to use <literal>&lt;map-key&gt;</literal>, "
+"<literal>&lt;map-key-many-to-many&gt;</literal> and <literal>&lt;composite-"
+"map-key&gt;</literal>. <literal>&lt;map-key&gt;</literal> is used for any "
+"basic type, <literal>&lt;map-key-many-to-many&gt;</literal> for an entity "
+"reference and <literal>&lt;composite-map-key&gt;</literal> for a composite "
+"type."
+msgstr ""
+"À part <literal>&lt;set&gt;</literal>, il y aussi les éléments de mappage "
+"<literal>&lt;list&gt;</literal>, <literal>&lt;map&gt;</literal>, "
+"<literal>&lt;bag&gt;</literal>, <literal>&lt;array&gt;</literal> et "
+"<literal>&lt;primitive-array&gt;</literal>. L'élément <literal>&lt;map&gt;</"
+"literal> est représentatif : "
+
+#. Tag: title
+#: collection_mapping.xml:590
+#, no-c-format
+msgid "map-key xml mapping element"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:601
+#, no-c-format
+msgid ""
+"&lt;map-key\n"
+"        column=\"column_name\"\n"
+"        formula=\"any SQL expression\"\n"
+"        type=\"type_name\"\n"
+"        node=\"@attribute-name\"\n"
+"        length=\"N\"/&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:605
+#, no-c-format
+msgid ""
+"<literal>column</literal> (optional): the name of the column holding the "
+"collection index values."
+msgstr ""
+"<literal>colonne</literal> (optionnel) : le nom de la colonne qui contient "
+"les valeurs 'index' de la collection."
+
+#. Tag: para
+#: collection_mapping.xml:610
+#, no-c-format
+msgid ""
+"<literal>formula</literal> (optional): a SQL formula used to evaluate the "
+"key of the map."
+msgstr ""
+"<literal>formula</literal> (optionnel): formule SQL utilisée pour évaluer la "
+"clé de la mappe."
+
+#. Tag: para
+#: collection_mapping.xml:615
+#, no-c-format
+msgid "<literal>type</literal> (required): the type of the map keys."
+msgstr "<literal>type</literal> (requis) : le type de clés de mappe."
+
+#. Tag: title
+#: collection_mapping.xml:623
+#, fuzzy, no-c-format
+msgid "map-key-many-to-many"
+msgstr "plusieurs-à-plusieurs "
+
+#. Tag: programlisting
+#: collection_mapping.xml:634
+#, no-c-format
+msgid ""
+"&lt;map-key-many-to-many\n"
+"        column=\"column_name\"\n"
+"        formula=\"any SQL expression\"\n"
+"        class=\"ClassName\"\n"
+"/&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:638
+#, no-c-format
+msgid ""
+"<literal>column</literal> (optional): the name of the foreign key column for "
+"the collection index values."
+msgstr ""
+"<literal>colonne</literal> (optionnel) : le nom de la colonne de clés "
+"étrangères pour la collection de valeurs 'index'."
+
+#. Tag: para
+#: collection_mapping.xml:643
+#, no-c-format
+msgid ""
+"<literal>formula</literal> (optional): a SQ formula used to evaluate the "
+"foreign key of the map key."
+msgstr ""
+"<literal>formula</literal> (optionnel): formule SQ utilisée pour évaluer la "
+"clé étrangère d'une clé de mappe."
+
+#. Tag: para
+#: collection_mapping.xml:648
+#, no-c-format
+msgid ""
+"<literal>class</literal> (required): the entity class used as the map key."
+msgstr ""
+"<literal>class</literal> (requis) : le nom de la classe utilisée en tant que "
+"clé de mappe."
+
+#. Tag: title
+#: collection_mapping.xml:658
+#, fuzzy, no-c-format
+msgid "Collections of basic types and embeddable objects"
+msgstr "Collections de valeurs et associations plusieurs-à-plusieurs"
+
+#. Tag: para
+#: collection_mapping.xml:660
+#, no-c-format
+msgid ""
+"In some situations you don't need to associate two entities but simply "
+"create a collection of basic types or embeddable objects. Use the "
+"<classname>@ElementCollection</classname> for this case."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:665
+#, no-c-format
+msgid ""
+"Collection of basic types mapped via <classname>@ElementCollection</"
+"classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:668
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class User {\n"
+"   [...]\n"
+"   public String getLastname() { ...}\n"
+"\n"
+"   @ElementCollection\n"
+"   @CollectionTable(name=\"Nicknames\", joinColumns=@JoinColumn(name="
+"\"user_id\"))\n"
+"   @Column(name=\"nickname\")\n"
+"   public Set&lt;String&gt; getNicknames() { ... } \n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:671
+#, no-c-format
+msgid ""
+"The collection table holding the collection data is set using the "
+"<classname>@CollectionTable</classname> annotation. If omitted the "
+"collection table name defaults to the concatenation of the name of the "
+"containing entity and the name of the collection attribute, separated by an "
+"underscore. In our example, it would be <literal>User_nicknames</literal>."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:678
+#, no-c-format
+msgid ""
+"The column holding the basic type is set using the <classname>@Column</"
+"classname> annotation. If omitted, the column name defaults to the property "
+"name: in our example, it would be <literal>nicknames</literal>."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:683
+#, no-c-format
+msgid ""
+"But you are not limited to basic types, the collection type can be any "
+"embeddable object. To override the columns of the embeddable object in the "
+"collection table, use the <classname>@AttributeOverride</classname> "
+"annotation."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:689
+#, no-c-format
+msgid "@ElementCollection for embeddable objects"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:691
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class User {\n"
+"   [...]\n"
+"   public String getLastname() { ...}\n"
+"\n"
+"   @ElementCollection\n"
+"   @CollectionTable(name=\"Addresses\", joinColumns=@JoinColumn(name="
+"\"user_id\"))\n"
+"   @AttributeOverrides({\n"
+"      @AttributeOverride(name=\"street1\", column=@Column(name=\"fld_street"
+"\"))\n"
+"   })\n"
+"   public Set&lt;Address&gt; getAddresses() { ... } \n"
+"}\n"
+"\n"
+"@Embeddable\n"
+"public class Address {\n"
+"   public String getStreet1() {...}\n"
+"   [...]\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:694
+#, no-c-format
+msgid "Such an embeddable object cannot contains a collection itself."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:698
+#, no-c-format
+msgid ""
+"in <classname>@AttributeOverride</classname>, you must use the "
+"<literal>value.</literal> prefix to override properties of the embeddable "
+"object used in the map value and the <literal>key.</literal> prefix to "
+"overrid

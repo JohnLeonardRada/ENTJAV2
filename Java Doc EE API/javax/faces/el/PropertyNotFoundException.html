@@ -1,0 +1,235 @@
+DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildSetter(org.hibernate.mapping.Component, org.hibernate.mapping.Property)"><!-- --></A><H3>
+buildSetter</H3>
+<PRE>
+protected abstract <A HREF="../../../../org/hibernate/property/Setter.html" title="interface in org.hibernate.property">Setter</A> <B>buildSetter</B>(<A HREF="../../../../org/hibernate/mapping/Component.html" title="class in org.hibernate.mapping">Component</A>&nbsp;component,
+                                      <A HREF="../../../../org/hibernate/mapping/Property.html" title="class in org.hibernate.mapping">Property</A>&nbsp;prop)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertyValue(java.lang.Object, int)"><!-- --></A><H3>
+getPropertyValue</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>getPropertyValue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;component,
+                               int&nbsp;i)
+                        throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getPropertyValue(java.lang.Object, int)">Tuplizer</A></CODE></B></DD>
+<DD>Extract the value of a particular property from the given entity.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getPropertyValue(java.lang.Object, int)">getPropertyValue</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html" title="interface in org.hibernate.tuple">Tuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>component</CODE> - The entity from which to extract the property value.<DD><CODE>i</CODE> - The index of the property for which to extract the value.
+<DT><B>Returns:</B><DD>The current value of the given property on the given entity.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertyValues(java.lang.Object)"><!-- --></A><H3>
+getPropertyValues</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[] <B>getPropertyValues</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;component)
+                           throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getPropertyValues(java.lang.Object)">Tuplizer</A></CODE></B></DD>
+<DD>Extract the current values contained on the given entity.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getPropertyValues(java.lang.Object)">getPropertyValues</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html" title="interface in org.hibernate.tuple">Tuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>component</CODE> - The entity from which to extract values.
+<DT><B>Returns:</B><DD>The current property values.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isInstance(java.lang.Object)"><!-- --></A><H3>
+isInstance</H3>
+<PRE>
+public boolean <B>isInstance</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;object)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#isInstance(java.lang.Object)">Tuplizer</A></CODE></B></DD>
+<DD>Is the given object considered an instance of the the entity (acconting
+ for entity-mode) managed by this tuplizer.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#isInstance(java.lang.Object)">isInstance</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html" title="interface in org.hibernate.tuple">Tuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>object</CODE> - The object to be checked.
+<DT><B>Returns:</B><DD>True if the object is considered as an instance of this entity
+      within the given mode.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPropertyValues(java.lang.Object, java.lang.Object[])"><!-- --></A><H3>
+setPropertyValues</H3>
+<PRE>
+public void <B>setPropertyValues</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;component,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[]&nbsp;values)
+                       throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#setPropertyValues(java.lang.Object, java.lang.Object[])">Tuplizer</A></CODE></B></DD>
+<DD>Inject the given values into the given entity.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#setPropertyValues(java.lang.Object, java.lang.Object[])">setPropertyValues</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html" title="interface in org.hibernate.tuple">Tuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>component</CODE> - The entity.<DD><CODE>values</CODE> - The values to be injected.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="instantiate()"><!-- --></A><H3>
+instantiate</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>instantiate</B>()
+                   throws <A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></PRE>
+<DL>
+<DD>This method does not populate the component parent
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#instantiate()">instantiate</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html" title="interface in org.hibernate.tuple">Tuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The new, empty entity instance.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/HibernateException.html" title="class in org.hibernate">HibernateException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParent(java.lang.Object)"><!-- --></A><H3>
+getParent</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>getParent</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;component)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html#getParent(java.lang.Object)">ComponentTuplizer</A></CODE></B></DD>
+<DD>Retreive the current value of the parent property.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html#getParent(java.lang.Object)">getParent</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html" title="interface in org.hibernate.tuple.component">ComponentTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>component</CODE> - The component instance from which to extract the parent
+ property value.
+<DT><B>Returns:</B><DD>The current value of the parent property.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasParentProperty()"><!-- --></A><H3>
+hasParentProperty</H3>
+<PRE>
+public boolean <B>hasParentProperty</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html#hasParentProperty()">ComponentTuplizer</A></CODE></B></DD>
+<DD>Does the component managed by this tuuplizer contain a parent property?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html#hasParentProperty()">hasParentProperty</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html" title="interface in org.hibernate.tuple.component">ComponentTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>True if the component does contain a parent property; false otherwise.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMethodOf(java.lang.reflect.Method)"><!-- --></A><H3>
+isMethodOf</H3>
+<PRE>
+public boolean <B>isMethodOf</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</A>&nbsp;method)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html#isMethodOf(java.lang.reflect.Method)">ComponentTuplizer</A></CODE></B></DD>
+<DD>Is the given method available via the managed component as a property getter?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html#isMethodOf(java.lang.reflect.Method)">isMethodOf</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html" title="interface in org.hibernate.tuple.component">ComponentTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>method</CODE> - The method which to check against the managed component.
+<DT><B>Returns:</B><DD>True if the managed component is available from the managed component; else false.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setParent(java.lang.Object, java.lang.Object, org.hibernate.engine.SessionFactoryImplementor)"><!-- --></A><H3>
+setParent</H3>
+<PRE>
+public void <B>setParent</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;component,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;parent,
+                      <A HREF="../../../../org/hibernate/engine/SessionFactoryImplementor.html" title="interface in org.hibernate.engine">SessionFactoryImplementor</A>&nbsp;factory)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html#setParent(java.lang.Object, java.lang.Object, org.hibernate.engine.SessionFactoryImplementor)">ComponentTuplizer</A></CODE></B></DD>
+<DD>Set the value of the parent property.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html#setParent(java.lang.Object, java.lang.Object, org.hibernate.engine.SessionFactoryImplementor)">setParent</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/component/ComponentTuplizer.html" title="interface in org.hibernate.tuple.component">ComponentTuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>component</CODE> - The component instance on which to set the parent.<DD><CODE>parent</CODE> - The parent to be set on the comonent.<DD><CODE>factory</CODE> - The current session factory.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getGetter(int)"><!-- --></A><H3>
+getGetter</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/property/Getter.html" title="interface in org.hibernate.property">Getter</A> <B>getGetter</B>(int&nbsp;i)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getGetter(int)">Tuplizer</A></CODE></B></DD>
+<DD>Retrieve the getter for the specified property.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html#getGetter(int)">getGetter</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/tuple/Tuplizer.html" title="interface in org.hibernate.tuple">Tuplizer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>i</CODE> - The property index.
+<DT><B>Returns:</B><DD>The property getter.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/AbstractComponentTuplizer.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp

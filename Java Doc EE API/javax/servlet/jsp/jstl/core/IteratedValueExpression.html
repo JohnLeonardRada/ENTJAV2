@@ -1,0 +1,181 @@
+obtain a JDBC <literal>Connection</literal>, or a <literal>Datasource</literal>, unless it is needed. It will not consume any resources until used."
+msgstr "<literal>Session</literal> 对象的创建代价比较小，是非线程安全的，对于单个请求，单个会话、单个的 工作单元而言，它只被使用一次，然后就丢弃。只有在需要的时候，一个 <literal>Session</literal> 对象 才会获取一个 JDBC 的 <literal>Connection</literal>（或一个<literal>Datasource</literal>）对象，因此假若不使用的时候它不消费任何资源。 "
+
+#. Tag: para
+#, no-c-format
+msgid "In order to reduce lock contention in the database, a database transaction has to be as short as possible. Long database transactions will prevent your application from scaling to a highly concurrent load. It is not recommended that you hold a database transaction open during user think time until the unit of work is complete."
+msgstr "此外我们还要考虑数据库事务。数据库事务应该尽可能的短，降低数据库中的锁争用。数据库长事务会阻止你的应用程序扩展到高的并发负载。因此，假若在用户思考期间让数据库事务开着，直到整个工作单元完成才关闭这个事务，这绝不是一个好的设计。 "
+
+#. Tag: para
+#, no-c-format
+msgid "What is the scope of a unit of work? Can a single Hibernate <literal>Session</literal> span several database transactions, or is this a one-to-one relationship of scopes? When should you open and close a <literal>Session</literal> and how do you demarcate the database transaction boundaries? These questions are addressed in the following sections."
+msgstr "一个操作单元（Unit of work）的范围是多大？单个的 Hibernate <literal>Session</literal> 能跨越多个数据库事务吗？还是一个 <literal>Session</literal> 的作用范围对应一个数据库事务的范围？应该何时打开 <literal>Session</literal>，何时关闭 <literal>Session</literal>，你又如何划分数据库事务的边界呢？我们将在后续章节解决这些问题。"
+
+#. Tag: title
+#, no-c-format
+msgid "Unit of work"
+msgstr "操作单元（Unit of work）"
+
+#. Tag: para
+#, no-c-format
+msgid "First, let's define a unit of work. A unit of work is a design pattern described by Martin Fowler as <quote> [maintaining] a list of objects affected by a business transaction and coordinates the writing out of changes and the resolution of concurrency problems. </quote><citation>PoEAA</citation> In other words, its a series of operations we wish to carry out against the database together. Basically, it is a transaction, though fulfilling a unit of work will often span multiple physical database transactions (see <xref linkend=\"transactions-basics-apptx\" />). So really we are talking about a more abstract notion of a transaction. The term \"business transaction\" is also sometimes used in lieu of unit of work."
+msgstr "首先，让我们定义一个工作单元（unit of work）。工作单元是一个设计模式，Martin Fowler 把它描述为 <quote> [maintaining] a list of objects affected by a business transaction and coordinates the writing out of changes and the resolution of concurrency problems. </quote><citation>PoEAA</citation> 换句话说，它是我们希望对数据库执行的一系列操作。基本上，它是一个事务，虽然完成一个工作单元经常将跨越多个物理数据库事务（请参考 <xref linkend=\"transactions-basics-apptx\"/>）。所以，实际上我们在讨论一个更抽象的事务概念。术语 \"business transaction\" 有时也和工作单元一起使用。"
+
+#. Tag: para
+#, no-c-format
+msgid "Do not use the <emphasis>session-per-operation</emphasis> antipattern: do not open and close a <literal>Session</literal> for every simple database call in a single thread. The same is true for database transactions. Database calls in an application are made using a planned sequence; they are grouped into atomic units of work. This also means that auto-commit after every single SQL statement is useless in an application as this mode is intended for ad-hoc SQL console work. Hibernate disables, or expects the application server to disable, auto-commit mode immediately. Database transactions are never optional. All communication with a database has to occur inside a transaction. Auto-commit behavior for reading data should be avoided, as many small transactions are unlikely to perform better than one clearly defined unit of work. The latter is also more maintainable and extensible."
+msgstr "首先，别用 <emphasis>session-per-operation</emphasis> 这种反模式了，也就是说，在单个线程中， 不要因为一次简单的数据库调用，就打开和关闭一次 <literal>Session</literal>！数据库事务也是如此。 应用程序中的数据库调用是按照计划好的次序，分组为原子的操作单元。（注意，这也意味着，应用程 序中，在单个的 SQL 语句发送之后，自动事务提交（auto-commit）模式失效了。这种模式专门为SQL控制台操作设计的。 Hibernate 禁止立即自动事务提交模式，或者期望应用服务器禁止立即自动事务提交模式。）数据库事务绝不是可有可无的，任何与数据库之间的通讯都必须在某个事务中进行，不管你是在读还是在写数据。对读数据而言，应该避免 auto-commit 行为，因为很多小的事务比一个清晰定义的工作单元性能差。后者也更容易维护和扩展。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The most common pattern in a multi-user client/server application is <emphasis>session-per-request</emphasis>. In this model, a request from the client is sent to the server, where the Hibernate persistence layer runs. A new Hibernate <literal>Session</literal> is opened, and all database operations are executed in this unit of work. On completion of the work, and once the response for the client has been prepared, the session is flushed and closed. Use a single database transaction to serve the clients request, starting and committing it when you open and close the <literal>Session</literal>. The relationship between the two is one-to-one and this model is a perfect fit for many applications."
+msgstr "在多用户的 client/server 应用程序中，最常用的模式是 <emphasis>每个请求一个会话（session-per-request）</emphasis>。 在这种模式下，来自客户端的请求被发送到服务器端（即 Hibernate 持久化层运行的地方），一个新的 Hibernate <literal>Session</literal> 被打开，并且执行这个操作单元中所有的数据库操作。一旦操作完成（同时对客户端的响应也准备就绪），session 被同步，然后关闭。你也可以使用单 个数据库事务来处理客户端请求，在你打开 <literal>Session</literal> 之后启动事务，在你关闭 <literal>Session</literal> 之前提交事务。会话和请求之间的关系是一对一的关系，这种模式对 于大多数应用程序来说是很棒的。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The challenge lies in the implementation. Hibernate provides built-in management of the \"current session\" to simplify this pattern. Start a transaction when a server request has to be processed, and end the transaction before the response is sent to the client. Common solutions are <literal>ServletFilter</literal>, AOP interceptor with a pointcut on the service methods, or a proxy/interception container. An EJB container is a standardized way to implement cross-cutting aspects such as transaction demarcation on EJB session beans, declaratively with CMT. If you use programmatic transaction demarcation, for ease of use and code portability use the Hibernate <literal>Transaction</literal> API shown later in this chapter."
+msgstr "实现才是真正的挑战。Hibernate 内置了对\"当前 session（current session）\" 的管理，用于简化此模式。你要做的一切就是在服务器端要处理请求的时候，开启事务，在响应发送给客户之前结束事务。你可以用任何方式来完成这一操作，通常的方案有 <literal>ServletFilter</literal>，在 service 方法中进行 pointcut 的 AOP 拦截器，或者 proxy/interception 容器。EJB 容器是实现横切诸如 EJB session bean 上的事务分界，用 CMT 对事务进行声明等方面的标准手段。假若你决定使用编程式的事务分界，请参考本章后面讲到的 Hibernate <literal>Transaction</literal> API，这对易用性和代码可移植性都有好处。 "
+
+#. Tag: para
+#, no-c-format
+msgid "Your application code can access a \"current session\" to process the request by calling <literal>sessionFactory.getCurrentSession()</literal>. You will always get a <literal>Session</literal> scoped to the current database transaction. This has to be configured for either resource-local or JTA environments, see <xref linkend=\"architecture-current-session\" />."
+msgstr "在任何时间，任何地方，你的应用代码可以通过简单的调用<literal>sessionFactory.getCurrentSession()</literal> 来访问\"当前 session\"，用于处理请求。你总是会得到当前数据库事务范围内的 <literal>Session</literal>。在使用本地资源或 JTA 环境时，必须配置它，请参见 <xref linkend=\"architecture-current-session\"/>。"
+
+#. Tag: para
+#, no-c-format
+msgid "You can extend the scope of a <literal>Session</literal> and database transaction until the \"view has been rendered\". This is especially useful in servlet applications that utilize a separate rendering phase after the request has been processed. Extending the database transaction until view rendering, is achieved by implementing your own interceptor. However, this will be difficult if you rely on EJBs with container-managed transactions. A transaction will be completed when an EJB method returns, before rendering of any view can start. See the Hibernate website and forum for tips and examples relating to this <emphasis>Open Session in View</emphasis> pattern."
+msgstr "有时，将 <literal>Session</literal> 和数据库事务的边界延伸到\"展示层被渲染后\"会带来便利。有些 serlvet 应用程序在对请求进行处理后，有个单独的渲染期，这种延伸对这种程序特别有用。假若你实现你自己的拦截器，把事务边界延伸到展示层渲染结束后非常容易。然而，假若你依赖有容器管理事务的 EJB，这就不太容易了，因为事务会在 EJB 方法返回后结束，而那是在任何展示层渲染开始之前。请访问  Hibernate 网站和论坛，你可以找到 <emphasis>Open Session in View</emphasis> 这一模式的提示和示例。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Long conversations"
+msgstr "长对话"
+
+#. Tag: para
+#, no-c-format
+msgid "The session-per-request pattern is not the only way of designing units of work. Many business processes require a whole series of interactions with the user that are interleaved with database accesses. In web and enterprise applications, it is not acceptable for a database transaction to span a user interaction. Consider the following example:"
+msgstr "session-per-request 模式不仅仅是一个可以用来设计操作单元的有用概念。很多业务处理都需 要一系列完整的与用户之间的交互，而这些用户是指对数据库有交叉访问的用户。在基于 web 的应用和企业应用中，跨用户交互的数据库事务是无法接受的。考虑下面的例子： "
+
+#. Tag: para
+#, no-c-format
+msgid "The first screen of a dialog opens. The data seen by the user has been loaded in a particular <literal>Session</literal> and database transaction. The user is free to modify the objects."
+msgstr "在界面的第一屏，打开对话框，用户所看到的数据是被一个特定的 <literal>Session</literal> 和数据 库事务载入（load）的。用户可以随意修改对话框中的数据对象。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The user clicks \"Save\" after 5 minutes and expects their modifications to be made persistent. The user also expects that they were the only person editing this information and that no conflicting modification has occurred."
+msgstr "5 分钟后，用户点击“保存”，期望所做出的修改被持久化；同时他也期望自己是唯一修改这个信息的人，不会出现修改冲突。 "
+
+#. Tag: para
+#, no-c-format
+msgid "From the point of view of the user, we call this unit of work a long-running <emphasis>conversation</emphasis> or <emphasis>application transaction</emphasis>. There are many ways to implement this in your application."
+msgstr "从用户的角度来看，我们把这个操作单元称为长时间运行的<emphasis>对话</emphasis>（conversation），或者<emphasis>应用事务</emphasis>（application transaction）。在你的应用程序中，可以有很多种方法来实现它。"
+
+#. Tag: para
+#, no-c-format
+msgid "A first naive implementation might keep the <literal>Session</literal> and database transaction open during user think time, with locks held in the database to prevent concurrent modification and to guarantee isolation and atomicity. This is an anti-pattern, since lock contention would not allow the application to scale with the number of concurrent users."
+msgstr "头一个幼稚的做法是，在用户思考的过程中，保持 <literal>Session</literal> 和数据库事务是打开的，保持数据库锁定，以阻止并发修改，从而保证数据库事务隔离级别和原子操作。这种方式当然是一个反模式，因为锁争用会导致应用程序无法扩展并发用户的数目。 "
+
+#. Tag: para
+#, no-c-format
+msgid "You have to use several database transactions to implement the conversation. In this case, maintaining isolation of business processes becomes the partial responsibility of the application tier. A single conversation usually spans several database transactions. It will be atomic if only one of these database transactions (the last one) stores the updated data. All others simply read data (for example, in a wizard-style dialog spanning several request/response cycles). This is easier to implement than it might sound, especially if you utilize some of Hibernate's features:"
+msgstr "很明显，我们必须使用多个数据库事务来实现这个对话。在这个例子中，维护业务处理的 事务隔离变成了应用程序层的部分责任。一个对话通常跨越多个数据库事务。如果仅仅只有一个数据库事务（最后的那个事务）保存更新过的数据，而所有其他事务只是单纯的读取数据（例如在一个跨越多个请求/响应周期的向导风格的对话框中），那么应用程序事务将保证其原子性。这种方式比听起来还要容易实现，特别是当你使用了 Hibernate 的下述特性的时候： "
+
+#. Tag: para
+#, no-c-format
+msgid "<emphasis>Automatic Versioning</emphasis>: Hibernate can perform automatic optimistic concurrency control for you. It can automatically detect if a concurrent modification occurred during user think time. Check for this at the end of the conversation."
+msgstr "<emphasis>自动版本化</emphasis>：Hibernate 能够自动进行乐观并发控制，如果在用户思考的过程中发生并发修改，Hibernate 能够自动检测到。一般我们只在对话结束时才检查。"
+
+#. Tag: para
+#, no-c-format
+msgid "<emphasis>Detached Objects</emphasis>: if you decide to use the <emphasis>session-per-request</emphasis> pattern, all loaded instances will be in the detached state during user think time. Hibernate allows you to reattach the objects and persist the modifications. The pattern is called <emphasis>session-per-request-with-detached-objects</emphasis>. Automatic versioning is used to isolate concurrent modifications."
+msgstr "<emphasis>脱管对象</emphasis>（Detached Objects）：如果你决定采用前面已经讨论过的  <emphasis>session-per-request</emphasis> 模式，所有载入的实例在用户思考的过程中都处于与 Session 脱离的状态。Hibernate 允许你把与 Session 脱离的对象重新关联到 Session 上，并且对修改进行持久化，这种模式被称为 <emphasis>session-per-request-with-detached-objects</emphasis>。自动版本化被用来隔离并发修改。"
+
+#. Tag: para
+#, no-c-format
+msgid "<emphasis>Extended (or Long) Session</emphasis>: the Hibernate <literal>Session</literal> can be disconnected from the underlying JDBC connection after the database transaction has been committed and reconnected when a new client request occurs. This pattern is known as <emphasis>session-per-conversation</emphasis> and makes even reattachment unnecessary. Automatic versioning is used to isolate concurrent modifications and the <literal>Session</literal> will not be allowed to be flushed automatically, but explicitly."
+msgstr "<emphasis>Extended (or Long) Session</emphasis>：Hibernate 的 <literal>Session</literal> 可以在数据库事务提交之后和底层的 JDBC 连接断开，当一个新的客户端请求到来的时候，它又重新连接上底层的 JDBC 连接。这种模式被称之为<emphasis>session-per-conversation</emphasis>，这种情况可 能会造成不必要的 Session 和 JDBC 连接的重新关联。自动版本化被用来隔离并发修改，<literal>Session</literal> 通常不允许自动 flush，而是显性地 flush。 "
+
+#. Tag: para
+#, no-c-format
+msgid "Both <emphasis>session-per-request-with-detached-objects</emphasis> and <emphasis>session-per-conversation</emphasis> have advantages and disadvantages. These disadvantages are discussed later in this chapter in the context of optimistic concurrency control."
+msgstr "<emphasis>session-per-request-with-detached-objects</emphasis> 和  <emphasis>session-per-conversation</emphasis> 各有优缺点，我们在本章后面乐观并发控制那部分再进行讨论。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Considering object identity"
+msgstr "关注对象标识（Considering object identity）"
+
+#. Tag: para
+#, no-c-format
+msgid "An application can concurrently access the same persistent state in two different <literal>Session</literal>s. However, an instance of a persistent class is never shared between two <literal>Session</literal> instances. It is for this reason that there are two different notions of identity:"
+msgstr "应用程序可能在两个不同的 <literal>Session</literal> 中并发访问同一持久化状态，但是，一个持久化类的实例无法在两个 <literal>Session</literal> 中共享。因此有两种不同的标识语义： "
+
+#. Tag: term
+#, no-c-format
+msgid "Database Identity"
+msgstr "数据库标识"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>foo.getId().equals( bar.getId() )</literal>"
+msgstr "<literal>foo.getId().equals( bar.getId() )</literal> "
+
+#. Tag: term
+#, no-c-format
+msgid "JVM Identity"
+msgstr "JVM 标识"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>foo==bar</literal>"
+msgstr "<literal>foo==bar</literal>"
+
+#. Tag: para
+#, no-c-format
+msgid "For objects attached to a <emphasis>particular</emphasis> <literal>Session</literal> (i.e., in the scope of a <literal>Session</literal>), the two notions are equivalent and JVM identity for database identity is guaranteed by Hibernate. While the application might concurrently access the \"same\" (persistent identity) business object in two different sessions, the two instances will actually be \"different\" (JVM identity). Conflicts are resolved using an optimistic approach and automatic versioning at flush/commit time."
+msgstr "对于那些关联到 <emphasis>特定</emphasis> <literal>Session</literal>（也就是在单个 <literal>Session</literal> 的范围内）上的对象来说，这两种标识的语义是等价的，与数据库标识对应的 JVM 标识是由 Hibernate 来保证的。不过，当应用程序在两个不同的 session 中并发访问具有同一持久化标识的业务对象实例的时候，这个业务对象的两个实例事实上是不相同的（从 JVM 识别来看）。这种冲突可以通过在同步和提交的时候使用自动版本化和乐观锁定方法来解决。 "
+
+#. Tag: para
+#, no-c-format
+msgid "This approach leaves Hibernate and the database to worry about concurrency. It also provides the best scalability, since guaranteeing identity in single-threaded units of work means that it does not need expensive locking or other means of synchronization. The application does not need to synchronize on any business object, as long as it maintains a single thread per <literal>Session</literal>. Within a <literal>Session</literal> the application can safely use <literal>==</literal> to compare objects."
+msgstr "这种方式把关于并发的头疼问题留给了 Hibernate 和数据库；由于在单个线程内，操作单元中的对象识别不 需要代价昂贵的锁定或其他意义上的同步，因此它同时可以提供最好的可伸缩性。只要在单个线程只持有一个 <literal>Session</literal>，应用程序就不需要同步任何业务对象。在 <literal>Session</literal> 的范围内，应用程序可以放心的使用 <literal>==</literal> 进行对象比较。 "
+
+#. Tag: para
+#, no-c-format
+msgid "However, an application that uses <literal>==</literal> outside of a <literal>Session</literal> might produce unexpected results. This might occur even in some unexpected places. For example, if you put two detached instances into the same <literal>Set</literal>, both might have the same database identity (i.e., they represent the same row). JVM identity, however, is by definition not guaranteed for instances in a detached state. The developer has to override the <literal>equals()</literal> and <literal>hashCode()</literal> methods in persistent classes and implement their own notion of object equality. There is one caveat: never use the database identifier to implement equality. Use a business key that is a combination of unique, usually immutable, attributes. The database identifier will change if a transient object is made persistent. If the transient instance (usually together with detached instances) is held in a <literal>Set</literal>, changing the hashcode breaks the contract of the <literal>Set</literal>. Attributes for business keys do not have to be as stable as database primary keys; you only have to guarantee stability as long as the objects are in the same <literal>Set</literal>. See the Hibernate website for a more thorough discussion of this issue. Please note that this is not a Hibernate issue, but simply how Java object identity and equality has to be implemented."
+msgstr "不过，应用程序在 <literal>Session</literal> 的外面使用 <literal>==</literal> 进行对象比较可能会 导致无法预期的结果。在一些无法预料的场合，例如，如果你把两个脱管对象实例放进同一个  <literal>Set</literal> 的时候，就可能发生。这两个对象实例可能有同一个数据库标识（也就是说， 他们代表了表的同一行数据），从 JVM 标识的定义上来说，对脱管的对象而言，Hibernate 无法保证他们 的的 JVM 标识一致。开发人员必须覆盖持久化类的 <literal>equals()</literal> 方法和  <literal>hashCode()</literal> 方法，从而实现自定义的对象相等语义。警告：不要使用数据库标识来实现对象相等，应该使用业务键值，由唯一的，通常不变的属性组成。当一个瞬时对象被持久化的时候，它的数据库标识会发生改变。如果一个瞬时对象（通常也包括脱管对象实例）被放入一个 <literal>Set</literal>，改变它的 hashcode 会导致与这个 <literal>Set</literal> 的关系中断。虽 然业务键值的属性不象数据库主键那样稳定不变，但是你只需要保证在同一个 <literal>Set</literal> 中的对象属性的稳定性就足够了。请到 Hibernate 网站去寻求这个问题更多的详细的讨论。请注意，这不是一个有关 Hibernate 的问题，而仅仅是一个关于 Java 对象标识和判等行为如何实现的问题。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Common issues"
+msgstr "常见问题"
+
+#. Tag: para
+#, no-c-format
+msgid "Do not use the anti-patterns <emphasis>session-per-user-session</emphasis> or <emphasis>session-per-application</emphasis> (there are, however, rare exceptions to this rule). Some of the following issues might also arise within the recommended patterns, so ensure that you understand the implications before making a design decision:"
+msgstr "决不要使用反模式 <emphasis>session-per-user-session</emphasis> 或者 <emphasis> session-per-application</emphasis>（当然，这个规定几乎没有例外）。请注意，下述一些问题可能也会出现在我们推荐的模式中，在你作出某个设计决定之前，请务必理解该模式的应用前提。 "
+
+#. Tag: para
+#, no-c-format
+msgid "A <literal>Session</literal> is not thread-safe. Things that work concurrently, like HTTP requests, session beans, or Swing workers, will cause race conditions if a <literal>Session</literal> instance is shared. If you keep your Hibernate <literal>Session</literal> in your <literal>HttpSession</literal> (this is discussed later in the chapter), you should consider synchronizing access to your Http session. Otherwise, a user that clicks reload fast enough can use the same <literal>Session</literal> in two concurrently running threads."
+msgstr "<literal>Session</literal> 对象是非线程安全的。如果一个 <literal>Session</literal> 实例允许共享的话，那些支持并发运行的东东，例如 HTTP request，session beans 或者是 Swing workers，将会导致出现资源争用（race condition）。如果在 <literal>HttpSession</literal> 中有 Hibernate 的 <literal>Session</literal> 的话（稍后讨论），你应该考虑同步访问你的 Http session。 否则，只要用户足够快的点击浏览器的“刷新”，就会导致两个并发运行线程使用同一个  <literal>Session</literal>。 "
+
+#. Tag: para
+#, no-c-format
+msgid "An exception thrown by Hibernate means you have to rollback your database transaction and close the <literal>Session</literal> immediately (this is discussed in more detail later in the chapter). If your <literal>Session</literal> is bound to the application, you have to stop the application. Rolling back the database transaction does not put your business objects back into the state they were at the start of the transaction. This means that the database state and the business objects will be out of sync. Usually this is not a problem, because exceptions are not recoverable and you will have to start over after rollback anyway."
+msgstr "一个由 Hibernate 抛出的异常意味着你必须立即回滚数据库事务，并立即关闭 <literal>Session</literal>（稍后会展开讨论）。如果你的 <literal>Session</literal> 绑定到一个应用程序上，你必须停止该应用程序。回滚数据库事务并不会把你的业务对象退回到事务启动时候的状态。这意味着数据库状态和业务对象状态不同步。通常情况下，这不是什么问题，因为异常是不可恢复的，你必须在回滚之后重新开始执行。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>Session</literal> caches every object that is in a persistent state (watched and checked for dirty state by Hibernate). If you keep it open for a long time or simply load too much data, it will grow endlessly until you get an OutOfMemoryException. One solution is to call <literal>clear()</literal> and <literal>evict()</literal> to manage the <literal>Session</literal> cache, but you should consider a Stored Procedure if you need mass data operations. Some solutions are shown in <xref linkend=\"batch\" />. Keeping a <literal>Session</literal> open for the duration of a user session also means a higher probability of stale data."
+msgstr "<literal>Session</literal> 缓存了处于持久化状态的每个对象（Hibernate 会监视和检查脏数据）。 这意味着，如果你让 <literal>Session</literal> 打开很长一段时间，或是仅仅载入了过多的数据， <literal>Session</literal> 占用的内存会一直增长，直到抛出 OutOfMemoryException 异常。这个 问题的一个解决方法是调用 <literal>clear()</literal> 和 <literal>evict()</literal> 来管理 <literal>Session</literal> 的缓存，但是如果你需要大批量数据操作的话，最好考虑使用存储过程。在<xref linkend=\"batch\"/>中有一些解决方案。在用户会话期间一直保持 <literal>Session</literal> 打开也意味着出现脏数据的可能性很高。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Database transaction demarcation"
+msgstr "数据库事务声明"
+
+#. Tag: para
+#, no-c-format
+msgid "Database, or system, transaction boundaries are always necessary. No communication with the database can occur outside of a database transaction (this seems to confuse many developers who are used to the auto-commit mode). Always use clear transaction boundaries, even for read-only operations. Depending on your isolation level and database capabilities this might not be required, but there is no downside if you always demarcate transactions explicitly. Certainly, a single database transaction 

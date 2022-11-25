@@ -1,0 +1,387 @@
+ode.firstChild);
+}
+node.innerHTML=d;
+};
+dojo.io.bind(args);
+};
+dojo.io.formFilter=function(node){
+var type=(node.type||"").toLowerCase();
+return !node.disabled&&node.name&&!dojo.lang.inArray(["file","submit","image","reset","button"],type);
+};
+dojo.io.encodeForm=function(_27f,_280,_281){
+if((!_27f)||(!_27f.tagName)||(!_27f.tagName.toLowerCase()=="form")){
+dojo.raise("Attempted to encode a non-form element.");
+}
+if(!_281){
+_281=dojo.io.formFilter;
+}
+var enc=/utf/i.test(_280||"")?encodeURIComponent:dojo.string.encodeAscii;
+var _283=[];
+for(var i=0;i<_27f.elements.length;i++){
+var elm=_27f.elements[i];
+if(!elm||elm.tagName.toLowerCase()=="fieldset"||!_281(elm)){
+continue;
+}
+var name=enc(elm.name);
+var type=elm.type.toLowerCase();
+if(type=="select-multiple"){
+for(var j=0;j<elm.options.length;j++){
+if(elm.options[j].selected){
+_283.push(name+"="+enc(elm.options[j].value));
+}
+}
+}else{
+if(dojo.lang.inArray(["radio","checkbox"],type)){
+if(elm.checked){
+_283.push(name+"="+enc(elm.value));
+}
+}else{
+_283.push(name+"="+enc(elm.value));
+}
+}
+}
+var _289=_27f.getElementsByTagName("input");
+for(var i=0;i<_289.length;i++){
+var _28a=_289[i];
+if(_28a.type.toLowerCase()=="image"&&_28a.form==_27f&&_281(_28a)){
+var name=enc(_28a.name);
+_283.push(name+"="+enc(_28a.value));
+_283.push(name+".x=0");
+_283.push(name+".y=0");
+}
+}
+return _283.join("&")+"&";
+};
+dojo.io.FormBind=function(args){
+this.bindArgs={};
+if(args&&args.formNode){
+this.init(args);
+}else{
+if(args){
+this.init({formNode:args});
+}
+}
+};
+dojo.lang.extend(dojo.io.FormBind,{form:null,bindArgs:null,clickedButton:null,init:function(args){
+var form=dojo.byId(args.formNode);
+if(!form||!form.tagName||form.tagName.toLowerCase()!="form"){
+throw new Error("FormBind: Couldn't apply, invalid form");
+}else{
+if(this.form==form){
+return;
+}else{
+if(this.form){
+throw new Error("FormBind: Already applied to a form");
+}
+}
+}
+dojo.lang.mixin(this.bindArgs,args);
+this.form=form;
+this.connect(form,"onsubmit","submit");
+for(var i=0;i<form.elements.length;i++){
+var node=form.elements[i];
+if(node&&node.type&&dojo.lang.inArray(["submit","button"],node.type.toLowerCase())){
+this.connect(node,"onclick","click");
+}
+}
+var _290=form.getElementsByTagName("input");
+for(var i=0;i<_290.length;i++){
+var _291=_290[i];
+if(_291.type.toLowerCase()=="image"&&_291.form==form){
+this.connect(_291,"onclick","click");
+}
+}
+},onSubmit:function(form){
+return true;
+},submit:function(e){
+e.preventDefault();
+if(this.onSubmit(this.form)){
+dojo.io.bind(dojo.lang.mixin(this.bindArgs,{formFilter:dojo.lang.hitch(this,"formFilter")}));
+}
+},click:function(e){
+var node=e.currentTarget;
+if(node.disabled){
+return;
+}
+this.clickedButton=node;
+},formFilter:function(node){
+var type=(node.type||"").toLowerCase();
+var _298=false;
+if(node.disabled||!node.name){
+_298=false;
+}else{
+if(dojo.lang.inArray(["submit","button","image"],type)){
+if(!this.clickedButton){
+this.clickedButton=node;
+}
+_298=node==this.clickedButton;
+}else{
+_298=!dojo.lang.inArray(["file","submit","reset","button"],type);
+}
+}
+return _298;
+},connect:function(_299,_29a,_29b){
+if(dojo.evalObjPath("dojo.event.connect")){
+dojo.event.connect(_299,_29a,this,_29b);
+}else{
+var fcn=dojo.lang.hitch(this,_29b);
+_299[_29a]=function(e){
+if(!e){
+e=window.event;
+}
+if(!e.currentTarget){
+e.currentTarget=e.srcElement;
+}
+if(!e.preventDefault){
+e.preventDefault=function(){
+window.event.returnValue=false;
+};
+}
+fcn(e);
+};
+}
+}});
+dojo.io.XMLHTTPTransport=new function(){
+var _29e=this;
+var _29f={};
+this.useCache=false;
+this.preventCache=false;
+function getCacheKey(url,_2a1,_2a2){
+return url+"|"+_2a1+"|"+_2a2.toLowerCase();
+}
+function addToCache(url,_2a4,_2a5,http){
+_29f[getCacheKey(url,_2a4,_2a5)]=http;
+}
+function getFromCache(url,_2a8,_2a9){
+return _29f[getCacheKey(url,_2a8,_2a9)];
+}
+this.clearCache=function(){
+_29f={};
+};
+function doLoad(_2aa,http,url,_2ad,_2ae){
+if(((http.status>=200)&&(http.status<300))||(http.status==304)||(http.status==1223)||(location.protocol=="file:"&&(http.status==0||http.status==undefined))||(location.protocol=="chrome:"&&(http.status==0||http.status==undefined))){
+var ret;
+if(_2aa.method.toLowerCase()=="head"){
+var _2b0=http.getAllResponseHeaders();
+ret={};
+ret.toString=function(){
+return _2b0;
+};
+var _2b1=_2b0.split(/[\r\n]+/g);
+for(var i=0;i<_2b1.length;i++){
+var pair=_2b1[i].match(/^([^:]+)\s*:\s*(.+)$/i);
+if(pair){
+ret[pair[1]]=pair[2];
+}
+}
+}else{
+if(_2aa.mimetype=="text/javascript"){
+try{
+ret=dj_eval(http.responseText);
+}
+catch(e){
+dojo.debug(e);
+dojo.debug(http.responseText);
+ret=null;
+}
+}else{
+if(_2aa.mimetype.substr(0,9)=="text/json"||_2aa.mimetype.substr(0,16)=="application/json"){
+try{
+ret=dj_eval("("+_2aa.jsonFilter(http.responseText)+")");
+}
+catch(e){
+dojo.debug(e);
+dojo.debug(http.responseText);
+ret=false;
+}
+}else{
+if((_2aa.mimetype=="application/xml")||(_2aa.mimetype=="text/xml")){
+ret=http.responseXML;
+if(!ret||typeof ret=="string"||!http.getResponseHeader("Content-Type")){
+ret=dojo.dom.createDocumentFromText(http.responseText);
+}
+}else{
+ret=http.responseText;
+}
+}
+}
+}
+if(_2ae){
+addToCache(url,_2ad,_2aa.method,http);
+}
+_2aa[(typeof _2aa.load=="function")?"load":"handle"]("load",ret,http,_2aa);
+}else{
+var _2b4=new dojo.io.Error("XMLHttpTransport Error: "+http.status+" "+http.statusText);
+_2aa[(typeof _2aa.error=="function")?"error":"handle"]("error",_2b4,http,_2aa);
+}
+}
+function setHeaders(http,_2b6){
+if(_2b6["headers"]){
+for(var _2b7 in _2b6["headers"]){
+if(_2b7.toLowerCase()=="content-type"&&!_2b6["contentType"]){
+_2b6["contentType"]=_2b6["headers"][_2b7];
+}else{
+http.setRequestHeader(_2b7,_2b6["headers"][_2b7]);
+}
+}
+}
+}
+this.inFlight=[];
+this.inFlightTimer=null;
+this.startWatchingInFlight=function(){
+if(!this.inFlightTimer){
+this.inFlightTimer=setTimeout("dojo.io.XMLHTTPTransport.watchInFlight();",10);
+}
+};
+this.watchInFlight=function(){
+var now=null;
+if(!dojo.hostenv._blockAsync&&!_29e._blockAsync){
+for(var x=this.inFlight.length-1;x>=0;x--){
+try{
+var tif=this.inFlight[x];
+if(!tif||tif.http._aborted||!tif.http.readyState){
+this.inFlight.splice(x,1);
+continue;
+}
+if(4==tif.http.readyState){
+this.inFlight.splice(x,1);
+doLoad(tif.req,tif.http,tif.url,tif.query,tif.useCache);
+}else{
+if(tif.startTime){
+if(!now){
+now=(new Date()).getTime();
+}
+if(tif.startTime+(tif.req.timeoutSeconds*1000)<now){
+if(typeof tif.http.abort=="function"){
+tif.http.abort();
+}
+this.inFlight.splice(x,1);
+tif.req[(typeof tif.req.timeout=="function")?"timeout":"handle"]("timeout",null,tif.http,tif.req);
+}
+}
+}
+}
+catch(e){
+try{
+var _2bb=new dojo.io.Error("XMLHttpTransport.watchInFlight Error: "+e);
+tif.req[(typeof tif.req.error=="function")?"error":"handle"]("error",_2bb,tif.http,tif.req);
+}
+catch(e2){
+dojo.debug("XMLHttpTransport error callback failed: "+e2);
+}
+}
+}
+}
+clearTimeout(this.inFlightTimer);
+if(this.inFlight.length==0){
+this.inFlightTimer=null;
+return;
+}
+this.inFlightTimer=setTimeout("dojo.io.XMLHTTPTransport.watchInFlight();",10);
+};
+var _2bc=dojo.hostenv.getXmlhttpObject()?true:false;
+this.canHandle=function(_2bd){
+var mlc=_2bd["mimetype"].toLowerCase()||"";
+return _2bc&&((dojo.lang.inArray(["text/plain","text/html","application/xml","text/xml","text/javascript"],mlc))||(mlc.substr(0,9)=="text/json"||mlc.substr(0,16)=="application/json"))&&!(_2bd["formNode"]&&dojo.io.formHasFile(_2bd["formNode"]));
+};
+this.multipartBoundary="45309FFF-BD65-4d50-99C9-36986896A96F";
+this.bind=function(_2bf){
+if(!_2bf["url"]){
+if(!_2bf["formNode"]&&(_2bf["backButton"]||_2bf["back"]||_2bf["changeUrl"]||_2bf["watchForURL"])&&(!djConfig.preventBackButtonFix)){
+dojo.deprecated("Using dojo.io.XMLHTTPTransport.bind() to add to browser history without doing an IO request","Use dojo.undo.browser.addToHistory() instead.","0.4");
+dojo.undo.browser.addToHistory(_2bf);
+return true;
+}
+}
+var url=_2bf.url;
+var _2c1="";
+if(_2bf["formNode"]){
+var ta=_2bf.formNode.getAttribute("action");
+if((ta)&&(!_2bf["url"])){
+url=ta;
+}
+var tp=_2bf.formNode.getAttribute("method");
+if((tp)&&(!_2bf["method"])){
+_2bf.method=tp;
+}
+_2c1+=dojo.io.encodeForm(_2bf.formNode,_2bf.encoding,_2bf["formFilter"]);
+}
+if(url.indexOf("#")>-1){
+dojo.debug("Warning: dojo.io.bind: stripping hash values from url:",url);
+url=url.split("#")[0];
+}
+if(_2bf["file"]){
+_2bf.method="post";
+}
+if(!_2bf["method"]){
+_2bf.method="get";
+}
+if(_2bf.method.toLowerCase()=="get"){
+_2bf.multipart=false;
+}else{
+if(_2bf["file"]){
+_2bf.multipart=true;
+}else{
+if(!_2bf["multipart"]){
+_2bf.multipart=false;
+}
+}
+}
+if(_2bf["backButton"]||_2bf["back"]||_2bf["changeUrl"]){
+dojo.undo.browser.addToHistory(_2bf);
+}
+var _2c4=_2bf["content"]||{};
+if(_2bf.sendTransport){
+_2c4["dojo.transport"]="xmlhttp";
+}
+do{
+if(_2bf.postContent){
+_2c1=_2bf.postContent;
+break;
+}
+if(_2c4){
+_2c1+=dojo.io.argsFromMap(_2c4,_2bf.encoding);
+}
+if(_2bf.method.toLowerCase()=="get"||!_2bf.multipart){
+break;
+}
+var t=[];
+if(_2c1.length){
+var q=_2c1.split("&");
+for(var i=0;i<q.length;++i){
+if(q[i].length){
+var p=q[i].split("=");
+t.push("--"+this.multipartBoundary,"Content-Disposition: form-data; name=\""+p[0]+"\"","",p[1]);
+}
+}
+}
+if(_2bf.file){
+if(dojo.lang.isArray(_2bf.file)){
+for(var i=0;i<_2bf.file.length;++i){
+var o=_2bf.file[i];
+t.push("--"+this.multipartBoundary,"Content-Disposition: form-data; name=\""+o.name+"\"; filename=\""+("fileName" in o?o.fileName:o.name)+"\"","Content-Type: "+("contentType" in o?o.contentType:"application/octet-stream"),"",o.content);
+}
+}else{
+var o=_2bf.file;
+t.push("--"+this.multipartBoundary,"Content-Disposition: form-data; name=\""+o.name+"\"; filename=\""+("fileName" in o?o.fileName:o.name)+"\"","Content-Type: "+("contentType" in o?o.contentType:"application/octet-stream"),"",o.content);
+}
+}
+if(t.length){
+t.push("--"+this.multipartBoundary+"--","");
+_2c1=t.join("\r\n");
+}
+}while(false);
+var _2ca=_2bf["sync"]?false:true;
+var _2cb=_2bf["preventCache"]||(this.preventCache==true&&_2bf["preventCache"]!=false);
+var _2cc=_2bf["useCache"]==true||(this.useCache==true&&_2bf["useCache"]!=false);
+if(!_2cb&&_2cc){
+var _2cd=getFromCache(url,_2c1,_2bf.method);
+if(_2cd){
+doLoad(_2bf,_2cd,url,_2c1,false);
+return;
+}
+}
+var http=dojo.hostenv.getXmlhttpObject(_2bf);
+var _2cf=false;
+if(_2ca){
+var _2d0=this.inFlight.push({"req":_2bf,"http":http,"url":url,"query":_2c1,"useCache":_2cc,"st

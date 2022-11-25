@@ -1,0 +1,840 @@
+= q.scroll();\n"
+"if ( cats.first() ) {\n"
+"\n"
+"    // find the first name on each page of an alphabetical list of cats by "
+"name\n"
+"    firstNamesOfPages = new ArrayList();\n"
+"    do {\n"
+"        String name = cats.getString(0);\n"
+"        firstNamesOfPages.add(name);\n"
+"    }\n"
+"    while ( cats.scroll(PAGE_SIZE) );\n"
+"\n"
+"    // Now get the first page of cats\n"
+"    pageOfCats = new ArrayList();\n"
+"    cats.beforeFirst();\n"
+"    int i=0;\n"
+"    while( ( PAGE_SIZE &gt; i++ ) &amp;&amp; cats.next() ) pageOfCats.add"
+"( cats.get(1) );\n"
+"\n"
+"}\n"
+"cats.close()"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:336
+#, no-c-format
+msgid ""
+"Note that an open database connection and cursor is required for this "
+"functionality. Use <literal>setMaxResult()</literal>/<literal>setFirstResult"
+"()</literal> if you need offline pagination functionality."
+msgstr ""
+"Note que se requiere una conexión de base de datos abierta y un cursor para "
+"esta funcionalidad. Utilice <literal>setMaxResult()</literal>/"
+"<literal>setFirstResult()</literal> si necesita la funcionalidad de "
+"paginación fuera de línea."
+
+#. Tag: title
+#: session_api.xml:343
+#, no-c-format
+msgid "Externalizing named queries"
+msgstr "Externalización de consultas con nombre"
+
+#. Tag: para
+#: session_api.xml:345
+#, no-c-format
+msgid ""
+"Queries can also be configured as so called named queries using annotations "
+"or Hibernate mapping documents. <literal>@NamedQuery</literal> and "
+"<literal>@NamedQueries</literal> can be defined at the class level as seen "
+"in <xref linkend=\"example-named-query-annotation\"/> . However their "
+"definitions are global to the session factory/entity manager factory scope. "
+"A named query is defined by its name and the actual query string."
+msgstr ""
+
+#. Tag: title
+#: session_api.xml:355
+#, no-c-format
+msgid "Defining a named query using <classname>@NamedQuery</classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: session_api.xml:358
+#, no-c-format
+msgid ""
+"@Entity\n"
+"@NamedQuery(name=\"night.moreRecentThan\", query=\"select n from Night n "
+"where n.date &gt;= :date\")\n"
+"public class Night {\n"
+"    ...\n"
+"}\n"
+"\n"
+"public class MyDao {\n"
+"    doStuff() {\n"
+"        Query q = s.getNamedQuery(\"night.moreRecentThan\");\n"
+"        q.setDate( \"date\", aMonthAgo );\n"
+"        List results = q.list();\n"
+"        ...\n"
+"    }\n"
+"    ...\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:361
+#, fuzzy, no-c-format
+msgid ""
+"Using a mapping document can be configured using the <literal>&lt;query&gt;</"
+"literal> node. Remember to use a <literal>CDATA</literal> section if your "
+"query contains characters that could be interpreted as markup."
+msgstr ""
+"También puede definir consultas con nombre en el documento de mapeo. "
+"Recuerde utilizar una sección <literal>CDATA</literal> si su consulta "
+"contiene caracteres que puedan ser interpretados como etiquetado."
+
+#. Tag: title
+#: session_api.xml:367
+#, no-c-format
+msgid "Defining a named query using <literal>&lt;query&gt;</literal>"
+msgstr ""
+
+#. Tag: programlisting
+#: session_api.xml:370
+#, no-c-format
+msgid ""
+"&lt;query name=\"ByNameAndMaximumWeight\"&gt;&lt;![CDATA[\n"
+"    from eg.DomesticCat as cat\n"
+"        where cat.name = ?\n"
+"        and cat.weight &gt; ?\n"
+"] ]&gt;&lt;/query&gt;"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:373
+#, fuzzy, no-c-format
+msgid ""
+"Parameter binding and executing is done programatically as seen in <xref "
+"linkend=\"example-parameter-binding-named-query\"/>."
+msgstr "El ligado de parámetros y de ejecución se realiza programáticamente:"
+
+#. Tag: title
+#: session_api.xml:377
+#, no-c-format
+msgid "Parameter binding of a named query"
+msgstr ""
+
+#. Tag: programlisting
+#: session_api.xml:379
+#, no-c-format
+msgid ""
+"Query q = sess.getNamedQuery(\"ByNameAndMaximumWeight\");\n"
+"q.setString(0, name);\n"
+"q.setInt(1, minWeight);\n"
+"List cats = q.list();"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:382
+#, no-c-format
+msgid ""
+"The actual program code is independent of the query language that is used. "
+"You can also define native SQL queries in metadata, or migrate existing "
+"queries to Hibernate by placing them in mapping files."
+msgstr ""
+"El código real del programa es independiente del lenguaje de consulta "
+"utilizado. También puede definir consultas SQL nativas en metadatos, o "
+"migrar consultas existentes a Hibernate colocándolas en archivos de mapeo."
+
+#. Tag: para
+#: session_api.xml:387
+#, no-c-format
+msgid ""
+"Also note that a query declaration inside a <literal>&lt;hibernate-"
+"mapping&gt;</literal> element requires a global unique name for the query, "
+"while a query declaration inside a <literal>&lt;class&gt;</literal> element "
+"is made unique automatically by prepending the fully qualified name of the "
+"class. For example <literal>eg.Cat.ByNameAndMaximumWeight</literal>."
+msgstr ""
+"Observe además que una declaración de consulta dentro de un elemento "
+"<literal>&lt;hibernate-mapping&gt;</literal> necesita de un nombre único "
+"global para la consulta, mientras que una declaración de consulta dentro de "
+"un elemento <literal>&lt;class&gt;</literal> se hace única automáticamente "
+"al agregar el nombre completamente calificado de la clase. Por ejemplo, "
+"<literal>eg.Cat.ByNameAndMaximumWeight</literal>."
+
+#. Tag: title
+#: session_api.xml:397
+#, no-c-format
+msgid "Filtering collections"
+msgstr "Filtración de colecciones"
+
+#. Tag: para
+#: session_api.xml:399
+#, no-c-format
+msgid ""
+"A collection <emphasis>filter</emphasis> is a special type of query that can "
+"be applied to a persistent collection or array. The query string can refer "
+"to <literal>this</literal>, meaning the current collection element."
+msgstr ""
+"Un <emphasis>filtro</emphasis> de colección es un tipo especial de consulta "
+"que puede ser aplicado a una colección persistente o array. La cadena de "
+"consulta puede referirse a <literal>this</literal>, lo que quiere decir el "
+"elemento de la colección actual."
+
+#. Tag: programlisting
+#: session_api.xml:404
+#, no-c-format
+msgid ""
+"Collection blackKittens = session.createFilter(\n"
+"    pk.getKittens(), \n"
+"    \"where this.color = ?\")\n"
+"    .setParameter( Color.BLACK, Hibernate.custom(ColorUserType.class) )\n"
+"    .list()\n"
+");"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:406
+#, no-c-format
+msgid ""
+"The returned collection is considered a bag that is a copy of the given "
+"collection. The original collection is not modified. This is contrary to the "
+"implication of the name \"filter\", but consistent with expected behavior."
+msgstr ""
+"La colección devuelta es considerada un bag, y es una copia de la colección "
+"dada. La colección original no es modificada. Esto es lo opuesto a lo que "
+"implica el nombre \"filtro\", pero es consistente con el comportamiento "
+"esperado."
+
+#. Tag: para
+#: session_api.xml:411
+#, no-c-format
+msgid ""
+"Observe that filters do not require a <literal>from</literal> clause, "
+"although they can have one if required. Filters are not limited to returning "
+"the collection elements themselves."
+msgstr ""
+"Observe que los filtros no requieren una cláusula <literal>from</literal> "
+"aunque pueden tener una si se necesita. Los filtros no están limitados a "
+"devolver los elementos de colección por sí mismos."
+
+#. Tag: programlisting
+#: session_api.xml:415
+#, no-c-format
+msgid ""
+"Collection blackKittenMates = session.createFilter(\n"
+"    pk.getKittens(), \n"
+"    \"select this.mate where this.color = eg.Color.BLACK.intValue\")\n"
+"    .list();"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:417
+#, no-c-format
+msgid ""
+"Even an empty filter query is useful, e.g. to load a subset of elements in a "
+"large collection:"
+msgstr ""
+"Incluso una consulta de filtro vacío es útil, por ejemplo, para cargar un "
+"subconjunto de elementos en una colección enorme: "
+
+#. Tag: programlisting
+#: session_api.xml:420
+#, no-c-format
+msgid ""
+"Collection tenKittens = session.createFilter(\n"
+"    mother.getKittens(), \"\")\n"
+"    .setFirstResult(0).setMaxResults(10)\n"
+"    .list();"
+msgstr ""
+
+#. Tag: title
+#: session_api.xml:424
+#, no-c-format
+msgid "Criteria queries"
+msgstr "Consultas de criterios"
+
+#. Tag: para
+#: session_api.xml:426
+#, no-c-format
+msgid ""
+"HQL is extremely powerful, but some developers prefer to build queries "
+"dynamically using an object-oriented API, rather than building query "
+"strings. Hibernate provides an intuitive <literal>Criteria</literal> query "
+"API for these cases:"
+msgstr ""
+"HQL es extremadamente potente pero algunos desarrolladores prefieren "
+"construir consultas dinámicamente utilizando una API orientada a objetos, en "
+"vez de construir cadenas de consulta. Hibernate brinda una API intuitiva de "
+"consulta <literal>Criteria</literal> para estos casos: "
+
+#. Tag: programlisting
+#: session_api.xml:431
+#, no-c-format
+msgid ""
+"Criteria crit = session.createCriteria(Cat.class);\n"
+"crit.add( Restrictions.eq( \"color\", eg.Color.BLACK ) );\n"
+"crit.setMaxResults(10);\n"
+"List cats = crit.list();"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:433
+#, fuzzy, no-c-format
+msgid ""
+"The <literal>Criteria</literal> and the associated <literal>Example</"
+"literal> API are discussed in more detail in <xref linkend=\"querycriteria\"/"
+">."
+msgstr ""
+"Las APIs de <literal>Criteria</literal> y el <literal>Example</literal> "
+"asociado se discuten en más detalle en el <xref linkend=\"querycriteria\" />."
+
+#. Tag: title
+#: session_api.xml:439
+#, no-c-format
+msgid "Queries in native SQL"
+msgstr "Consultas en SQL nativo"
+
+#. Tag: para
+#: session_api.xml:441
+#, no-c-format
+msgid ""
+"You can express a query in SQL, using <literal>createSQLQuery()</literal> "
+"and let Hibernate manage the mapping from result sets to objects. You can at "
+"any time call <literal>session.connection()</literal> and use the JDBC "
+"<literal>Connection</literal> directly. If you choose to use the Hibernate "
+"API, you must enclose SQL aliases in braces:"
+msgstr ""
+"Puede expresar una consulta en SQL, utilizando <literal>createSQLQuery()</"
+"literal> y dejar que Hibernate administre el mapeo de los conjuntos de "
+"resultados a objetos. Puede llamar en cualquier momento a <literal>session."
+"connection()</literal> y utilizar la <literal>Connection</literal> JDBC "
+"directamente. Si elige usar la API de Hibernate, tiene que encerrar los "
+"alias de SQL entre llaves:"
+
+#. Tag: programlisting
+#: session_api.xml:448
+#, no-c-format
+msgid ""
+"List cats = session.createSQLQuery(\"SELECT {cat.*} FROM CAT {cat} WHERE "
+"ROWNUM&lt;10\")\n"
+"    .addEntity(\"cat\", Cat.class)\n"
+".list();"
+msgstr ""
+
+#. Tag: programlisting
+#: session_api.xml:450
+#, no-c-format
+msgid ""
+"List cats = session.createSQLQuery(\n"
+"    \"SELECT {cat}.ID AS {cat.id}, {cat}.SEX AS {cat.sex}, \" +\n"
+"           \"{cat}.MATE AS {cat.mate}, {cat}.SUBCLASS AS {cat.class}, ... \" "
+"+\n"
+"    \"FROM CAT {cat} WHERE ROWNUM&lt;10\")\n"
+"    .addEntity(\"cat\", Cat.class)\n"
+".list()"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:452
+#, fuzzy, no-c-format
+msgid ""
+"SQL queries can contain named and positional parameters, just like Hibernate "
+"queries. More information about native SQL queries in Hibernate can be found "
+"in <xref linkend=\"querysql\"/>."
+msgstr ""
+"Las consultas SQL pueden contener parámetros con nombre y posicionados, al "
+"igual que las consultas de Hibernate. Puede encontrar más información sobre "
+"las consultas en SQL nativo en Hibernate en el <xref linkend=\"querysql\" /"
+">. "
+
+#. Tag: title
+#: session_api.xml:459
+#, no-c-format
+msgid "Modifying persistent objects"
+msgstr "Modificación de objetos persistentes"
+
+#. Tag: para
+#: session_api.xml:461
+#, no-c-format
+msgid ""
+"<emphasis>Transactional persistent instances</emphasis> (i.e. objects "
+"loaded, saved, created or queried by the <literal>Session</literal>) can be "
+"manipulated by the application, and any changes to persistent state will be "
+"persisted when the <literal>Session</literal> is <emphasis>flushed</"
+"emphasis>. This is discussed later in this chapter. There is no need to call "
+"a particular method (like <literal>update()</literal>, which has a different "
+"purpose) to make your modifications persistent. The most straightforward way "
+"to update the state of an object is to <literal>load()</literal> it and then "
+"manipulate it directly while the <literal>Session</literal> is open:"
+msgstr ""
+"Las <emphasis>instancias persistentes transaccionales</emphasis> (por "
+"ejemplo, los objetos cargados, creados o consultados por la "
+"<literal>Session</literal>) pueden ser manipulados por la aplicación y "
+"cualquier cambio al estado persistente será persistido cuando se "
+"<emphasis>vacie</emphasis> la <literal>Session</literal>. Esto se discute "
+"más adelante en este capítulo. No hay necesidad de llamar a un método en "
+"particular (como <literal>update()</literal>, que tiene un propósito "
+"diferente) para hacer persistentes sus modificaciones. De modo que la forma "
+"más directa de actualizar el estado de un objeto es cargarlo con "
+"<literal>load()</literal> y luego manipularlo directamente, mientras la "
+"<literal>Session</literal> está abierta:"
+
+#. Tag: programlisting
+#: session_api.xml:473
+#, no-c-format
+msgid ""
+"DomesticCat cat = (DomesticCat) sess.load( Cat.class, new Long(69) );\n"
+"cat.setName(\"PK\");\n"
+"sess.flush();  // changes to cat are automatically detected and persisted"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:475
+#, no-c-format
+msgid ""
+"Sometimes this programming model is inefficient, as it requires in the same "
+"session both an SQL <literal>SELECT</literal> to load an object and an SQL "
+"<literal>UPDATE</literal> to persist its updated state. Hibernate offers an "
+"alternate approach by using detached instances."
+msgstr ""
+"A veces este modelo de programación es ineficiente pues requiere un "
+"<literal>SELECT</literal> de SQL para cargar un objeto y un <literal>UPDATE</"
+"literal> de SQL para hacer persistente su estado actualizado en la misma "
+"sesión. Por lo tanto, Hibernate ofrece un enfoque opcional, utilizando "
+"instancias separadas."
+
+#. Tag: title
+#: session_api.xml:483
+#, no-c-format
+msgid "Modifying detached objects"
+msgstr "Modificación de objetos separados"
+
+#. Tag: para
+#: session_api.xml:485
+#, no-c-format
+msgid ""
+"Many applications need to retrieve an object in one transaction, send it to "
+"the UI layer for manipulation, then save the changes in a new transaction. "
+"Applications that use this kind of approach in a high-concurrency "
+"environment usually use versioned data to ensure isolation for the \"long\" "
+"unit of work."
+msgstr ""
+"Muchas aplicaciones necesitan recuperar un objeto en una transacción, "
+"enviarla a la capa de UI para su manipulación, y entonces guardar los "
+"cambios en una nueva transacción. Las aplicaciones que usan este tipo de "
+"enfoque en un entorno de alta concurrencia usualmente utilizan datos "
+"versionados para asegurar el aislamiento de la unidad de trabajo \"larga\"."
+
+#. Tag: para
+#: session_api.xml:491
+#, no-c-format
+msgid ""
+"Hibernate supports this model by providing for reattachment of detached "
+"instances using the <literal>Session.update()</literal> or <literal>Session."
+"merge()</literal> methods:"
+msgstr ""
+"Hibernate soporta este modelo al proveer re-unión de instancias separadas "
+"utilizando los métodos <literal>Session.update()</literal> o "
+"<literal>Session.merge()</literal>:"
+
+#. Tag: programlisting
+#: session_api.xml:495
+#, no-c-format
+msgid ""
+"// in the first session\n"
+"Cat cat = (Cat) firstSession.load(Cat.class, catId);\n"
+"Cat potentialMate = new Cat();\n"
+"firstSession.save(potentialMate);\n"
+"\n"
+"// in a higher layer of the application\n"
+"cat.setMate(potentialMate);\n"
+"\n"
+"// later, in a new session\n"
+"secondSession.update(cat);  // update cat\n"
+"secondSession.update(mate); // update mate"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:497
+#, no-c-format
+msgid ""
+"If the <literal>Cat</literal> with identifier <literal>catId</literal> had "
+"already been loaded by <literal>secondSession</literal> when the application "
+"tried to reattach it, an exception would have been thrown."
+msgstr ""
+"Si el <literal>Cat</literal> con identificador <literal>catId</literal> ya "
+"hubiera sido cargado por <literal>secondSession</literal> cuando la "
+"aplicación intentó volver a unirlo, se habría lanzado una excepción."
+
+#. Tag: para
+#: session_api.xml:502
+#, no-c-format
+msgid ""
+"Use <literal>update()</literal> if you are certain that the session does not "
+"contain an already persistent instance with the same identifier. Use "
+"<literal>merge()</literal> if you want to merge your modifications at any "
+"time without consideration of the state of the session. In other words, "
+"<literal>update()</literal> is usually the first method you would call in a "
+"fresh session, ensuring that the reattachment of your detached instances is "
+"the first operation that is executed."
+msgstr ""
+"Utilice <literal>update()</literal> si está seguro de que la sesión no tiene "
+"una instancia ya persistente con el mismo identificador. Utilice "
+"<literal>merge()</literal> si quiere fusionar sus modificaciones en "
+"cualquier momento sin consideración del estado de la sesión. En otras "
+"palabras, <literal>update()</literal> usualmente es el primer método que "
+"usted llamaría en una sesión actualizada, asegurando que la re-unión de sus "
+"instancias separadas es la primera operación que se ejecuta."
+
+#. Tag: para
+#: session_api.xml:510
+#, fuzzy, no-c-format
+msgid ""
+"The application should individually <literal>update()</literal> detached "
+"instances that are reachable from the given detached instance "
+"<emphasis>only</emphasis> if it wants their state to be updated. This can be "
+"automated using <emphasis>transitive persistence</emphasis>. See <xref "
+"linkend=\"objectstate-transitive\"/> for more information."
+msgstr ""
+"La aplicación debe actualizar <literal>update()</literal> individualmente "
+"las instancias separadas alcanzables desde la instancia separada dada "
+"<emphasis>sólo</emphasis> si quiere que su estado se actualice. Esto puede "
+"ser automatizado utilizando la <emphasis>persistencia transitiva</emphasis>. "
+"Consulte la <xref linkend=\"objectstate-transitive\" /> para obtener mayor "
+"información."
+
+#. Tag: para
+#: session_api.xml:516
+#, no-c-format
+msgid ""
+"The <literal>lock()</literal> method also allows an application to "
+"reassociate an object with a new session. However, the detached instance has "
+"to be unmodified."
+msgstr ""
+"El método <literal>lock()</literal> también le permite a una aplicación "
+"reasociar un objeto con una sesión nueva. Sin embargo, la instancia separada "
+"no puede haber sido modificada."
+
+#. Tag: programlisting
+#: session_api.xml:520
+#, no-c-format
+msgid ""
+"//just reassociate:\n"
+"sess.lock(fritz, LockMode.NONE);\n"
+"//do a version check, then reassociate:\n"
+"sess.lock(izi, LockMode.READ);\n"
+"//do a version check, using SELECT ... FOR UPDATE, then reassociate:\n"
+"sess.lock(pk, LockMode.UPGRADE);"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:522
+#, no-c-format
+msgid ""
+"Note that <literal>lock()</literal> can be used with various "
+"<literal>LockMode</literal>s. See the API documentation and the chapter on "
+"transaction handling for more information. Reattachment is not the only "
+"usecase for <literal>lock()</literal>."
+msgstr ""
+"Note que <literal>lock()</literal> se puede utilizar con varios "
+"<literal>LockMode</literal>s. Consulte la documentación de la API y el "
+"capítulo sobre el manejo de transacciones para obtener mayor información. La "
+"re-unión no es el único caso de uso para <literal>lock()</literal>."
+
+#. Tag: para
+#: session_api.xml:527
+#, fuzzy, no-c-format
+msgid ""
+"Other models for long units of work are discussed in <xref linkend="
+"\"transactions-optimistic\"/>."
+msgstr ""
+"Se discuten otros modelos para unidades largas de trabajo en <xref linkend="
+"\"transactions-optimistic\" />."
+
+#. Tag: title
+#: session_api.xml:532
+#, no-c-format
+msgid "Automatic state detection"
+msgstr "Detección automática de estado"
+
+#. Tag: para
+#: session_api.xml:534
+#, no-c-format
+msgid ""
+"Hibernate users have requested a general purpose method that either saves a "
+"transient instance by generating a new identifier or updates/reattaches the "
+"detached instances associated with its current identifier. The "
+"<literal>saveOrUpdate()</literal> method implements this functionality."
+msgstr ""
+"Los usuarios de Hibernate han pedido un método de propósito general que bien "
+"guarde una instancia transitoria generando un identificador nuevo, o bien "
+"actualice/reúna las instancias separadas asociadas con su identificador "
+"actual. El método <literal>saveOrUpdate()</literal> implementa esta "
+"funcionalidad."
+
+#. Tag: programlisting
+#: session_api.xml:540
+#, no-c-format
+msgid ""
+"// in the first session\n"
+"Cat cat = (Cat) firstSession.load(Cat.class, catID);\n"
+"\n"
+"// in a higher tier of the application\n"
+"Cat mate = new Cat();\n"
+"cat.setMate(mate);\n"
+"\n"
+"// later, in a new session\n"
+"secondSession.saveOrUpdate(cat);   // update existing state (cat has a non-"
+"null id)\n"
+"secondSession.saveOrUpdate(mate);  // save the new instance (mate has a null "
+"id)"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:542
+#, no-c-format
+msgid ""
+"The usage and semantics of <literal>saveOrUpdate()</literal> seems to be "
+"confusing for new users. Firstly, so long as you are not trying to use "
+"instances from one session in another new session, you should not need to "
+"use <literal>update()</literal>, <literal>saveOrUpdate()</literal>, or "
+"<literal>merge()</literal>. Some whole applications will never use either of "
+"these methods."
+msgstr ""
+"La utilización y semántica de <literal>saveOrUpdate()</literal> parece ser "
+"confuso para los usuarios nuevos. Primero, en tanto no esté tratando de "
+"utilizar instancias de una sesión en otra sesión nueva, no debe necesitar "
+"usar <literal>update()</literal>, <literal>saveOrUpdate()</literal>, o "
+"<literal>merge()</literal>. Algunas aplicaciones enteras nunca usarán "
+"ninguno de estos métodos."
+
+#. Tag: para
+#: session_api.xml:549
+#, no-c-format
+msgid ""
+"Usually <literal>update()</literal> or <literal>saveOrUpdate()</literal> are "
+"used in the following scenario:"
+msgstr ""
+"Usualmente <literal>update()</literal> o <literal>saveOrUpdate()</literal> "
+"se utilizan en el siguiente escenario:"
+
+#. Tag: para
+#: session_api.xml:555
+#, no-c-format
+msgid "the application loads an object in the first session"
+msgstr "la aplicación carga un objeto en la primera sesión"
+
+#. Tag: para
+#: session_api.xml:559
+#, no-c-format
+msgid "the object is passed up to the UI tier"
+msgstr "el objeto se pasa a la capa de UI"
+
+#. Tag: para
+#: session_api.xml:563
+#, no-c-format
+msgid "some modifications are made to the object"
+msgstr "se realizan algunas modificaciones al objeto"
+
+#. Tag: para
+#: session_api.xml:567
+#, no-c-format
+msgid "the object is passed back down to the business logic tier"
+msgstr "el objeto se pasa abajo de regreso a la capa lógica de negocios"
+
+#. Tag: para
+#: session_api.xml:571
+#, no-c-format
+msgid ""
+"the application persists these modifications by calling <literal>update()</"
+"literal> in a second session"
+msgstr ""
+"la aplicación hace estas modificaciones persistentes llamando a "
+"<literal>update()</literal> en una segunda sesión"
+
+#. Tag: para
+#: session_api.xml:576
+#, no-c-format
+msgid "<literal>saveOrUpdate()</literal> does the following:"
+msgstr "<literal>saveOrUpdate()</literal> hace lo siguiente:"
+
+#. Tag: para
+#: session_api.xml:580
+#, no-c-format
+msgid "if the object is already persistent in this session, do nothing"
+msgstr "si el objeto ya es persistente en esta sesión, no haga nada"
+
+#. Tag: para
+#: session_api.xml:585
+#, no-c-format
+msgid ""
+"if another object associated with the session has the same identifier, throw "
+"an exception"
+msgstr ""
+"si otro objeto asociado con la sesión tiene el mismo identificador, lance "
+"una excepción"
+
+#. Tag: para
+#: session_api.xml:590
+#, no-c-format
+msgid "if the object has no identifier property, <literal>save()</literal> it"
+msgstr ""
+"si el objeto no tiene ninguna propiedad identificadora, guárdelo llamando a "
+"<literal>save()</literal>"
+
+#. Tag: para
+#: session_api.xml:595
+#, no-c-format
+msgid ""
+"if the object's identifier has the value assigned to a newly instantiated "
+"object, <literal>save()</literal> it"
+msgstr ""
+"si el identificador del objeto tiene el valor asignado a un objeto recién "
+"instanciado, guárdelo llamando a <literal>save()</literal>"
+
+#. Tag: para
+#: session_api.xml:600
+#, no-c-format
+msgid ""
+"if the object is versioned by a <literal>&lt;version&gt;</literal> or "
+"<literal>&lt;timestamp&gt;</literal>, and the version property value is the "
+"same value assigned to a newly instantiated object, <literal>save()</"
+"literal> it"
+msgstr ""
+"si el objeto está versionado por un <literal>&lt;version&gt;</literal> o "
+"<literal>&lt;timestamp&gt;</literal>, y el valor de la propiedad de versión "
+"es el mismo valor asignado a un objeto recién instanciado, guárdelo llamando "
+"a <literal>save()</literal>"
+
+#. Tag: para
+#: session_api.xml:608
+#, no-c-format
+msgid "otherwise <literal>update()</literal> the object"
+msgstr ""
+"de otra manera actualice el objeto llamando a <literal>update()</literal>"
+
+#. Tag: para
+#: session_api.xml:612
+#, no-c-format
+msgid "and <literal>merge()</literal> is very different:"
+msgstr "y <literal>merge()</literal> es muy diferente:"
+
+#. Tag: para
+#: session_api.xml:616
+#, no-c-format
+msgid ""
+"if there is a persistent instance with the same identifier currently "
+"associated with the session, copy the state of the given object onto the "
+"persistent instance"
+msgstr ""
+"si existe una instancia persistente con el mismo identificador asignado "
+"actualmente con la sesión, copie el estado del objeto dado en la instancia "
+"persistente"
+
+#. Tag: para
+#: session_api.xml:622
+#, no-c-format
+msgid ""
+"if there is no persistent instance currently associated with the session, "
+"try to load it from the database, or create a new persistent instance"
+msgstr ""
+"si no existe ninguna instancia persistente asociada a la sesión actualmente, "
+"intente cargarla desde la base de datos, o cree una nueva instancia "
+"persistente"
+
+#. Tag: para
+#: session_api.xml:628
+#, no-c-format
+msgid "the persistent instance is returned"
+msgstr "la instancia persistente es devuelta"
+
+#. Tag: para
+#: session_api.xml:632
+#, no-c-format
+msgid ""
+"the given instance does not become associated with the session, it remains "
+"detached"
+msgstr "la instancia dada no se asocia a la sesión, permanece separada"
+
+#. Tag: title
+#: session_api.xml:639
+#, no-c-format
+msgid "Deleting persistent objects"
+msgstr "Borrado de objetos persistentes"
+
+#. Tag: para
+#: session_api.xml:641
+#, no-c-format
+msgid ""
+"<literal>Session.delete()</literal> will remove an object's state from the "
+"database. Your application, however, can still hold a reference to a deleted "
+"object. It is best to think of <literal>delete()</literal> as making a "
+"persistent instance, transient."
+msgstr ""
+"<literal>Session.delete()</literal> borrará el estado de un objeto de la "
+"base de datos. Sin embargo, su aplicación puede tener todavía una referencia "
+"a un objeto borrado. Lo mejor es pensar en <literal>delete()</literal> al "
+"hacer transitoria una instancia persistente."
+
+#. Tag: programlisting
+#: session_api.xml:646
+#, no-c-format
+msgid "sess.delete(cat);"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:648
+#, no-c-format
+msgid ""
+"You can delete objects in any order, without risk of foreign key constraint "
+"violations. It is still possible to violate a <literal>NOT NULL</literal> "
+"constraint on a foreign key column by deleting objects in the wrong order, e."
+"g. if you delete the parent, but forget to delete the children."
+msgstr ""
+"Puede borrar objetos en el orden que quiera, sin riesgo de violaciones de "
+"restricción de clave foránea. Aún es posible violar una restricción "
+"<literal>NOT NULL</literal> sobre una columna de clave foránea borrando "
+"objetos en un orden erróneo, por ejemplo, si borra el padre, pero olvida "
+"borrar los hijos."
+
+#. Tag: title
+#: session_api.xml:656
+#, no-c-format
+msgid "Replicating object between two different datastores"
+msgstr "Replicación de objetos entre dos almacenamientos de datos diferentes"
+
+#. Tag: para
+#: session_api.xml:658
+#, no-c-format
+msgid ""
+"It is sometimes useful to be able to take a graph of persistent instances "
+"and make them persistent in a different datastore, without regenerating "
+"identifier values."
+msgstr ""
+"A veces es útil poder tomar un grafo de la instancias persistentes y "
+"hacerlas persistentes en un almacenamiento de datos diferente, sin regenerar "
+"los valores identificadores."
+
+#. Tag: programlisting
+#: session_api.xml:662
+#, no-c-format
+msgid ""
+"//retrieve a cat from one database\n"
+"Session session1 = factory1.openSession();\n"
+"Transaction tx1 = session1.beginTransaction();\n"
+"Cat cat = session1.get(Cat.class, catId);\n"
+"tx1.commit();\n"
+"session1.close();\n"
+"\n"
+"//reconcile with a second database\n"
+"Session session2 = factory2.openSession();\n"
+"Transaction tx2 = session2.beginTransaction();\n"
+"session2.replicate(cat, ReplicationMode.LATEST_VERSION);\n"
+"tx2.commit();\n"
+"session2.close();"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:664
+#,

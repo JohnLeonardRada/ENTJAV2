@@ -1,0 +1,577 @@
+" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="isNullableTable(int)"><!-- --></A><H3>
+isNullableTable</H3>
+<PRE>
+protected boolean <B>isNullableTable</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#isNullableTable(int)">isNullableTable</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSubclassTableSequentialSelect(int)"><!-- --></A><H3>
+isSubclassTableSequentialSelect</H3>
+<PRE>
+protected boolean <B>isSubclassTableSequentialSelect</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#isSubclassTableSequentialSelect(int)">isSubclassTableSequentialSelect</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubclassPropertyTableName(int)"><!-- --></A><H3>
+getSubclassPropertyTableName</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSubclassPropertyTableName</B>(int&nbsp;i)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/OuterJoinLoadable.html#getSubclassPropertyTableName(int)">OuterJoinLoadable</A></CODE></B></DD>
+<DD>Return the table name used to persist the numbered property of the
+ class or a subclass.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDiscriminatorType()"><!-- --></A><H3>
+getDiscriminatorType</H3>
+<PRE>
+public <A HREF="../../../../org/hibernate/type/Type.html" title="interface in org.hibernate.type">Type</A> <B>getDiscriminatorType</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Loadable.html#getDiscriminatorType()">Loadable</A></CODE></B></DD>
+<DD>Get the discriminator type
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDiscriminatorSQLValue()"><!-- --></A><H3>
+getDiscriminatorSQLValue</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getDiscriminatorSQLValue</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#getDiscriminatorSQLValue()">Queryable</A></CODE></B></DD>
+<DD>Get the discriminator value for this particular concrete subclass,
+ as a string that may be embedded in a select statement
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubclassForDiscriminatorValue(java.lang.Object)"><!-- --></A><H3>
+getSubclassForDiscriminatorValue</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSubclassForDiscriminatorValue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Loadable.html#getSubclassForDiscriminatorValue(java.lang.Object)">Loadable</A></CODE></B></DD>
+<DD>Get the concrete subclass corresponding to the given discriminator
+ value
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertySpaces()"><!-- --></A><H3>
+getPropertySpaces</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>[] <B>getPropertySpaces</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/EntityPersister.html#getPropertySpaces()">EntityPersister</A></CODE></B></DD>
+<DD>Returns an array of objects that identify spaces in which properties of
+ this entity are persisted, for instances of this class only.
+ <p/>
+ For most implementations, this returns the complete set of table names
+ to which instances of the mapped entity are persisted (not accounting
+ for superclass entity mappings).
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The property spaces.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTableName(int)"><!-- --></A><H3>
+getTableName</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getTableName</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getTableName(int)">getTableName</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getKeyColumns(int)"><!-- --></A><H3>
+getKeyColumns</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getKeyColumns</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getKeyColumns(int)">getKeyColumns</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isTableCascadeDeleteEnabled(int)"><!-- --></A><H3>
+isTableCascadeDeleteEnabled</H3>
+<PRE>
+protected boolean <B>isTableCascadeDeleteEnabled</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#isTableCascadeDeleteEnabled(int)">isTableCascadeDeleteEnabled</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isPropertyOfTable(int, int)"><!-- --></A><H3>
+isPropertyOfTable</H3>
+<PRE>
+protected boolean <B>isPropertyOfTable</B>(int&nbsp;property,
+                                    int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#isPropertyOfTable(int, int)">isPropertyOfTable</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="fromTableFragment(java.lang.String)"><!-- --></A><H3>
+fromTableFragment</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>fromTableFragment</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/OuterJoinLoadable.html#fromTableFragment(java.lang.String)">OuterJoinLoadable</A></CODE></B></DD>
+<DD>Get the main from table fragment, given a query alias.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTableName()"><!-- --></A><H3>
+getTableName</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getTableName</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Joinable.html#getTableName()">Joinable</A></CODE></B></DD>
+<DD>The table to join to.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addDiscriminatorToSelect(org.hibernate.sql.SelectFragment, java.lang.String, java.lang.String)"><!-- --></A><H3>
+addDiscriminatorToSelect</H3>
+<PRE>
+public void <B>addDiscriminatorToSelect</B>(<A HREF="../../../../org/hibernate/sql/SelectFragment.html" title="class in org.hibernate.sql">SelectFragment</A>&nbsp;select,
+                                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+                                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#addDiscriminatorToSelect(org.hibernate.sql.SelectFragment, java.lang.String, java.lang.String)">addDiscriminatorToSelect</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="filterFragment(java.lang.String)"><!-- --></A><H3>
+filterFragment</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>filterFragment</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#filterFragment(java.lang.String)">filterFragment</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateFilterConditionAlias(java.lang.String)"><!-- --></A><H3>
+generateFilterConditionAlias</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>generateFilterConditionAlias</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rootAlias)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#generateFilterConditionAlias(java.lang.String)">Queryable</A></CODE></B></DD>
+<DD>The alias used for any filter conditions (mapped where-fragments or
+ enabled-filters).
+ </p>
+ This may or may not be different from the root alias depending upon the
+ inheritence mapping strategy.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#generateFilterConditionAlias(java.lang.String)">generateFilterConditionAlias</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html" title="interface in org.hibernate.persister.entity">Queryable</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#generateFilterConditionAlias(java.lang.String)">generateFilterConditionAlias</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rootAlias</CODE> - The root alias
+<DT><B>Returns:</B><DD>The alias used for "filter conditions" within the where clause.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIdentifierColumnNames()"><!-- --></A><H3>
+getIdentifierColumnNames</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getIdentifierColumnNames</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Loadable.html#getIdentifierColumnNames()">Loadable</A></CODE></B></DD>
+<DD>Get the names of columns used to persist the identifier
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/id/PostInsertIdentityPersister.html#getIdentifierColumnNames()">getIdentifierColumnNames</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/id/PostInsertIdentityPersister.html" title="interface in org.hibernate.id">PostInsertIdentityPersister</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/Loadable.html#getIdentifierColumnNames()">getIdentifierColumnNames</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/entity/Loadable.html" title="interface in org.hibernate.persister.entity">Loadable</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#getIdentifierColumnNames()">getIdentifierColumnNames</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html" title="interface in org.hibernate.persister.entity">Queryable</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getIdentifierColumnNames()">getIdentifierColumnNames</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIdentifierColumnReaderTemplates()"><!-- --></A><H3>
+getIdentifierColumnReaderTemplates</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getIdentifierColumnReaderTemplates</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getIdentifierColumnReaderTemplates()">getIdentifierColumnReaderTemplates</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIdentifierColumnReaders()"><!-- --></A><H3>
+getIdentifierColumnReaders</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getIdentifierColumnReaders</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getIdentifierColumnReaders()">getIdentifierColumnReaders</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toColumns(java.lang.String, java.lang.String)"><!-- --></A><H3>
+toColumns</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>toColumns</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;propertyName)
+                   throws <A HREF="../../../../org/hibernate/QueryException.html" title="class in org.hibernate">QueryException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/PropertyMapping.html#toColumns(java.lang.String, java.lang.String)">PropertyMapping</A></CODE></B></DD>
+<DD>Given a query alias and a property path, return the qualified
+ column name
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/PropertyMapping.html#toColumns(java.lang.String, java.lang.String)">toColumns</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/entity/PropertyMapping.html" title="interface in org.hibernate.persister.entity">PropertyMapping</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#toColumns(java.lang.String, java.lang.String)">toColumns</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/QueryException.html" title="class in org.hibernate">QueryException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertyTableNumbersInSelect()"><!-- --></A><H3>
+getPropertyTableNumbersInSelect</H3>
+<PRE>
+protected int[] <B>getPropertyTableNumbersInSelect</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getPropertyTableNumbersInSelect()">getPropertyTableNumbersInSelect</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubclassPropertyTableNumber(int)"><!-- --></A><H3>
+getSubclassPropertyTableNumber</H3>
+<PRE>
+protected int <B>getSubclassPropertyTableNumber</B>(int&nbsp;i)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getSubclassPropertyTableNumber(int)">getSubclassPropertyTableNumber</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTableSpan()"><!-- --></A><H3>
+getTableSpan</H3>
+<PRE>
+public int <B>getTableSpan</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getTableSpan()">getTableSpan</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMultiTable()"><!-- --></A><H3>
+isMultiTable</H3>
+<PRE>
+public boolean <B>isMultiTable</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#isMultiTable()">Queryable</A></CODE></B></DD>
+<DD>Is the inheritence hierarchy described by this persister contained across
+ multiple tables?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#isMultiTable()">isMultiTable</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html" title="interface in org.hibernate.persister.entity">Queryable</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#isMultiTable()">isMultiTable</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>True if the inheritence hierarchy is spread across multiple tables; false otherwise.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubclassColumnTableNumberClosure()"><!-- --></A><H3>
+getSubclassColumnTableNumberClosure</H3>
+<PRE>
+protected int[] <B>getSubclassColumnTableNumberClosure</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getSubclassColumnTableNumberClosure()">getSubclassColumnTableNumberClosure</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubclassFormulaTableNumberClosure()"><!-- --></A><H3>
+getSubclassFormulaTableNumberClosure</H3>
+<PRE>
+protected int[] <B>getSubclassFormulaTableNumberClosure</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getSubclassFormulaTableNumberClosure()">getSubclassFormulaTableNumberClosure</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertyTableNumbers()"><!-- --></A><H3>
+getPropertyTableNumbers</H3>
+<PRE>
+protected int[] <B>getPropertyTableNumbers</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getPropertyTableNumbers()">getPropertyTableNumbers</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubclassTableKeyColumns(int)"><!-- --></A><H3>
+getSubclassTableKeyColumns</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getSubclassTableKeyColumns</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getSubclassTableKeyColumns(int)">getSubclassTableKeyColumns</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubclassTableName(int)"><!-- --></A><H3>
+getSubclassTableName</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSubclassTableName</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#getSubclassTableName(int)">Queryable</A></CODE></B></DD>
+<DD>Get the name of the table with the given index from the internal
+ array.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#getSubclassTableName(int)">getSubclassTableName</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html" title="interface in org.hibernate.persister.entity">Queryable</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getSubclassTableName(int)">getSubclassTableName</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>j</CODE> - The index into the internal array.
+<DT><B>Returns:</B><DD></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubclassTableSpan()"><!-- --></A><H3>
+getSubclassTableSpan</H3>
+<PRE>
+public int <B>getSubclassTableSpan</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getSubclassTableSpan()">getSubclassTableSpan</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSubclassTableLazy(int)"><!-- --></A><H3>
+isSubclassTableLazy</H3>
+<PRE>
+protected boolean <B>isSubclassTableLazy</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#isSubclassTableLazy(int)">isSubclassTableLazy</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isClassOrSuperclassTable(int)"><!-- --></A><H3>
+isClassOrSuperclassTable</H3>
+<PRE>
+protected boolean <B>isClassOrSuperclassTable</B>(int&nbsp;j)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#isClassOrSuperclassTable(int)">isClassOrSuperclassTable</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPropertyTableName(java.lang.String)"><!-- --></A><H3>
+getPropertyTableName</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getPropertyTableName</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;propertyName)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/OuterJoinLoadable.html#getPropertyTableName(java.lang.String)">OuterJoinLoadable</A></CODE></B></DD>
+<DD>Get the table name for the given property path
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getConstraintOrderedTableNameClosure()"><!-- --></A><H3>
+getConstraintOrderedTableNameClosure</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>getConstraintOrderedTableNameClosure</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#getConstraintOrderedTableNameClosure()">Queryable</A></CODE></B></DD>
+<DD>Get the names of all tables used in the hierarchy (up and down) ordered such
+ that deletes in the given order would not cause contraint violations.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The ordered array of table names.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getContraintOrderedTableKeyColumnClosure()"><!-- --></A><H3>
+getContraintOrderedTableKeyColumnClosure</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[][] <B>getContraintOrderedTableKeyColumnClosure</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Queryable.html#getContraintOrderedTableKeyColumnClosure()">Queryable</A></CODE></B></DD>
+<DD>For each table specified in <A HREF="../../../../org/hibernate/persister/entity/Queryable.html#getConstraintOrderedTableNameClosure()"><CODE>Queryable.getConstraintOrderedTableNameClosure()</CODE></A>, get
+ the columns that define the key between the various hierarchy classes.
+ <p/>
+ The first dimension here corresponds to the table indexes returned in
+ <A HREF="../../../../org/hibernate/persister/entity/Queryable.html#getConstraintOrderedTableNameClosure()"><CODE>Queryable.getConstraintOrderedTableNameClosure()</CODE></A>.
+ <p/>
+ The second dimension should have the same length across all the elements in
+ the first dimension.  If not, that'd be a problem ;)
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRootTableName()"><!-- --></A><H3>
+getRootTableName</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getRootTableName</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Lockable.html#getRootTableName()">Lockable</A></CODE></B></DD>
+<DD>Locks are always applied to the "root table".
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/Lockable.html#getRootTableName()">getRootTableName</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/entity/Lockable.html" title="interface in org.hibernate.persister.entity">Lockable</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html#getRootTableName()">getRootTableName</A></CODE> in class <CODE><A HREF="../../../../org/hibernate/persister/entity/AbstractEntityPersister.html" title="class in org.hibernate.persister.entity">AbstractEntityPersister</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The root table name</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRootTableAlias(java.lang.String)"><!-- --></A><H3>
+getRootTableAlias</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getRootTableAlias</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;drivingAlias)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../org/hibernate/persister/entity/Lockable.html#getRootTableAlias(java.lang.String)">Lockable</A></CODE></B></DD>
+<DD>Get the SQL alias this persister would use for the root table
+ given the passed driving alias.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/hibernate/persister/entity/Lockable.html#getRootTableAlias(java.lang.String)">getRootTableAlias</A></CODE> in interface <CODE><A HREF="../../../../org/hibernate/persister/entity/Lockable.html" title="interface in org.hibernate.persister.entity">Lockable</A></CODE><DT><B>Overr

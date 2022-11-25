@@ -1,0 +1,340 @@
+"){
+_700[item]=true;
+}
+break;
+}
+}
+}
+return _700;
+};
+this.getDataProvider=function(_706,_707){
+dojo.io.bind({url:_707,load:function(type,_709){
+if(type=="load"){
+_706.dataProvider=_709;
+}
+},mimetype:"text/javascript",sync:true});
+};
+this.getPropertySetById=function(_70a){
+for(var x=0;x<this.propertySetsList.length;x++){
+if(_70a==this.propertySetsList[x]["id"][0].value){
+return this.propertySetsList[x];
+}
+}
+return "";
+};
+this.getPropertySetsByType=function(_70c){
+var _70d=[];
+for(var x=0;x<this.propertySetsList.length;x++){
+var cpl=this.propertySetsList[x];
+var cpcc=cpl.componentClass||cpl.componentType||null;
+var _711=this.propertySetsList[x]["id"][0].value;
+if(cpcc&&(_711==cpcc[0].value)){
+_70d.push(cpl);
+}
+}
+return _70d;
+};
+this.getPropertySets=function(_712){
+var ppl="dojo:propertyproviderlist";
+var _714=[];
+var _715=_712.tagName;
+if(_712[ppl]){
+var _716=_712[ppl].value.split(" ");
+for(var _717 in _716){
+if((_717.indexOf("..")==-1)&&(_717.indexOf("://")==-1)){
+var _718=this.getPropertySetById(_717);
+if(_718!=""){
+_714.push(_718);
+}
+}else{
+}
+}
+}
+return this.getPropertySetsByType(_715).concat(_714);
+};
+this.createComponentFromScript=function(_719,_71a,_71b,ns){
+_71b.fastMixIn=true;
+var ltn=(ns||"dojo")+":"+_71a.toLowerCase();
+if(dojo.widget.tags[ltn]){
+return [dojo.widget.tags[ltn](_71b,this,null,null,_71b)];
+}
+return [dojo.widget.buildWidgetFromParseTree(ltn,_71b,this,null,null,_71b)];
+};
+};
+dojo.widget._parser_collection={"dojo":new dojo.widget.Parse()};
+dojo.widget.getParser=function(name){
+if(!name){
+name="dojo";
+}
+if(!this._parser_collection[name]){
+this._parser_collection[name]=new dojo.widget.Parse();
+}
+return this._parser_collection[name];
+};
+dojo.widget.createWidget=function(name,_720,_721,_722){
+var _723=false;
+var _724=(typeof name=="string");
+if(_724){
+var pos=name.indexOf(":");
+var ns=(pos>-1)?name.substring(0,pos):"dojo";
+if(pos>-1){
+name=name.substring(pos+1);
+}
+var _727=name.toLowerCase();
+var _728=ns+":"+_727;
+_723=(dojo.byId(name)&&!dojo.widget.tags[_728]);
+}
+if((arguments.length==1)&&(_723||!_724)){
+var xp=new dojo.xml.Parse();
+var tn=_723?dojo.byId(name):name;
+return dojo.widget.getParser().createComponents(xp.parseElement(tn,null,true))[0];
+}
+function fromScript(_72b,name,_72d,ns){
+_72d[_728]={dojotype:[{value:_727}],nodeRef:_72b,fastMixIn:true};
+_72d.ns=ns;
+return dojo.widget.getParser().createComponentFromScript(_72b,name,_72d,ns);
+}
+_720=_720||{};
+var _72f=false;
+var tn=null;
+var h=dojo.render.html.capable;
+if(h){
+tn=document.createElement("span");
+}
+if(!_721){
+_72f=true;
+_721=tn;
+if(h){
+dojo.body().appendChild(_721);
+}
+}else{
+if(_722){
+dojo.dom.insertAtPosition(tn,_721,_722);
+}else{
+tn=_721;
+}
+}
+var _731=fromScript(tn,name.toLowerCase(),_720,ns);
+if((!_731)||(!_731[0])||(typeof _731[0].widgetType=="undefined")){
+throw new Error("createWidget: Creation of \""+name+"\" widget failed.");
+}
+try{
+if(_72f&&_731[0].domNode.parentNode){
+_731[0].domNode.parentNode.removeChild(_731[0].domNode);
+}
+}
+catch(e){
+dojo.debug(e);
+}
+return _731[0];
+};
+dojo.provide("dojo.widget.DomWidget");
+dojo.widget._cssFiles={};
+dojo.widget._cssStrings={};
+dojo.widget._templateCache={};
+dojo.widget.defaultStrings={dojoRoot:dojo.hostenv.getBaseScriptUri(),dojoWidgetModuleUri:dojo.uri.moduleUri("dojo.widget"),baseScriptUri:dojo.hostenv.getBaseScriptUri()};
+dojo.widget.fillFromTemplateCache=function(obj,_733,_734,_735){
+var _736=_733||obj.templatePath;
+var _737=dojo.widget._templateCache;
+if(!_736&&!obj["widgetType"]){
+do{
+var _738="__dummyTemplate__"+dojo.widget._templateCache.dummyCount++;
+}while(_737[_738]);
+obj.widgetType=_738;
+}
+var wt=_736?_736.toString():obj.widgetType;
+var ts=_737[wt];
+if(!ts){
+_737[wt]={"string":null,"node":null};
+if(_735){
+ts={};
+}else{
+ts=_737[wt];
+}
+}
+if((!obj.templateString)&&(!_735)){
+obj.templateString=_734||ts["string"];
+}
+if(obj.templateString){
+obj.templateString=this._sanitizeTemplateString(obj.templateString);
+}
+if((!obj.templateNode)&&(!_735)){
+obj.templateNode=ts["node"];
+}
+if((!obj.templateNode)&&(!obj.templateString)&&(_736)){
+var _73b=this._sanitizeTemplateString(dojo.hostenv.getText(_736));
+obj.templateString=_73b;
+if(!_735){
+_737[wt]["string"]=_73b;
+}
+}
+if((!ts["string"])&&(!_735)){
+ts.string=obj.templateString;
+}
+};
+dojo.widget._sanitizeTemplateString=function(_73c){
+if(_73c){
+_73c=_73c.replace(/^\s*<\?xml(\s)+version=[\'\"](\d)*.(\d)*[\'\"](\s)*\?>/im,"");
+var _73d=_73c.match(/<body[^>]*>\s*([\s\S]+)\s*<\/body>/im);
+if(_73d){
+_73c=_73d[1];
+}
+}else{
+_73c="";
+}
+return _73c;
+};
+dojo.widget._templateCache.dummyCount=0;
+dojo.widget.attachProperties=["dojoAttachPoint","id"];
+dojo.widget.eventAttachProperty="dojoAttachEvent";
+dojo.widget.onBuildProperty="dojoOnBuild";
+dojo.widget.waiNames=["waiRole","waiState"];
+dojo.widget.wai={waiRole:{name:"waiRole","namespace":"http://www.w3.org/TR/xhtml2",alias:"x2",prefix:"wairole:"},waiState:{name:"waiState","namespace":"http://www.w3.org/2005/07/aaa",alias:"aaa",prefix:""},setAttr:function(node,ns,attr,_741){
+if(dojo.render.html.ie){
+node.setAttribute(this[ns].alias+":"+attr,this[ns].prefix+_741);
+}else{
+node.setAttributeNS(this[ns]["namespace"],attr,this[ns].prefix+_741);
+}
+},getAttr:function(node,ns,attr){
+if(dojo.render.html.ie){
+return node.getAttribute(this[ns].alias+":"+attr);
+}else{
+return node.getAttributeNS(this[ns]["namespace"],attr);
+}
+},removeAttr:function(node,ns,attr){
+var _748=true;
+if(dojo.render.html.ie){
+_748=node.removeAttribute(this[ns].alias+":"+attr);
+}else{
+node.removeAttributeNS(this[ns]["namespace"],attr);
+}
+return _748;
+}};
+dojo.widget.attachTemplateNodes=function(_749,_74a,_74b){
+var _74c=dojo.dom.ELEMENT_NODE;
+function trim(str){
+return str.replace(/^\s+|\s+$/g,"");
+}
+if(!_749){
+_749=_74a.domNode;
+}
+if(_749.nodeType!=_74c){
+return;
+}
+var _74e=_749.all||_749.getElementsByTagName("*");
+var _74f=_74a;
+for(var x=-1;x<_74e.length;x++){
+var _751=(x==-1)?_749:_74e[x];
+var _752=[];
+if(!_74a.widgetsInTemplate||!_751.getAttribute("dojoType")){
+for(var y=0;y<this.attachProperties.length;y++){
+var _754=_751.getAttribute(this.attachProperties[y]);
+if(_754){
+_752=_754.split(";");
+for(var z=0;z<_752.length;z++){
+if(dojo.lang.isArray(_74a[_752[z]])){
+_74a[_752[z]].push(_751);
+}else{
+_74a[_752[z]]=_751;
+}
+}
+break;
+}
+}
+var _756=_751.getAttribute(this.eventAttachProperty);
+if(_756){
+var evts=_756.split(";");
+for(var y=0;y<evts.length;y++){
+if((!evts[y])||(!evts[y].length)){
+continue;
+}
+var _758=null;
+var tevt=trim(evts[y]);
+if(evts[y].indexOf(":")>=0){
+var _75a=tevt.split(":");
+tevt=trim(_75a[0]);
+_758=trim(_75a[1]);
+}
+if(!_758){
+_758=tevt;
+}
+var tf=function(){
+var ntf=new String(_758);
+return function(evt){
+if(_74f[ntf]){
+_74f[ntf](dojo.event.browser.fixEvent(evt,this));
+}
+};
+}();
+dojo.event.browser.addListener(_751,tevt,tf,false,true);
+}
+}
+for(var y=0;y<_74b.length;y++){
+var _75e=_751.getAttribute(_74b[y]);
+if((_75e)&&(_75e.length)){
+var _758=null;
+var _75f=_74b[y].substr(4);
+_758=trim(_75e);
+var _760=[_758];
+if(_758.indexOf(";")>=0){
+_760=dojo.lang.map(_758.split(";"),trim);
+}
+for(var z=0;z<_760.length;z++){
+if(!_760[z].length){
+continue;
+}
+var tf=function(){
+var ntf=new String(_760[z]);
+return function(evt){
+if(_74f[ntf]){
+_74f[ntf](dojo.event.browser.fixEvent(evt,this));
+}
+};
+}();
+dojo.event.browser.addListener(_751,_75f,tf,false,true);
+}
+}
+}
+}
+var _763=_751.getAttribute(this.templateProperty);
+if(_763){
+_74a[_763]=_751;
+}
+dojo.lang.forEach(dojo.widget.waiNames,function(name){
+var wai=dojo.widget.wai[name];
+var val=_751.getAttribute(wai.name);
+if(val){
+if(val.indexOf("-")==-1){
+dojo.widget.wai.setAttr(_751,wai.name,"role",val);
+}else{
+var _767=val.split("-");
+dojo.widget.wai.setAttr(_751,wai.name,_767[0],_767[1]);
+}
+}
+},this);
+var _768=_751.getAttribute(this.onBuildProperty);
+if(_768){
+eval("var node = baseNode; var widget = targetObj; "+_768);
+}
+}
+};
+dojo.widget.getDojoEventsFromStr=function(str){
+var re=/(dojoOn([a-z]+)(\s?))=/gi;
+var evts=str?str.match(re)||[]:[];
+var ret=[];
+var lem={};
+for(var x=0;x<evts.length;x++){
+if(evts[x].length<1){
+continue;
+}
+var cm=evts[x].replace(/\s/,"");
+cm=(cm.slice(0,cm.length-1));
+if(!lem[cm]){
+lem[cm]=true;
+ret.push(cm);
+}
+}
+return ret;
+};
+dojo.declare("dojo.widget.DomWidget",dojo.widget.Widget,function(){
+if((arguments.length>0

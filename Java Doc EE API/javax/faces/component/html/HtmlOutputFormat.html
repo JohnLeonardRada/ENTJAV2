@@ -1,0 +1,191 @@
+ing files.
+            These statements are only executed if the schema is created ie if
+            <code class="literal">hibernate.hbm2ddl.auto</code> is set to
+            <code class="literal">create</code> or
+            <code class="literal">create-drop</code>.</p><p> <span class="strong"><strong>e.g.</strong></span>
+            <code class="literal">/humans.sql,/dogs.sql</code> </p></td></tr><tr><td><code class="literal">hibernate.bytecode.use_reflection_optimizer</code></td><td><p>Enables the use of bytecode manipulation instead of
+            runtime reflection. This is a System-level property and cannot be
+            set in <code class="literal">hibernate.cfg.xml</code>. Reflection can
+            sometimes be useful when troubleshooting. Hibernate always
+            requires either CGLIB or javassist even if you turn off the
+            optimizer.</p><p> <span class="strong"><strong>e.g.</strong></span>
+            <code class="literal">true</code> | <code class="literal">false</code> </p></td></tr><tr><td><code class="literal">hibernate.bytecode.provider</code></td><td><p>Both javassist or cglib can be used as byte
+            manipulation engines; the default is
+            <code class="literal">javassist</code>.</p><p> <span class="strong"><strong>e.g.</strong></span> <code class="literal">javassist</code> |
+            <code class="literal">cglib</code> </p></td></tr></tbody></table></div></div><br class="table-break"/><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-optional-dialects"/>3.4.1. SQL Dialects</h3></div></div></div><p>Always set the <code class="literal">hibernate.dialect</code> property to
+      the correct <code class="literal">org.hibernate.dialect.Dialect</code> subclass
+      for your database. If you specify a dialect, Hibernate will use sensible
+      defaults for some of the other properties listed above. This means that
+      you will not have to specify them manually.</p><div class="table"><a id="sql-dialects"/><p class="title"><b>Table 3.8. Hibernate SQL Dialects
+        (<code class="literal">hibernate.dialect</code>)</b></p><div class="table-contents"><table summary="Hibernate SQL Dialects&#xA;        (hibernate.dialect)" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>RDBMS</th><th>Dialect</th></tr></thead><tbody><tr><td>DB2</td><td><code class="literal">org.hibernate.dialect.DB2Dialect</code></td></tr><tr><td>DB2 AS/400</td><td><code class="literal">org.hibernate.dialect.DB2400Dialect</code></td></tr><tr><td>DB2 OS390</td><td><code class="literal">org.hibernate.dialect.DB2390Dialect</code></td></tr><tr><td>PostgreSQL</td><td><code class="literal">org.hibernate.dialect.PostgreSQLDialect</code></td></tr><tr><td>MySQL5</td><td><code class="literal">org.hibernate.dialect.MySQL5Dialect</code></td></tr><tr><td>MySQL5 with InnoDB</td><td><code class="literal">org.hibernate.dialect.MySQL5InnoDBDialect</code></td></tr><tr><td>MySQL with MyISAM</td><td><code class="literal">org.hibernate.dialect.MySQLMyISAMDialect</code></td></tr><tr><td>Oracle (any version)</td><td><code class="literal">org.hibernate.dialect.OracleDialect</code></td></tr><tr><td>Oracle 9i</td><td><code class="literal">org.hibernate.dialect.Oracle9iDialect</code></td></tr><tr><td>Oracle 10g</td><td><code class="literal">org.hibernate.dialect.Oracle10gDialect</code></td></tr><tr><td>Oracle 11g</td><td><code class="literal">org.hibernate.dialect.Oracle10gDialect</code></td></tr><tr><td>Sybase</td><td><code class="literal">org.hibernate.dialect.SybaseASE15Dialect</code></td></tr><tr><td>Sybase Anywhere</td><td><code class="literal">org.hibernate.dialect.SybaseAnywhereDialect</code></td></tr><tr><td>Microsoft SQL Server 2000</td><td><code class="literal">org.hibernate.dialect.SQLServerDialect</code></td></tr><tr><td>Microsoft SQL Server 2005</td><td><code class="literal">org.hibernate.dialect.SQLServer2005Dialect</code></td></tr><tr><td>Microsoft SQL Server 2008</td><td><code class="literal">org.hibernate.dialect.SQLServer2008Dialect</code></td></tr><tr><td>SAP DB</td><td><code class="literal">org.hibernate.dialect.SAPDBDialect</code></td></tr><tr><td>Informix</td><td><code class="literal">org.hibernate.dialect.InformixDialect</code></td></tr><tr><td>HypersonicSQL</td><td><code class="literal">org.hibernate.dialect.HSQLDialect</code></td></tr><tr><td>H2 Database</td><td><code class="literal">org.hibernate.dialect.H2Dialect</code></td></tr><tr><td>Ingres</td><td><code class="literal">org.hibernate.dialect.IngresDialect</code></td></tr><tr><td>Progress</td><td><code class="literal">org.hibernate.dialect.ProgressDialect</code></td></tr><tr><td>Mckoi SQL</td><td><code class="literal">org.hibernate.dialect.MckoiDialect</code></td></tr><tr><td>Interbase</td><td><code class="literal">org.hibernate.dialect.InterbaseDialect</code></td></tr><tr><td>Pointbase</td><td><code class="literal">org.hibernate.dialect.PointbaseDialect</code></td></tr><tr><td>FrontBase</td><td><code class="literal">org.hibernate.dialect.FrontbaseDialect</code></td></tr><tr><td>Firebird</td><td><code class="literal">org.hibernate.dialect.FirebirdDialect</code></td></tr></tbody></table></div></div><br class="table-break"/></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-optional-outerjoin"/>3.4.2. Outer Join Fetching</h3></div></div></div><p>If your database supports ANSI, Oracle or Sybase style outer
+      joins, <span class="emphasis"><em>outer join fetching</em></span> will often increase
+      performance by limiting the number of round trips to and from the
+      database. This is, however, at the cost of possibly more work performed
+      by the database itself. Outer join fetching allows a whole graph of
+      objects connected by many-to-one, one-to-many, many-to-many and
+      one-to-one associations to be retrieved in a single SQL
+      <code class="literal">SELECT</code>.</p><p>Outer join fetching can be disabled <span class="emphasis"><em>globally</em></span>
+      by setting the property <code class="literal">hibernate.max_fetch_depth</code> to
+      <code class="literal">0</code>. A setting of <code class="literal">1</code> or higher
+      enables outer join fetching for one-to-one and many-to-one associations
+      that have been mapped with <code class="literal">fetch="join"</code>.</p><p>See <a class="xref" href="performance.html#performance-fetching" title="21.1. Fetching strategies">Section 21.1, “Fetching strategies”</a> for more
+      information.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-optional-binarystreams"/>3.4.3. Binary Streams</h3></div></div></div><p>Oracle limits the size of <code class="literal">byte</code> arrays that can
+      be passed to and/or from its JDBC driver. If you wish to use large
+      instances of <code class="literal">binary</code> or
+      <code class="literal">serializable</code> type, you should enable
+      <code class="literal">hibernate.jdbc.use_streams_for_binary</code>. <span class="emphasis"><em>This
+      is a system-level setting only.</em></span></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-optional-cacheprovider"/>3.4.4. Second-level and query cache</h3></div></div></div><p>The properties prefixed by <code class="literal">hibernate.cache</code>
+      allow you to use a process or cluster scoped second-level cache system
+      with Hibernate. See the <a class="xref" href="performance.html#performance-cache" title="21.2. The Second Level Cache">Section 21.2, “The Second Level Cache”</a> for more
+      information.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-optional-querysubstitution"/>3.4.5. Query Language Substitution</h3></div></div></div><p>You can define new Hibernate query tokens using
+      <code class="literal">hibernate.query.substitutions</code>. For example:</p><pre class="programlisting">hibernate.query.substitutions true=1, false=0</pre><p>This would cause the tokens <code class="literal">true</code> and
+      <code class="literal">false</code> to be translated to integer literals in the
+      generated SQL.</p><pre class="programlisting">hibernate.query.substitutions toLowercase=LOWER</pre><p>This would allow you to rename the SQL <code class="literal">LOWER</code>
+      function.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-optional-statistics"/>3.4.6. Hibernate statistics</h3></div></div></div><p>If you enable <code class="literal">hibernate.generate_statistics</code>,
+      Hibernate exposes a number of metrics that are useful when tuning a
+      running system via <code class="literal">SessionFactory.getStatistics()</code>.
+      Hibernate can even be configured to expose these statistics via JMX.
+      Read the Javadoc of the interfaces in
+      <code class="literal">org.hibernate.stats</code> for more information.</p></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="configuration-logging"/>3.5. Logging</h2></div></div></div><p>Hibernate utilizes <a class="ulink" href="http://www.slf4j.org/">Simple Logging
+    Facade for Java</a> (SLF4J) in order to log various system events.
+    SLF4J can direct your logging output to several logging frameworks (NOP,
+    Simple, log4j version 1.2, JDK 1.4 logging, JCL or logback) depending on
+    your chosen binding. In order to setup logging you will need
+    <code class="filename">slf4j-api.jar</code> in your classpath together with the jar
+    file for your preferred binding - <code class="filename">slf4j-log4j12.jar</code>
+    in the case of Log4J. See the SLF4J <a class="ulink" href="http://www.slf4j.org/manual.html">documentation</a> for more
+    detail. To use Log4j you will also need to place a
+    <code class="filename">log4j.properties</code> file in your classpath. An example
+    properties file is distributed with Hibernate in the
+    <code class="literal">src/</code> directory.</p><p>It is recommended that you familiarize yourself with Hibernate's log
+    messages. A lot of work has been put into making the Hibernate log as
+    detailed as possible, without making it unreadable. It is an essential
+    troubleshooting device. The most interesting log categories are the
+    following:</p><div class="table"><a id="log-categories"/><p class="title"><b>Table 3.9. Hibernate Log Categories</b></p><div class="table-contents"><table summary="Hibernate Log Categories" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Category</th><th>Function</th></tr></thead><tbody><tr><td><code class="literal">org.hibernate.SQL</code></td><td>Log all SQL DML statements as they are executed</td></tr><tr><td><code class="literal">org.hibernate.type</code></td><td>Log all JDBC parameters</td></tr><tr><td><code class="literal">org.hibernate.tool.hbm2ddl</code></td><td>Log all SQL DDL statements as they are executed</td></tr><tr><td><code class="literal">org.hibernate.pretty</code></td><td>Log the state of all entities (max 20 entities) associated
+            with the session at flush time</td></tr><tr><td><code class="literal">org.hibernate.cache</code></td><td>Log all second-level cache activity</td></tr><tr><td><code class="literal">org.hibernate.transaction</code></td><td>Log transaction related activity</td></tr><tr><td><code class="literal">org.hibernate.jdbc</code></td><td>Log all JDBC resource acquisition</td></tr><tr><td><code class="literal">org.hibernate.hql.ast.AST</code></td><td>Log HQL and SQL ASTs during query parsing</td></tr><tr><td><code class="literal">org.hibernate.secure</code></td><td>Log all JAAS authorization requests</td></tr><tr><td><code class="literal">org.hibernate</code></td><td>Log everything. This is a lot of information but it is
+            useful for troubleshooting</td></tr></tbody></table></div></div><br class="table-break"/><p>When developing applications with Hibernate, you should almost
+    always work with <code class="literal">debug</code> enabled for the category
+    <code class="literal">org.hibernate.SQL</code>, or, alternatively, the property
+    <code class="literal">hibernate.show_sql</code> enabled.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="configuration-namingstrategy"/>3.6. Implementing a <code class="literal">NamingStrategy</code></h2></div></div></div><p>The interface <code class="literal">org.hibernate.cfg.NamingStrategy</code>
+    allows you to specify a "naming standard" for database objects and schema
+    elements.</p><p>You can provide rules for automatically generating database
+    identifiers from Java identifiers or for processing "logical" column and
+    table names given in the mapping file into "physical" table and column
+    names. This feature helps reduce the verbosity of the mapping document,
+    eliminating repetitive noise (<code class="literal">TBL_</code> prefixes, for
+    example). The default strategy used by Hibernate is quite minimal.</p><p>You can specify a different strategy by calling
+    <code class="literal">Configuration.setNamingStrategy()</code> before adding
+    mappings:</p><pre xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="JAVA"><!-- <br/> --><span class="java_type">SessionFactory</span><!-- <br/> --><span class="java_plain">&nbsp;sf&nbsp;</span><!-- <br/> --><span class="java_operator">=</span><!-- <br/> --><span class="java_plain">&nbsp;</span><!-- <br/> --><span class="java_keyword">new</span><!-- <br/> --><span class="java_plain">&nbsp;</span><!-- <br/> --><span class="java_type">Configuration</span><!-- <br/> --><span class="java_separator">()</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">setNamingStrategy</span><span class="java_separator">(</span><span class="java_type">ImprovedNamingStrategy</span><span class="java_separator">.</span><span class="java_plain">INSTANCE</span><span class="java_separator">)</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">addFile</span><span class="java_separator">(</span><span class="java_literal">&quot;Item.hbm.xml&quot;</span><span class="java_separator">)</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">addFile</span><span class="java_separator">(</span><span class="java_literal">&quot;Bid.hbm.xml&quot;</span><span class="java_separator">)</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">buildSessionFactory</span><span class="java_separator">();</span></pre><p><code class="literal">org.hibernate.cfg.ImprovedNamingStrategy</code> is a
+    built-in strategy that might be a useful starting point for some
+    applications.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="d0e3362"/>3.7. Implementing a PersisterClassProvider</h2></div></div></div><p>You can configure the persister implementation used to persist your
+    entities and collections:</p><div class="itemizedlist"><ul><li><p>by default, Hibernate uses persisters that make sense in a
+        relational model and follow Java Persistence's specification</p></li><li><p>you can define a <code class="classname">PersisterClassProvider</code>
+        implementation that provides the persister class used of a given
+        entity or collection</p></li><li><p>finally, you can override them on a per entity and collection
+        basis in the mapping using <code class="classname">@Persister</code> or its
+        XML equivalent</p></li></ul></div><p>The latter in the list the higher in priority.</p><p>You can pass the <code class="classname">PersisterClassProvider</code>
+    instance to the <code class="classname">Configuration</code> object.</p><pre xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="JAVA"><!-- <br/> --><span class="java_type">SessionFactory</span><!-- <br/> --><span class="java_plain">&nbsp;sf&nbsp;</span><!-- <br/> --><span class="java_operator">=</span><!-- <br/> --><span class="java_plain">&nbsp;</span><!-- <br/> --><span class="java_keyword">new</span><!-- <br/> --><span class="java_plain">&nbsp;</span><!-- <br/> --><span class="java_type">Configuration</span><!-- <br/> --><span class="java_separator">()</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">setPersisterClassProvider</span><span class="java_separator">(</span><span class="java_plain">customPersisterClassProvider</span><span class="java_separator">)</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">addAnnotatedClass</span><span class="java_separator">(</span><span class="java_type">Order</span><span class="java_separator">.</span><span class="java_keyword">class</span><span class="java_separator">)</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">buildSessionFactory</span><span class="java_separator">();</span></pre><p>The persister class provider methods, when returning a non null
+    persister class, override the default Hibernate persisters. The entity
+    name or the collection role are passed to the methods. It is a nice way to
+    centralize the overriding logic of the persisters instead of spreading
+    them on each entity or collection mapping.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="configuration-xmlconfig"/>3.8. XML configuration file</h2></div></div></div><p>An alternative approach to configuration is to specify a full
+    configuration in a file named <code class="literal">hibernate.cfg.xml</code>. This
+    file can be used as a replacement for the
+    <code class="literal">hibernate.properties</code> file or, if both are present, to
+    override properties.</p><p>The XML configuration file is by default expected to be in the root
+    of your <code class="literal">CLASSPATH</code>. Here is an example:</p><pre xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="XML"><!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_processing_instruction">&lt;?xml&nbsp;version='1.0'&nbsp;encoding='utf-8'?&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_tag_symbols">&lt;</span><span class="xml_plain">!</span><span class="xml_attribute_name">DOCTYPE</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">hibernate-configuration</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">PUBLIC</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_attribute_value">&quot;-//Hibernate/Hibernate&nbsp;Configuration&nbsp;DTD//EN&quot;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_attribute_value">&quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">hibernate-configuration</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_comment">&lt;!--&nbsp;a&nbsp;SessionFactory&nbsp;instance&nbsp;listed&nbsp;as&nbsp;/jndi/name&nbsp;--&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">session-factory</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;java:hibernate/SessionFactory&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_comment">&lt;!--&nbsp;properties&nbsp;--&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">property</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;connection.datasource&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">java:/comp/env/jdbc/MyDB</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">property</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">property</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;dialect&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">org.hibernate.dialect.MySQLDialect</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">property</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">property</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;show_sql&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">false</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">property</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">property</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;transaction.factory_class&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.hibernate.transaction.JTATransactionFactory</span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">property</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">property</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;jta.UserTransaction&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">java:comp/UserTransaction</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">property</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_comment">&lt;!--&nbsp;mapping&nbsp;files&nbsp;--&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">mapping</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">resource</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;org/hibernate/auction/Item.hbm.xml&quot;</span><span class="xml_tag_symbols">/&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">mapping</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">resource</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;org/hibernate/auction/Bid.hbm.xml&quot;</span><span class="xml_tag_symbols">/&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_comment">&lt;!--&nbsp;cache&nbsp;settings&nbsp;--&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">class-cache</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">class</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;org.hibernate.auction.Item&quot;</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">usage</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;read-write&quot;</span><span class="xml_tag_symbols">/&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">class-cache</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">class</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;org.hibernate.auction.Bid&quot;</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">usage</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;read-only&quot;</span><span class="xml_tag_symbols">/&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">collection-cache</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">collection</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;org.hibernate.auction.Item.bids&quot;</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">usage</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;read-write&quot;</span><span class="xml_tag_symbols">/&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">session-factory</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">hibernate-configuration</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+</pre><p>The advantage of this approach is the externalization of the mapping
+    file names to configuration. The <code class="literal">hibernate.cfg.xml</code> is
+    also more convenient once you have to tune the Hibernate cache. It is your
+    choice to use either <code class="literal">hibernate.properties</code> or
+    <code class="literal">hibernate.cfg.xml</code>. Both are equivalent, except for the
+    above mentioned benefits of using the XML syntax.</p><p>With the XML configuration, starting Hibernate is then as simple
+    as:</p><pre xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="JAVA"><!-- <br/> --><span class="java_type">SessionFactory</span><!-- <br/> --><span class="java_plain">&nbsp;sf&nbsp;</span><!-- <br/> --><span class="java_operator">=</span><!-- <br/> --><span class="java_plain">&nbsp;</span><!-- <br/> --><span class="java_keyword">new</span><!-- <br/> --><span class="java_plain">&nbsp;</span><!-- <br/> --><span class="java_type">Configuration</span><!-- <br/> --><span class="java_separator">().</span><!-- <br/> --><span class="java_plain">configure</span><!-- <br/> --><span class="java_separator">().</span><!-- <br/> --><span class="java_plain">buildSessionFactory</span><!-- <br/> --><span class="java_separator">();</span></pre><p>You can select a different XML configuration file using:</p><pre xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="JAVA"><!-- <br/> --><span class="java_type">SessionFactory</span><!-- <br/> --><span class="java_plain">&nbsp;sf&nbsp;</span><!-- <br/> --><span class="java_operator">=</span><!-- <br/> --><span class="java_plain">&nbsp;</span><!-- <br/> --><span class="java_keyword">new</span><!-- <br/> --><span class="java_plain">&nbsp;</span><!-- <br/> --><span class="java_type">Configuration</span><!-- <br/> --><span class="java_separator">()</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">configure</span><span class="java_separator">(</span><span class="java_literal">&quot;catdb.cfg.xml&quot;</span><span class="java_separator">)</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_separator">.</span><span class="java_plain">buildSessionFactory</span><span class="java_separator">();</span></pre></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="configuration-j2ee"/>3.9. Java EE Application Server integration</h2></div></div></div><p>Hibernate has the following integration points for J2EE
+    infrastructure:</p><div class="itemizedlist"><ul><li><p><span class="emphasis"><em>Container-managed datasources</em></span>: Hibernate
+        can use JDBC connections managed by the container and provided through
+        JNDI. Usually, a JTA compatible <code class="literal">TransactionManager</code>
+        and a <code class="literal">ResourceManager</code> take care of transaction
+        management (CMT), especially distributed transaction handling across
+        several datasources. You can also demarcate transaction boundaries
+        programmatically (BMT), or you might want to use the optional
+        Hibernate <code class="literal">Transaction</code> API for this to keep your
+        code portable.</p></li></ul></div><div class="itemizedlist"><ul><li><p><span class="emphasis"><em>Automatic JNDI binding</em></span>: Hibernate can bind
+        its <code class="literal">SessionFactory</code> to JNDI after startup.</p></li></ul></div><div class="itemizedlist"><ul><li><p><span class="emphasis"><em>JTA Session binding:</em></span> the Hibernate
+        <code class="literal">Session</code> can be automatically bound to the scope of
+        JTA transactions. Simply lookup the <code class="literal">SessionFactory</code>
+        from JNDI and get the current <code class="literal">Session</code>. Let
+        Hibernate manage flushing and closing the <code class="literal">Session</code>
+        when your JTA transaction completes. Transaction demarcation is either
+        declarative (CMT) or programmatic (BMT/UserTransaction).</p></li></ul></div><div class="itemizedlist"><ul><li><p><span class="emphasis"><em>JMX deployment:</em></span> if you have a JMX capable
+        application server (e.g. JBoss AS), you can choose to deploy Hibernate
+        as a managed MBean. This saves you the one line startup code to build
+        your <code class="literal">SessionFactory</code> from a
+        <code class="literal">Configuration</code>. The container will startup your
+        <code class="literal">HibernateService</code> and also take care of service
+        dependencies (datasource has to be available before Hibernate starts,
+        etc).</p></li></ul></div><p>Depending on your environment, you might have to set the
+    configuration option
+    <code class="literal">hibernate.connection.aggressive_release</code> to true if your
+    application server shows "connection containment" exceptions.</p><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-optional-transactionstrategy"/>3.9.1. Transaction strategy configuration</h3></div></div></div><p>The Hibernate <code class="literal">Session</code> API is independent of any
+      transaction demarcation system in your architecture. If you let
+      Hibernate use JDBC directly through a connection pool, you can begin and
+      end your transactions by calling the JDBC API. If you run in a J2EE
+      application server, you might want to use bean-managed transactions and
+      call the JTA API and <code class="literal">UserTransaction</code> when
+      needed.</p><p>To keep your code portable between these two (and other)
+      environments we recommend the optional Hibernate
+      <code class="literal">Transaction</code> API, which wraps and hides the underlying
+      system. You have to specify a factory class for
+      <code class="literal">Transaction</code> instances by setting the Hibernate
+      configuration property
+      <code class="literal">hibernate.transaction.factory_class</code>.</p><p>There are three standard, or built-in, choices:</p><div class="variablelist"><dl><dt><span class="term"><code class="literal">org.hibernate.transaction.JDBCTransactionFactory</code></span></dt><dd><p>delegates to database (JDBC) transactions (default)</p></dd><dt><span class="term"><code class="literal">org.hibernate.transaction.JTATransactionFactory</code></span></dt><dd><p>delegates to container-managed transactions if an existing
+            transaction is underway in this context (for example, EJB session
+            bean method). Otherwise, a new transaction is started and
+            bean-managed transactions are used.</p></dd><dt><span class="term"><code class="literal">org.hibernate.transaction.CMTTransactionFactory</code></span></dt><dd><p>delegates to container-managed JTA transactions</p></dd></dl></div><p>You can also define your own transaction strategies (for a CORBA
+      transaction service, for example).</p><p>Some features in Hibernate (i.e., the second level cache,
+      Contextual Sessions with JTA, etc.) require access to the JTA
+      <code class="literal">TransactionManager</code> in a managed environment. In an
+      application server, since J2EE does not standardize a single mechanism,
+      you have to specify how Hibernate should obtain a reference to the
+      <code class="literal">TransactionManager</code>:</p><div class="table"><a id="jtamanagerlookup"/><p class="title"><b>Table 3.10. JTA

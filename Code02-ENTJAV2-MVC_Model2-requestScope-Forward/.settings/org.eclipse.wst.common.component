@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Code02-ENTJAV2-MVC_Model2-requestScope-Forward">
+        <wb-resource deploy-path="/" source-path="/web" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="www.mvc-model2.demo.com.ph"/>
+        <property name="java-output-path" value="/Code02-ENTJAV2-MVC_Model2-requestScope-Forward/build/classes"/>
+    </wb-module>
+</project-modules>

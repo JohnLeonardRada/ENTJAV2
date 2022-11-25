@@ -1,0 +1,6 @@
+
+	"ControllerBinding_GyroNeutralAngle_joystick_move" "Ângulo neutro de inclinação do giroscópio"
+	"ControllerBinding_GyroNeutralAngle_joystick_move_description" "Esta é a posição neutra de um joystick. Ao ajustares esta opção, podes alterar a posição neutra (central) para a frente ou para trás, conforme for mais confortável para a tua postura. Para usos que imitem um volante é recomendado desativar a porção vertical completamente e usar só o eixo horizontal, onde este ângulo não tem qualquer relevância."
+	"ControllerBinding_GyroLockExtents_joystick_move" "Bloquear giroscópio às extremidades"
+	"ControllerBinding_GyroLockExtents_joystick_move_description" "Quando ativado, se rodares o comando para além do seu limite de deteção, ele bloqueia-se nesse extremo. Se desativares, o comando pode \"inverter-se\" para o lado oposto ao passar a extremidade. Se tiveres problemas com a direção do comando a bloquear frequentemente, poderás querer desativar esta opção."
+	"ControllerBinding_GyroLockExtents_joystick_move_on" "Bloquear giroscópi

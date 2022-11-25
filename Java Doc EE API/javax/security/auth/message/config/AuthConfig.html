@@ -1,0 +1,132 @@
+: <FONT color="red"><EM>help needed here</EM></FONT>.</LI>
+</UL>
+
+
+<H2><A name="TutorialLesson06-BuildingyourownInterceptor"></A>Building your own Interceptor</H2>
+
+<P>If none of the above interceptors suit your particular need, you will have to implement your own interceptor. Fortunately, this is an easy task to accomplish. Suppose we need an interceptor that places a greeting in the Session according to the time of the day (morning, afternoon or evening). Here's how we could implement it:</P>
+
+<H3><A name="TutorialLesson06-GreetingInterceptor.java%3A"></A>GreetingInterceptor.java:</H3>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">package</SPAN> lesson05;
+
+<SPAN class="code-keyword">import</SPAN> java.util.Calendar;
+<SPAN class="code-keyword">import</SPAN> com.opensymphony.xwork.interceptor.Interceptor;
+<SPAN class="code-keyword">import</SPAN> com.opensymphony.xwork.ActionInvocation;
+
+<SPAN class="code-keyword">public</SPAN> class GreetingInterceptor <SPAN class="code-keyword">implements</SPAN> Interceptor {
+	<SPAN class="code-keyword">public</SPAN> void init() { }
+	<SPAN class="code-keyword">public</SPAN> void destroy() { }
+	<SPAN class="code-keyword">public</SPAN> <SPAN class="code-object">String</SPAN> intercept(ActionInvocation invocation) <SPAN class="code-keyword">throws</SPAN> Exception {
+		Calendar calendar = Calendar.getInstance();
+		<SPAN class="code-object">int</SPAN> hour = calendar.get(Calendar.HOUR_OF_DAY);
+		<SPAN class="code-object">String</SPAN> greeting = (hour &lt; 6) ? <SPAN class="code-quote">&quot;Good evening&quot;</SPAN> :
+			((hour &lt; 12) ? <SPAN class="code-quote">&quot;Good morning&quot;</SPAN>:
+			((hour &lt; 18) ? <SPAN class="code-quote">&quot;Good afternoon&quot;</SPAN>: <SPAN class="code-quote">&quot;Good evening&quot;</SPAN>));
+
+		invocation.getInvocationContext().getSession().put(<SPAN class="code-quote">&quot;greeting&quot;</SPAN>, greeting);
+
+		<SPAN class="code-object">String</SPAN> result = invocation.invoke();
+
+		<SPAN class="code-keyword">return</SPAN> result;
+	}
+}
+</PRE>
+</DIV></DIV>
+
+<H3><A name="TutorialLesson06-xwork.xml%3A"></A>xwork.xml:</H3>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml">&lt;!DOCTYPE xwork PUBLIC <SPAN class="code-quote">&quot;-//OpenSymphony Group//XWork 1.0//EN&quot;</SPAN>
+<SPAN class="code-quote">&quot;http://www.opensymphony.com/xwork/xwork-1.0.dtd&quot;</SPAN>&gt;
+
+<SPAN class="code-tag">&lt;xwork&gt;</SPAN>
+	<SPAN class="code-tag"><SPAN class="code-comment">&lt;!-- Include webwork defaults (from WebWork JAR). --&gt;</SPAN></SPAN>
+	<SPAN class="code-tag">&lt;include file=<SPAN class="code-quote">&quot;webwork-default.xml&quot;</SPAN> /&gt;</SPAN>
+
+	<SPAN class="code-tag"><SPAN class="code-comment">&lt;!-- Configuration for the default package. --&gt;</SPAN></SPAN>
+	<SPAN class="code-tag">&lt;package name=<SPAN class="code-quote">&quot;default&quot;</SPAN> extends=<SPAN class="code-quote">&quot;webwork-default&quot;</SPAN>&gt;</SPAN>
+		<SPAN class="code-tag">&lt;interceptors&gt;</SPAN>
+			<SPAN class="code-tag">&lt;interceptor name=<SPAN class="code-quote">&quot;greeting&quot;</SPAN> class=<SPAN class="code-quote">&quot;section02.lesson05.GreetingInterceptor&quot;</SPAN> /&gt;</SPAN>
+		<SPAN class="code-tag">&lt;/interceptors&gt;</SPAN>
+
+		<SPAN class="code-tag"><SPAN class="code-comment">&lt;!-- Action: Lesson 5: GreetingInterceptor. --&gt;</SPAN></SPAN>
+		<SPAN class="code-tag">&lt;action name=<SPAN class="code-quote">&quot;greetingAction&quot;</SPAN> class=<SPAN class="code-quote">&quot;lesson05.GreetingAction&quot;</SPAN>&gt;</SPAN>
+			<SPAN class="code-tag">&lt;result name=<SPAN class="code-quote">&quot;success&quot;</SPAN> type=<SPAN class="code-quote">&quot;velocity&quot;</SPAN>&gt;</SPAN>ex01-result.vm<SPAN class="code-tag">&lt;/result&gt;</SPAN>
+			<SPAN class="code-tag">&lt;interceptor-ref name=<SPAN class="code-quote">&quot;greeting&quot;</SPAN> /&gt;</SPAN>
+		<SPAN class="code-tag">&lt;/action&gt;</SPAN>
+	<SPAN class="code-tag">&lt;/package&gt;</SPAN>
+<SPAN class="code-tag">&lt;/xwork&gt;</SPAN>
+</PRE>
+</DIV></DIV>
+
+<H3><A name="TutorialLesson06-GreetingAction.java%3A"></A>GreetingAction.java:</H3>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">package</SPAN> lesson05;
+
+<SPAN class="code-keyword">import</SPAN> com.opensymphony.xwork.ActionSupport;
+
+<SPAN class="code-keyword">public</SPAN> class GreetingAction <SPAN class="code-keyword">extends</SPAN> ActionSupport {
+	<SPAN class="code-keyword">public</SPAN> <SPAN class="code-object">String</SPAN> execute() <SPAN class="code-keyword">throws</SPAN> Exception {
+		<SPAN class="code-keyword">return</SPAN> SUCCESS;
+	}
+}
+</PRE>
+</DIV></DIV>
+
+<H3><A name="TutorialLesson06-ex01result.vm%3A"></A>ex01-result.vm:</H3>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-html"><SPAN class="code-tag">&lt;html&gt;</SPAN>
+<SPAN class="code-tag">&lt;head&gt;</SPAN>
+<SPAN class="code-tag">&lt;title&gt;</SPAN>WebWork Tutorial - Lesson 5 - Example 1<SPAN class="code-tag">&lt;/title&gt;</SPAN>
+<SPAN class="code-tag">&lt;/head&gt;</SPAN>
+<SPAN class="code-tag">&lt;body&gt;</SPAN>
+
+#set ($ses = $req.getSession())
+<SPAN class="code-tag">&lt;p&gt;</SPAN><SPAN class="code-tag">&lt;b&gt;</SPAN>${ses.getAttribute('greeting')}!<SPAN class="code-tag">&lt;/b&gt;</SPAN><SPAN class="code-tag">&lt;/p&gt;</SPAN>
+
+<SPAN class="code-tag">&lt;/body&gt;</SPAN>
+<SPAN class="code-tag">&lt;/html&gt;</SPAN>
+</PRE>
+</DIV></DIV>
+<P>Let's take a look at our interceptor class first. As explained before, the interceptor must implement <TT>com.opensymphony.xwork.interceptor.Interceptor</TT>'s methods: <TT>init()</TT>, called during interceptor initialization, <TT>destroy()</TT>, called during destruction, and most importantly, <TT>intercept(ActionInvocation invocation)</TT>, which is where we place the code that does the work.</P>
+
+<P>Notice that our interceptor returns the result from <TT>invocation.invoke()</TT> which is the method responsible for executing the next interceptor in the stack or, if this is the last one, the action. This means that the interceptor has the power of short-circuiting the action invocation and return a result string without executing the action at all&#33; Use this with caution, though.</P>
+
+<P>One other thing that interceptors can do is execute code after the action has executed. To do that, just place code after the invocation.invoke() call. WebWork provides an abstract class that already implements this kind of behaviour: <TT>com.opensymphony.xwork.interceptor.AroundInterceptor</TT>. Just extend it and implement the methods <TT>before(ActionInvocation invocation)</TT> and <TT>after(ActionInvocation dispatcher, String result)</TT>.</P>
+
+<P>The <TT>xwork.xml</TT> configuration, the action class and the result page are pretty straightforward and require no further explanation.</P>
+<BLOCKQUOTE><P><A href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&title=TutorialExamples&linkCreation=true&fromPageId=14155" class="createlink">Try the example&#33;</A></P></BLOCKQUOTE>
+
+<HR>
+<P><A href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&title=TutorialLesson05&linkCreation=true&fromPageId=14155" class="createlink">Previous Lesson</A> &#124; <A href="tutorialend.html" title="TutorialEnd">End of Tutorial</A></P>
+        </DIV>
+
+                  <DIV class="tabletitle">
+            Children
+            <SPAN class="smalltext" id="show" style="display: inline;">
+              <A href="javascript:showChildren()">Show Children</A></SPAN>
+            <SPAN class="smalltext" id="hide" style="display: none;">
+              <A href="javascript:hideChildren()">Hide Children</A></SPAN>
+          </DIV>
+          <DIV class="greybox" id="children" style="display: none;">
+                                      <A href="tutorialend.html" title="TutorialEnd">TutorialEnd</A>
+              <SPAN class="smalltext">(Apache Struts 2 Documentation)</SPAN>
+              <BR>
+                      </DIV>
+        
+      </DIV>
+    </DIV>
+    <DIV class="footer">
+      Generated by
+      <A href="http://www.atlassian.com/confluence/">Atlassian Confluence</A> (Version: 3.4.9 Build: 2042 Feb 14, 2011)
+      <A href="http://could.it/autoexport/">Auto Export Plugin</A> (Version: 1.0.0-dkulp)
+    </DIV>
+  </BODY>
+</HTML>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        âPNG
+
+   IHDR  		  Ç   ˜VZ   bKGD ˇ ˇ ˇ†Ωßì   	pHYs  ."  ."™‚›í    IDATxúÏ›lï˜ù/¯'	PlC&€å„@L‡ÓpQ†6§Kö	≥;°ìJ{/ôF≥R“Õ˝c∫ùÙjÔΩÍ4´…H˝°;#›ˆŒtV{´§“›MKªä#]Ÿ"·é°0ñ:™Õÿˇ@«çèçùbŒ9‘&…˛·;ÑÄ}ŒÛ}Œy^Ø?™¸ÄÛ}'¡.ÁyüœÁ{«G}     @
+‹:       ƒD7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê∫1      “B7     @ZË∆      H›      i°      -tc      §Ön     Ä¥–ç     ê

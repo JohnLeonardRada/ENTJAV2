@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Code18-ENTJAV2-Struts2-Basic-EL-ValueStack-URLParameters">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/" source-path="/web"/>
+        <property name="context-root" value="Code18-ENTJAV2-Struts2-Basic-EL-ValueStack-URLParameters"/>
+        <property name="java-output-path" value="/Code18-ENTJAV2-Struts2-Basic-EL-ValueStack-URLParameters/build/classes"/>
+    </wb-module>
+</project-modules>

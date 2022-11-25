@@ -1,0 +1,696 @@
+AXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createExternalLink(java.lang.String, java.lang.String)"><!-- --></A><H3>
+createExternalLink</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/ExternalLink.html" title="interface in javax.xml.registry.infomodel">ExternalLink</A> <B>createExternalLink</B>(java.lang.String&nbsp;externalURI,
+                                java.lang.String&nbsp;description)
+                                throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an ExternalLink instance using the specified
+ parameters, where the description is a String.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>externalURI</CODE> - the external URI<DD><CODE>description</CODE> - a description of the link (a String)
+<DT><B>Returns:</B><DD>the ExternalLink instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createExternalLink(java.lang.String, javax.xml.registry.infomodel.InternationalString)"><!-- --></A><H3>
+createExternalLink</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/ExternalLink.html" title="interface in javax.xml.registry.infomodel">ExternalLink</A> <B>createExternalLink</B>(java.lang.String&nbsp;externalURI,
+                                <A HREF="../../../javax/xml/registry/infomodel/InternationalString.html" title="interface in javax.xml.registry.infomodel">InternationalString</A>&nbsp;description)
+                                throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an ExternalLink instance using the specified
+ parameters, where the description is an InternationalString.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>externalURI</CODE> - the external URI<DD><CODE>description</CODE> - a description of the link (an InternationalString)
+<DT><B>Returns:</B><DD>the ExternalLink instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createExtrinsicObject(javax.activation.DataHandler)"><!-- --></A><H3>
+createExtrinsicObject</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/ExtrinsicObject.html" title="interface in javax.xml.registry.infomodel">ExtrinsicObject</A> <B>createExtrinsicObject</B>(<A HREF="../../../javax/activation/DataHandler.html" title="class in javax.activation">DataHandler</A>&nbsp;repositoryItem)
+                                      throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an ExtrinsicObject instance using the specified
+ parameters.
+
+
+ <p><DL><DT><B>Capability Level: 1 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>repositoryItem</CODE> - the DataHandler for the repository item. Must not be null.
+<DT><B>Returns:</B><DD>the ExtrinsicObject instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createInternationalString()"><!-- --></A><H3>
+createInternationalString</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/InternationalString.html" title="interface in javax.xml.registry.infomodel">InternationalString</A> <B>createInternationalString</B>()
+                                              throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an empty InternationalString instance.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the InternationalString instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createInternationalString(java.lang.String)"><!-- --></A><H3>
+createInternationalString</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/InternationalString.html" title="interface in javax.xml.registry.infomodel">InternationalString</A> <B>createInternationalString</B>(java.lang.String&nbsp;s)
+                                              throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an InternationalString instance using a String
+ parameter and the default Locale.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>s</CODE> - the String from which to create the InternationalString
+<DT><B>Returns:</B><DD>the InternationalString instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createInternationalString(java.util.Locale, java.lang.String)"><!-- --></A><H3>
+createInternationalString</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/InternationalString.html" title="interface in javax.xml.registry.infomodel">InternationalString</A> <B>createInternationalString</B>(java.util.Locale&nbsp;l,
+                                              java.lang.String&nbsp;s)
+                                              throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an InternationalString instance using the specified
+ Locale and String parameters.
+
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>l</CODE> - the Locale in which to create the InternationalString<DD><CODE>s</CODE> - the String from which to create the InternationalString
+<DT><B>Returns:</B><DD>the InternationalString instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createKey(java.lang.String)"><!-- --></A><H3>
+createKey</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/Key.html" title="interface in javax.xml.registry.infomodel">Key</A> <B>createKey</B>(java.lang.String&nbsp;id)
+              throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a Key instance from an ID.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>id</CODE> - the ID string from which to create the Key
+<DT><B>Returns:</B><DD>the Key instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createLocalizedString(java.util.Locale, java.lang.String)"><!-- --></A><H3>
+createLocalizedString</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/LocalizedString.html" title="interface in javax.xml.registry.infomodel">LocalizedString</A> <B>createLocalizedString</B>(java.util.Locale&nbsp;l,
+                                      java.lang.String&nbsp;s)
+                                      throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a LocalizedString instance using the specified
+ Locale and String parameters.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>l</CODE> - the Locale in which to create the LocalizedString<DD><CODE>s</CODE> - the String from which to create the LocalizedString
+<DT><B>Returns:</B><DD>the LocalizedString instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createLocalizedString(java.util.Locale, java.lang.String, java.lang.String)"><!-- --></A><H3>
+createLocalizedString</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/LocalizedString.html" title="interface in javax.xml.registry.infomodel">LocalizedString</A> <B>createLocalizedString</B>(java.util.Locale&nbsp;l,
+                                      java.lang.String&nbsp;s,
+                                      java.lang.String&nbsp;charSetName)
+                                      throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a LocalizedString instance using the specified
+ Locale, String, and character set parameters.
+
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>l</CODE> - the Locale in which to create the LocalizedString<DD><CODE>s</CODE> - the String from which to create the LocalizedString<DD><CODE>charSetName</CODE> - the name of the character set to use
+<DT><B>Returns:</B><DD>the LocalizedString instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createOrganization(java.lang.String)"><!-- --></A><H3>
+createOrganization</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/Organization.html" title="interface in javax.xml.registry.infomodel">Organization</A> <B>createOrganization</B>(java.lang.String&nbsp;name)
+                                throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an Organization instance using the specified
+ name, where the name is a String.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the Organization
+<DT><B>Returns:</B><DD>the Organization instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createOrganization(javax.xml.registry.infomodel.InternationalString)"><!-- --></A><H3>
+createOrganization</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/Organization.html" title="interface in javax.xml.registry.infomodel">Organization</A> <B>createOrganization</B>(<A HREF="../../../javax/xml/registry/infomodel/InternationalString.html" title="interface in javax.xml.registry.infomodel">InternationalString</A>&nbsp;name)
+                                throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an Organization instance using the specified
+ name, where the name is an InternationalString.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the Organization
+<DT><B>Returns:</B><DD>the Organization instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPersonName(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+createPersonName</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/PersonName.html" title="interface in javax.xml.registry.infomodel">PersonName</A> <B>createPersonName</B>(java.lang.String&nbsp;firstName,
+                            java.lang.String&nbsp;middleName,
+                            java.lang.String&nbsp;lastName)
+                            throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a PersonName instance using the specified
+ first, middle, and last names.
+
+ <p><DL><DT><B>Capability Level: 1 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>firstName</CODE> - the person's first name<DD><CODE>middleName</CODE> - the person's middle name<DD><CODE>lastName</CODE> - the person's last name
+<DT><B>Returns:</B><DD>the PersonName instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPersonName(java.lang.String)"><!-- --></A><H3>
+createPersonName</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/PersonName.html" title="interface in javax.xml.registry.infomodel">PersonName</A> <B>createPersonName</B>(java.lang.String&nbsp;fullName)
+                            throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a PersonName instance using the specified
+ full name.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>fullName</CODE> - the person's full name
+<DT><B>Returns:</B><DD>the PersonName instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPostalAddress(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+createPostalAddress</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/PostalAddress.html" title="interface in javax.xml.registry.infomodel">PostalAddress</A> <B>createPostalAddress</B>(java.lang.String&nbsp;streetNumber,
+                                  java.lang.String&nbsp;street,
+                                  java.lang.String&nbsp;city,
+                                  java.lang.String&nbsp;stateOrProvince,
+                                  java.lang.String&nbsp;country,
+                                  java.lang.String&nbsp;postalCode,
+                                  java.lang.String&nbsp;type)
+                                  throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a PostalAddress instance using the specified
+ parameters.
+
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>streetNumber</CODE> - the street number<DD><CODE>street</CODE> - the street name<DD><CODE>city</CODE> - the city name<DD><CODE>stateOrProvince</CODE> - the state or province name<DD><CODE>country</CODE> - the country name<DD><CODE>postalCode</CODE> - the postal code (such as a US ZIP code)<DD><CODE>type</CODE> - the type of the address
+<DT><B>Returns:</B><DD>the PostalAddress instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createRegistryPackage(java.lang.String)"><!-- --></A><H3>
+createRegistryPackage</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/RegistryPackage.html" title="interface in javax.xml.registry.infomodel">RegistryPackage</A> <B>createRegistryPackage</B>(java.lang.String&nbsp;name)
+                                      throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a RegistryPackage instance using the specified
+ name, where the name is a String.
+
+ <p><DL><DT><B>Capability Level: 1 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the registry package (a String)
+<DT><B>Returns:</B><DD>the RegistryPackage instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createRegistryPackage(javax.xml.registry.infomodel.InternationalString)"><!-- --></A><H3>
+createRegistryPackage</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/RegistryPackage.html" title="interface in javax.xml.registry.infomodel">RegistryPackage</A> <B>createRegistryPackage</B>(<A HREF="../../../javax/xml/registry/infomodel/InternationalString.html" title="interface in javax.xml.registry.infomodel">InternationalString</A>&nbsp;name)
+                                      throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a RegistryPackage instance using the specified
+ name, where the name is an InternationalString.
+
+ <p><DL><DT><B>Capability Level: 1 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the registry package (an InternationalString)
+<DT><B>Returns:</B><DD>the RegistryPackage instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createService(java.lang.String)"><!-- --></A><H3>
+createService</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/Service.html" title="interface in javax.xml.registry.infomodel">Service</A> <B>createService</B>(java.lang.String&nbsp;name)
+                      throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a Service instance using the specified
+ name, where the name is a String.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the Service (a String)
+<DT><B>Returns:</B><DD>the Service instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createService(javax.xml.registry.infomodel.InternationalString)"><!-- --></A><H3>
+createService</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/Service.html" title="interface in javax.xml.registry.infomodel">Service</A> <B>createService</B>(<A HREF="../../../javax/xml/registry/infomodel/InternationalString.html" title="interface in javax.xml.registry.infomodel">InternationalString</A>&nbsp;name)
+                      throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a Service instance using the specified
+ name, where the name is an InternationalString.
+
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the Service (an InternationalString)
+<DT><B>Returns:</B><DD>the Service instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createServiceBinding()"><!-- --></A><H3>
+createServiceBinding</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/ServiceBinding.html" title="interface in javax.xml.registry.infomodel">ServiceBinding</A> <B>createServiceBinding</B>()
+                                    throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an empty ServiceBinding instance.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the ServiceBinding instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSlot(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+createSlot</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/Slot.html" title="interface in javax.xml.registry.infomodel">Slot</A> <B>createSlot</B>(java.lang.String&nbsp;name,
+                java.lang.String&nbsp;value,
+                java.lang.String&nbsp;slotType)
+                throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a Slot instance using the specified
+ parameters, where the value is a String.
+
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the Slot<DD><CODE>value</CODE> - the value (a String)<DD><CODE>slotType</CODE> - the slot type
+<DT><B>Returns:</B><DD>the Slot instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSlot(java.lang.String, java.util.Collection, java.lang.String)"><!-- --></A><H3>
+createSlot</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/Slot.html" title="interface in javax.xml.registry.infomodel">Slot</A> <B>createSlot</B>(java.lang.String&nbsp;name,
+                java.util.Collection&nbsp;values,
+                java.lang.String&nbsp;slotType)
+                throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates a Slot instance using the specified
+ parameters, where the value is a Collection of Strings.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the Slot<DD><CODE>value</CODE> - the value (a Collection of Strings)<DD><CODE>slotType</CODE> - the slot type
+<DT><B>Returns:</B><DD>the Slot instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSpecificationLink()"><!-- --></A><H3>
+createSpecificationLink</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/SpecificationLink.html" title="interface in javax.xml.registry.infomodel">SpecificationLink</A> <B>createSpecificationLink</B>()
+                                          throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an empty SpecificationLink instance.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the SpecificationLink instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createTelephoneNumber()"><!-- --></A><H3>
+createTelephoneNumber</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/TelephoneNumber.html" title="interface in javax.xml.registry.infomodel">TelephoneNumber</A> <B>createTelephoneNumber</B>()
+                                      throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an empty TelephoneNumber instance.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the TelephoneNumber instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createUser()"><!-- --></A><H3>
+createUser</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/infomodel/User.html" title="interface in javax.xml.registry.infomodel">User</A> <B>createUser</B>()
+                throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Creates an empty User instance.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the User instance created
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="saveObjects(java.util.Collection)"><!-- --></A><H3>
+saveObjects</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/BulkResponse.html" title="interface in javax.xml.registry">BulkResponse</A> <B>saveObjects</B>(java.util.Collection&nbsp;objects)
+                         throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Saves one or more Objects to the registry. An object may be a RegistryObject
+ subclass instance.
+ <p>If an object is not in the registry, it is created in the registry.
+ If it already exists in the registry and has been modified, then its
+ state is updated (replaced) in the registry.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>objects</CODE> - a potentially heterogeneous Collection of RegistryObject instances
+<DT><B>Returns:</B><DD>a BulkResponse containing the Collection of keys for those objects that were
+ saved successfully and any SaveException that was encountered in case of partial commit
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="deprecateObjects(java.util.Collection)"><!-- --></A><H3>
+deprecateObjects</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/BulkResponse.html" title="interface in javax.xml.registry">BulkResponse</A> <B>deprecateObjects</B>(java.util.Collection&nbsp;keys)
+                              throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Deprecates one or more previously submitted objects. Deprecation marks an
+ object as "soon to be deleted".
+ Once an object is deprecated, the JAXR provider must not allow any new references (e.g. new Associations, Classifications and ExternalLinks) to that object to be submitted. If a client makes an API call that results in a new reference to a deprecated object, the JAXR provider must throw a java.lang.IllegalStateException within a JAXRException. However, existing references to a deprecated object continue to function normally.
+
+ <p><DL><DT><B>Capability Level: 1 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>keys</CODE> - a Collection of keys for the objects to be deprecated
+<DT><B>Returns:</B><DD>a BulkResponse containing the Collection of keys for those objects that were
+ deprecated successfully and any JAXRException that was encountered in case of partial commit
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="unDeprecateObjects(java.util.Collection)"><!-- --></A><H3>
+unDeprecateObjects</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/BulkResponse.html" title="interface in javax.xml.registry">BulkResponse</A> <B>unDeprecateObjects</B>(java.util.Collection&nbsp;keys)
+                                throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Undeprecates one or more previously deprecated objects. If an object
+ was not previously deprecated, it is not an error, and no exception
+ is thrown.
+ Once an object is undeprecated, the JAXR provider must again allow new references (e.g. new Associations, Classifications and ExternalLinks) to that object to be submitted.
+
+ <p><DL><DT><B>Capability Level: 1 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>keys</CODE> - a Collection of keys for the objects to be undeprecated
+<DT><B>Returns:</B><DD>a BulkResponse containing the Collection of keys for those objects that were
+ deprecated successfully and any JAXRException that was encountered in case of partial commit
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="deleteObjects(java.util.Collection)"><!-- --></A><H3>
+deleteObjects</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/BulkResponse.html" title="interface in javax.xml.registry">BulkResponse</A> <B>deleteObjects</B>(java.util.Collection&nbsp;keys)
+                           throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Deletes one or more previously submitted objects from the registry
+ using the object keys.
+
+ <p><DL><DT><B>Capability Level: 1 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>keys</CODE> - a Collection of keys for the objects to be deleted
+<DT><B>Returns:</B><DD>a BulkResponse containing the Collection of keys for those objects that were
+ deleted successfully and any DeleteException that was encountered in case of partial commit
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="deleteObjects(java.util.Collection, java.lang.String)"><!-- --></A><H3>
+deleteObjects</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/BulkResponse.html" title="interface in javax.xml.registry">BulkResponse</A> <B>deleteObjects</B>(java.util.Collection&nbsp;keys,
+                           java.lang.String&nbsp;objectType)
+                           throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Deletes one or more previously submitted objects from the registry
+ using the object keys and a specified objectType attribute.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>keys</CODE> - a Collection of keys for the objects to be deleted<DD><CODE>objectType</CODE> - the objectType attribute for the objects to be deleted
+<DT><B>Returns:</B><DD>a BulkResponse containing the Collection of keys for those objects that were
+ deleted successfully and any DeleteException that was encountered in case of partial commit
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRegistryService()"><!-- --></A><H3>
+getRegistryService</H3>
+<PRE>
+<A HREF="../../../javax/xml/registry/RegistryService.html" title="interface in javax.xml.registry">RegistryService</A> <B>getRegistryService</B>()
+                                   throws <A HREF="../../../javax/xml/registry/JAXRException.html" title="class in javax.xml.registry">JAXRException</A></PRE>
+<DL>
+<DD>Returns the parent RegistryService that created this object.
+
+ <p><DL><DT><B>Capability Level: 0 </B></DL>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the parent RegistryService
+<DT><B>Throws:</B>
+<DD><CODE>JAXRException</CODE> - if the JAXR provider encounters an internal error</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../javax/xml/registry/JAXRResponse.html" title="interface in javax.xml.registry"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../javax/xml/registry/Query.html" title="interface in javax.xml.registry"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../index.html?javax/xml/registry/LifeCycleManager.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="LifeCycleManager.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+<font size="-1"><a href="http://java.sun.com/webapps/bugreport">Submit a bug or feature</a> <p> Copyright &copy; 2009, 2010, Oracle Corporation and/or its affiliates. All Rights Reserved. Use is subject to <a href="http://java.sun.com/javaee/downloads/licenses/java_ee-6_0-final-full-pub-license.txt" target="_top">license terms. </a> <p> Generated on 4-June-2010 04:34 </font> 
+</BODY>
+</HTML>
+                                                                                                                                                                                

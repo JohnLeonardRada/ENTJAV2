@@ -1,0 +1,4 @@
+127.0.0.1 - - [10/Sep/2020:08:18:00 +0800] "GET / HTTP/1.1" 404 748
+0:0:0:0:0:0:0:1 - - [10/Sep/2020:08:18:00 +0800] "GET /www.forex.bpi.com.ph/index.jsp HTTP/1.1" 200 906
+0:0:0:0:0:0:0:1 - - [10/Sep/2020:08:18:05 +0800] "POST /www.forex.bpi.com.ph/convertforex.jsp HTTP/1.1" 200 1301
+0:0:0:0:0:0:0:1 - - [10/Sep/2020:08:18:07 +0800] "GET /www.forex.bpi.com.ph/index.jsp HTTP/1.1" 200 906

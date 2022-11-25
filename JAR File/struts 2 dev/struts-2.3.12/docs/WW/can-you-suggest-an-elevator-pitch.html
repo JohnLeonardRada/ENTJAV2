@@ -1,0 +1,193 @@
+/* background-color: white; */\r\n\t/* border: 1px solid #a6a7a3; */\r\n\tfont-family: Verdana, Trebuchet, Tahoma, Arial;\r\n}\r\n\r\n.iconContainer {\r\n\tfont-family: Verdana, Trebuchet, Tahoma, Arial;\r\n\tfont-size: 13px;\r\n\tfloat: left;\r\n\theight: 18px;\r\n\tdisplay: block;\r\n\t/* background-color: white; */\r\n\tcursor: pointer;\r\n\tpadding: 1px 4px 1px 1px; /* almost the same as a transparent border */\r\n\tborder: 0px;\r\n}\r\n\r\n.dojoE2TBIcon {\r\n\tdisplay: block;\r\n\ttext-align: center;\r\n\tmin-width: 18px;\r\n\twidth: 18px;\r\n\theight: 18px;\r\n\t/* background-color: #a6a7a3; */\r\n\tbackground-repeat: no-repeat;\r\n\tbackground-image: url(buttons/aggregate.gif);\r\n}\r\n\r\n\r\n.dojoE2TBIcon[class~=dojoE2TBIcon] {\r\n}\r\n\r\n.ToolbarButtonLatched {\r\n    border: #316ac5 1px solid; !important;\r\n    padding: 0px 3px 0px 0px; !important; /* make room for border */\r\n    background-color: #c1d2ee;\r\n}\r\n\r\n.ToolbarButtonHighlighted {\r\n    border: #316ac5 1px solid; !important;\r\n    padding: 0px 3px 0px 0px; !important; /* make room for border */\r\n    background-color: #dff1ff;\r\n}\r\n\r\n.ToolbarButtonDisabled{\r\n    filter: gray() alpha(opacity=30); /* IE */\r\n    opacity: 0.30; /* Safari, Opera and Mozilla */\r\n}\r\n\r\n.headingContainer {\r\n\twidth: 150px;\r\n\theight: 30px;\r\n\tmargin: 0px;\r\n\t/* padding-left: 5px; */\r\n\toverflow: hidden;\r\n\tline-height: 25px;\r\n\tborder-bottom: 1px solid black;\r\n\tborder-top: 1px solid white;\r\n}\r\n\r\n.EditorToolbarDomNode select {\r\n\tfont-size: 14px;\r\n}\r\n \r\n.dojoE2TBIcon_Sep { width: 5px; min-width: 5px; max-width: 5px; background-position: 0px 0px}\r\n.dojoE2TBIcon_Backcolor { background-position: -18px 0px}\r\n.dojoE2TBIcon_Bold { background-position: -36px 0px}\r\n.dojoE2TBIcon_Cancel { background-position: -54px 0px}\r\n.dojoE2TBIcon_Copy { background-position: -72px 0px}\r\n.dojoE2TBIcon_Link { background-position: -90px 0px}\r\n.dojoE2TBIcon_Cut { background-position: -108px 0px}\r\n.dojoE2TBIcon_Delete { background-position: -126px 0px}\r\n.dojoE2TBIcon_TextColor { background-position: -144px 0px}\r\n.dojoE2TBIcon_BackgroundColor { background-position: -162px 0px}\r\n.dojoE2TBIcon_Indent { background-position: -180px 0px}\r\n.dojoE2TBIcon_HorizontalLine { background-position: -198px 0px}\r\n.dojoE2TBIcon_Image { background-position: -216px 0px}\r\n.dojoE2TBIcon_NumberedList { background-position: -234px 0px}\r\n.dojoE2TBIcon_Table { background-position: -252px 0px}\r\n.dojoE2TBIcon_BulletedList { background-position: -270px 0px}\r\n.dojoE2TBIcon_Italic { background-position: -288px 0px}\r\n.dojoE2TBIcon_CenterJustify { background-position: -306px 0px}\r\n.dojoE2TBIcon_BlockJustify { background-position: -324px 0px}\r\n.dojoE2TBIcon_LeftJustify { background-position: -342px 0px}\r\n.dojoE2TBIcon_RightJustify { background-position: -360px 0px}\r\n.dojoE2TBIcon_left_to_right { background-position: -378px 0px}\r\n.dojoE2TBIcon_list_bullet_indent { background-position: -396px 0px}\r\n.dojoE2TBIcon_list_bullet_outdent { background-position: -414px 0px}\r\n.dojoE2TBIcon_list_num_indent { background-position: -432px 0px}\r\n.dojoE2TBIcon_list_num_outdent { background-position: -450px 0px}\r\n.dojoE2TBIcon_Outdent { background-position: -468px 0px}\r\n.dojoE2TBIcon_Paste { background-position: -486px 0px}\r\n.dojoE2TBIcon_Redo { background-position: -504px 0px}\r\ndojoE2TBIcon_RemoveFormat { background-position: -522px 0px}\r\n.dojoE2TBIcon_right_to_left { background-position: -540px 0px}\r\n.dojoE2TBIcon_Save { background-position: -558px 0px}\r\n.dojoE2TBIcon_Space { background-position: -576px 0px}\r\n.dojoE2TBIcon_StrikeThrough { background-position: -594px 0px}\r\n.dojoE2TBIcon_Subscript { background-position: -612px 0px}\r\n.dojoE2TBIcon_Superscript { background-position: -630px 0px}\r\n.dojoE2TBIcon_Underline { background-position: -648px 0px}\r\n.dojoE2TBIcon_Undo { background-position: -666px 0px}\r\n.dojoE2TBIcon_WikiWord { background-position: -684px 0px}\r\n\r\n",templateCssPath:dojo.uri.moduleUri("dojo.widget","templates/EditorToolbar.css"),ToolbarLatchedItemStyle:"ToolbarButtonLatched",ToolbarEnabledItemStyle:"ToolbarButtonEnabled",ToolbarDisabledItemStyle:"ToolbarButtonDisabled",ToolbarHighlightedItemStyle:"ToolbarButtonHighlighted",ToolbarHighlightedSelectStyle:"ToolbarSelectHighlighted",ToolbarHighlightedSelectItemStyle:"ToolbarSelectHighlightedItem",postCreate:function(){
+var _a38=dojo.html.getElementsByClass("dojoEditorToolbarItem",this.domNode);
+this.items={};
+for(var x=0;x<_a38.length;x++){
+var node=_a38[x];
+var _a3b=node.getAttribute("dojoETItemName");
+if(_a3b){
+var item=dojo.widget.Editor2ToolbarItemManager.getToolbarItem(_a3b);
+if(item){
+item.create(node,this);
+this.items[_a3b.toLowerCase()]=item;
+}else{
+node.style.display="none";
+}
+}
+}
+},update:function(){
+for(var cmd in this.items){
+this.items[cmd].refreshState();
+}
+},shareGroup:"",checkAvailability:function(){
+if(!this.shareGroup){
+this.parent.focus();
+return true;
+}
+var _a3e=dojo.widget.Editor2Manager.getCurrentInstance();
+if(this.shareGroup==_a3e.toolbarGroup){
+return true;
+}
+return false;
+},destroy:function(){
+for(var it in this.items){
+this.items[it].destroy();
+delete this.items[it];
+}
+dojo.widget.Editor2Toolbar.superclass.destroy.call(this);
+}});
+dojo.provide("dojo.uri.cache");
+dojo.uri.cache={_cache:{},set:function(uri,_a41){
+this._cache[uri.toString()]=_a41;
+return uri;
+},remove:function(uri){
+delete this._cache[uri.toString()];
+},get:function(uri){
+var key=uri.toString();
+var _a45=this._cache[key];
+if(!_a45){
+_a45=dojo.hostenv.getText(key);
+if(_a45){
+this._cache[key]=_a45;
+}
+}
+return _a45;
+},allow:function(uri){
+return uri;
+}};
+dojo.provide("dojo.lfx.shadow");
+dojo.lfx.shadow=function(node){
+this.shadowPng=dojo.uri.moduleUri("dojo.html","images/shadow");
+this.shadowThickness=8;
+this.shadowOffset=15;
+this.init(node);
+};
+dojo.extend(dojo.lfx.shadow,{init:function(node){
+this.node=node;
+this.pieces={};
+var x1=-1*this.shadowThickness;
+var y0=this.shadowOffset;
+var y1=this.shadowOffset+this.shadowThickness;
+this._makePiece("tl","top",y0,"left",x1);
+this._makePiece("l","top",y1,"left",x1,"scale");
+this._makePiece("tr","top",y0,"left",0);
+this._makePiece("r","top",y1,"left",0,"scale");
+this._makePiece("bl","top",0,"left",x1);
+this._makePiece("b","top",0,"left",0,"crop");
+this._makePiece("br","top",0,"left",0);
+},_makePiece:function(name,_a4d,_a4e,_a4f,_a50,_a51){
+var img;
+var url=this.shadowPng+name.toUpperCase()+".png";
+if(dojo.render.html.ie55||dojo.render.html.ie60){
+img=dojo.doc().createElement("div");
+img.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+url+"'"+(_a51?", sizingMethod='"+_a51+"'":"")+")";
+}else{
+img=dojo.doc().createElement("img");
+img.src=url;
+}
+img.style.position="absolute";
+img.style[_a4d]=_a4e+"px";
+img.style[_a4f]=_a50+"px";
+img.style.width=this.shadowThickness+"px";
+img.style.height=this.shadowThickness+"px";
+this.pieces[name]=img;
+this.node.appendChild(img);
+},size:function(_a54,_a55){
+var _a56=_a55-(this.shadowOffset+this.shadowThickness+1);
+if(_a56<0){
+_a56=0;
+}
+if(_a55<1){
+_a55=1;
+}
+if(_a54<1){
+_a54=1;
+}
+with(this.pieces){
+l.style.height=_a56+"px";
+r.style.height=_a56+"px";
+b.style.width=(_a54-1)+"px";
+bl.style.top=(_a55-1)+"px";
+b.style.top=(_a55-1)+"px";
+br.style.top=(_a55-1)+"px";
+tr.style.left=(_a54-1)+"px";
+r.style.left=(_a54-1)+"px";
+br.style.left=(_a54-1)+"px";
+}
+}});
+dojo.provide("dojo.widget.html.layout");
+dojo.widget.html.layout=function(_a57,_a58,_a59){
+dojo.html.addClass(_a57,"dojoLayoutContainer");
+_a58=dojo.lang.filter(_a58,function(_a5a,idx){
+_a5a.idx=idx;
+return dojo.lang.inArray(["top","bottom","left","right","client","flood"],_a5a.layoutAlign);
+});
+if(_a59&&_a59!="none"){
+var rank=function(_a5d){
+switch(_a5d.layoutAlign){
+case "flood":
+return 1;
+case "left":
+case "right":
+return (_a59=="left-right")?2:3;
+case "top":
+case "bottom":
+return (_a59=="left-right")?3:2;
+default:
+return 4;
+}
+};
+_a58.sort(function(a,b){
+return (rank(a)-rank(b))||(a.idx-b.idx);
+});
+}
+var f={top:dojo.html.getPixelValue(_a57,"padding-top",true),left:dojo.html.getPixelValue(_a57,"padding-left",true)};
+dojo.lang.mixin(f,dojo.html.getContentBox(_a57));
+dojo.lang.forEach(_a58,function(_a61){
+var elm=_a61.domNode;
+var pos=_a61.layoutAlign;
+with(elm.style){
+left=f.left+"px";
+top=f.top+"px";
+bottom="auto";
+right="auto";
+}
+dojo.html.addClass(elm,"dojoAlign"+dojo.string.capitalize(pos));
+if((pos=="top")||(pos=="bottom")){
+dojo.html.setMarginBox(elm,{width:f.width});
+var h=dojo.html.getMarginBox(elm).height;
+f.height-=h;
+if(pos=="top"){
+f.top+=h;
+}else{
+elm.style.top=f.top+f.height+"px";
+}
+if(_a61.onResized){
+_a61.onResized();
+}
+}else{
+if(pos=="left"||pos=="right"){
+var w=dojo.html.getMarginBox(elm).width;
+if(_a61.resizeTo){
+_a61.resizeTo(w,f.height);
+}else{
+dojo.html.setMarginBox(elm,{width:w,height:f.height});
+}
+f.width-=w;
+if(pos=="left"){
+f.left+=w;
+}else{
+elm.style.left=f.left+f.width+"px";
+}
+}else{
+if(pos=="flood"||pos=="client"){
+if(_a61.resizeTo){
+_a61.resizeTo(f.width,f.height);
+}else{
+dojo.html.setMarginBox(elm,{width:f.width,height:f.height});
+}
+}
+}
+}
+});
+};
+dojo.html.insertCssText(".dojoLayoutContainer{ position: relative; display: block; overflow: hidden; }\n"+"body .dojoAlignTop, body .dojoAlignBottom, body .dojoAlignLeft, body .dojoAlignRigh

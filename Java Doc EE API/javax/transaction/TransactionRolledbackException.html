@@ -1,0 +1,192 @@
+ title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="unlockRegion(org.hibernate.cache.access.SoftLock)"><!-- --></A><H3>
+unlockRegion</H3>
+<PRE>
+void <B>unlockRegion</B>(<A HREF="../../../../org/hibernate/cache/access/SoftLock.html" title="interface in org.hibernate.cache.access">SoftLock</A>&nbsp;lock)
+                  throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Called after we have finished the attempted invalidation of the entire
+ region
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>lock</CODE> - The lock previously obtained from <A HREF="../../../../org/hibernate/cache/access/EntityRegionAccessStrategy.html#lockRegion()"><CODE>lockRegion()</CODE></A>
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insert(java.lang.Object, java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+insert</H3>
+<PRE>
+boolean <B>insert</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;version)
+               throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Called after an item has been inserted (before the transaction completes),
+ instead of calling evict().
+ This method is used by "synchronous" concurrency strategies.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>key</CODE> - The item key<DD><CODE>value</CODE> - The item<DD><CODE>version</CODE> - The item's version value
+<DT><B>Returns:</B><DD>Were the contents of the cache actual changed by this operation?
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="afterInsert(java.lang.Object, java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+afterInsert</H3>
+<PRE>
+boolean <B>afterInsert</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;version)
+                    throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Called after an item has been inserted (after the transaction completes),
+ instead of calling release().
+ This method is used by "asynchronous" concurrency strategies.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>key</CODE> - The item key<DD><CODE>value</CODE> - The item<DD><CODE>version</CODE> - The item's version value
+<DT><B>Returns:</B><DD>Were the contents of the cache actual changed by this operation?
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="update(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+update</H3>
+<PRE>
+boolean <B>update</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;currentVersion,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;previousVersion)
+               throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Called after an item has been updated (before the transaction completes),
+ instead of calling evict(). This method is used by "synchronous" concurrency
+ strategies.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>key</CODE> - The item key<DD><CODE>value</CODE> - The item<DD><CODE>currentVersion</CODE> - The item's current version value<DD><CODE>previousVersion</CODE> - The item's previous version value
+<DT><B>Returns:</B><DD>Were the contents of the cache actual changed by this operation?
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="afterUpdate(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, org.hibernate.cache.access.SoftLock)"><!-- --></A><H3>
+afterUpdate</H3>
+<PRE>
+boolean <B>afterUpdate</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;currentVersion,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;previousVersion,
+                    <A HREF="../../../../org/hibernate/cache/access/SoftLock.html" title="interface in org.hibernate.cache.access">SoftLock</A>&nbsp;lock)
+                    throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Called after an item has been updated (after the transaction completes),
+ instead of calling release().  This method is used by "asynchronous"
+ concurrency strategies.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>key</CODE> - The item key<DD><CODE>value</CODE> - The item<DD><CODE>currentVersion</CODE> - The item's current version value<DD><CODE>previousVersion</CODE> - The item's previous version value<DD><CODE>lock</CODE> - The lock previously obtained from <A HREF="../../../../org/hibernate/cache/access/EntityRegionAccessStrategy.html#lockItem(java.lang.Object, java.lang.Object)"><CODE>lockItem(java.lang.Object, java.lang.Object)</CODE></A>
+<DT><B>Returns:</B><DD>Were the contents of the cache actual changed by this operation?
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="remove(java.lang.Object)"><!-- --></A><H3>
+remove</H3>
+<PRE>
+void <B>remove</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key)
+            throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Called after an item has become stale (before the transaction completes).
+ This method is used by "synchronous" concurrency strategies.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>key</CODE> - The key of the item to remove
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeAll()"><!-- --></A><H3>
+removeAll</H3>
+<PRE>
+void <B>removeAll</B>()
+               throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Called to evict data from the entire region
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="evict(java.lang.Object)"><!-- --></A><H3>
+evict</H3>
+<PRE>
+void <B>evict</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key)
+           throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Forcibly evict an item from the cache immediately without regard for transaction
+ isolation.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>key</CODE> - The key of the item to remove
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="evictAll()"><!-- --></A><H3>
+evictAll</H3>
+<PRE>
+void <B>evictAll</B>()
+              throws <A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></PRE>
+<DL>
+<DD>Forcibly evict all items from the cache immediately without regard for transaction
+ isolation.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../org/hibernate/cache/CacheException.html" title="class in org.hibernate.cache">CacheException</A></CODE> - Propogated from underlying <A HREF="../../../../org/hibernate/cache/Region.html" title="interface in org.hibernate.cache"><CODE>Region</CODE></A></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/EntityRegionAccessStrategy.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CL

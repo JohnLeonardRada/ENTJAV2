@@ -1,0 +1,259 @@
+kBarConnectAttempts<this._max_taskBarConnectAttempts){
+dojo.lang.setTimeout(this,this._taskBarSetup,50);
+this._taskBarConnectAttempts++;
+}else{
+dojo.debug("Unable to connect to the taskBar");
+}
+return;
+}
+_b3c.addChild(this);
+},showFloatingPane:function(){
+this.bringToTop();
+},onFloatingPaneShow:function(){
+var mb=dojo.html.getMarginBox(this.domNode);
+this.resizeTo(mb.width,mb.height);
+},resizeTo:function(_b3e,_b3f){
+dojo.html.setMarginBox(this.domNode,{width:_b3e,height:_b3f});
+dojo.widget.html.layout(this.domNode,[{domNode:this.titleBar,layoutAlign:"top"},{domNode:this.resizeBar,layoutAlign:"bottom"},{domNode:this.containerNode,layoutAlign:"client"}]);
+dojo.widget.html.layout(this.containerNode,this.children,"top-bottom");
+this.bgIframe.onResized();
+if(this.shadow){
+this.shadow.size(_b3e,_b3f);
+}
+this.onResized();
+},checkSize:function(){
+},destroyFloatingPane:function(){
+if(this.resizeHandle){
+this.resizeHandle.destroy();
+this.resizeHandle=null;
+}
+}});
+dojo.widget.defineWidget("dojo.widget.FloatingPane",[dojo.widget.ContentPane,dojo.widget.FloatingPaneBase],{fillInTemplate:function(args,frag){
+this.fillInFloatingPaneTemplate(args,frag);
+dojo.widget.FloatingPane.superclass.fillInTemplate.call(this,args,frag);
+},postCreate:function(){
+dojo.widget.FloatingPaneBase.prototype.postCreate.apply(this,arguments);
+dojo.widget.FloatingPane.superclass.postCreate.apply(this,arguments);
+},show:function(){
+dojo.widget.FloatingPane.superclass.show.apply(this,arguments);
+this.showFloatingPane();
+},onShow:function(){
+dojo.widget.FloatingPane.superclass.onShow.call(this);
+this.onFloatingPaneShow();
+},destroy:function(){
+this.destroyFloatingPane();
+dojo.widget.FloatingPane.superclass.destroy.apply(this,arguments);
+}});
+dojo.widget.defineWidget("dojo.widget.ModalFloatingPane",[dojo.widget.FloatingPane,dojo.widget.ModalDialogBase],{windowState:"minimized",displayCloseAction:true,postCreate:function(){
+dojo.widget.ModalDialogBase.prototype.postCreate.call(this);
+dojo.widget.ModalFloatingPane.superclass.postCreate.call(this);
+},show:function(){
+this.showModalDialog();
+dojo.widget.ModalFloatingPane.superclass.show.apply(this,arguments);
+this.bg.style.zIndex=this.domNode.style.zIndex-1;
+},hide:function(){
+this.hideModalDialog();
+dojo.widget.ModalFloatingPane.superclass.hide.apply(this,arguments);
+},closeWindow:function(){
+this.hide();
+dojo.widget.ModalFloatingPane.superclass.closeWindow.apply(this,arguments);
+}});
+dojo.provide("dojo.widget.Editor2Plugin.AlwaysShowToolbar");
+dojo.event.topic.subscribe("dojo.widget.Editor2::onLoad",function(_b42){
+if(_b42.toolbarAlwaysVisible){
+var p=new dojo.widget.Editor2Plugin.AlwaysShowToolbar(_b42);
+}
+});
+dojo.declare("dojo.widget.Editor2Plugin.AlwaysShowToolbar",null,function(_b44){
+this.editor=_b44;
+this.editor.registerLoadedPlugin(this);
+this.setup();
+},{_scrollSetUp:false,_fixEnabled:false,_scrollThreshold:false,_handleScroll:true,setup:function(){
+var tdn=this.editor.toolbarWidget;
+if(!tdn.tbBgIframe){
+tdn.tbBgIframe=new dojo.html.BackgroundIframe(tdn.domNode);
+tdn.tbBgIframe.onResized();
+}
+this.scrollInterval=setInterval(dojo.lang.hitch(this,"globalOnScrollHandler"),100);
+dojo.event.connect("before",this.editor.toolbarWidget,"destroy",this,"destroy");
+},globalOnScrollHandler:function(){
+var isIE=dojo.render.html.ie;
+if(!this._handleScroll){
+return;
+}
+var dh=dojo.html;
+var tdn=this.editor.toolbarWidget.domNode;
+var db=dojo.body();
+if(!this._scrollSetUp){
+this._scrollSetUp=true;
+var _b4a=dh.getMarginBox(this.editor.domNode).width;
+this._scrollThreshold=dh.abs(tdn,true).y;
+if((isIE)&&(db)&&(dh.getStyle(db,"background-image")=="none")){
+with(db.style){
+backgroundImage="url("+dojo.uri.moduleUri("dojo.widget","templates/images/blank.gif")+")";
+backgroundAttachment="fixed";
+}
+}
+}
+var _b4b=(window["pageYOffset"])?window["pageYOffset"]:(document["documentElement"]||document["body"]).scrollTop;
+if(_b4b>this._scrollThreshold){
+if(!this._fixEnabled){
+var _b4c=dojo.html.getMarginBox(tdn);
+this.editor.editorObject.style.marginTop=_b4c.height+"px";
+if(isIE){
+tdn.style.left=dojo.html.abs(tdn,dojo.html.boxSizing.MARGIN_BOX).x;
+if(tdn.previousSibling){
+this._IEOriginalPos=["after",tdn.previousSibling];
+}else{
+if(tdn.nextSibling){
+this._IEOriginalPos=["before",tdn.nextSibling];
+}else{
+this._IEOriginalPos=["",tdn.parentNode];
+}
+}
+dojo.body().appendChild(tdn);
+dojo.html.addClass(tdn,"IEFixedToolbar");
+}else{
+with(tdn.style){
+position="fixed";
+top="0px";
+}
+}
+tdn.style.width=_b4c.width+"px";
+tdn.style.zIndex=1000;
+this._fixEnabled=true;
+}
+if(!dojo.render.html.safari){
+var _b4d=(this.height)?parseInt(this.editor.height):this.editor._lastHeight;
+if(_b4b>(this._scrollThreshold+_b4d)){
+tdn.style.display="none";
+}else{
+tdn.style.display="";
+}
+}
+}else{
+if(this._fixEnabled){
+(this.editor.object||this.editor.iframe).style.marginTop=null;
+with(tdn.style){
+position="";
+top="";
+zIndex="";
+display="";
+}
+if(isIE){
+tdn.style.left="";
+dojo.html.removeClass(tdn,"IEFixedToolbar");
+if(this._IEOriginalPos){
+dojo.html.insertAtPosition(tdn,this._IEOriginalPos[1],this._IEOriginalPos[0]);
+this._IEOriginalPos=null;
+}else{
+dojo.html.insertBefore(tdn,this.editor.object||this.editor.iframe);
+}
+}
+tdn.style.width="";
+this._fixEnabled=false;
+}
+}
+},destroy:function(){
+this._IEOriginalPos=null;
+this._handleScroll=false;
+clearInterval(this.scrollInterval);
+this.editor.unregisterLoadedPlugin(this);
+if(dojo.render.html.ie){
+dojo.html.removeClass(this.editor.toolbarWidget.domNode,"IEFixedToolbar");
+}
+}});
+dojo.provide("dojo.widget.Editor2");
+dojo.widget.Editor2Manager=new dojo.widget.HandlerManager;
+dojo.lang.mixin(dojo.widget.Editor2Manager,{_currentInstance:null,commandState:{Disabled:0,Latched:1,Enabled:2},getCurrentInstance:function(){
+return this._currentInstance;
+},setCurrentInstance:function(inst){
+this._currentInstance=inst;
+},getCommand:function(_b4f,name){
+var _b51;
+name=name.toLowerCase();
+for(var i=0;i<this._registeredHandlers.length;i++){
+_b51=this._registeredHandlers[i](_b4f,name);
+if(_b51){
+return _b51;
+}
+}
+switch(name){
+case "htmltoggle":
+_b51=new dojo.widget.Editor2BrowserCommand(_b4f,name);
+break;
+case "formatblock":
+_b51=new dojo.widget.Editor2FormatBlockCommand(_b4f,name);
+break;
+case "anchor":
+_b51=new dojo.widget.Editor2Command(_b4f,name);
+break;
+case "createlink":
+_b51=new dojo.widget.Editor2DialogCommand(_b4f,name,{contentFile:"dojo.widget.Editor2Plugin.CreateLinkDialog",contentClass:"Editor2CreateLinkDialog",title:"Insert/Edit Link",width:"300px",height:"200px"});
+break;
+case "insertimage":
+_b51=new dojo.widget.Editor2DialogCommand(_b4f,name,{contentFile:"dojo.widget.Editor2Plugin.InsertImageDialog",contentClass:"Editor2InsertImageDialog",title:"Insert/Edit Image",width:"400px",height:"270px"});
+break;
+default:
+var _b53=this.getCurrentInstance();
+if((_b53&&_b53.queryCommandAvailable(name))||(!_b53&&dojo.widget.Editor2.prototype.queryCommandAvailable(name))){
+_b51=new dojo.widget.Editor2BrowserCommand(_b4f,name);
+}else{
+dojo.debug("dojo.widget.Editor2Manager.getCommand: Unknown command "+name);
+return;
+}
+}
+return _b51;
+},destroy:function(){
+this._currentInstance=null;
+dojo.widget.HandlerManager.prototype.destroy.call(this);
+}});
+dojo.addOnUnload(dojo.widget.Editor2Manager,"destroy");
+dojo.lang.declare("dojo.widget.Editor2Command",null,function(_b54,name){
+this._editor=_b54;
+this._updateTime=0;
+this._name=name;
+},{_text:"Unknown",execute:function(para){
+dojo.unimplemented("dojo.widget.Editor2Command.execute");
+},getText:function(){
+return this._text;
+},getState:function(){
+return dojo.widget.Editor2Manager.commandState.Enabled;
+},destroy:function(){
+}});
+dojo.widget.Editor2BrowserCommandNames={"bold":"Bold","copy":"Copy","cut":"Cut","Delete":"Delete","indent":"Indent","inserthorizontalrule":"Horizental Rule","insertorderedlist":"Numbered List","insertunorderedlist":"Bullet List","italic":"Italic","justifycenter":"Align Center","justifyfull":"Justify","justifyleft":"Align Left","justifyright":"Align Right","outdent":"Outdent","paste":"Paste","redo":"Redo","removeformat":"Remove Format","selectall":"Select All","strikethrough":"Strikethrough","subscript":"Subscript","superscript":"Superscript","underline":"Underline","undo":"Undo","unlink":"Remove Link","createlink":"Create Link","insertimage":"Insert Image","htmltoggle":"HTML Source","forecolor":"Foreground Color","hilitecolor":"Background Color","plainformatblock":"Paragraph Style","formatblock":"Paragraph Style","fontsize":"Font Size","fontname":"Font Name"};
+dojo.lang.declare("dojo.widget.Editor2BrowserCommand",dojo.widget.Editor2Command,function(_b57,name){
+var text=dojo.widget.Editor2BrowserCommandNames[name.toLowerCase()];
+if(text){
+this._text=text;
+}
+},{execute:function(para){
+this._editor.execCommand(this._name,para);
+},getState:function(){
+if(this._editor._lastStateTimestamp>this._updateTime||this._state==undefined){
+this._updateTime=this._editor._lastStateTimestamp;
+try{
+if(this._editor.queryCommandEnabled(this._name)){
+if(this._editor.queryCommandState(this._name)){
+this._state=dojo.widget.Editor2Manager.commandState.Latched;
+}else{
+this._state=dojo.widget.Editor2Manager.commandState.Enabled;
+}
+}else{
+this._state=dojo.widget.Editor2Manager.commandState.Disabled;
+}
+}
+catch(e){
+this._state=dojo.widget.Editor2Manager.commandState.Enabled;
+}
+}
+return this._state;
+},getValue:function(){
+try{
+return this._editor.queryCommandValue(this._name);
+}
+catch(e){
+}
+}});
+dojo.lang.declare("dojo.widget.Editor2FormatBlockCommand",dojo.widget.Editor2BrowserCommand,{});
+dojo.widget.defineWidget("dojo.widget.Editor2Dialog",[dojo.widget.HtmlWidget,dojo.widget.FloatingPaneBase,dojo.widget.ModalDialogBase],{templateString:"<div id=\"${this.widgetId}\" class=\"dojoFloatingPane\">\r\n\t<span dojoattachpoint=\"tabStartOuter\" dojoonfocus=\"trapTabs\" dojoonblur=\"clearTrap\"\ttabindex=\"0\"></span>\r\n\t<span dojoattachpoint=\"tabStart\" dojoonfocus=\"trapTabs\" dojoonblur=\"clearTrap\" tabindex=\"0\"></span>\r\n\t<div dojoAttachPoint=\"titleBar\" class=\"dojoFloatingPaneTitleBar\"  style=\"display:none\">\r\n\t  \t<img dojoAttachPoint=\"titleBarIcon\"  class=\"dojoFloatingPaneTitleBarIcon\">\r\n\t\t<div dojoAttachPoint=\"closeAction\" dojoAttachEvent=\"onClick:hide\"\r\n   \t  \t\tclass=\"dojoFloatingPaneCloseIcon\"></div>\r\n\t\t<div dojoAttachPoint=\"restoreAction\" dojoAttachEvent=\"onClick:restoreWindow\"\r\n   \t  \t\tclass=\"dojoFloatingPaneRestoreIcon\"></div>\r\n\t\t<div dojoAttachPoint=\"maximizeAction\" dojoAttachEvent=\"onClick:maximizeWindow\"\r\n   \t  \t\tclass=\"dojoFloatingPaneMaximizeIcon\"></div>\r\n\t\t<div dojoAttachPoint=\"minimizeAction\" dojoAttachEvent=\"onClick:minimizeWindow\"\r\n   \t  \t\tclass=\"dojoFloatingPaneMinimizeIcon\"></div>\r\n\t  \t<div dojoAttachPoint=\"titleBarText\" class=\"dojoFloatingPaneTitleText\">${this.title}</div>\r\n\t</div>\r\n\r\n\t<div id=\"${this.widgetId}_container\" dojoAttachPoint=\"containerNode\" class=\"dojoFloatingPaneClient\"></div>\r\n\t<span dojoattachpoint=\"tabEnd\" dojoonfocus=\"trapTabs\" dojoonblur=\"clearTrap\" tabindex=\"0\"></span>\r\n\t<span dojoattachpoint=\"tabEndOuter\" dojoonfocus=\"trapTabs\" dojoonblur=\"clearTrap\" tabindex=\"0\"></span>\r\n\t<div dojoAttachPoint=\"resizeBar\" class=\"dojoFloatingPaneResizebar\" style=\"display:

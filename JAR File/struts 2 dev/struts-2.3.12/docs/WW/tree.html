@@ -1,0 +1,1118 @@
+ng.xml:643
+#, no-c-format
+msgid ""
+"<literal>formula</literal> (optional): a SQ formula used to evaluate the "
+"foreign key of the map key."
+msgstr ""
+"<literal>formula</literal> (optionnel): formule SQ utilisée pour évaluer la "
+"clé étrangère d'une clé de mappe."
+
+#. Tag: para
+#: collection_mapping.xml:648
+#, no-c-format
+msgid ""
+"<literal>class</literal> (required): the entity class used as the map key."
+msgstr ""
+"<literal>class</literal> (requis) : le nom de la classe utilisée en tant que "
+"clé de mappe."
+
+#. Tag: title
+#: collection_mapping.xml:658
+#, fuzzy, no-c-format
+msgid "Collections of basic types and embeddable objects"
+msgstr "Collections de valeurs et associations plusieurs-à-plusieurs"
+
+#. Tag: para
+#: collection_mapping.xml:660
+#, no-c-format
+msgid ""
+"In some situations you don't need to associate two entities but simply "
+"create a collection of basic types or embeddable objects. Use the "
+"<classname>@ElementCollection</classname> for this case."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:665
+#, no-c-format
+msgid ""
+"Collection of basic types mapped via <classname>@ElementCollection</"
+"classname>"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:668
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class User {\n"
+"   [...]\n"
+"   public String getLastname() { ...}\n"
+"\n"
+"   @ElementCollection\n"
+"   @CollectionTable(name=\"Nicknames\", joinColumns=@JoinColumn(name="
+"\"user_id\"))\n"
+"   @Column(name=\"nickname\")\n"
+"   public Set&lt;String&gt; getNicknames() { ... } \n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:671
+#, no-c-format
+msgid ""
+"The collection table holding the collection data is set using the "
+"<classname>@CollectionTable</classname> annotation. If omitted the "
+"collection table name defaults to the concatenation of the name of the "
+"containing entity and the name of the collection attribute, separated by an "
+"underscore. In our example, it would be <literal>User_nicknames</literal>."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:678
+#, no-c-format
+msgid ""
+"The column holding the basic type is set using the <classname>@Column</"
+"classname> annotation. If omitted, the column name defaults to the property "
+"name: in our example, it would be <literal>nicknames</literal>."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:683
+#, no-c-format
+msgid ""
+"But you are not limited to basic types, the collection type can be any "
+"embeddable object. To override the columns of the embeddable object in the "
+"collection table, use the <classname>@AttributeOverride</classname> "
+"annotation."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:689
+#, no-c-format
+msgid "@ElementCollection for embeddable objects"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:691
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class User {\n"
+"   [...]\n"
+"   public String getLastname() { ...}\n"
+"\n"
+"   @ElementCollection\n"
+"   @CollectionTable(name=\"Addresses\", joinColumns=@JoinColumn(name="
+"\"user_id\"))\n"
+"   @AttributeOverrides({\n"
+"      @AttributeOverride(name=\"street1\", column=@Column(name=\"fld_street"
+"\"))\n"
+"   })\n"
+"   public Set&lt;Address&gt; getAddresses() { ... } \n"
+"}\n"
+"\n"
+"@Embeddable\n"
+"public class Address {\n"
+"   public String getStreet1() {...}\n"
+"   [...]\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:694
+#, no-c-format
+msgid "Such an embeddable object cannot contains a collection itself."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:698
+#, no-c-format
+msgid ""
+"in <classname>@AttributeOverride</classname>, you must use the "
+"<literal>value.</literal> prefix to override properties of the embeddable "
+"object used in the map value and the <literal>key.</literal> prefix to "
+"override properties of the embeddable object used in the map key."
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:704
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class User {\n"
+"   @ElementCollection\n"
+"   @AttributeOverrides({\n"
+"      @AttributeOverride(name=\"key.street1\", column=@Column(name="
+"\"fld_street\")),\n"
+"      @AttributeOverride(name=\"value.stars\", column=@Column(name=\"fld_note"
+"\"))\n"
+"   })\n"
+"   public Map&lt;Address,Rating&gt; getFavHomes() { ... }"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:708
+#, no-c-format
+msgid ""
+"We recommend you to migrate from <classname>@org.hibernate.annotations."
+"CollectionOfElements</classname> to the new <classname>@ElementCollection</"
+"classname> annotation."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:714
+#, fuzzy, no-c-format
+msgid ""
+"Using the mapping file approach a collection of values is mapped using the "
+"<literal>&lt;element&gt;</literal> tag. For example:"
+msgstr ""
+"Pour une collection de valeurs, nous utilisons la balise <literal>&lt;"
+"element&gt;</literal>. Par exemple :"
+
+#. Tag: title
+#: collection_mapping.xml:718
+#, no-c-format
+msgid "&lt;element&gt; tag for collection values using mapping files"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:730
+#, no-c-format
+msgid ""
+"&lt;element\n"
+"        column=\"column_name\"\n"
+"        formula=\"any SQL expression\"\n"
+"        type=\"typename\"\n"
+"        length=\"L\"\n"
+"        precision=\"P\"\n"
+"        scale=\"S\"\n"
+"        not-null=\"true|false\"\n"
+"        unique=\"true|false\"\n"
+"        node=\"element-name\"\n"
+"/&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:734
+#, no-c-format
+msgid ""
+"<literal>column</literal> (optional): the name of the column holding the "
+"collection element values."
+msgstr ""
+"<literal>colonne</literal> (optionnel) : le nom de la colonne qui contient "
+"les valeurs des éléments de collection."
+
+#. Tag: para
+#: collection_mapping.xml:739
+#, no-c-format
+msgid ""
+"<literal>formula</literal> (optional): an SQL formula used to evaluate the "
+"element."
+msgstr ""
+"<literal>formula</literal> (optionnel) : formule SQL utilisée pour évaluer "
+"l'élément."
+
+#. Tag: para
+#: collection_mapping.xml:744
+#, no-c-format
+msgid "<literal>type</literal> (required): the type of the collection element."
+msgstr "<literal>type</literal> (requis) : le type d'élément de collection."
+
+#. Tag: title
+#: collection_mapping.xml:754
+#, no-c-format
+msgid "Advanced collection mappings"
+msgstr "Mappages de collection avancés"
+
+#. Tag: title
+#: collection_mapping.xml:757
+#, no-c-format
+msgid "Sorted collections"
+msgstr "Collections triées"
+
+#. Tag: para
+#: collection_mapping.xml:759
+#, no-c-format
+msgid ""
+"Hibernate supports collections implementing <literal>java.util.SortedMap</"
+"literal> and <literal>java.util.SortedSet</literal>. With annotations you "
+"declare a sort comparator using <literal>@Sort</literal>. You chose between "
+"the comparator types unsorted, natural or custom. If you want to use your "
+"own comparator implementation, you'll also have to specify the "
+"implementation class using the <literal>comparator</literal> attribute. Note "
+"that you need to use either a <classname>SortedSet</classname> or a "
+"<classname>SortedMap</classname> interface."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:770
+#, fuzzy, no-c-format
+msgid "Sorted collection with @Sort"
+msgstr "Collections triées"
+
+#. Tag: programlisting
+#: collection_mapping.xml:772
+#, no-c-format
+msgid ""
+"@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)\n"
+"@JoinColumn(name=\"CUST_ID\")\n"
+"@Sort(type = SortType.COMPARATOR, comparator = TicketComparator.class)\n"
+"public SortedSet&lt;Ticket&gt; getTickets() {\n"
+"    return tickets;\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:775
+#, no-c-format
+msgid ""
+"Using Hibernate mapping files you specify a comparator in the mapping file "
+"with <literal>&lt;sort&gt;</literal>:"
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:779
+#, fuzzy, no-c-format
+msgid "Sorted collection using xml mapping"
+msgstr "Collections triées"
+
+#. Tag: programlisting
+#: collection_mapping.xml:781
+#, no-c-format
+msgid ""
+"&lt;set name=\"aliases\"\n"
+"            table=\"person_aliases\" \n"
+"            sort=\"natural\"&gt;\n"
+"    &lt;key column=\"person\"/&gt;\n"
+"    &lt;element column=\"name\" type=\"string\"/&gt;\n"
+"&lt;/set&gt;\n"
+"\n"
+"&lt;map name=\"holidays\" sort=\"my.custom.HolidayComparator\"&gt;\n"
+"    &lt;key column=\"year_id\"/&gt;\n"
+"    &lt;map-key column=\"hol_name\" type=\"string\"/&gt;\n"
+"    &lt;element column=\"hol_date\" type=\"date\"/&gt;\n"
+"&lt;/map&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:784
+#, no-c-format
+msgid ""
+"Allowed values of the <literal>sort</literal> attribute are "
+"<literal>unsorted</literal>, <literal>natural</literal> and the name of a "
+"class implementing <literal>java.util.Comparator</literal>."
+msgstr ""
+"Les valeurs permises pour l'attribut <literal>sort</literal> sont "
+"<literal>unsorted</literal>, <literal>natural</literal> et le nom d'une "
+"classe implémentant <literal>java.util.Comparator</literal>."
+
+#. Tag: para
+#: collection_mapping.xml:789
+#, no-c-format
+msgid ""
+"Sorted collections actually behave like <literal>java.util.TreeSet</literal> "
+"or <literal>java.util.TreeMap</literal>."
+msgstr ""
+"Les collections triées se comportent réellement comme <literal>java.util."
+"TreeSet</literal> ou <literal>java.util.TreeMap</literal>."
+
+#. Tag: para
+#: collection_mapping.xml:794
+#, fuzzy, no-c-format
+msgid ""
+"If you want the database itself to order the collection elements, use the "
+"<literal>order-by</literal> attribute of <literal>set</literal>, "
+"<literal>bag</literal> or <literal>map</literal> mappings. This solution is "
+"implemented using <literal>LinkedHashSet</literal> or "
+"<literal>LinkedHashMap</literal> and performs the ordering in the SQL query "
+"and not in the memory."
+msgstr ""
+"Si vous voulez que la base de données elle-même ordonne les éléments de la "
+"collection, utilisez l'attribut <literal>order-by</literal> des mappages "
+"<literal>set</literal>, <literal>bag</literal> ou <literal>map</literal>. "
+"Cette solution est seulement disponible à partir du JDK 1.4 (c'est "
+"implémenté en utilisant <literal>LinkedHashSet</literal> ou "
+"<literal>LinkedHashMap</literal>). Ceci exécute le tri dans la requête SQL, "
+"pas en mémoire. "
+
+#. Tag: title
+#: collection_mapping.xml:802
+#, no-c-format
+msgid "Sorting in database using order-by"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:804
+#, no-c-format
+msgid ""
+"&lt;set name=\"aliases\" table=\"person_aliases\" order-by=\"lower(name) asc"
+"\"&gt;\n"
+"    &lt;key column=\"person\"/&gt;\n"
+"    &lt;element column=\"name\" type=\"string\"/&gt;\n"
+"&lt;/set&gt;\n"
+"\n"
+"&lt;map name=\"holidays\" order-by=\"hol_date, hol_name\"&gt;\n"
+"    &lt;key column=\"year_id\"/&gt;\n"
+"    &lt;map-key column=\"hol_name\" type=\"string\"/&gt;\n"
+"    &lt;element column=\"hol_date type=\"date\"/&gt;\n"
+"&lt;/map&gt;"
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:808
+#, no-c-format
+msgid "Note"
+msgstr "Note"
+
+#. Tag: para
+#: collection_mapping.xml:810
+#, no-c-format
+msgid ""
+"The value of the <literal>order-by</literal> attribute is an SQL ordering, "
+"not an HQL ordering."
+msgstr ""
+"Notez que la valeur de l'attribut <literal>order-by</literal> est un ordre "
+"SQL, et non pas un ordre HQL."
+
+#. Tag: para
+#: collection_mapping.xml:814
+#, no-c-format
+msgid ""
+"Associations can even be sorted by arbitrary criteria at runtime using a "
+"collection <literal>filter()</literal>:"
+msgstr ""
+"Les associations peuvent même être triées sur des critères arbitraires à "
+"l'exécution en utilisant un <literal>filter()</literal> de collection :"
+
+#. Tag: title
+#: collection_mapping.xml:818
+#, no-c-format
+msgid "Sorting via a query filter"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:820
+#, no-c-format
+msgid ""
+"sortedUsers = s.createFilter( group.getUsers(), \"order by this.name\" ).list"
+"();"
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:825
+#, no-c-format
+msgid "Bidirectional associations"
+msgstr "Associations bidirectionnelles"
+
+#. Tag: para
+#: collection_mapping.xml:827
+#, no-c-format
+msgid ""
+"A <emphasis>bidirectional association</emphasis> allows navigation from both "
+"\"ends\" of the association. Two kinds of bidirectional association are "
+"supported:"
+msgstr ""
+"Une <emphasis>association bidirectionnelle</emphasis> permet la navigation à "
+"partir des deux extrémités de l'association. Deux types d'associations "
+"bidirectionnelles sont supportées : "
+
+#. Tag: term
+#: collection_mapping.xml:831
+#, no-c-format
+msgid "one-to-many"
+msgstr "un-à-plusieurs (one-to-many)"
+
+#. Tag: para
+#: collection_mapping.xml:834
+#, no-c-format
+msgid "set or bag valued at one end and single-valued at the other"
+msgstr "ensemble ou sac à une extrémité, une seule valeur à l'autre "
+
+#. Tag: term
+#: collection_mapping.xml:840
+#, no-c-format
+msgid "many-to-many"
+msgstr "plusieurs-à-plusieurs "
+
+#. Tag: para
+#: collection_mapping.xml:843
+#, no-c-format
+msgid "set or bag valued at both ends"
+msgstr "ensemble ou sac aux deux extrémités"
+
+#. Tag: para
+#: collection_mapping.xml:848
+#, no-c-format
+msgid ""
+"Often there exists a many to one association which is the owner side of a "
+"bidirectional relationship. The corresponding one to many association is in "
+"this case annotated by <literal>@OneToMany(mappedBy=...)</literal>"
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:854
+#, no-c-format
+msgid "Bidirectional one to many with many to one side as association owner"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:857
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Troop {\n"
+"    @OneToMany(mappedBy=\"troop\")\n"
+"    public Set&lt;Soldier&gt; getSoldiers() {\n"
+"    ...\n"
+"}\n"
+"\n"
+"@Entity\n"
+"public class Soldier {\n"
+"    @ManyToOne\n"
+"    @JoinColumn(name=\"troop_fk\")\n"
+"    public Troop getTroop() {\n"
+"    ...\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:860
+#, no-c-format
+msgid ""
+"<classname>Troop</classname> has a bidirectional one to many relationship "
+"with <literal>Soldier</literal> through the <literal>troop</literal> "
+"property. You don't have to (must not) define any physical mapping in the "
+"<literal>mappedBy</literal> side."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:865
+#, no-c-format
+msgid ""
+"To map a bidirectional one to many, with the one-to-many side as the owning "
+"side, you have to remove the <literal>mappedBy</literal> element and set the "
+"many to one <literal>@JoinColumn</literal> as insertable and updatable to "
+"false. This solution is not optimized and will produce additional UPDATE "
+"statements."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:872
+#, fuzzy, no-c-format
+msgid "Bidirectional associtaion with one to many side as owner"
+msgstr "Associations bidirectionnelles avec des collections indexées"
+
+#. Tag: programlisting
+#: collection_mapping.xml:875
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Troop {\n"
+"    @OneToMany\n"
+"    @JoinColumn(name=\"troop_fk\") //we need to duplicate the physical "
+"information\n"
+"    public Set&lt;Soldier&gt; getSoldiers() {\n"
+"    ...\n"
+"}\n"
+"\n"
+"@Entity\n"
+"public class Soldier {\n"
+"    @ManyToOne\n"
+"    @JoinColumn(name=\"troop_fk\", insertable=false, updatable=false)\n"
+"    public Troop getTroop() {\n"
+"    ...\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:878
+#, fuzzy, no-c-format
+msgid ""
+"How does the mappping of a bidirectional mapping look like in Hibernate "
+"mapping xml? There you define a bidirectional one-to-many association by "
+"mapping a one-to-many association to the same table column(s) as a many-to-"
+"one association and declaring the many-valued end <literal>inverse=\"true\"</"
+"literal>."
+msgstr ""
+"Vous pouvez définir une association bidirectionnelle un-à-plusieurs en "
+"mappant une association un-à-plusieurs vers la(es) même(s) colonne(s) de "
+"table qu'une association plusieurs-à-un et en déclarant l'extrémité pluri-"
+"valuée <literal>inverse=\"true\"</literal>. "
+
+#. Tag: title
+#: collection_mapping.xml:885
+#, no-c-format
+msgid "Bidirectional one to many via Hibernate mapping files"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:887
+#, no-c-format
+msgid ""
+"&lt;class name=\"Parent\"&gt;\n"
+"    &lt;id name=\"id\" column=\"parent_id\"/&gt;\n"
+"    ....\n"
+"    &lt;set name=\"children\" inverse=\"true\"&gt;\n"
+"        &lt;key column=\"parent_id\"/&gt;\n"
+"        &lt;one-to-many class=\"Child\"/&gt;\n"
+"    &lt;/set&gt;\n"
+"&lt;/class&gt;\n"
+"\n"
+"&lt;class name=\"Child\"&gt;\n"
+"    &lt;id name=\"id\" column=\"child_id\"/&gt;\n"
+"    ....\n"
+"    &lt;many-to-one name=\"parent\" \n"
+"        class=\"Parent\" \n"
+"        column=\"parent_id\"\n"
+"        not-null=\"true\"/&gt;\n"
+"&lt;/class&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:890
+#, no-c-format
+msgid ""
+"Mapping one end of an association with <literal>inverse=\"true\"</literal> "
+"does not affect the operation of cascades as these are orthogonal concepts."
+msgstr ""
+"Mapper une extrémité d'une association avec <literal>inverse=\"true\"</"
+"literal> n'affecte pas l'opération de cascades, ce sont des concepts "
+"orthogonaux."
+
+#. Tag: para
+#: collection_mapping.xml:894
+#, no-c-format
+msgid ""
+"A many-to-many association is defined logically using the "
+"<literal>@ManyToMany</literal> annotation. You also have to describe the "
+"association table and the join conditions using the <literal>@JoinTable</"
+"literal> annotation. If the association is bidirectional, one side has to be "
+"the owner and one side has to be the inverse end (ie. it will be ignored "
+"when updating the relationship values in the association table):"
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:903
+#, no-c-format
+msgid "Many to many association via @ManyToMany"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:905
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Employer implements Serializable {\n"
+"    @ManyToMany(\n"
+"        targetEntity=org.hibernate.test.metadata.manytomany.Employee.class,\n"
+"        cascade={CascadeType.PERSIST, CascadeType.MERGE}\n"
+"    )\n"
+"    @JoinTable(\n"
+"        name=\"EMPLOYER_EMPLOYEE\",\n"
+"        joinColumns=@JoinColumn(name=\"EMPER_ID\"),\n"
+"        inverseJoinColumns=@JoinColumn(name=\"EMPEE_ID\")\n"
+"    )\n"
+"    public Collection getEmployees() {\n"
+"        return employees;\n"
+"    }\n"
+"    ...\n"
+"}"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:907
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Employee implements Serializable {\n"
+"    @ManyToMany(\n"
+"        cascade = {CascadeType.PERSIST, CascadeType.MERGE},\n"
+"        mappedBy = \"employees\",\n"
+"        targetEntity = Employer.class\n"
+"    )\n"
+"    public Collection getEmployers() {\n"
+"        return employers;\n"
+"    }\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:910
+#, no-c-format
+msgid ""
+"In this example <classname>@JoinTable</classname> defines a <literal>name</"
+"literal>, an array of join columns, and an array of inverse join columns. "
+"The latter ones are the columns of the association table which refer to the "
+"<classname>Employee</classname> primary key (the \"other side\"). As seen "
+"previously, the other side don't have to (must not) describe the physical "
+"mapping: a simple <literal>mappedBy</literal> argument containing the owner "
+"side property name bind the two."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:919
+#, no-c-format
+msgid ""
+"As any other annotations, most values are guessed in a many to many "
+"relationship. Without describing any physical mapping in a unidirectional "
+"many to many the following rules applied. The table name is the "
+"concatenation of the owner table name, <keycap>_</keycap> and the other side "
+"table name. The foreign key name(s) referencing the owner table is the "
+"concatenation of the owner table name, <keycap>_</keycap> and the owner "
+"primary key column(s). The foreign key name(s) referencing the other side is "
+"the concatenation of the owner property name, <keycap>_</keycap>, and the "
+"other side primary key column(s). These are the same rules used for a "
+"unidirectional one to many relationship."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:932
+#, no-c-format
+msgid "Default values for <classname>@ManyToMany</classname> (uni-directional)"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:935
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Store {\n"
+"    @ManyToMany(cascade = CascadeType.PERSIST)\n"
+"    public Set&lt;City&gt; getImplantedIn() {\n"
+"        ...\n"
+"    }\n"
+"}\n"
+"\n"
+"@Entity\n"
+"public class City {\n"
+"    ... //no bidirectional relationship\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:938
+#, no-c-format
+msgid ""
+"A <literal>Store_City</literal> is used as the join table. The "
+"<literal>Store_id</literal> column is a foreign key to the <literal>Store</"
+"literal> table. The <literal>implantedIn_id</literal> column is a foreign "
+"key to the <literal>City</literal> table."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:943
+#, no-c-format
+msgid ""
+"Without describing any physical mapping in a bidirectional many to many the "
+"following rules applied. The table name is the concatenation of the owner "
+"table name, <keycap>_</keycap> and the other side table name. The foreign "
+"key name(s) referencing the owner table is the concatenation of the other "
+"side property name, <keycap>_</keycap>, and the owner primary key column(s). "
+"The foreign key name(s) referencing the other side is the concatenation of "
+"the owner property name, <keycap>_</keycap>, and the other side primary key "
+"column(s). These are the same rules used for a unidirectional one to many "
+"relationship."
+msgstr ""
+
+#. Tag: title
+#: collection_mapping.xml:955
+#, no-c-format
+msgid "Default values for <classname>@ManyToMany</classname> (bi-directional)"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:958
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Store {\n"
+"    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})\n"
+"    public Set&lt;Customer&gt; getCustomers() {\n"
+"        ...\n"
+"    }\n"
+"}\n"
+"\n"
+"@Entity\n"
+"public class Customer {\n"
+"    @ManyToMany(mappedBy=\"customers\")\n"
+"    public Set&lt;Store&gt; getStores() {\n"
+"        ...\n"
+"    }\n"
+"}"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:961
+#, no-c-format
+msgid ""
+"A <literal>Store_Customer</literal> is used as the join table. The "
+"<literal>stores_id</literal> column is a foreign key to the <literal>Store</"
+"literal> table. The <literal>customers_id</literal> column is a foreign key "
+"to the <literal>Customer</literal> table."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:966
+#, fuzzy, no-c-format
+msgid ""
+"Using Hibernate mapping files you can map a bidirectional many-to-many "
+"association by mapping two many-to-many associations to the same database "
+"table and declaring one end as <emphasis>inverse</emphasis>."
+msgstr ""
+"Vous pouvez spécifier une association bidirectionnelle plusieurs-à-plusieurs "
+"simplement en mappant deux associations plusieurs-à-plusieurs vers la même "
+"table de base de données et en déclarant une extrémité comme "
+"<emphasis>inverse</emphasis> (celle de votre choix, mais pas une collection "
+"indexée). "
+
+#. Tag: para
+#: collection_mapping.xml:970
+#, no-c-format
+msgid "You cannot select an indexed collection."
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:973
+#, fuzzy, no-c-format
+msgid ""
+"shows a bidirectional many-to-many association that illustrates how each "
+"category can have many items and each item can be in many categories:"
+msgstr ""
+"Voici un exemple d'association bidirectionnelle plusieurs-à-plusieurs ; "
+"chaque catégorie peut avoir plusieurs objets et chaque objet peut être dans "
+"plusieurs catégories : "
+
+#. Tag: title
+#: collection_mapping.xml:979
+#, no-c-format
+msgid "Many to many association using Hibernate mapping files"
+msgstr ""
+
+#. Tag: programlisting
+#: collection_mapping.xml:981
+#, no-c-format
+msgid ""
+"&lt;class name=\"Category\"&gt;\n"
+"    &lt;id name=\"id\" column=\"CATEGORY_ID\"/&gt;\n"
+"    ...\n"
+"    &lt;bag name=\"items\" table=\"CATEGORY_ITEM\"&gt;\n"
+"        &lt;key column=\"CATEGORY_ID\"/&gt;\n"
+"        &lt;many-to-many class=\"Item\" column=\"ITEM_ID\"/&gt;\n"
+"    &lt;/bag&gt;\n"
+"&lt;/class&gt;\n"
+"\n"
+"&lt;class name=\"Item\"&gt;\n"
+"    &lt;id name=\"id\" column=\"ITEM_ID\"/&gt;\n"
+"    ...\n"
+"\n"
+"    &lt;!-- inverse end --&gt;\n"
+"    &lt;bag name=\"categories\" table=\"CATEGORY_ITEM\" inverse=\"true"
+"\"&gt;\n"
+"        &lt;key column=\"ITEM_ID\"/&gt;\n"
+"        &lt;many-to-many class=\"Category\" column=\"CATEGORY_ID\"/&gt;\n"
+"    &lt;/bag&gt;\n"
+"&lt;/class&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:984
+#, no-c-format
+msgid ""
+"Changes made only to the inverse end of the association are <emphasis>not</"
+"emphasis> persisted. This means that Hibernate has two representations in "
+"memory for every bidirectional association: one link from A to B and another "
+"link from B to A. This is easier to understand if you think about the Java "
+"object model and how a many-to-many relationship in Javais created:"
+msgstr ""
+"Les changements faits uniquement sur l'extrémité inverse de l'association "
+"<emphasis>ne sont pas</emphasis> persistés. Ceci signifie qu'Hibernate a "
+"deux représentations en mémoire pour chaque association bidirectionnelle, un "
+"lien de A vers B et un autre de B vers A. Ceci est plus facile à comprendre "
+"si vous pensez au modèle objet de Java et à la façon dont nous créons une "
+"relation plusieurs-à-plusieurs dans Java : "
+
+#. Tag: title
+#: collection_mapping.xml:992
+#, fuzzy, no-c-format
+msgid "Effect of inverse vs. non-inverse side of many to many associations"
+msgstr "Collections de valeurs et associations plusieurs-à-plusieurs"
+
+#. Tag: programlisting
+#: collection_mapping.xml:995
+#, no-c-format
+msgid ""
+"category.getItems().add(item);           // The category now \"knows\" about "
+"the relationship\n"
+"item.getCategories().add(category);      // The item now \"knows\" about the "
+"relationship\n"
+"\n"
+"session.persist(item);                   // The relationship won't be "
+"saved!\n"
+"session.persist(category);               // The relationship will be saved"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:998
+#, no-c-format
+msgid ""
+"The non-inverse side is used to save the in-memory representation to the "
+"database."
+msgstr ""
+"La partie non-inverse est utilisée pour sauvegarder la représentation en "
+"mémoire dans la base de données."
+
+#. Tag: title
+#: collection_mapping.xml:1003
+#, no-c-format
+msgid "Bidirectional associations with indexed collections"
+msgstr "Associations bidirectionnelles avec des collections indexées"
+
+#. Tag: para
+#: collection_mapping.xml:1005
+#, fuzzy, no-c-format
+msgid ""
+"There are some additional considerations for bidirectional mappings with "
+"indexed collections (where one end is represented as a <literal>&lt;list&gt;"
+"</literal> or <literal>&lt;map&gt;</literal>) when using Hibernate mapping "
+"files. If there is a property of the child class that maps to the index "
+"column you can use <literal>inverse=\"true\"</literal> on the collection "
+"mapping:"
+msgstr ""
+"Une association bidirectionnelle où une extrémité est représentée comme une "
+"<literal>&lt;list&gt;</literal> ou une <literal>&lt;map&gt;</literal> "
+"requiert une considération spéciale. S'il y a une propriété de la classe "
+"enfant qui mappe la colonne de l'index, pas de problème, nous pouvons "
+"continuer à utiliser <literal>inverse=\"true\"</literal> sur le mappage de "
+"la collection : "
+
+#. Tag: title
+#: collection_mapping.xml:1013
+#, fuzzy, no-c-format
+msgid "Bidirectional association with indexed collection"
+msgstr "Associations bidirectionnelles avec des collections indexées"
+
+#. Tag: programlisting
+#: collection_mapping.xml:1015
+#, no-c-format
+msgid ""
+"&lt;class name=\"Parent\"&gt;\n"
+"    &lt;id name=\"id\" column=\"parent_id\"/&gt;\n"
+"    ....\n"
+"    &lt;map name=\"children\" inverse=\"true\"&gt;\n"
+"        &lt;key column=\"parent_id\"/&gt;\n"
+"        &lt;map-key column=\"name\" \n"
+"            type=\"string\"/&gt;\n"
+"        &lt;one-to-many class=\"Child\"/&gt;\n"
+"    &lt;/map&gt;\n"
+"&lt;/class&gt;\n"
+"\n"
+"&lt;class name=\"Child\"&gt;\n"
+"    &lt;id name=\"id\" column=\"child_id\"/&gt;\n"
+"    ....\n"
+"    &lt;property name=\"name\" \n"
+"        not-null=\"true\"/&gt;\n"
+"    &lt;many-to-one name=\"parent\" \n"
+"        class=\"Parent\" \n"
+"        column=\"parent_id\"\n"
+"        not-null=\"true\"/&gt;\n"
+"&lt;/class&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:1018
+#, no-c-format
+msgid ""
+"If there is no such property on the child class, the association cannot be "
+"considered truly bidirectional. That is, there is information available at "
+"one end of the association that is not available at the other end. In this "
+"case, you cannot map the collection <literal>inverse=\"true\"</literal>. "
+"Instead, you could use the following mapping:"
+msgstr ""
+"Mais, si il n'y a pas de telle propriété sur la classe enfant, nous ne "
+"pouvons pas considérer l'association comme vraiment bidirectionnelle (il y a "
+"des informations disponibles à une extrémité de l'association qui ne sont "
+"pas disponibles à l'autre extrémité). Dans ce cas, nous ne pouvons pas "
+"mapper la collection <literal>inverse=\"true\"</literal>. Par contre, nous "
+"utiliserons le mappage suivant : "
+
+#. Tag: title
+#: collection_mapping.xml:1026
+#, fuzzy, no-c-format
+msgid "Bidirectional association with indexed collection, but no index column"
+msgstr "Associations bidirectionnelles avec des collections indexées"
+
+#. Tag: programlisting
+#: collection_mapping.xml:1029
+#, no-c-format
+msgid ""
+"&lt;class name=\"Parent\"&gt;\n"
+"    &lt;id name=\"id\" column=\"parent_id\"/&gt;\n"
+"    ....\n"
+"    &lt;map name=\"children\"&gt;\n"
+"        &lt;key column=\"parent_id\"\n"
+"            not-null=\"true\"/&gt;\n"
+"        &lt;map-key column=\"name\" \n"
+"            type=\"string\"/&gt;\n"
+"        &lt;one-to-many class=\"Child\"/&gt;\n"
+"    &lt;/map&gt;\n"
+"&lt;/class&gt;\n"
+"\n"
+"&lt;class name=\"Child\"&gt;\n"
+"    &lt;id name=\"id\" column=\"child_id\"/&gt;\n"
+"    ....\n"
+"    &lt;many-to-one name=\"parent\" \n"
+"        class=\"Parent\" \n"
+"        column=\"parent_id\"\n"
+"        insert=\"false\"\n"
+"        update=\"false\"\n"
+"        not-null=\"true\"/&gt;\n"
+"&lt;/class&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:1032
+#, fuzzy, no-c-format
+msgid ""
+"Note that in this mapping, the collection-valued end of the association is "
+"responsible for updates to the foreign key."
+msgstr ""
+"Notez que dans ce mappage, l'extrémité de l'association contenant la "
+"collection est responsable des mise à jour de la clé étrangère. <!-- TODO: "
+"Does this really result in some unnecessary update statements? -->"
+
+#. Tag: title
+#: collection_mapping.xml:1037
+#, no-c-format
+msgid "Ternary associations"
+msgstr "Associations ternaires"
+
+#. Tag: para
+#: collection_mapping.xml:1039
+#, no-c-format
+msgid ""
+"There are three possible approaches to mapping a ternary association. One "
+"approach is to use a <literal>Map</literal> with an association as its index:"
+msgstr ""
+"Il y a trois approches possibles pour mapper une association ternaire. L'une "
+"est d'utiliser une <literal>Map</literal> avec une association comme son "
+"index : "
+
+#. Tag: title
+#: collection_mapping.xml:1044
+#, fuzzy, no-c-format
+msgid "Ternary association mapping"
+msgstr "Associations ternaires"
+
+#. Tag: programlisting
+#: collection_mapping.xml:1046
+#, no-c-format
+msgid ""
+"@Entity\n"
+"public class Company {\n"
+"   @Id \n"
+"   int id;\n"
+"   ...\n"
+"   @OneToMany // unidirectional\n"
+"   @MapKeyJoinColumn(name=\"employee_id\")\n"
+"   Map&lt;Employee, Contract&gt; contracts;\n"
+"}\n"
+"\n"
+"// or\n"
+"\n"
+"&lt;map name=\"contracts\"&gt;\n"
+"    &lt;key column=\"employer_id\" not-null=\"true\"/&gt;\n"
+"    &lt;map-key-many-to-many column=\"employee_id\" class=\"Employee\"/&gt;\n"
+"    &lt;one-to-many class=\"Contract\"/&gt;\n"
+"&lt;/map&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:1049
+#, fuzzy, no-c-format
+msgid ""
+"A second approach is to remodel the association as an entity class. This is "
+"the most common approach. A final alternative is to use composite elements, "
+"which will be discussed later."
+msgstr ""
+"Une seconde approche est simplement de remodeler l'association comme une "
+"classe d'entité. C'est l'approche la plus commune. "
+
+#. Tag: literal
+#: collection_mapping.xml:1055
+#, fuzzy, no-c-format
+msgid "Using an &lt;idbag&gt;"
+msgstr "<literal>Using an &lt;idbag&gt;</literal>"
+
+#. Tag: para
+#: collection_mapping.xml:1057
+#, fuzzy, no-c-format
+msgid ""
+"The majority of the many-to-many associations and collections of values "
+"shown previously all map to tables with composite keys, even though it has "
+"been suggested that entities should have synthetic identifiers (surrogate "
+"keys). A pure association table does not seem to benefit much from a "
+"surrogate key, although a collection of composite values <emphasis>might</"
+"emphasis>. For this reason Hibernate provides a feature that allows you to "
+"map many-to-many associations and collections of values to a table with a "
+"surrogate key."
+msgstr ""
+"Si vous êtes bien d'accord avec nous sur le fait que les clés composées sont "
+"une mauvaise chose et que les entités devraient avoir des identifiants "
+"artificiels (des clés subrogées), vous pourrez trouver un peu curieux que "
+"les associations plusieurs-à-plusieurs et les collections de valeurs que "
+"nous avons montrées jusqu'ici, mappent toutes des tables avec des clés "
+"composées ! Il est vrai que ce point est ambigu ; une table d'association "
+"pure ne semble pas tirer avantage d'une clé subrogée (bien qu'une collection "
+"de valeur composées le <emphasis>pourrait</emphasis>). Néanmoins, Hibernate "
+"fournit une fonctionnalité qui vous permet de mapper des associations "
+"plusieurs-à-plusieurs et des collections de valeurs vers une table avec une "
+"clé subrogée. "
+
+#. Tag: para
+#: collection_mapping.xml:1066
+#, no-c-format
+msgid ""
+"The <literal>&lt;idbag&gt;</literal> element lets you map a <literal>List</"
+"literal> (or <literal>Collection</literal>) with bag semantics. For example:"
+msgstr ""
+"L'élément <literal>&lt;idbag&gt;</literal> vous laisse mapper une "
+"<literal>List</literal> (ou une <literal>Collection</literal>) avec une "
+"sémantique de sac. Par exemple :"
+
+#. Tag: programlisting
+#: collection_mapping.xml:1070
+#, no-c-format
+msgid ""
+"&lt;idbag name=\"lovers\" table=\"LOVERS\"&gt;\n"
+"    &lt;collection-id column=\"ID\" type=\"long\"&gt;\n"
+"        &lt;generator class=\"sequence\"/&gt;\n"
+"    &lt;/collection-id&gt;\n"
+"    &lt;key column=\"PERSON1\"/&gt;\n"
+"    &lt;many-to-many column=\"PERSON2\" class=\"Person\" fetch=\"join\"/"
+"&gt;\n"
+"&lt;/idbag&gt;"
+msgstr ""
+
+#. Tag: para
+#: collection_mapping.xml:1072
+#, no-c-format
+msgid ""
+"An <literal>&lt;idbag&gt;</literal> has a synthetic id generator, just like "
+"an entity class. A different surrogate key is assigned to each collection "
+"row. Hibernate does not, however, provide any mechanism for discovering the "
+"surrogate key value of a particular row."
+msgstr ""
+"Comme vous pouvez le constater, un <literal>&lt;idbag&gt;</literal> a un "
+"générateur d'id artificiel, exactement comme une classe d'entité ! Une clé "
+"subrogée différente est assignée à chaque ligne de la collection. Cependant, "
+"Hibernate ne fournit pas de mécanisme pour découvrir la valeur d'une clé "
+"subrogée d'une ligne particulière. "
+
+#. Tag: para
+#: collection_mapping.xml:1077
+#, no-c-format
+msgid ""
+"The update performance of an <literal>&lt;idbag&gt;</literal> supersedes a "
+"regular <literal>&lt;bag&gt;</literal>. Hibernate can locate individual rows "
+"efficiently and update or delete them individually, similar to a list, map "
+"or set

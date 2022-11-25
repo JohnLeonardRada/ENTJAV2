@@ -1,0 +1,176 @@
+nlyCache</A>, <A HREF="../../../org/hibernate/cache/ReadWriteCache.html" title="class in org.hibernate.cache">ReadWriteCache</A>, <A HREF="../../../org/hibernate/cache/TransactionalCache.html" title="class in org.hibernate.cache">TransactionalCache</A></DD>
+</DL>
+<HR>
+<B>Deprecated.</B>&nbsp;<I>As of 3.3; see <a href="package.html"/> for details.</I>
+<P>
+<DL>
+<DT><PRE>public interface <B>CacheConcurrencyStrategy</B></DL>
+</PRE>
+
+<P>
+Implementors manage transactional access to cached data. Transactions
+ pass in a timestamp indicating transaction start time. Two different
+ implementation patterns are provided for.<ul>
+ <li>A transaction-aware cache implementation might be wrapped by a
+ "synchronous" concurrency strategy, where updates to the cache are written
+ to the cache inside the transaction.</li>
+ <li>A non transaction-aware cache would be wrapped by an "asynchronous"
+ concurrency strategy, where items are merely "soft locked" during the 
+ transaction and then updated during the "after transaction completion"
+ phase; the soft lock is not an actual lock on the database row -
+ only upon the cached representation of the item.</li>
+ </ul>
+ <p/>
+ In terms of entity caches, the expected call sequences are: <ul>
+ <li><b>DELETES</b> : <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#lock(java.lang.Object, java.lang.Object)"><CODE>lock(java.lang.Object, java.lang.Object)</CODE></A> -> <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#evict(java.lang.Object)"><CODE>evict(java.lang.Object)</CODE></A> -> <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#release(java.lang.Object, org.hibernate.cache.access.SoftLock)"><CODE>release(java.lang.Object, org.hibernate.cache.access.SoftLock)</CODE></A></li>
+ <li><b>UPDATES</b> : <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#lock(java.lang.Object, java.lang.Object)"><CODE>lock(java.lang.Object, java.lang.Object)</CODE></A> -> <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#update(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)"><CODE>update(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)</CODE></A> -> <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#afterUpdate(java.lang.Object, java.lang.Object, java.lang.Object, org.hibernate.cache.access.SoftLock)"><CODE>afterUpdate(java.lang.Object, java.lang.Object, java.lang.Object, org.hibernate.cache.access.SoftLock)</CODE></A></li>
+ <li><b>INSERTS</b> : <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#insert(java.lang.Object, java.lang.Object, java.lang.Object)"><CODE>insert(java.lang.Object, java.lang.Object, java.lang.Object)</CODE></A> -> <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#afterInsert(java.lang.Object, java.lang.Object, java.lang.Object)"><CODE>afterInsert(java.lang.Object, java.lang.Object, java.lang.Object)</CODE></A></li>
+ </ul>
+ <p/>
+ In terms of collection caches, all modification actions actually just
+ invalidate the entry(s).  The call sequence here is:
+ <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#lock(java.lang.Object, java.lang.Object)"><CODE>lock(java.lang.Object, java.lang.Object)</CODE></A> -> <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#evict(java.lang.Object)"><CODE>evict(java.lang.Object)</CODE></A> -> <A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#release(java.lang.Object, org.hibernate.cache.access.SoftLock)"><CODE>release(java.lang.Object, org.hibernate.cache.access.SoftLock)</CODE></A>
+ <p/>
+ Note that, for an asynchronous cache, cache invalidation must be a two 
+ step process (lock->release, or lock-afterUpdate), since this is the only 
+ way to guarantee consistency with the database for a nontransactional cache
+ implementation. For a synchronous cache, cache invalidation is a single 
+ step process (evict, or update). Hence, this interface defines a three
+ step process, to cater for both models.
+ <p/>
+ Note that query result caching does not go through a concurrency strategy; they
+ are managed directly against the underlying <A HREF="../../../org/hibernate/cache/Cache.html" title="interface in org.hibernate.cache"><CODE>cache regions</CODE></A>.
+<P>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#afterInsert(java.lang.Object, java.lang.Object, java.lang.Object)">afterInsert</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;version)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Called after an item has been inserted (after the transaction completes),
+ instead of calling release().</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#afterUpdate(java.lang.Object, java.lang.Object, java.lang.Object, org.hibernate.cache.access.SoftLock)">afterUpdate</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;version,
+            <A HREF="../../../org/hibernate/cache/access/SoftLock.html" title="interface in org.hibernate.cache.access">SoftLock</A>&nbsp;lock)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Called after an item has been updated (after the transaction completes),
+ instead of calling release().</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#clear()">clear</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Evict all items from the cache immediately.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#destroy()">destroy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Clean up all resources.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#evict(java.lang.Object)">evict</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Called after an item has become stale (before the transaction completes).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#get(java.lang.Object, long)">get</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+    long&nbsp;txTimestamp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Attempt to retrieve an object from the cache.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../org/hibernate/cache/Cache.html" title="interface in org.hibernate.cache">Cache</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#getCache()">getCache</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Get the wrapped cache implementation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#getRegionName()">getRegionName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Get the cache region name</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#insert(java.lang.Object, java.lang.Object, java.lang.Object)">insert</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;currentVersion)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Called after an item has been inserted (before the transaction completes),
+ instead of calling evict().</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../org/hibernate/cache/access/SoftLock.html" title="interface in org.hibernate.cache.access">SoftLock</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#lock(java.lang.Object, java.lang.Object)">lock</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;version)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;We are going to attempt to update/delete the keyed object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#put(java.lang.Object, java.lang.Object, long, java.lang.Object, java.util.Comparator, boolean)">put</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;value,
+    long&nbsp;txTimestamp,
+    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;version,
+    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util">Comparator</A>&nbsp;versionComparator,
+    boolean&nbsp;minimalPut)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Attempt to cache an object, after loading from the database.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/CacheConcurrencyStrategy.html#release(java.lang.Object, org.hibernate.cache.access.SoftLock)">release</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;key,
+        <A HREF="../../../org/hibernate/cache/access/SoftLock.html" title="interface in org.hibernate.cache.access">SoftLock</A>&nbsp;lock)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Called when we have finished the attempted update/delete (which may or 
+ may not have been successful), after transaction completion.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/hibernate/cache/Cach

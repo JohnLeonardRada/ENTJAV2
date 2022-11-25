@@ -1,0 +1,834 @@
+来不用这些方法。"
+
+#. Tag: para
+#: session_api.xml:549
+#, no-c-format
+msgid ""
+"Usually <literal>update()</literal> or <literal>saveOrUpdate()</literal> are "
+"used in the following scenario:"
+msgstr ""
+"通常下面的场景会使用 <literal>update()</literal> 或 <literal>saveOrUpdate()</"
+"literal>："
+
+#. Tag: para
+#: session_api.xml:555
+#, no-c-format
+msgid "the application loads an object in the first session"
+msgstr "程序在第一个 session 中加载对象"
+
+#. Tag: para
+#: session_api.xml:559
+#, no-c-format
+msgid "the object is passed up to the UI tier"
+msgstr "该对象被传递到表现层"
+
+#. Tag: para
+#: session_api.xml:563
+#, no-c-format
+msgid "some modifications are made to the object"
+msgstr "对象发生了一些改动"
+
+#. Tag: para
+#: session_api.xml:567
+#, no-c-format
+msgid "the object is passed back down to the business logic tier"
+msgstr "该对象被返回到业务逻辑层"
+
+#. Tag: para
+#: session_api.xml:571
+#, no-c-format
+msgid ""
+"the application persists these modifications by calling <literal>update()</"
+"literal> in a second session"
+msgstr "程序调用第二个 session 的 <literal>update()</literal> 方法持久这些改动"
+
+#. Tag: para
+#: session_api.xml:576
+#, no-c-format
+msgid "<literal>saveOrUpdate()</literal> does the following:"
+msgstr "<literal>saveOrUpdate()</literal> 做下面的事："
+
+#. Tag: para
+#: session_api.xml:580
+#, no-c-format
+msgid "if the object is already persistent in this session, do nothing"
+msgstr "如果对象已经在本 session 中持久化了，不做任何事"
+
+#. Tag: para
+#: session_api.xml:585
+#, no-c-format
+msgid ""
+"if another object associated with the session has the same identifier, throw "
+"an exception"
+msgstr ""
+"如果另一个与本 session 关联的对象拥有相同的持久化标识（identifier），抛出一个"
+"异常"
+
+#. Tag: para
+#: session_api.xml:590
+#, no-c-format
+msgid "if the object has no identifier property, <literal>save()</literal> it"
+msgstr ""
+"如果对象没有持久化标识（identifier）属性，对其调用 <literal>save()</literal>"
+
+#. Tag: para
+#: session_api.xml:595
+#, no-c-format
+msgid ""
+"if the object's identifier has the value assigned to a newly instantiated "
+"object, <literal>save()</literal> it"
+msgstr ""
+"如果对象的持久标识（identifier）表明其是一个新实例化的对象，对其调用 "
+"<literal>save()</literal>。"
+
+#. Tag: para
+#: session_api.xml:600
+#, no-c-format
+msgid ""
+"if the object is versioned by a <literal>&lt;version&gt;</literal> or "
+"<literal>&lt;timestamp&gt;</literal>, and the version property value is the "
+"same value assigned to a newly instantiated object, <literal>save()</"
+"literal> it"
+msgstr ""
+"如果对象是附带版本信息的（通过 <literal>&lt;version&gt;</literal> 或 "
+"<literal>&lt;timestamp&gt;</literal>）并且版本属性的值表明其是一个新实例化的"
+"对象，<literal>save()</literal> 它。 "
+
+#. Tag: para
+#: session_api.xml:608
+#, no-c-format
+msgid "otherwise <literal>update()</literal> the object"
+msgstr "否则 <literal>update()</literal> 这个对象"
+
+#. Tag: para
+#: session_api.xml:612
+#, no-c-format
+msgid "and <literal>merge()</literal> is very different:"
+msgstr "<literal>merge()</literal> 可非常不同："
+
+#. Tag: para
+#: session_api.xml:616
+#, no-c-format
+msgid ""
+"if there is a persistent instance with the same identifier currently "
+"associated with the session, copy the state of the given object onto the "
+"persistent instance"
+msgstr ""
+"如果 session 中存在相同持久化标识（identifier）的实例，用用户给出的对象的状态"
+"覆盖旧有的持久实例"
+
+#. Tag: para
+#: session_api.xml:622
+#, no-c-format
+msgid ""
+"if there is no persistent instance currently associated with the session, "
+"try to load it from the database, or create a new persistent instance"
+msgstr ""
+"如果 session 没有相应的持久实例，则尝试从数据库中加载，或创建新的持久化实例"
+
+#. Tag: para
+#: session_api.xml:628
+#, no-c-format
+msgid "the persistent instance is returned"
+msgstr "最后返回该持久实例"
+
+#. Tag: para
+#: session_api.xml:632
+#, no-c-format
+msgid ""
+"the given instance does not become associated with the session, it remains "
+"detached"
+msgstr "用户给出的这个对象没有被关联到 session 上，它依旧是脱管的"
+
+#. Tag: title
+#: session_api.xml:639
+#, no-c-format
+msgid "Deleting persistent objects"
+msgstr "删除持久对象"
+
+#. Tag: para
+#: session_api.xml:641
+#, no-c-format
+msgid ""
+"<literal>Session.delete()</literal> will remove an object's state from the "
+"database. Your application, however, can still hold a reference to a deleted "
+"object. It is best to think of <literal>delete()</literal> as making a "
+"persistent instance, transient."
+msgstr ""
+"使用 <literal>Session.delete()</literal> 会把对象的状态从数据库中移除。当然，"
+"你的应用程序可能仍然持有一个指向已删除对象的引用。所以，最好这样理解："
+"<literal>delete()</literal> 的用途是把一个持久实例变成瞬时（transient）实"
+"例。 "
+
+#. Tag: programlisting
+#: session_api.xml:646
+#, fuzzy, no-c-format
+msgid "sess.delete(cat);"
+msgstr "<![CDATA[sess.delete(cat);]]>"
+
+#. Tag: para
+#: session_api.xml:648
+#, no-c-format
+msgid ""
+"You can delete objects in any order, without risk of foreign key constraint "
+"violations. It is still possible to violate a <literal>NOT NULL</literal> "
+"constraint on a foreign key column by deleting objects in the wrong order, e."
+"g. if you delete the parent, but forget to delete the children."
+msgstr ""
+"你可以用你喜欢的任何顺序删除对象，不用担心外键约束冲突。当然，如果你搞错了顺"
+"序，还是有可能引发在外键字段定义的 <literal>NOT NULL</literal> 约束冲突。例如"
+"你删除了父对象，但是忘记删除其子对象。"
+
+#. Tag: title
+#: session_api.xml:656
+#, no-c-format
+msgid "Replicating object between two different datastores"
+msgstr "在两个不同数据库间复制对象"
+
+#. Tag: para
+#: session_api.xml:658
+#, no-c-format
+msgid ""
+"It is sometimes useful to be able to take a graph of persistent instances "
+"and make them persistent in a different datastore, without regenerating "
+"identifier values."
+msgstr ""
+"偶尔会用到不重新生成持久化标识（identifier），将持久实例以及其关联的实例持久"
+"到不同的数据库中的操作。 "
+
+#. Tag: programlisting
+#: session_api.xml:662
+#, fuzzy, no-c-format
+msgid ""
+"//retrieve a cat from one database\n"
+"Session session1 = factory1.openSession();\n"
+"Transaction tx1 = session1.beginTransaction();\n"
+"Cat cat = session1.get(Cat.class, catId);\n"
+"tx1.commit();\n"
+"session1.close();\n"
+"\n"
+"//reconcile with a second database\n"
+"Session session2 = factory2.openSession();\n"
+"Transaction tx2 = session2.beginTransaction();\n"
+"session2.replicate(cat, ReplicationMode.LATEST_VERSION);\n"
+"tx2.commit();\n"
+"session2.close();"
+msgstr ""
+"<![CDATA[//retrieve a cat from one database\n"
+"Session session1 = factory1.openSession();\n"
+"Transaction tx1 = session1.beginTransaction();\n"
+"Cat cat = session1.get(Cat.class, catId);\n"
+"tx1.commit();\n"
+"session1.close();\n"
+"\n"
+"//reconcile with a second database\n"
+"Session session2 = factory2.openSession();\n"
+"Transaction tx2 = session2.beginTransaction();\n"
+"session2.replicate(cat, ReplicationMode.LATEST_VERSION);\n"
+"tx2.commit();\n"
+"session2.close();]]>"
+
+#. Tag: para
+#: session_api.xml:664
+#, no-c-format
+msgid ""
+"The <literal>ReplicationMode</literal> determines how <literal>replicate()</"
+"literal> will deal with conflicts with existing rows in the database:"
+msgstr ""
+"<literal>ReplicationMode</literal> 决定在和数据库中已存在记录由冲突时，"
+"<literal>replicate()</literal> 如何处理。 "
+
+#. Tag: para
+#: session_api.xml:670
+#, no-c-format
+msgid ""
+"<literal>ReplicationMode.IGNORE</literal>: ignores the object when there is "
+"an existing database row with the same identifier"
+msgstr ""
+"<literal>ReplicationMode.IGNORE</literal>：当某个现有数据库记录具有相同标识符"
+"时忽略它"
+
+#. Tag: para
+#: session_api.xml:675
+#, no-c-format
+msgid ""
+"<literal>ReplicationMode.OVERWRITE</literal>: overwrites any existing "
+"database row with the same identifier"
+msgstr ""
+"<literal>ReplicationMode.OVERWRITE</literal>：用相同的标识符覆盖现有数据库记"
+"录"
+
+#. Tag: para
+#: session_api.xml:680
+#, no-c-format
+msgid ""
+"<literal>ReplicationMode.EXCEPTION</literal>: throws an exception if there "
+"is an existing database row with the same identifier"
+msgstr ""
+"<literal>ReplicationMode.EXCEPTION</literal>：当某个现有数据库记录具有相同标"
+"识符时抛出异常"
+
+#. Tag: para
+#: session_api.xml:686
+#, no-c-format
+msgid ""
+"<literal>ReplicationMode.LATEST_VERSION</literal>: overwrites the row if its "
+"version number is earlier than the version number of the object, or ignore "
+"the object otherwise"
+msgstr ""
+"<literal>ReplicationMode.LATEST_VERSION</literal>：如果当前的版本较新，则覆"
+"盖，否则忽略"
+
+#. Tag: para
+#: session_api.xml:692
+#, no-c-format
+msgid ""
+"Usecases for this feature include reconciling data entered into different "
+"database instances, upgrading system configuration information during "
+"product upgrades, rolling back changes made during non-ACID transactions and "
+"more."
+msgstr ""
+"这个功能的用途包括使录入的数据在不同数据库中一致，产品升级时升级系统配置信"
+"息，回滚 non-ACID 事务中的修改等等。（译注，non-ACID，非 ACID;ACID，Atomic，"
+"Consistent，Isolated and Durable 的缩写）"
+
+#. Tag: title
+#: session_api.xml:699
+#, no-c-format
+msgid "Flushing the Session"
+msgstr "Session 刷出（flush）"
+
+#. Tag: para
+#: session_api.xml:701
+#, no-c-format
+msgid ""
+"Sometimes the <literal>Session</literal> will execute the SQL statements "
+"needed to synchronize the JDBC connection's state with the state of objects "
+"held in memory. This process, called <emphasis>flush</emphasis>, occurs by "
+"default at the following points:"
+msgstr ""
+"每间隔一段时间，<literal>Session</literal> 会执行一些必需的 SQL 语句来把内存"
+"中的对象的状态同步到 JDBC 连接中。这个过程被称为<emphasis>刷出（flush）</"
+"emphasis>，默认会在下面的时间点执行： "
+
+#. Tag: para
+#: session_api.xml:709
+#, no-c-format
+msgid "before some query executions"
+msgstr "在某些查询执行之前"
+
+#. Tag: para
+#: session_api.xml:713
+#, no-c-format
+msgid "from <literal>org.hibernate.Transaction.commit()</literal>"
+msgstr "在调用 <literal>org.hibernate.Transaction.commit()</literal> 的时候"
+
+#. Tag: para
+#: session_api.xml:718
+#, no-c-format
+msgid "from <literal>Session.flush()</literal>"
+msgstr "在调用 <literal>Session.flush()</literal> 的时候"
+
+#. Tag: para
+#: session_api.xml:722
+#, no-c-format
+msgid "The SQL statements are issued in the following order:"
+msgstr "涉及的 SQL 语句会按照下面的顺序发出执行： "
+
+#. Tag: para
+#: session_api.xml:726
+#, no-c-format
+msgid ""
+"all entity insertions in the same order the corresponding objects were saved "
+"using <literal>Session.save()</literal>"
+msgstr ""
+"所有对实体进行插入的语句，其顺序按照对象执行 <literal>Session.save()</"
+"literal> 的时间顺序 "
+
+#. Tag: para
+#: session_api.xml:731
+#, no-c-format
+msgid "all entity updates"
+msgstr "所有对实体进行更新的语句"
+
+#. Tag: para
+#: session_api.xml:735
+#, no-c-format
+msgid "all collection deletions"
+msgstr "所有进行集合删除的语句"
+
+#. Tag: para
+#: session_api.xml:739
+#, no-c-format
+msgid "all collection element deletions, updates and insertions"
+msgstr "所有对集合元素进行删除，更新或者插入的语句"
+
+#. Tag: para
+#: session_api.xml:743
+#, no-c-format
+msgid "all collection insertions"
+msgstr "所有进行集合插入的语句"
+
+#. Tag: para
+#: session_api.xml:747
+#, no-c-format
+msgid ""
+"all entity deletions in the same order the corresponding objects were "
+"deleted using <literal>Session.delete()</literal>"
+msgstr ""
+"所有对实体进行删除的语句，其顺序按照对象执行 <literal>Session.delete()</"
+"literal> 的时间顺序 "
+
+#. Tag: para
+#: session_api.xml:752
+#, no-c-format
+msgid ""
+"An exception is that objects using <literal>native</literal> ID generation "
+"are inserted when they are saved."
+msgstr ""
+"有一个例外是，如果对象使用 <literal>native</literal> 方式来生成 ID（持久化标"
+"识）的话，它们一执行 save 就会被插入。"
+
+#. Tag: para
+#: session_api.xml:755
+#, no-c-format
+msgid ""
+"Except when you explicitly <literal>flush()</literal>, there are absolutely "
+"no guarantees about <emphasis>when</emphasis> the <literal>Session</literal> "
+"executes the JDBC calls, only the <emphasis>order</emphasis> in which they "
+"are executed. However, Hibernate does guarantee that the <literal>Query.list"
+"(..)</literal> will never return stale or incorrect data."
+msgstr ""
+"除非你明确地发出了 <literal>flush()</literal> 指令，关于 Session<emphasis> 何"
+"时</emphasis>会执行这些 JDBC 调用是完全无法保证的，只能保证它们执行的前后顺"
+"序。当然，Hibernate 保证，<literal>Query.list(..)</literal> 绝对不会返回已经"
+"失效的数据，也不会返回错误数据。 "
+
+#. Tag: para
+#: session_api.xml:762
+#, fuzzy, no-c-format
+msgid ""
+"It is possible to change the default behavior so that flush occurs less "
+"frequently. The <literal>FlushMode</literal> class defines three different "
+"modes: only flush at commit time when the Hibernate <literal>Transaction</"
+"literal> API is used, flush automatically using the explained routine, or "
+"never flush unless <literal>flush()</literal> is called explicitly. The last "
+"mode is useful for long running units of work, where a <literal>Session</"
+"literal> is kept open and disconnected for a long time (see <xref linkend="
+"\"transactions-optimistic-longsession\"/>)."
+msgstr ""
+"也可以改变默认的设置，来让刷出（flush）操作发生的不那么频繁。"
+"<literal>FlushMode</literal> 类定义了三种不同的方式。仅在提交时刷出（仅当 "
+"Hibernate 的 <literal>Transaction</literal> API 被使用时有效），按照刚才说的"
+"方式刷出，以及除非明确使用 <literal>flush()</literal> 否则从不刷出。 最后一种"
+"模式对于那些需要长时间保持 <literal>Session</literal> 为打开或者断线状态的长"
+"时间运行的工作单元很有用。（参见 <xref linkend=\"transactions-optimistic-"
+"longsession\"/>）。"
+
+#. Tag: programlisting
+#: session_api.xml:772
+#, fuzzy, no-c-format
+msgid ""
+"sess = sf.openSession();\n"
+"Transaction tx = sess.beginTransaction();\n"
+"sess.setFlushMode(FlushMode.COMMIT); // allow queries to return stale state\n"
+"\n"
+"Cat izi = (Cat) sess.load(Cat.class, id);\n"
+"izi.setName(iznizi);\n"
+"\n"
+"// might return stale data\n"
+"sess.find(\"from Cat as cat left outer join cat.kittens kitten\");\n"
+"\n"
+"// change to izi is not flushed!\n"
+"...\n"
+"tx.commit(); // flush occurs\n"
+"sess.close();"
+msgstr ""
+"<![CDATA[sess = sf.openSession();\n"
+"Transaction tx = sess.beginTransaction();\n"
+"sess.setFlushMode(FlushMode.COMMIT); // allow queries to return stale state\n"
+"\n"
+"Cat izi = (Cat) sess.load(Cat.class, id);\n"
+"izi.setName(iznizi);\n"
+"\n"
+"// might return stale data\n"
+"sess.find(\"from Cat as cat left outer join cat.kittens kitten\");\n"
+"\n"
+"// change to izi is not flushed!\n"
+"...\n"
+"tx.commit(); // flush occurs\n"
+"sess.close();]]>"
+
+#. Tag: para
+#: session_api.xml:774
+#, fuzzy, no-c-format
+msgid ""
+"During flush, an exception might occur (e.g. if a DML operation violates a "
+"constraint). Since handling exceptions involves some understanding of "
+"Hibernate's transactional behavior, we discuss it in <xref linkend="
+"\"transactions\"/>."
+msgstr ""
+"刷出（flush）期间，可能会抛出异常（例如一个 DML 操作违反了约束）。异常处理涉"
+"及到对 Hibernate 事务性行为的理解，因此我们将在 <xref linkend=\"transactions"
+"\"/> 中讨论。 "
+
+#. Tag: title
+#: session_api.xml:781
+#, no-c-format
+msgid "Transitive persistence"
+msgstr "传播性持久化（transitive persistence）"
+
+#. Tag: para
+#: session_api.xml:783
+#, no-c-format
+msgid ""
+"It is quite cumbersome to save, delete, or reattach individual objects, "
+"especially if you deal with a graph of associated objects. A common case is "
+"a parent/child relationship. Consider the following example:"
+msgstr ""
+"对每一个对象都要执行保存，删除或重关联操作让人感觉有点麻烦，尤其是在处理许多"
+"彼此关联的对象的时候。一个常见的例子是父子关系。考虑下面的例子："
+
+#. Tag: para
+#: session_api.xml:788
+#, no-c-format
+msgid ""
+"If the children in a parent/child relationship would be value typed (e.g. a "
+"collection of addresses or strings), their life cycle would depend on the "
+"parent and no further action would be required for convenient \"cascading\" "
+"of state changes. When the parent is saved, the value-typed child objects "
+"are saved and when the parent is deleted, the children will be deleted, etc. "
+"This works for operations such as the removal of a child from the "
+"collection. Since value-typed objects cannot have shared references, "
+"Hibernate will detect this and delete the child from the database."
+msgstr ""
+"如果一个父子关系中的子对象是值类型（value typed）（例如，地址或字符串的集合）"
+"的，他们的生命周期会依赖于父对象，可以享受方便的级联操作（Cascading），不需要"
+"额外的动作。父对象被保存时，这些值类型（value typed）子对象也将被保存；父对象"
+"被删除时，子对象也将被删除。这对将一个子对象从集合中移除是同样有效："
+"Hibernate 会检测到，并且因为值类型（value typed）的对象不可能被其他对象引用，"
+"所以 Hibernate 会在数据库中删除这个子对象。 "
+
+#. Tag: para
+#: session_api.xml:798
+#, no-c-format
+msgid ""
+"Now consider the same scenario with parent and child objects being entities, "
+"not value-types (e.g. categories and items, or parent and child cats). "
+"Entities have their own life cycle and support shared references. Removing "
+"an entity from the collection does not mean it can be deleted), and there is "
+"by default no cascading of state from one entity to any other associated "
+"entities. Hibernate does not implement <emphasis>persistence by "
+"reachability</emphasis> by default."
+msgstr ""
+"现在考虑同样的场景，不过父子对象都是实体（entities）类型，而非值类型（value "
+"typed）（例如，类别与个体，或母猫和小猫）。实体有自己的生命期，允许共享对其的"
+"引用（因此从集合中移除一个实体，不意味着它可以被删除），并且实体到其他关联实"
+"体之间默认没有级联操作的设置。 Hibernate 默认不实现所谓的<emphasis>可到达即持"
+"久化（persistence by reachability）</emphasis>的策略。 "
+
+#. Tag: para
+#: session_api.xml:806
+#, no-c-format
+msgid ""
+"For each basic operation of the Hibernate session - including "
+"<literal>persist(), merge(), saveOrUpdate(), delete(), lock(), refresh(), "
+"evict(), replicate()</literal> - there is a corresponding cascade style. "
+"Respectively, the cascade styles are named <literal>create, merge, save-"
+"update, delete, lock, refresh, evict, replicate</literal>. If you want an "
+"operation to be cascaded along an association, you must indicate that in the "
+"mapping document. For example:"
+msgstr ""
+"每个 Hibernate session 的基本操作 — 包括 <literal>persist(), merge(), "
+"saveOrUpdate(), delete(), lock(), refresh(), evict(), replicate()</literal> "
+"— 都有对应的级联风格（cascade style）。这些级联风格（cascade style）风格分别"
+"命名为  <literal>create, merge, save-update, delete, lock, refresh, evict, "
+"replicate</literal>。如果你希望一个操作被顺着关联关系级联传播，你必须在映射文"
+"件中指出这一点。例如："
+
+#. Tag: programlisting
+#: session_api.xml:814
+#, fuzzy, no-c-format
+msgid "&lt;one-to-one name=\"person\" cascade=\"persist\"/&gt;"
+msgstr "<![CDATA[<one-to-one name=\"person\" cascade=\"persist\"/>]]>"
+
+#. Tag: para
+#: session_api.xml:816
+#, no-c-format
+msgid "Cascade styles my be combined:"
+msgstr "级联风格（cascade style）是可组合的："
+
+#. Tag: programlisting
+#: session_api.xml:818
+#, fuzzy, no-c-format
+msgid "&lt;one-to-one name=\"person\" cascade=\"persist,delete,lock\"/&gt;"
+msgstr ""
+"<![CDATA[<one-to-one name=\"person\" cascade=\"persist,delete,lock\"/>]]>"
+
+#. Tag: para
+#: session_api.xml:820
+#, no-c-format
+msgid ""
+"You can even use <literal>cascade=\"all\"</literal> to specify that "
+"<emphasis>all</emphasis> operations should be cascaded along the "
+"association. The default <literal>cascade=\"none\"</literal> specifies that "
+"no operations are to be cascaded."
+msgstr ""
+"你可以使用 <literal>cascade=\"all\"</literal> 来指定<emphasis>全部</emphasis>"
+"操作都顺着关联关系级联（cascaded）。默认值是 <literal>cascade=\"none\"</"
+"literal>，即任何操作都不会被级联（cascaded）。 "
+
+#. Tag: para
+#: session_api.xml:825
+#, no-c-format
+msgid ""
+"In case you are using annotatons you probably have noticed the "
+"<literal>cascade</literal> attribute taking an array of "
+"<classname>CascadeType</classname> as a value. The cascade concept in JPA is "
+"very is similar to the transitive persistence and cascading of operations as "
+"described above, but with slightly different semantics and cascading types:"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:834
+#, no-c-format
+msgid ""
+"<literal>CascadeType.PERSIST</literal>: cascades the persist (create) "
+"operation to associated entities persist() is called or if the entity is "
+"managed"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:840
+#, no-c-format
+msgid ""
+"<literal>CascadeType.MERGE</literal>: cascades the merge operation to "
+"associated entities if merge() is called or if the entity is managed"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:846
+#, no-c-format
+msgid ""
+"<literal>CascadeType.REMOVE</literal>: cascades the remove operation to "
+"associated entities if delete() is called"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:851
+#, no-c-format
+msgid ""
+"<literal>CascadeType.REFRESH:</literal> cascades the refresh operation to "
+"associated entities if refresh() is called"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:856
+#, no-c-format
+msgid ""
+"<literal>CascadeType.DETACH:</literal> cascades the detach operation to "
+"associated entities if detach() is called"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:861
+#, fuzzy, no-c-format
+msgid "<literal>CascadeType.ALL</literal>: all of the above"
+msgstr "<literal>saveOrUpdate()</literal> 做下面的事："
+
+#. Tag: para
+#: session_api.xml:866
+#, no-c-format
+msgid ""
+"CascadeType.ALL also covers Hibernate specific operations like save-update, "
+"lock etc..."
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:870
+#, no-c-format
+msgid ""
+"A special cascade style, <literal>delete-orphan</literal>, applies only to "
+"one-to-many associations, and indicates that the <literal>delete()</literal> "
+"operation should be applied to any child object that is removed from the "
+"association. Using annotations there is no <literal>CascadeType.DELETE-"
+"ORPHAN</literal> equivalent. Instead you can use the attribute "
+"<literal>orphanRemoval as seen in </literal><xref linkend=\"example-one-to-"
+"many-with-orphan-removal\"/>. If an entity is removed from a "
+"<classname>@OneToMany</classname> collection or an associated entity is "
+"dereferenced from a <classname>@OneToOne</classname> association, this "
+"associated entity can be marked for deletion if <literal>orphanRemoval</"
+"literal> is set to true."
+msgstr ""
+
+#. Tag: title
+#: session_api.xml:883
+#, no-c-format
+msgid "<literal>@OneToMany</literal> with <literal>orphanRemoval</literal>"
+msgstr ""
+
+#. Tag: programlisting
+#: session_api.xml:886
+#, no-c-format
+msgid ""
+"@Entity \n"
+"public class Customer {\n"
+"   private Set&lt;Order&gt; orders;\n"
+"\n"
+"   @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true) \n"
+"   public Set&lt;Order&gt; getOrders() { return orders; }\n"
+"\n"
+"   public void setOrders(Set&lt;Order&gt; orders) { this.orders = orders; }\n"
+"\n"
+"   [...]\n"
+"}\n"
+"\n"
+"@Entity \n"
+"public class Order { ... }\n"
+"\n"
+"Customer customer = em.find(Customer.class, 1l);\n"
+"Order order = em.find(Order.class, 1l);\n"
+"customer.getOrders().remove(order); //order will be deleted by cascade"
+msgstr ""
+
+#. Tag: para
+#: session_api.xml:889
+#, no-c-format
+msgid "Recommendations:"
+msgstr "建议："
+
+#. Tag: para
+#: session_api.xml:893
+#, fuzzy, no-c-format
+msgid ""
+"It does not usually make sense to enable cascade on a many-to-one or many-to-"
+"many association. In fact the <literal>@ManyToOne</literal> and "
+"<literal>@ManyToMany</literal> don't even offer a <literal>orphanRemoval</"
+"literal> attribute. Cascading is often useful for one-to-one and one-to-many "
+"associations."
+msgstr ""
+"通常在 <literal>&lt;many-to-one&gt;</literal> 或 <literal>&lt;many-to-"
+"many&gt;</literal> 关系中应用级联（cascade）没什么意义。级联（cascade）通常"
+"在 <literal>&lt;one-to-one&gt;</literal>   和 <literal>&lt;one-to-many&gt;</"
+"literal> 关系中比较有用。 "
+
+#. Tag: para
+#: session_api.xml:901
+#, fuzzy, no-c-format
+msgid ""
+"If the child object's lifespan is bounded by the lifespan of the parent "
+"object, make it a <emphasis>life cycle object</emphasis> by specifying "
+"<literal>cascade=\"all,delete-orphan\"(<literal>@OneToMany"
+"(cascade=CascadeType.ALL, orphanRemoval=true)</literal>)</literal>."
+msgstr ""
+"如果子对象的寿命限定在父亲对象的寿命之内，可通过指定 <literal>cascade=\"all,"
+"delete-orphan\"</literal> 将其变为<emphasis>自动生命周期管理的对象"
+"（lifecycle object）</emphasis>。 "
+
+#. Tag: para
+#: session_api.xml:909
+#, no-c-format
+msgid ""
+"Otherwise, you might not need cascade at all. But if you think that you will "
+"often be working with the parent and children together in the same "
+"transaction, and you want to save yourself some typing, consider using "
+"<literal>cascade=\"persist,merge,save-update\"</literal>."
+msgstr ""
+"其他情况，你可根本不需要级联（cascade）。但是如果你认为你会经常在某个事务中同"
+"时用到父对象与子对象，并且你希望少打点儿字，可以考虑使用   <literal>cascade="
+"\"persist,merge,save-update\"</literal>。"
+
+#. Tag: para
+#: session_api.xml:917
+#, no-c-format
+msgid ""
+"Mapping an association (either a single valued association, or a collection) "
+"with <literal>cascade=\"all\"</literal> marks the association as a "
+"<emphasis>parent/child</emphasis> style relationship where save/update/"
+"delete of the parent results in save/update/delete of the child or children."
+msgstr ""
+"可以使用 <literal>cascade=\"all\"</literal> 将一个关联关系（无论是对值对象的"
+"关联，或者对一个集合的关联）标记为<emphasis>父/子</emphasis>关系的关联。 这样"
+"对父对象进行 save/update/delete 操作就会导致子对象也进行 save/update/delete "
+"操作。"
+
+#. Tag: para
+#: session_api.xml:923
+#, fuzzy, no-c-format
+msgid ""
+"Furthermore, a mere reference to a child from a persistent parent will "
+"result in save/update of the child. This metaphor is incomplete, however. A "
+"child which becomes unreferenced by its parent is <emphasis>not</emphasis> "
+"automatically deleted, except in the case of a one-to-many association "
+"mapped with <literal>cascade=\"delete-orphan\"</literal>. The precise "
+"semantics of cascading operations for a parent/child relationship are as "
+"follows:"
+msgstr ""
+"此外，一个持久的父对象对子对象的浅引用（mere reference）会导致子对象被同步 "
+"save/update。不过，这个隐喻（metaphor）的说法并不完整。除非关联是 "
+"<literal>&lt;one-to-many&gt;</literal> 关联并且被标记为 <literal>cascade="
+"\"delete-orphan\"</literal>，否则父对象失去对某个子对象的引用<emphasis>不会</"
+"emphasis>导致该子对象被自动删除。父子关系的级联（cascading）操作准确语义如"
+"下： "
+
+#. Tag: para
+#: session_api.xml:934
+#, no-c-format
+msgid ""
+"If a parent is passed to <literal>persist()</literal>, all children are "
+"passed to <literal>persist()</literal>"
+msgstr ""
+"如果父对象被 <literal>persist()</literal>，那么所有子对象也会被 "
+"<literal>persist()</literal>"
+
+#. Tag: para
+#: session_api.xml:939
+#, no-c-format
+msgid ""
+"If a parent is passed to <literal>merge()</literal>, all children are passed "
+"to <literal>merge()</literal>"
+msgstr ""
+"如果父对象被 <literal>merge()</literal>，那么所有子对象也会被 <literal>merge"
+"()</literal>"
+
+#. Tag: para
+#: session_api.xml:944
+#, no-c-format
+msgid ""
+"If a parent is passed to <literal>save()</literal>, <literal>update()</"
+"literal> or <literal>saveOrUpdate()</literal>, all children are passed to "
+"<literal>saveOrUpdate()</literal>"
+msgstr ""
+"如果父对象被 <literal>save()</literal>，<literal>update()</literal> 或  "
+"<literal>saveOrUpdate()</literal>，那么所有子对象则会被 <literal>saveOrUpdate"
+"()</literal>"
+
+#. Tag: para
+#: session_api.xml:950
+#, no-c-format
+msgid ""
+"If a transient or detached child becomes referenced by a persistent parent, "
+"it is passed to <literal>saveOrUpdate()</literal>"
+msgstr ""
+"如果某个持久的父对象引用了瞬时（transient）或者脱管（detached）的子对象，那么"
+"子对象将会被 <literal>saveOrUpdate()</literal>"
+
+#. Tag: para
+#: session_api.xml:956
+#, no-c-format
+msgid ""
+"If a parent is deleted, all children are passed to <literal>delete()</"
+"literal>"
+msgstr "如果父对象被删除，那么所有子对象也会被 <literal>delete()</literal>"
+
+#. Tag: para
+#: session_api.xml:961
+#, no-c-format
+msgid ""
+"If a child is dereferenced by a persistent parent, <emphasis>nothing special "
+"happens</emphasis> - the application should explicitly delete the child if "
+"necessary - unless <literal>cascade=\"delete-orphan\"</literal>, in which "
+"case the \"orphaned\" child is deleted."
+msgstr ""
+"除非被标记为 <literal>cascade=\"delete-orphan\"</literal>（删除“孤儿”模式，此"
+"时不被任何一�

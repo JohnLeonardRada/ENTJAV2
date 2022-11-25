@@ -1,0 +1,649 @@
+<font color="#ffffff" face="arial,helvetica.sanserif"><a name="Session Statistics"><!--()--></a><a name="Session_Statistics"><strong>Session Statistics</strong></a></font></td></tr><tr><td><blockquote>
+
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://localhost:8080/manager/text/sessions?path=/examples
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p>Display the default session timeout for a web application, and the
+number of currently active sessions that fall within ten-minute ranges of
+their actual timeout times.  For example, after restarting Tomcat and then
+executing one of the JSP samples in the <code>/examples</code> web app,
+you might get something like this:</p>
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+OK - Session information for application at context path /examples
+Default maximum session inactive interval 30 minutes
+30 - &lt;40 minutes:1 sessions
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+</blockquote></td></tr></table>
+
+
+<table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Start an Existing Application"><!--()--></a><a name="Start_an_Existing_Application"><strong>Start an Existing Application</strong></a></font></td></tr><tr><td><blockquote>
+
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://localhost:8080/manager/text/start?path=/examples
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p>Signal a stopped application to restart, and make itself available again.
+Stopping and starting is useful, for example, if the database required by
+your application becomes temporarily unavailable.  It is usually better to
+stop the web application that relies on this database rather than letting
+users continuously encounter database exceptions.</p>
+
+<p>If this command succeeds, you will see a response like this:</p>
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+OK - Started application at context path /examples
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p>Otherwise, the response will start with <code>FAIL</code> and include an
+error message.  Possible causes for problems include:</p>
+<ul>
+<li><em>Encountered exception</em>
+    <blockquote>
+    <p>An exception was encountered trying to start the web application.
+    Check the Tomcat logs for the details.</p>
+    </blockquote></li>
+<li><em>Invalid context path was specified</em>
+    <blockquote>
+    <p>The context path must start with a slash character. To reference the
+    ROOT web application use "/".</p>
+    </blockquote></li>
+<li><em>No context exists for path /foo</em>
+    <blockquote>
+    <p>There is no deployed application on the context path
+    that you specified.</p>
+    </blockquote></li>
+<li><em>No context path was specified</em>
+    <blockquote>
+    The <code>path</code> parameter is required.
+    </blockquote></li>
+</ul>
+
+</blockquote></td></tr></table>
+
+<table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Stop an Existing Application"><!--()--></a><a name="Stop_an_Existing_Application"><strong>Stop an Existing Application</strong></a></font></td></tr><tr><td><blockquote>
+
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://localhost:8080/manager/text/stop?path=/examples
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p>Signal an existing application to make itself unavailable, but leave it
+deployed.  Any request that comes in while an application is
+stopped will see an HTTP error 404, and this application will show as
+"stopped" on a list applications command.</p>
+
+<p>If this command succeeds, you will see a response like this:</p>
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+OK - Stopped application at context path /examples
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p>Otherwise, the response will start with <code>FAIL</code> and include an
+error message.  Possible causes for problems include:</p>
+<ul>
+<li><em>Encountered exception</em>
+    <blockquote>
+    <p>An exception was encountered trying to stop the web application.
+    Check the Tomcat logs for the details.</p>
+    </blockquote></li>
+<li><em>Invalid context path was specified</em>
+    <blockquote>
+    <p>The context path must start with a slash character. To reference the
+    ROOT web application use "/".</p>
+    </blockquote></li>
+<li><em>No context exists for path /foo</em>
+    <blockquote>
+    <p>There is no deployed application on the context path
+    that you specified.</p>
+    </blockquote></li>
+<li><em>No context path was specified</em>
+    <blockquote>
+    The <code>path</code> parameter is required.
+    </blockquote></li>
+</ul>
+
+</blockquote></td></tr></table>
+
+
+<table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Undeploy an Existing Application"><!--()--></a><a name="Undeploy_an_Existing_Application"><strong>Undeploy an Existing Application</strong></a></font></td></tr><tr><td><blockquote>
+
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://localhost:8080/manager/text/undeploy?path=/examples
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p><strong><font color="red">WARNING</font> - This command will delete any web
+application artifacts that exist within <code>appBase</code> directory
+(typically "webapps") for this virtual host</strong>.
+This will delete the the application .WAR, if present,
+the application directory resulting either from a deploy in unpacked form
+or from .WAR expansion as well as the XML Context definition from
+<code>$CATALINA_BASE/conf/[enginename]/[hostname]/</code> directory.
+If you simply want to take an application
+out of service, you should use the <code>/stop</code> command instead.</p>
+
+<p>Signal an existing application to gracefully shut itself down, and
+remove it from Tomcat (which also makes this context path available for
+reuse later).  In addition, the document root directory is removed, if it
+exists in the <code>appBase</code> directory (typically "webapps") for
+this virtual host.  This command is the logical opposite of the
+<code>/deploy</code> command.</p>
+
+<p>If this command succeeds, you will see a response like this:</p>
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+OK - Undeployed application at context path /examples
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p>Otherwise, the response will start with <code>FAIL</code> and include an
+error message.  Possible causes for problems include:</p>
+<ul>
+<li><em>Encountered exception</em>
+    <blockquote>
+    <p>An exception was encountered trying to undeploy the web application.
+    Check the Tomcat logs for the details.</p>
+    </blockquote></li>
+<li><em>Invalid context path was specified</em>
+    <blockquote>
+    <p>The context path must start with a slash character. To reference the
+    ROOT web application use "/".</p>
+    </blockquote></li>
+<li><em>No context exists for path /foo</em>
+    <blockquote>
+    <p>There is no deployed application on the context path
+    that you specified.</p>
+    </blockquote></li>
+<li><em>No context path was specified</em>
+    <blockquote>
+    The <code>path</code> parameter is required.
+    </blockquote></li>
+</ul>
+
+</blockquote></td></tr></table>
+
+<table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Finding memory leaks"><!--()--></a><a name="Finding_memory_leaks"><strong>Finding memory leaks</strong></a></font></td></tr><tr><td><blockquote>
+
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://localhost:8080/manager/text/findleaks[?statusLine=[true|false]]
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p><strong>The find leaks diagnostic triggers a full garbage collection. It
+should be used with extreme caution on production systems.</strong></p>
+
+<p>The find leaks diagnostic attempts to identify web applications that have
+caused memory leaks when they were stopped, reloaded or undeployed. Results
+should always be confirmed
+with a profiler. The diagnostic uses additional functionality provided by the
+StandardHost implementation. It will not work if a custom host is used that
+does not extend StandardHost.</p>
+
+<p>Explicitly triggering a full garbage collection from Java code is documented
+to be unreliable. Furthermore, depending on the JVM used, there are options to
+disable explicit GC triggering, like <code>-XX:+DisableExplicitGC</code>.
+If you want to make sure, that the diagnostics were successfully running a full
+GC, you will need to check using tools like GC logging, JConsole or similar.</p>
+
+<p>If this command succeeds, you will see a response like this:</p>
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+/leaking-webapp
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+<p>If you wish to see a status line included in the response then include the
+<code>statusLine</code> query parameter in the request with a value of
+<code>true</code>.</p>
+
+<p>Each context path for a web application that was stopped, reloaded or
+undeployed, but which classes from the previous runs are still loaded in memory,
+thus causing a memory leak, will be listed on a new line. If an application
+has been reloaded several times, it may be listed several times.</p>
+
+<p>If the command does not succeed, the response will start with
+<code>FAIL</code> and include an error message.</p>
+
+</blockquote></td></tr></table>
+
+<table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Server Status"><!--()--></a><a name="Server_Status"><strong>Server Status</strong></a></font></td></tr><tr><td><blockquote>
+
+<p>From this link , you can view information about the server.</p>
+
+<p>First, you have the server and JVM version number, JVM provider, OS name
+and number followed by the architecture type.</p>
+
+<p>Second, there is several information about the memory usage of the JVM
+(available, total and max memory).</p>
+
+<p>Then, there is information about the Tomcat AJP and HTTP connectors.
+The same information is available for both of them :
+</p>
+<ul>
+    <li><p>Threads information : Max threads, min and max spare threads,
+    current thread count and current thread busy.</p></li>
+    <li><p>Request information : Max processing time and processing time,
+    request and error count, bytes received and sent.</p></li>
+    <li><p>A table showing Stage, Time, Bytes Sent, Bytes Receive, Client,
+    VHost and Request. All existing threads are listed in the table.
+    Here is the list of the possible thread stages :</p>
+    <ul>
+        <li><p><em>"Parse and Prepare Request"</em> : The request headers are
+        being parsed or the necessary preparation to read the request body (if
+        a transfer encoding has been specified) is taking place.</p></li>
+        <li><p><em>"Service"</em> : The thread is processing a request and
+        generating the response. This stage follows the "Parse and Prepare
+        Request" stage and precedes the "Finishing" stage. There is always at
+        least one thread in this stage (the server-status page).</p></li>
+        <li><p><em>"Finishing"</em> : The end of the request processing. Any
+        remainder of the response still in the output buffers is sent to the
+        client. This stage is followed by "Keep-Alive" if it is appropriate to
+        keep the connection alive or "Ready" if "Keep-Alive" is not
+        appropriate.</p></li>
+        <li><p><em>"Keep-Alive"</em> : The thread keeps the connection open to
+        the client in case the client sends another request. If another request
+        is received, the next stage will br "Parse and Prepare Requst". If no
+        request is received before the keep alive times out, the connection will
+        be closed and the next stage will be "Ready".</p></li>
+        <li><p><em>"Ready"</em> : The thread is at rest and ready to be
+        used.</p></li>
+    </ul>
+    </li>
+</ul>
+</blockquote></td></tr></table>
+
+</blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Executing Manager Commands With Ant"><!--()--></a><a name="Executing_Manager_Commands_With_Ant"><strong>Executing Manager Commands With Ant</strong></a></font></td></tr><tr><td><blockquote>
+
+<p>In addition to the ability to execute Manager commands via HTTP requests,
+as documented above, Tomcat includes a convenient set of Task definitions
+for the <em>Ant</em> (version 1.4 or later) build tool.  In order to use these
+commands, you must perform the following setup operations:</p>
+<ul>
+<li>Download the binary distribution of Ant from
+    <a href="http://ant.apache.org">http://ant.apache.org</a>.
+    You must use version <strong>1.4</strong> or later.</li>
+<li>Install the Ant distribution in a convenient directory (called
+    ANT_HOME in the remainder of these instructions).</li>
+<li>Copy the file <code>server/lib/catalina-ant.jar</code> from your Tomcat
+    installation into Ant's library directory (<code>$ANT_HOME/lib</code>).
+    </li>
+<li>Add the <code>$ANT_HOME/bin</code> directory to your <code>PATH</code>
+    environment variable.</li>
+<li>Configure at least one username/password combination in your Tomcat
+    user database that includes the <code>manager-script</code> role.</li>
+</ul>
+
+<p>To use custom tasks within Ant, you must declare them first with a
+<code>&lt;taskdef&gt;</code> element.  Therefore, your <code>build.xml</code>
+file might look something like this:</p>
+
+<table border="1">
+<tr><td><pre>
+&lt;project name="My Application" default="compile" basedir="."&gt;
+
+  &lt;!-- Configure the directory into which the web application is built --&gt;
+  &lt;property name="build"    value="${basedir}/build"/&gt;
+
+  &lt;!-- Configure the context path for this application --&gt;
+  &lt;property name="path"     value="/myapp"/&gt;
+
+  &lt;!-- Configure properties to access the Manager application --&gt;
+  &lt;property name="url"      value="http://localhost:8080/manager/text"/&gt;
+  &lt;property name="username" value="myusername"/&gt;
+  &lt;property name="password" value="mypassword"/&gt;
+
+  &lt;!-- Configure the custom Ant tasks for the Manager application --&gt;
+  &lt;taskdef name="deploy"    classname="org.apache.catalina.ant.DeployTask"/&gt;
+  &lt;taskdef name="list"      classname="org.apache.catalina.ant.ListTask"/&gt;
+  &lt;taskdef name="reload"    classname="org.apache.catalina.ant.ReloadTask"/&gt;
+  &lt;taskdef name="findleaks" classname="org.apache.catalina.ant.FindLeaksTask"/&gt;
+  &lt;taskdef name="resources" classname="org.apache.catalina.ant.ResourcesTask"/&gt;
+  &lt;taskdef name="start"     classname="org.apache.catalina.ant.StartTask"/&gt;
+  &lt;taskdef name="stop"      classname="org.apache.catalina.ant.StopTask"/&gt;
+  &lt;taskdef name="undeploy"  classname="org.apache.catalina.ant.UndeployTask"/&gt;
+
+  &lt;!-- Executable Targets --&gt;
+  &lt;target name="compile" description="Compile web application"&gt;
+    &lt;!-- ... construct web application in ${build} subdirectory, and
+            generated a ${path}.war ... --&gt;
+  &lt;/target&gt;
+
+  &lt;target name="deploy" description="Install web application"
+          depends="compile"&gt;
+    &lt;deploy url="${url}" username="${username}" password="${password}"
+            path="${path}" war="file:${build}${path}.war"/&gt;
+  &lt;/target&gt;
+
+  &lt;target name="reload" description="Reload web application"
+          depends="compile"&gt;
+    &lt;reload  url="${url}" username="${username}" password="${password}"
+            path="${path}"/&gt;
+  &lt;/target&gt;
+
+  &lt;target name="undeploy" description="Remove web application"&gt;
+    &lt;undeploy url="${url}" username="${username}" password="${password}"
+            path="${path}"/&gt;
+  &lt;/target&gt;
+
+&lt;/project&gt;
+</pre></td></tr>
+</table>
+
+<p>Note: The definition of the resources task above will override the resources
+datatype added in Ant 1.7. If you wish to use the resources datatype you will
+need to use Ant's namespace support to assign the Tomcat tasks to their own
+namespace.</p>
+
+<p>Now, you can execute commands like <code>ant deploy</code> to deploy the
+application to a running instance of Tomcat, or <code>ant reload</code> to
+tell Tomcat to reload it.  Note also that most of the interesting values in
+this <code>build.xml</code> file are defined as replaceable properties, so
+you can override their values from the command line.  For example, you might
+consider it a security risk to include the real manager password in your
+<code>build.xml</code> file's source code.  To avoid this, omit the password
+property, and specify it from the command line:</p>
+<pre>
+  ant -Dpassword=secret deploy
+</pre>
+
+<table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Tasks output capture"><!--()--></a><a name="Tasks_output_capture"><strong>Tasks output capture</strong></a></font></td></tr><tr><td><blockquote>
+
+<p>Using <em>Ant</em> version <strong>1.6.2</strong> or later,
+the Catalina tasks offer the option to capture their output in
+properties or external files. They support directly the following subset of the
+<code>&lt;redirector&gt;</code> type attributes:
+</p>
+
+<table border="1" cellpadding="2" cellspacing="0">
+<tbody>
+<tr>
+<td valign="top"><b>Attribute</b></td>
+<td valign="top"><b>Description</b></td>
+<td align="center" valign="top"><b>Required</b></td>
+</tr>
+<tr>
+<td valign="top">output</td>
+<td valign="top">Name of a file to which to write the output. If
+the error stream is not also redirected to a file or property, it will
+appear in this output.</td>
+<td align="center" valign="top">No</td>
+</tr>
+<tr>
+<td valign="top">error</td>
+<td valign="top">The file to which the standard error of the
+command should be redirected.</td>
+<td align="center" valign="top">No</td>
+</tr>
+<tr>
+<td valign="top">logError</td>
+<td valign="top">This attribute is used when you wish to see
+error output in Ant's log and you are redirecting output to a
+file/property. The error output will not be included in the output
+file/property. If you redirect error with the <i>error</i> or <i>errorProperty</i>
+attributes, this will have no effect.</td>
+<td align="center" valign="top">No</td>
+</tr>
+<tr>
+<td valign="top">append</td>
+<td valign="top">Whether output and error files should be
+appended to or overwritten. Defaults to <code>false</code>.</td>
+<td align="center" valign="top">No</td>
+</tr>
+<tr>
+<td valign="top">createemptyfiles</td>
+<td valign="top">Whether output and error files should be created
+even when empty. Defaults to <code>true</code>.</td>
+<td align="center" valign="top">No</td>
+</tr>
+<tr>
+<td valign="top">outputproperty</td>
+<td valign="top">The name of a property in which the output of
+the command should be stored. Unless the error stream is redirected to
+a separate file or stream, this property will include the error output.</td>
+<td align="center" valign="top">No</td>
+</tr>
+<tr>
+<td valign="top">errorproperty</td>
+<td valign="top">The name of a property in which the standard
+error of the command should be stored.</td>
+<td align="center" valign="top">No</td>
+</tr>
+</tbody>
+</table>
+
+<p>A couple of additional attributes can also be specified:
+</p>
+<table border="1" cellpadding="2" cellspacing="0">
+<tbody>
+<tr>
+<td valign="top"><b>Attribute</b></td>
+<td valign="top"><b>Description</b></td>
+<td align="center" valign="top"><b>Required</b></td>
+</tr>
+<tr>
+<td valign="top">alwaysLog</td>
+<td valign="top">This attribute is used when you wish to see the
+output you are capturing, appearing also in the Ant's log. It must not be
+used unless you are capturing task output.
+Defaults to <code>false</code>.
+<em>This attribute will be supported directly by <code>&lt;redirector&gt;</code>
+in Ant 1.6.3</em></td>
+<td align="center" valign="top">No</td>
+</tr>
+<tr>
+<td valign="top">failonerror</td>
+<td valign="top">This attribute is used when you wish to avoid that
+any manager command processing error terminates the ant execution. Defaults to <code>true</code>.
+It must be set to <code>false</code>, if you want to capture error output,
+otherwise execution will terminate before anything can be captured.
+<br>
+This attribute acts only on manager command execution,
+any wrong or missing command attribute will still cause Ant execution termination.
+</td>
+<td align="center" valign="top">No</td>
+</tr>
+</tbody>
+</table>
+
+<p>They also support the embedded <code>&lt;redirector&gt;</code> element
+in which you can specify
+its full set of attributes, but <code>input</code>, <code>inputstring</code> and
+<code>inputencoding</code> that, even if accepted, are not used because they have
+no meaning in this context.
+Refer to <a href="http://ant.apache.org">ant manual</a> for details on
+<code>&lt;redirector&gt;</code> element attributes.
+</p>
+
+<p>
+Here is a sample build file extract that shows how this output redirection support
+can be used:
+</p>
+
+<table border="1">
+<tr><td><pre>
+    &lt;target name="manager.deploy"
+        depends="context.status"
+        if="context.notInstalled"&gt;
+        &lt;deploy url="${mgr.url}"
+            username="${mgr.username}"
+            password="${mgr.password}"
+            path="${mgr.context.path}"
+            config="${mgr.context.descriptor}"/&gt;
+    &lt;/target&gt;
+
+    &lt;target name="manager.deploy.war"
+        depends="context.status"
+        if="context.deployable"&gt;
+        &lt;deploy url="${mgr.url}"
+            username="${mgr.username}"
+            password="${mgr.password}"
+            update="${mgr.update}"
+            path="${mgr.context.path}"
+            war="${mgr.war.file}"/&gt;
+    &lt;/target&gt;
+
+    &lt;target name="context.status"&gt;
+        &lt;property name="running" value="${mgr.context.path}:running"/&gt;
+        &lt;property name="stopped" value="${mgr.context.path}:stopped"/&gt;
+
+        &lt;list url="${mgr.url}"
+            outputproperty="ctx.status"
+            username="${mgr.username}"
+            password="${mgr.password}"&gt;
+        &lt;/list&gt;
+
+        &lt;condition property="context.running"&gt;
+            &lt;contains string="${ctx.status}" substring="${running}"/&gt;
+        &lt;/condition&gt;
+        &lt;condition property="context.stopped"&gt;
+            &lt;contains string="${ctx.status}" substring="${stopped}"/&gt;
+        &lt;/condition&gt;
+        &lt;condition property="context.notInstalled"&gt;
+            &lt;and&gt;
+                &lt;isfalse value="${context.running}"/&gt;
+                &lt;isfalse value="${context.stopped}"/&gt;
+            &lt;/and&gt;
+        &lt;/condition&gt;
+        &lt;condition property="context.deployable"&gt;
+            &lt;or&gt;
+                &lt;istrue value="${context.notInstalled}"/&gt;
+                &lt;and&gt;
+                    &lt;istrue value="${context.running}"/&gt;
+                    &lt;istrue value="${mgr.update}"/&gt;
+                &lt;/and&gt;
+                &lt;and&gt;
+                    &lt;istrue value="${context.stopped}"/&gt;
+                    &lt;istrue value="${mgr.update}"/&gt;
+                &lt;/and&gt;
+            &lt;/or&gt;
+        &lt;/condition&gt;
+        &lt;condition property="context.undeployable"&gt;
+            &lt;or&gt;
+                &lt;istrue value="${context.running}"/&gt;
+                &lt;istrue value="${context.stopped}"/&gt;
+            &lt;/or&gt;
+        &lt;/condition&gt;
+    &lt;/target&gt;
+</pre></td></tr>
+</table>
+
+<p><strong>WARNING:</strong> even if it doesn't make many sense, and is always a bad idea,
+calling a Catalina task more than once,
+badly set Ant tasks depends chains may cause that a task be called
+more than once in the same Ant run, even if not intended to. A bit of caution should be exercised when you are
+capturing output from that task, because this could lead to something unexpected:</p>
+<ul>
+<li>when capturing in a property you will find in it only the output from the <em>first</em> call, because
+Ant properties are immutable and once set they cannot be changed,
+</li>
+<li>when capturing in a file, each run will overwrite it and you will find in it only the <em>last</em> call
+output, unless you are using the <code>append="true"</code> attribute, in which case you will
+see the output of each task call appended to the file.
+</li>
+</ul>
+
+</blockquote></td></tr></table>
+
+</blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Using the JMX Proxy Servlet"><!--()--></a><a name="Using_the_JMX_Proxy_Servlet"><strong>Using the JMX Proxy Servlet</strong></a></font></td></tr><tr><td><blockquote>
+
+  <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="What is JMX Proxy Servlet"><!--()--></a><a name="What_is_JMX_Proxy_Servlet"><strong>What is JMX Proxy Servlet</strong></a></font></td></tr><tr><td><blockquote>
+    The JMX Proxy Servlet is a lightweight proxy to get and set the
+    tomcat internals. (Or any class that has been exposed via an MBean)
+    Its usage is not very user friendly but the UI is
+    extremely help for integrating command line scripts for monitoring
+    and changing the internals of tomcat. You can do two things with the proxy:
+    get information and set information. For you to really understand the
+    JMX Proxy Servlet, you should have a general understanding of JMX.
+    If you don't know what JMX is, then prepare to be confused.
+  </blockquote></td></tr></table>
+
+  <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="JMX Query command"><!--()--></a><a name="JMX_Query_command"><strong>JMX Query command</strong></a></font></td></tr><tr><td><blockquote>
+    This takes the form:
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://webserver/manager/jmxproxy/?qry=STUFF
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+    Where <code>STUFF</code> is the JMX query you wish to perform. For example,
+    here are some queries you might wish to run:
+    <ul>
+      <li>
+        <code>qry=*%3Atype%3DRequestProcessor%2C* --&gt;
+         type=RequestProcessor</code> which will locate all
+         workers which can process requests and report
+         their state.
+      </li>
+      <li>
+        <code>qry=*%3Aj2eeType=Servlet%2c* --&gt;
+            j2eeType=Servlet</code> which return all loaded servlets.
+      </li>
+      <li>
+        <code>qry=Catalina%3Atype%3DEnvironment%2Cresourcetype%3DGlobal%2Cname%3DsimpleValue --&gt;
+            Catalina:type=Environment,resourcetype=Global,name=simpleValue</code>
+            which look for a specific MBean by the given name.
+      </li>
+    </ul>
+    You'll need to experiment with this to really understand its capabilites.
+    If you provide no <code>qry</code> parameter, then all of the MBeans will
+    be displayed. We really recommend looking at the tomcat source code and
+    understand the JMX spec to get a better understanding of all the queries
+    you may run.
+  </blockquote></td></tr></table>
+
+  <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="JMX Get command"><!--()--></a><a name="JMX_Get_command"><strong>JMX Get command</strong></a></font></td></tr><tr><td><blockquote>
+    The JXMProxyServlet also supports a "get" command that you can use to
+    fetch the value of a specific MBean's attribute. The general form of
+    the <code>get</code> command is:
+
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://webserver/manager/jmxproxy/?get=BEANNAME&amp;att=MYATTRIBUTE&amp;key=MYKEY
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+    You must provide the following parameters:
+    <ol>
+      <li><code>get</code>: The full bean name</li>
+      <li><code>att</code>: The attribute you wish to fetch</li>
+      <li><code>key</code>: (optional) The key into a CompositeData MBean attribute</li>
+    </ol>
+
+    If all goes well, then it will say OK, otherwise an error message will
+    be shown. For example, let's say we wish to fetch the current heap memory
+    data:
+
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://webserver/manager/jmxproxy/?get=java.lang:type=Memory&amp;att=HeapMemoryUsage
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+    Or, if you only want the "used" key:
+
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://webserver/manager/jmxproxy/
+ ?get=java.lang:type=Memory&amp;att=HeapMemoryUsage&amp;key=used
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+  </blockquote></td></tr></table>
+
+  <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="JMX Set command"><!--()--></a><a name="JMX_Set_command"><strong>JMX Set command</strong></a></font></td></tr><tr><td><blockquote>
+    Now that you can query an MBean, its time to muck with Tomcat's internals!
+    The general form of the set command is :
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://webserver/manager/jmxproxy/?set=BEANNAME&amp;att=MYATTRIBUTE&amp;val=NEWVALUE
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+    So you need to provide 3 request parameters:
+    <ol>
+      <li><code>set</code>: The full bean name</li>
+      <li><code>att</code>: The attribute you wish to alter</li>
+      <li><code>val</code>: The new value </li>
+    </ol>
+    If all goes ok, then it will say OK, otherwise an error message will be
+    shown. For example, lets say we wish to turn up debugging on the fly for the
+    <code>ErrorReportValve</code>. The following will set debugging to 10.
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://localhost:8080/manager/jmxproxy/
+ ?set=Catalina%3Atype%3DValve%2Cname%3DErrorReportValve%2Chost%3Dlocalhost
+ &amp;att=debug&amp;val=10
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+    and my result is (YMMV):
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+Result: ok
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+
+    Here is what I see if I pass in a bad value. Here is the URL I used,
+    I try set debugging equal to 'cow':
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
+http://localhost:8080/manager/jmxproxy/
+ ?set=Catalina%3Atype%3DValve%2Cname%3DErrorReportValve%2Chost%3Dlocalhost
+ &amp;att=debug&amp;val=cow
+</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
+    When I try that, my result is
+<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" 

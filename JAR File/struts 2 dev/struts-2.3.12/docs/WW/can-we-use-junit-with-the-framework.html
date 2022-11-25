@@ -1,0 +1,202 @@
+eckAvailability()){
+if(!this._dropdown){
+this._dropdown=dojo.widget.createWidget("PopupContainer",{});
+this._domNode.appendChild(this._dropdown.domNode);
+}
+if(this._dropdown.isShowingNow){
+this._dropdown.close();
+}else{
+this.onDropDownShown();
+this._dropdown.open(this._domNode,null,this._domNode);
+}
+}
+},destroy:function(){
+this.onDropDownDestroy();
+if(this._dropdown){
+this._dropdown.destroy();
+}
+dojo.widget.Editor2ToolbarDropDownButton.superclass.destroy.call(this);
+},onDropDownShown:function(){
+},onDropDownDestroy:function(){
+}});
+dojo.declare("dojo.widget.Editor2ToolbarColorPaletteButton",dojo.widget.Editor2ToolbarDropDownButton,{onDropDownShown:function(){
+if(!this._colorpalette){
+this._colorpalette=dojo.widget.createWidget("ColorPalette",{});
+this._dropdown.addChild(this._colorpalette);
+this.disableSelection(this._dropdown.domNode);
+this.disableSelection(this._colorpalette.domNode);
+dojo.event.connect(this._colorpalette,"onColorSelect",this,"setColor");
+dojo.event.connect(this._dropdown,"open",this,"latchToolbarItem");
+dojo.event.connect(this._dropdown,"close",this,"enableToolbarItem");
+}
+},setColor:function(_a0b){
+this._dropdown.close();
+var _a0c=dojo.widget.Editor2Manager.getCurrentInstance();
+if(_a0c){
+var _a0d=_a0c.getCommand(this._name);
+if(_a0d){
+_a0d.execute(_a0b);
+}
+}
+}});
+dojo.declare("dojo.widget.Editor2ToolbarFormatBlockPlainSelect",dojo.widget.Editor2ToolbarButton,{create:function(node,_a0f){
+this._domNode=node;
+this._parentToolbar=_a0f;
+this._domNode=node;
+this.disableSelection(this._domNode);
+dojo.event.connect(this._domNode,"onchange",this,"onChange");
+},destroy:function(){
+this._domNode=null;
+},onChange:function(){
+if(this._parentToolbar.checkAvailability()){
+var sv=this._domNode.value.toLowerCase();
+var _a11=dojo.widget.Editor2Manager.getCurrentInstance();
+if(_a11){
+var _a12=_a11.getCommand(this._name);
+if(_a12){
+_a12.execute(sv);
+}
+}
+}
+},refreshState:function(){
+if(this._domNode){
+dojo.widget.Editor2ToolbarFormatBlockPlainSelect.superclass.refreshState.call(this);
+var _a13=dojo.widget.Editor2Manager.getCurrentInstance();
+if(_a13){
+var _a14=_a13.getCommand(this._name);
+if(_a14){
+var _a15=_a14.getValue();
+if(!_a15){
+_a15="";
+}
+dojo.lang.forEach(this._domNode.options,function(item){
+if(item.value.toLowerCase()==_a15.toLowerCase()){
+item.selected=true;
+}
+});
+}
+}
+}
+}});
+dojo.declare("dojo.widget.Editor2ToolbarComboItem",dojo.widget.Editor2ToolbarDropDownButton,{href:null,create:function(node,_a18){
+dojo.widget.Editor2ToolbarComboItem.superclass.create.apply(this,arguments);
+if(!this._contentPane){
+this._contentPane=dojo.widget.createWidget("ContentPane",{preload:"true"});
+this._contentPane.addOnLoad(this,"setup");
+this._contentPane.setUrl(this.href);
+}
+},onMouseOver:function(e){
+if(this._lastState!=dojo.widget.Editor2Manager.commandState.Disabled){
+dojo.html.addClass(e.currentTarget,this._parentToolbar.ToolbarHighlightedSelectStyle);
+}
+},onMouseOut:function(e){
+dojo.html.removeClass(e.currentTarget,this._parentToolbar.ToolbarHighlightedSelectStyle);
+},onDropDownShown:function(){
+if(!this._dropdown.__addedContentPage){
+this._dropdown.addChild(this._contentPane);
+this._dropdown.__addedContentPage=true;
+}
+},setup:function(){
+},onChange:function(e){
+if(this._parentToolbar.checkAvailability()){
+var name=e.currentTarget.getAttribute("dropDownItemName");
+var _a1d=dojo.widget.Editor2Manager.getCurrentInstance();
+if(_a1d){
+var _a1e=_a1d.getCommand(this._name);
+if(_a1e){
+_a1e.execute(name);
+}
+}
+}
+this._dropdown.close();
+},onMouseOverItem:function(e){
+dojo.html.addClass(e.currentTarget,this._parentToolbar.ToolbarHighlightedSelectItemStyle);
+},onMouseOutItem:function(e){
+dojo.html.removeClass(e.currentTarget,this._parentToolbar.ToolbarHighlightedSelectItemStyle);
+}});
+dojo.declare("dojo.widget.Editor2ToolbarFormatBlockSelect",dojo.widget.Editor2ToolbarComboItem,{href:dojo.uri.moduleUri("dojo.widget","templates/Editor2/EditorToolbar_FormatBlock.html"),setup:function(){
+dojo.widget.Editor2ToolbarFormatBlockSelect.superclass.setup.call(this);
+var _a21=this._contentPane.domNode.all||this._contentPane.domNode.getElementsByTagName("*");
+this._blockNames={};
+this._blockDisplayNames={};
+for(var x=0;x<_a21.length;x++){
+var node=_a21[x];
+dojo.html.disableSelection(node);
+var name=node.getAttribute("dropDownItemName");
+if(name){
+this._blockNames[name]=node;
+var _a25=node.getElementsByTagName(name);
+this._blockDisplayNames[name]=_a25[_a25.length-1].innerHTML;
+}
+}
+for(var name in this._blockNames){
+dojo.event.connect(this._blockNames[name],"onclick",this,"onChange");
+dojo.event.connect(this._blockNames[name],"onmouseover",this,"onMouseOverItem");
+dojo.event.connect(this._blockNames[name],"onmouseout",this,"onMouseOutItem");
+}
+},onDropDownDestroy:function(){
+if(this._blockNames){
+for(var name in this._blockNames){
+delete this._blockNames[name];
+delete this._blockDisplayNames[name];
+}
+}
+},refreshState:function(){
+dojo.widget.Editor2ToolbarFormatBlockSelect.superclass.refreshState.call(this);
+if(this._lastState!=dojo.widget.Editor2Manager.commandState.Disabled){
+var _a27=dojo.widget.Editor2Manager.getCurrentInstance();
+if(_a27){
+var _a28=_a27.getCommand(this._name);
+if(_a28){
+var _a29=_a28.getValue();
+if(_a29==this._lastSelectedFormat&&this._blockDisplayNames){
+return this._lastState;
+}
+this._lastSelectedFormat=_a29;
+var _a2a=this._domNode.getElementsByTagName("label")[0];
+var _a2b=false;
+if(this._blockDisplayNames){
+for(var name in this._blockDisplayNames){
+if(name==_a29){
+_a2a.innerHTML=this._blockDisplayNames[name];
+_a2b=true;
+break;
+}
+}
+if(!_a2b){
+_a2a.innerHTML="&nbsp;";
+}
+}
+}
+}
+}
+return this._lastState;
+}});
+dojo.declare("dojo.widget.Editor2ToolbarFontSizeSelect",dojo.widget.Editor2ToolbarComboItem,{href:dojo.uri.moduleUri("dojo.widget","templates/Editor2/EditorToolbar_FontSize.html"),setup:function(){
+dojo.widget.Editor2ToolbarFormatBlockSelect.superclass.setup.call(this);
+var _a2d=this._contentPane.domNode.all||this._contentPane.domNode.getElementsByTagName("*");
+this._fontsizes={};
+this._fontSizeDisplayNames={};
+for(var x=0;x<_a2d.length;x++){
+var node=_a2d[x];
+dojo.html.disableSelection(node);
+var name=node.getAttribute("dropDownItemName");
+if(name){
+this._fontsizes[name]=node;
+this._fontSizeDisplayNames[name]=node.getElementsByTagName("font")[0].innerHTML;
+}
+}
+for(var name in this._fontsizes){
+dojo.event.connect(this._fontsizes[name],"onclick",this,"onChange");
+dojo.event.connect(this._fontsizes[name],"onmouseover",this,"onMouseOverItem");
+dojo.event.connect(this._fontsizes[name],"onmouseout",this,"onMouseOutItem");
+}
+},onDropDownDestroy:function(){
+if(this._fontsizes){
+for(var name in this._fontsizes){
+delete this._fontsizes[name];
+delete this._fontSizeDisplayNames[name];
+}
+}
+},refreshState:function(){
+dojo.widget.Editor2ToolbarFormatBlockSelect.superclas

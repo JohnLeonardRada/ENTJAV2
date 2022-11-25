@@ -1,0 +1,270 @@
+eContent");
+}
+if(h.ie70&&this.useActiveX){
+dojo.debug("activeX in ie70 is not currently supported, useActiveX is ignored for now.");
+this.useActiveX=false;
+}
+if(this.useActiveX&&h.ie){
+var self=this;
+setTimeout(function(){
+self._drawObject(html);
+},0);
+}else{
+if(h.ie||this._safariIsLeopard()||h.opera){
+this.iframe=dojo.doc().createElement("iframe");
+this.iframe.src="javascript:void(0)";
+this.editorObject=this.iframe;
+with(this.iframe.style){
+border="0";
+width="100%";
+}
+this.iframe.frameBorder=0;
+this.editingArea.appendChild(this.iframe);
+this.window=this.iframe.contentWindow;
+this.document=this.window.document;
+this.document.open();
+this.document.write("<html><head><style>body{margin:0;padding:0;border:0;overflow:hidden;}</style></head><body><div></div></body></html>");
+this.document.close();
+this.editNode=this.document.body.firstChild;
+this.editNode.contentEditable=true;
+with(this.iframe.style){
+if(h.ie70){
+if(this.height){
+height=this.height;
+}
+if(this.minHeight){
+minHeight=this.minHeight;
+}
+}else{
+height=this.height?this.height:this.minHeight;
+}
+}
+var _895=["p","pre","address","h1","h2","h3","h4","h5","h6","ol","div","ul"];
+var _896="";
+for(var i in _895){
+if(_895[i].charAt(1)!="l"){
+_896+="<"+_895[i]+"><span>content</span></"+_895[i]+">";
+}else{
+_896+="<"+_895[i]+"><li>content</li></"+_895[i]+">";
+}
+}
+with(this.editNode.style){
+position="absolute";
+left="-2000px";
+top="-2000px";
+}
+this.editNode.innerHTML=_896;
+var node=this.editNode.firstChild;
+while(node){
+dojo.withGlobal(this.window,"selectElement",dojo.html.selection,[node.firstChild]);
+var _898=node.tagName.toLowerCase();
+this._local2NativeFormatNames[_898]=this.queryCommandValue("formatblock");
+this._native2LocalFormatNames[this._local2NativeFormatNames[_898]]=_898;
+node=node.nextSibling;
+}
+with(this.editNode.style){
+position="";
+left="";
+top="";
+}
+this.editNode.innerHTML=html;
+if(this.height){
+this.document.body.style.overflowY="scroll";
+}
+dojo.lang.forEach(this.events,function(e){
+dojo.event.connect(this.editNode,e.toLowerCase(),this,e);
+},this);
+this.onLoad();
+}else{
+this._drawIframe(html);
+this.editorObject=this.iframe;
+}
+}
+if(this.domNode.nodeName=="LI"){
+this.domNode.lastChild.style.marginTop="-1.2em";
+}
+dojo.html.addClass(this.domNode,"RichTextEditable");
+this.isClosed=false;
+},_hasCollapseableMargin:function(_89a,side){
+if(dojo.html.getPixelValue(_89a,"border-"+side+"-width",false)){
+return false;
+}else{
+if(dojo.html.getPixelValue(_89a,"padding-"+side,false)){
+return false;
+}else{
+return true;
+}
+}
+},_getContributingMargin:function(_89c,_89d){
+if(_89d=="top"){
+var _89e="previousSibling";
+var _89f="nextSibling";
+var _8a0="firstChild";
+var _8a1="margin-top";
+var _8a2="margin-bottom";
+}else{
+var _89e="nextSibling";
+var _89f="previousSibling";
+var _8a0="lastChild";
+var _8a1="margin-bottom";
+var _8a2="margin-top";
+}
+var _8a3=dojo.html.getPixelValue(_89c,_8a1,false);
+function isSignificantNode(_8a4){
+return !(_8a4.nodeType==3&&dojo.string.isBlank(_8a4.data))&&dojo.html.getStyle(_8a4,"display")!="none"&&!dojo.html.isPositionAbsolute(_8a4);
+}
+var _8a5=0;
+var _8a6=_89c[_8a0];
+while(_8a6){
+while((!isSignificantNode(_8a6))&&_8a6[_89f]){
+_8a6=_8a6[_89f];
+}
+_8a5=Math.max(_8a5,dojo.html.getPixelValue(_8a6,_8a1,false));
+if(!this._hasCollapseableMargin(_8a6,_89d)){
+break;
+}
+_8a6=_8a6[_8a0];
+}
+if(!this._hasCollapseableMargin(_89c,_89d)){
+return parseInt(_8a5);
+}
+var _8a7=0;
+var _8a8=_89c[_89e];
+while(_8a8){
+if(isSignificantNode(_8a8)){
+_8a7=dojo.html.getPixelValue(_8a8,_8a2,false);
+break;
+}
+_8a8=_8a8[_89e];
+}
+if(!_8a8){
+_8a7=dojo.html.getPixelValue(_89c.parentNode,_8a1,false);
+}
+if(_8a5>_8a3){
+return parseInt(Math.max((_8a5-_8a3)-_8a7,0));
+}else{
+return 0;
+}
+},_drawIframe:function(html){
+var _8aa=Boolean(dojo.render.html.moz&&(typeof window.XML=="undefined"));
+if(!this.iframe){
+var _8ab=(new dojo.uri.Uri(dojo.doc().location)).host;
+this.iframe=dojo.doc().createElement("iframe");
+with(this.iframe){
+style.border="none";
+style.lineHeight="0";
+style.verticalAlign="bottom";
+scrolling=this.height?"auto":"no";
+}
+}
+if(djConfig["useXDomain"]&&!djConfig["dojoRichTextFrameUrl"]){
+dojo.debug("dojo.widget.RichText: When using cross-domain Dojo builds,"+" please save src/widget/templates/richtextframe.html to your domain and set djConfig.dojoRichTextFrameUrl"+" to the path on your domain to richtextframe.html");
+}
+this.iframe.src=(djConfig["dojoRichTextFrameUrl"]||dojo.uri.moduleUri("dojo.widget","templates/richtextframe.html"))+((dojo.doc().domain!=_8ab)?("#"+dojo.doc().domain):"");
+this.iframe.width=this.inheritWidth?this._oldWidth:"100%";
+if(this.height){
+this.iframe.style.height=this.height;
+}else{
+var _8ac=this._oldHeight;
+if(this._hasCollapseableMargin(this.domNode,"top")){
+_8ac+=this._firstChildContributingMargin;
+}
+if(this._hasCollapseableMargin(this.domNode,"bottom")){
+_8ac+=this._lastChildContributingMargin;
+}
+this.iframe.height=_8ac;
+}
+var _8ad=dojo.doc().createElement("div");
+_8ad.innerHTML=html;
+this.editingArea.appendChild(_8ad);
+if(this.relativeImageUrls){
+var imgs=_8ad.getElementsByTagName("img");
+for(var i=0;i<imgs.length;i++){
+imgs[i].src=(new dojo.uri.Uri(dojo.global().location,imgs[i].src)).toString();
+}
+html=_8ad.innerHTML;
+}
+var _8b0=dojo.html.firstElement(_8ad);
+var _8b1=dojo.html.lastElement(_8ad);
+if(_8b0){
+_8b0.style.marginTop=this._firstChildContributingMargin+"px";
+}
+if(_8b1){
+_8b1.style.marginBottom=this._lastChildContributingMargin+"px";
+}
+this.editingArea.appendChild(this.iframe);
+if(dojo.render.html.safari){
+this.iframe.src=this.iframe.src;
+}
+var _8b2=false;
+var _8b3=dojo.lang.hitch(this,function(){
+if(!_8b2){
+_8b2=true;
+}else{
+return;
+}
+if(!this.editNode){
+if(this.iframe.contentWindow){
+this.window=this.iframe.contentWindow;
+this.document=this.iframe.contentWindow.document;
+}else{
+if(this.iframe.contentDocument){
+this.window=this.iframe.contentDocument.window;
+this.document=this.iframe.contentDocument;
+}
+}
+var _8b4=(function(_8b5){
+return function(_8b6){
+return dojo.html.getStyle(_8b5,_8b6);
+};
+})(this.domNode);
+var font=_8b4("font-weight")+" "+_8b4("font-size")+" "+_8b4("font-family");
+var _8b8="1.0";
+var _8b9=dojo.html.getUnitValue(this.domNode,"line-height");
+if(_8b9.value&&_8b9.units==""){
+_8b8=_8b9.value;
+}
+dojo.html.insertCssText("body,html{background:transparent;padding:0;margin:0;}"+"body{top:0;left:0;right:0;"+(((this.height)||(dojo.render.html.opera))?"":"position:fixed;")+"font:"+font+";"+"min-height:"+this.minHeight+";"+"line-height:"+_8b8+"}"+"p{margin: 1em 0 !important;}"+"body > *:first-child{padding-top:0 !important;margin-top:"+this._firstChildContributingMargin+"px !important;}"+"body > *:last-child{padding-bottom:0 !important;margin-bottom:"+this._lastChildContributingMargin+"px !important;}"+"li > ul:-moz-first-node, li > ol:-moz-first-node{padding-top:1.2em;}\n"+"li{min-height:1.2em;}"+"",this.document);
+dojo.html.removeNode(_8ad);
+this.document.body.innerHTML=html;
+if(_8aa||dojo.render.html.safari){
+this.document.designMode="on";
+}
+this.onLoad();
+}else{
+dojo.html.removeNode(_8ad);
+this.editNode.innerHTML=html;
+this.onDisplayChanged();
+}
+});
+if(this.editNode){
+_8b3();
+}else{
+if(dojo.render.html.moz){
+this.iframe.onload=function(){
+setTimeout(_8b3,250);
+};
+}else{
+this.iframe.onload=_8b3;
+}
+}
+},_applyEditingAreaStyleSheets:function(){
+var _8ba=[];
+if(this.styleSheets){
+_8ba=this.styleSheets.split(";");
+this.styleSheets="";
+}
+_8ba=_8ba.concat(this.editingAreaStyleSheets);
+this.editingAreaStyleSheets=[];
+if(_8ba.length>0){
+for(var i=0;i<_8ba.length;i++){
+var url=_8ba[i];
+if(url){
+this.addStyleSheet(dojo.uri.dojoUri(url));
+}
+}
+}
+},addStyleSheet:function(uri){
+var url=uri.toString();
+if(dojo.lang.find(this.editingAreaStyleSheets,url)>-1){
+dojo.debug("dojo.widget.RichText.addStyleSheet: Style sheet "+ur

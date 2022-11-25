@@ -1,0 +1,269 @@
+n, org.hibernate.envers.tools.query.QueryBuilder, java.lang.String, java.lang.String, boolean, org.hibernate.envers.entities.mapper.relation.MiddleIdData, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+addEntityAtRevisionRestriction</H3>
+<PRE>
+void <B>addEntityAtRevisionRestriction</B>(<A HREF="../../../../org/hibernate/envers/configuration/GlobalConfiguration.html" title="class in org.hibernate.envers.configuration">GlobalConfiguration</A>&nbsp;globalCfg,
+                                    <A HREF="../../../../org/hibernate/envers/tools/query/QueryBuilder.html" title="class in org.hibernate.envers.tools.query">QueryBuilder</A>&nbsp;rootQueryBuilder,
+                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;revisionProperty,
+                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;revisionEndProperty,
+                                    boolean&nbsp;addAlias,
+                                    <A HREF="../../../../org/hibernate/envers/entities/mapper/relation/MiddleIdData.html" title="class in org.hibernate.envers.entities.mapper.relation">MiddleIdData</A>&nbsp;idData,
+                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;revisionPropertyPath,
+                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;originalIdPropertyName,
+                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias1,
+                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;alias2)</PRE>
+<DL>
+<DD>Update the rootQueryBuilder with an extra WHERE clause to restrict the revision for a two-entity relation.
+ This WHERE clause depends on the AuditStrategy, as follows:
+ <ul>
+ <li>For <A HREF="../../../../org/hibernate/envers/strategy/DefaultAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>DefaultAuditStrategy</CODE></A> a subquery is created: 
+ <p><code>e.revision = (SELECT max(...) ...)</code></p>
+ </li>
+ <li>for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A> the revision-end column is used: 
+ <p><code>e.revision <= :revision and (e.endRevision > :revision or e.endRevision is null)</code></p>
+ </li>
+ </ul>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>globalCfg</CODE> - the <A HREF="../../../../org/hibernate/envers/configuration/GlobalConfiguration.html" title="class in org.hibernate.envers.configuration"><CODE>GlobalConfiguration</CODE></A><DD><CODE>rootQueryBuilder</CODE> - the <A HREF="../../../../org/hibernate/envers/tools/query/QueryBuilder.html" title="class in org.hibernate.envers.tools.query"><CODE>QueryBuilder</CODE></A> that will be updated<DD><CODE>revisionProperty</CODE> - property of the revision column<DD><CODE>revisionEndProperty</CODE> - property of the revisionEnd column (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)<DD><CODE>addAlias</CODE> - <code>boolean</code> indicator if a left alias is needed<DD><CODE>idData</CODE> - id-information for the two-entity relation (only used for <A HREF="../../../../org/hibernate/envers/strategy/DefaultAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>DefaultAuditStrategy</CODE></A>)<DD><CODE>revisionPropertyPath</CODE> - path of the revision property (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)<DD><CODE>originalIdPropertyName</CODE> - name of the id property (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)<DD><CODE>alias1</CODE> - an alias used for subquery (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)<DD><CODE>alias2</CODE> - an alias used for subquery (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addAssociationAtRevisionRestriction(org.hibernate.envers.tools.query.QueryBuilder, java.lang.String, java.lang.String, boolean, org.hibernate.envers.entities.mapper.relation.MiddleIdData, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.hibernate.envers.entities.mapper.relation.MiddleComponentData...)"><!-- --></A><H3>
+addAssociationAtRevisionRestriction</H3>
+<PRE>
+void <B>addAssociationAtRevisionRestriction</B>(<A HREF="../../../../org/hibernate/envers/tools/query/QueryBuilder.html" title="class in org.hibernate.envers.tools.query">QueryBuilder</A>&nbsp;rootQueryBuilder,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;revisionProperty,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;revisionEndProperty,
+                                         boolean&nbsp;addAlias,
+                                         <A HREF="../../../../org/hibernate/envers/entities/mapper/relation/MiddleIdData.html" title="class in org.hibernate.envers.entities.mapper.relation">MiddleIdData</A>&nbsp;referencingIdData,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;versionsMiddleEntityName,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;eeOriginalIdPropertyPath,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;revisionPropertyPath,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;originalIdPropertyName,
+                                         <A HREF="../../../../org/hibernate/envers/entities/mapper/relation/MiddleComponentData.html" title="class in org.hibernate.envers.entities.mapper.relation">MiddleComponentData</A>...&nbsp;componentDatas)</PRE>
+<DL>
+<DD>Update the rootQueryBuilder with an extra WHERE clause to restrict the revision for a middle-entity 
+ association. This WHERE clause depends on the AuditStrategy, as follows:
+ <ul>
+ <li>For <A HREF="../../../../org/hibernate/envers/strategy/DefaultAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>DefaultAuditStrategy</CODE></A> a subquery is created: 
+ <p><code>e.revision = (SELECT max(...) ...)</code></p>
+ </li>
+ <li>for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A> the revision-end column is used: 
+ <p><code>e.revision <= :revision and (e.endRevision > :revision or e.endRevision is null)</code></p>
+ </li>
+ </ul>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rootQueryBuilder</CODE> - the <A HREF="../../../../org/hibernate/envers/tools/query/QueryBuilder.html" title="class in org.hibernate.envers.tools.query"><CODE>QueryBuilder</CODE></A> that will be updated<DD><CODE>revisionProperty</CODE> - property of the revision column<DD><CODE>revisionEndProperty</CODE> - property of the revisionEnd column (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)<DD><CODE>addAlias</CODE> - <code>boolean</code> indicator if a left alias is needed<DD><CODE>referencingIdData</CODE> - id-information for the middle-entity association (only used for <A HREF="../../../../org/hibernate/envers/strategy/DefaultAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>DefaultAuditStrategy</CODE></A>)<DD><CODE>versionsMiddleEntityName</CODE> - name of the middle-entity<DD><CODE>eeOriginalIdPropertyPath</CODE> - name of the id property (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)<DD><CODE>revisionPropertyPath</CODE> - path of the revision property (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)<DD><CODE>originalIdPropertyName</CODE> - name of the id property (only used for <A HREF="../../../../org/hibernate/envers/strategy/ValidityAuditStrategy.html" title="class in org.hibernate.envers.strategy"><CODE>ValidityAuditStrategy</CODE></A>)<DD><CODE>componentDatas</CODE> - information about the middle-entity relation</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/AuditStrategy.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../org/hibernate/envers/strategy/DefaultAuditStrategy.html" title="class in org.hibernate.envers.strategy"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../index.html?org/hibernate/envers/strategy/AuditStrategy.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="AuditStrategy.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &copy; 2001-2010 <a href="http://redhat.com">Red Hat, Inc.</a>  All Rights Reserved.
+</BODY>
+</HTML>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- Generated by javadoc (build 1.6.0_07) on Wed Feb 08 19:32:52 CST 2012 -->
+<TITLE>
+ANSIJoinFragment (Hibernate JavaDocs)
+</TITLE>
+
+<META NAME="date" CONTENT="2012-02-08">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="ANSIJoinFragment (Hibernate JavaDocs)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ANSIJoinFragment.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../org/hibernate/sql/ANSICaseFragment.html" title="class in org.hibernate.sql"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../org/hibernate/sql/CacheJoinFragment.html" title="class in org.hibernate.sql"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../index.html?org/hibernate/sql/ANSIJoinFragment.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ANSIJoinFragment.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.hibernate.sql.JoinFragment">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.hibernate.sql</FONT>
+<BR>
+Class ANSIJoinFragment</H2>
+<PRE>
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+  <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../org/hibernate/sql/JoinFragment.html" title="class in org.hibernate.sql">org.hibernate.sql.JoinFragment</A>
+      <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>org.hibernate.sql.ANSIJoinFragment</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../org/hibernate/sql/CacheJoinFragment.html" title="class in org.hibernate.sql">CacheJoinFragment</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>ANSIJoinFragment</B><DT>extends <A HREF="../../../org/hibernate/sql/JoinFragment.html" title="class in org.hibernate.sql">JoinFragment</A></DL>
+</PRE>
+
+<P>
+An ANSI-style join
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Gavin King</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.hibernate.sql.JoinFragment"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.hibernate.sql.<A HREF="../../../org/hibernate/sql/JoinFragment.html" title="class in org.hibernate.sql">JoinFragment</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../org/hibernate/sql/JoinFragment.html#FULL_JOIN">FULL_JOIN</A>, <A HREF="../../../org/hibernate/sql/JoinFragment.html#INNER_JOIN">INNER_JOIN</A>, <A HREF="../../../org/hibernate/sql/JoinFragment.html#LEFT_OUTER_JOIN">LEFT_OUTER_JOIN</A>, <A HREF="../../../org/hibernate/sql/JoinFragment.html#RIGHT_OUTER_JOIN">RIGHT_OUTER_JOIN</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+<

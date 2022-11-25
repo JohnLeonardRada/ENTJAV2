@@ -1,0 +1,753 @@
+ded."
+msgstr ""
+"存储过程必须返回一个结果集。注意这些 servers 可能返回多个结果集以及更新的数"
+"目。Hibernate 将取出第一条结果集作为它的返回值，其他将被丢弃。 "
+
+#. Tag: para
+#: query_sql.xml:626
+#, no-c-format
+msgid ""
+"If you can enable <literal>SET NOCOUNT ON</literal> in your procedure it "
+"will probably be more efficient, but this is not a requirement."
+msgstr ""
+"如果你能够在存储过程里设定 <literal>SET NOCOUNT ON</literal>，这可能会效率更"
+"高，但这不是必需的。"
+
+#. Tag: title
+#: query_sql.xml:636
+#, no-c-format
+msgid "Custom SQL for create, update and delete"
+msgstr "定制 SQL 用来 create，update 和 delete"
+
+#. Tag: para
+#: query_sql.xml:638
+#, fuzzy, no-c-format
+msgid ""
+"Hibernate3 can use custom SQL for create, update, and delete operations. The "
+"SQL can be overridden at the statement level or inidividual column level. "
+"This section describes statement overrides. For columns, see <xref linkend="
+"\"mapping-column-read-and-write\"/>. <xref linkend=\"example-custom-crdu-via-"
+"annotations\"/> shows how to define custom SQL operatons using annotations."
+msgstr ""
+"Hibernate3 可以自定义 create、update 和 delete 操作。SQL 可以在语句或单个字段"
+"级别进行覆盖。本节描述了语句覆盖。对于字段覆盖，请参考 <xref linkend="
+"\"mapping-column-read-and-write\" />。"
+
+#. Tag: title
+#: query_sql.xml:646
+#, no-c-format
+msgid "Custom CRUD via annotations"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:648
+#, no-c-format
+msgid ""
+"@Entity\n"
+"@Table(name=\"CHAOS\")\n"
+"@SQLInsert( sql=\"INSERT INTO CHAOS(size, name, nickname, id) VALUES(?,upper"
+"(?),?,?)\")\n"
+"@SQLUpdate( sql=\"UPDATE CHAOS SET size = ?, name = upper(?), nickname = ? "
+"WHERE id = ?\")\n"
+"@SQLDelete( sql=\"DELETE CHAOS WHERE id = ?\")\n"
+"@SQLDeleteAll( sql=\"DELETE CHAOS\")\n"
+"@Loader(namedQuery = \"chaos\")\n"
+"@NamedNativeQuery(name=\"chaos\", query=\"select id, size, name, lower"
+"( nickname ) as nickname from CHAOS where id= ?\", resultClass = Chaos."
+"class)\n"
+"public class Chaos {\n"
+"    @Id\n"
+"    private Long id;\n"
+"    private Long size;\n"
+"    private String name;\n"
+"    private String nickname;"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:651
+#, no-c-format
+msgid ""
+"<literal>@SQLInsert</literal>, <literal>@SQLUpdate</literal>, "
+"<literal>@SQLDelete</literal>, <literal>@SQLDeleteAll</literal> respectively "
+"override the INSERT, UPDATE, DELETE, and DELETE all statement. The same can "
+"be achieved using Hibernate mapping files and the <literal>&lt;sql-insert&gt;"
+"</literal>, <literal>&lt;sql-update&gt;</literal> and <literal>&lt;sql-"
+"delete&gt;</literal> nodes. This can be seen in <xref linkend=\"example-"
+"custom-crdu-via-xml\"/>."
+msgstr ""
+
+#. Tag: title
+#: query_sql.xml:661
+#, no-c-format
+msgid "Custom CRUD XML"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:663
+#, fuzzy, no-c-format
+msgid ""
+"&lt;class name=\"Person\"&gt;\n"
+"    &lt;id name=\"id\"&gt;\n"
+"        &lt;generator class=\"increment\"/&gt;\n"
+"    &lt;/id&gt;\n"
+"    &lt;property name=\"name\" not-null=\"true\"/&gt;\n"
+"    &lt;sql-insert&gt;INSERT INTO PERSON (NAME, ID) VALUES ( UPPER(?), ? )"
+"&lt;/sql-insert&gt;\n"
+"    &lt;sql-update&gt;UPDATE PERSON SET NAME=UPPER(?) WHERE ID=?&lt;/sql-"
+"update&gt;\n"
+"    &lt;sql-delete&gt;DELETE FROM PERSON WHERE ID=?&lt;/sql-delete&gt;\n"
+"&lt;/class&gt;"
+msgstr ""
+"&lt;class name=\"Person\"&gt;\n"
+"    &lt;id name=\"id\"&gt;\n"
+"        &lt;generator class=\"increment\"/&gt;\n"
+"    &lt;/id&gt;\n"
+"    &lt;property name=\"name\" not-null=\"true\"/&gt;\n"
+"    &lt;sql-insert&gt;INSERT INTO PERSON (NAME, ID) VALUES ( UPPER(?), ? )"
+"&lt;/sql-insert&gt;\n"
+"    &lt;sql-update&gt;UPDATE PERSON SET NAME=UPPER(?) WHERE ID=?&lt;/sql-"
+"update&gt;\n"
+"    &lt;sql-delete&gt;DELETE FROM PERSON WHERE ID=?&lt;/sql-delete&gt;\n"
+"&lt;/class&gt;"
+
+#. Tag: para
+#: query_sql.xml:666
+#, no-c-format
+msgid ""
+"If you expect to call a store procedure, be sure to set the "
+"<literal>callable</literal> attribute to <constant>true</constant>. In "
+"annotations as well as in xml."
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:670
+#, no-c-format
+msgid ""
+"To check that the execution happens correctly, Hibernate allows you to "
+"define one of those three strategies:"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:675
+#, no-c-format
+msgid ""
+"none: no check is performed: the store procedure is expected to fail upon "
+"issues"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:680
+#, no-c-format
+msgid "count: use of rowcount to check that the update is successful"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:685
+#, no-c-format
+msgid ""
+"param: like COUNT but using an output parameter rather that the standard "
+"mechanism"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:690
+#, no-c-format
+msgid ""
+"To define the result check style, use the <literal>check</literal> parameter "
+"which is again available in annoations as well as in xml."
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:693
+#, no-c-format
+msgid ""
+"You can use the exact same set of annotations respectively xml nodes to "
+"override the collection related statements -see <xref linkend=\"example-"
+"overriding-sql-collections-annotations\"/>."
+msgstr ""
+
+#. Tag: title
+#: query_sql.xml:698
+#, no-c-format
+msgid "Overriding SQL statements for collections using annotations"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:701
+#, no-c-format
+msgid ""
+"@OneToMany\n"
+"@JoinColumn(name=\"chaos_fk\")\n"
+"@SQLInsert( sql=\"UPDATE CASIMIR_PARTICULE SET chaos_fk = ? where id = ?\")\n"
+"@SQLDelete( sql=\"UPDATE CASIMIR_PARTICULE SET chaos_fk = null where id = ?"
+"\")\n"
+"private Set&lt;CasimirParticle&gt; particles = new HashSet&lt;"
+"CasimirParticle&gt;();"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:705
+#, fuzzy, no-c-format
+msgid ""
+"The parameter order is important and is defined by the order Hibernate "
+"handles properties. You can see the expected order by enabling debug logging "
+"for the <literal>org.hibernate.persister.entity</literal> level. With this "
+"level enabled Hibernate will print out the static SQL that is used to "
+"create, update, delete etc. entities. (To see the expected sequence, "
+"remember to not include your custom SQL through annotations or mapping files "
+"as that will override the Hibernate generated static sql)"
+msgstr ""
+"你能够通过设定日志调试级别为 <literal>org.hiberante.persister.entity</"
+"literal> 来查看 Hibernate 所期待的顺序。在这个级别下，Hibernate 将会打印出"
+"create，update 和 delete 实体的静态 SQL。（如果想看到预计的顺序。记得不要将定"
+"制 SQL 包含在映射文件里，因为他们会重载 Hibernate 生成的静态 SQL。） "
+
+#. Tag: para
+#: query_sql.xml:715
+#, no-c-format
+msgid ""
+"Overriding SQL statements for secondary tables is also possible using "
+"<literal>@org.hibernate.annotations.Table</literal> and either (or all) "
+"attributes <literal>sqlInsert</literal>, <literal>sqlUpdate</literal>, "
+"<literal>sqlDelete</literal>:"
+msgstr ""
+
+#. Tag: title
+#: query_sql.xml:721
+#, no-c-format
+msgid "Overriding SQL statements for secondary tables"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:723
+#, no-c-format
+msgid ""
+"@Entity\n"
+"@SecondaryTables({\n"
+"    @SecondaryTable(name = \"`Cat nbr1`\"),\n"
+"    @SecondaryTable(name = \"Cat2\"})\n"
+"@org.hibernate.annotations.Tables( {\n"
+"    @Table(appliesTo = \"Cat\", comment = \"My cat table\" ),\n"
+"    @Table(appliesTo = \"Cat2\", foreignKey = @ForeignKey(name=\"FK_CAT2_CAT"
+"\"), fetch = FetchMode.SELECT,\n"
+"        sqlInsert=@SQLInsert(sql=\"insert into Cat2(storyPart2, id) values"
+"(upper(?), ?)\") )\n"
+"} )\n"
+"public class Cat implements Serializable {"
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:726
+#, no-c-format
+msgid ""
+"The previous example also shows that you can give a comment to a given table "
+"(primary or secondary): This comment will be used for DDL generation."
+msgstr ""
+
+#. Tag: para
+#: query_sql.xml:731
+#, fuzzy, no-c-format
+msgid ""
+"The SQL is directly executed in your database, so you can use any dialect "
+"you like. This will, however, reduce the portability of your mapping if you "
+"use database specific SQL."
+msgstr ""
+"这些 SQL 直接在你的数据库里执行，所以你可以自由的使用你喜欢的任意语法。但如果"
+"你使用数据库特定的语法，这当然会降低你映射的可移植性。 "
+
+#. Tag: para
+#: query_sql.xml:736
+#, fuzzy, no-c-format
+msgid ""
+"Last but not least, stored procedures are in most cases required to return "
+"the number of rows inserted, updated and deleted. Hibernate always registers "
+"the first statement parameter as a numeric output parameter for the CUD "
+"operations:"
+msgstr ""
+"在大多数情况下（最好这么做），存储过程需要返回插入／更新／删除的行数，因为 "
+"Hibernate 对语句的成功执行有些运行时的检查。Hibernate 常会把进行 CUD 操作的语"
+"句的第一个参数注册为一个数值型输出参数。 "
+
+#. Tag: title
+#: query_sql.xml:742
+#, no-c-format
+msgid "Stored procedures and their return value"
+msgstr ""
+
+#. Tag: programlisting
+#: query_sql.xml:744
+#, fuzzy, no-c-format
+msgid ""
+"CREATE OR REPLACE FUNCTION updatePerson (uid IN NUMBER, uname IN VARCHAR2)\n"
+"    RETURN NUMBER IS\n"
+"BEGIN\n"
+"\n"
+"    update PERSON\n"
+"    set\n"
+"        NAME = uname,\n"
+"    where\n"
+"        ID = uid;\n"
+"\n"
+"    return SQL%ROWCOUNT;\n"
+"\n"
+"END updatePerson;"
+msgstr ""
+"CREATE OR REPLACE FUNCTION updatePerson (uid IN NUMBER, uname IN VARCHAR2)\n"
+"    RETURN NUMBER IS\n"
+"BEGIN\n"
+"\n"
+"    update PERSON\n"
+"    set\n"
+"        NAME = uname,\n"
+"    where\n"
+"        ID = uid;\n"
+"\n"
+"    return SQL&#37;ROWCOUNT;\n"
+"\n"
+"END updatePerson;"
+
+#. Tag: title
+#: query_sql.xml:749
+#, no-c-format
+msgid "Custom SQL for loading"
+msgstr "定制装载 SQL"
+
+#. Tag: para
+#: query_sql.xml:751
+#, fuzzy, no-c-format
+msgid ""
+"You can also declare your own SQL (or HQL) queries for entity loading. As "
+"with inserts, updates, and deletes, this can be done at the individual "
+"column level as described in <xref linkend=\"mapping-column-read-and-write\"/"
+"> or at the statement level. Here is an example of a statement level "
+"override:"
+msgstr ""
+"你也可以为实体加载声明自己的 SQL（或 HQL）。如 <xref linkend=\"mapping-"
+"column-read-and-write\" /> 所描述的，inserts、updates 和 deletes 可以在字段级"
+"别或语句级别来完成。下面是一个语句覆盖的例子："
+
+#. Tag: programlisting
+#: query_sql.xml:757
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"person\"&gt;\n"
+"    &lt;return alias=\"pers\" class=\"Person\" lock-mode=\"upgrade\"/&gt;\n"
+"    SELECT NAME AS {pers.name}, ID AS {pers.id}\n"
+"    FROM PERSON\n"
+"    WHERE ID=?\n"
+"    FOR UPDATE\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"person\"&gt;\n"
+"    &lt;return alias=\"pers\" class=\"Person\" lock-mode=\"upgrade\"/&gt;\n"
+"    SELECT NAME AS {pers.name}, ID AS {pers.id}\n"
+"    FROM PERSON\n"
+"    WHERE ID=?\n"
+"    FOR UPDATE\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:759
+#, no-c-format
+msgid ""
+"This is just a named query declaration, as discussed earlier. You can "
+"reference this named query in a class mapping:"
+msgstr ""
+"这只是一个前面讨论过的命名查询声明，你可以在类映射里引用这个命名查询。 "
+
+#. Tag: programlisting
+#: query_sql.xml:762
+#, fuzzy, no-c-format
+msgid ""
+"&lt;class name=\"Person\"&gt;\n"
+"    &lt;id name=\"id\"&gt;\n"
+"        &lt;generator class=\"increment\"/&gt;\n"
+"    &lt;/id&gt;\n"
+"    &lt;property name=\"name\" not-null=\"true\"/&gt;\n"
+"    &lt;loader query-ref=\"person\"/&gt;\n"
+"&lt;/class&gt;"
+msgstr ""
+"&lt;class name=\"Person\"&gt;\n"
+"    &lt;id name=\"id\"&gt;\n"
+"        &lt;generator class=\"increment\"/&gt;\n"
+"    &lt;/id&gt;\n"
+"    &lt;property name=\"name\" not-null=\"true\"/&gt;\n"
+"    &lt;loader query-ref=\"person\"/&gt;\n"
+"&lt;/class&gt;"
+
+#. Tag: para
+#: query_sql.xml:764
+#, no-c-format
+msgid "This even works with stored procedures."
+msgstr "这也可以用于存储过程"
+
+#. Tag: para
+#: query_sql.xml:766
+#, no-c-format
+msgid "You can even define a query for collection loading:"
+msgstr "你甚至可以定一个用于集合装载的查询： "
+
+#. Tag: programlisting
+#: query_sql.xml:768
+#, fuzzy, no-c-format
+msgid ""
+"&lt;set name=\"employments\" inverse=\"true\"&gt;\n"
+"    &lt;key/&gt;\n"
+"    &lt;one-to-many class=\"Employment\"/&gt;\n"
+"    &lt;loader query-ref=\"employments\"/&gt;\n"
+"&lt;/set&gt;"
+msgstr ""
+"&lt;set name=\"employments\" inverse=\"true\"&gt;\n"
+"    &lt;key/&gt;\n"
+"    &lt;one-to-many class=\"Employment\"/&gt;\n"
+"    &lt;loader query-ref=\"employments\"/&gt;\n"
+"&lt;/set&gt;"
+
+#. Tag: programlisting
+#: query_sql.xml:770
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"employments\"&gt;\n"
+"    &lt;load-collection alias=\"emp\" role=\"Person.employments\"/&gt;\n"
+"    SELECT {emp.*}\n"
+"    FROM EMPLOYMENT emp\n"
+"    WHERE EMPLOYER = :id\n"
+"    ORDER BY STARTDATE ASC, EMPLOYEE ASC\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"employments\"&gt;\n"
+"    &lt;load-collection alias=\"emp\" role=\"Person.employments\"/&gt;\n"
+"    SELECT {emp.*}\n"
+"    FROM EMPLOYMENT emp\n"
+"    WHERE EMPLOYER = :id\n"
+"    ORDER BY STARTDATE ASC, EMPLOYEE ASC\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:772
+#, no-c-format
+msgid ""
+"You can also define an entity loader that loads a collection by join "
+"fetching:"
+msgstr "你甚至还可以定义一个实体装载器，它通过连接抓取装载一个集合： "
+
+#. Tag: programlisting
+#: query_sql.xml:775
+#, fuzzy, no-c-format
+msgid ""
+"&lt;sql-query name=\"person\"&gt;\n"
+"    &lt;return alias=\"pers\" class=\"Person\"/&gt;\n"
+"    &lt;return-join alias=\"emp\" property=\"pers.employments\"/&gt;\n"
+"    SELECT NAME AS {pers.*}, {emp.*}\n"
+"    FROM PERSON pers\n"
+"    LEFT OUTER JOIN EMPLOYMENT emp\n"
+"        ON pers.ID = emp.PERSON_ID\n"
+"    WHERE ID=?\n"
+"&lt;/sql-query&gt;"
+msgstr ""
+"&lt;sql-query name=\"person\"&gt;\n"
+"    &lt;return alias=\"pers\" class=\"Person\"/&gt;\n"
+"    &lt;return-join alias=\"emp\" property=\"pers.employments\"/&gt;\n"
+"    SELECT NAME AS {pers.*}, {emp.*}\n"
+"    FROM PERSON pers\n"
+"    LEFT OUTER JOIN EMPLOYMENT emp\n"
+"        ON pers.ID = emp.PERSON_ID\n"
+"    WHERE ID=?\n"
+"&lt;/sql-query&gt;"
+
+#. Tag: para
+#: query_sql.xml:777
+#, no-c-format
+msgid ""
+"The annotation equivalent <literal>&lt;loader&gt;</literal> is the @Loader "
+"annotation as seen in <xref linkend=\"example-custom-crdu-via-annotations\"/"
+">."
+msgstr ""
+
+#~ msgid "<literal>A_NAME as {item.name}</literal>"
+#~ msgstr "<literal>A_NAME as {item.name}</literal>"
+
+#~ msgid "<literal>{[aliasname].class}</literal>"
+#~ msgstr "<literal>{[aliasname].class}</literal>"
+
+#~ msgid "<literal>DISC as {item.class}</literal>"
+#~ msgstr "<literal>DISC as {item.class}</literal>"
+
+#~ msgid "<literal>{[aliasname].*}</literal>"
+#~ msgstr "<literal>{[aliasname].*}</literal>"
+
+#~ msgid "<literal>{item.*}</literal>"
+#~ msgstr "<literal>{item.*}</literal>"
+
+#~ msgid "<literal>{[aliasname].key}</literal>"
+#~ msgstr "<literal>{[aliasname].key}</literal>"
+
+#~ msgid "<literal>ORGID as {coll.key}</literal>"
+#~ msgstr "<literal>ORGID as {coll.key}</literal>"
+
+#~ msgid "<literal>{[aliasname].id}</literal>"
+#~ msgstr "<literal>{[aliasname].id}</literal>"
+
+#~ msgid "<literal>EMPID as {coll.id}</literal>"
+#~ msgstr "<literal>EMPID as {coll.id}</literal>"
+
+#~ msgid "<literal>{[aliasname].element}</literal>"
+#~ msgstr "<literal>{[aliasname].element}</literal>"
+
+#~ msgid "<literal>XID as {coll.element}</literal>"
+#~ msgstr "<literal>XID as {coll.element}</literal>"
+
+#~ msgid "<literal>NAME as {coll.element.name}</literal>"
+#~ msgstr "<literal>NAME as {coll.element.name}</literal>"
+
+#~ msgid "<literal>{[aliasname].element.*}</literal>"
+#~ msgstr "<literal>{[aliasname].element.*}</literal>"
+
+#~ msgid "<literal>{coll.element.*}</literal>"
+#~ msgstr "<literal>{coll.element.*}</literal>"
+
+#~ msgid "<literal>{coll.*}</literal>"
+#~ msgstr "<literal>{coll.*}</literal>"
+
+#~ msgid ""
+#~ "The class and collection persisters in Hibernate already contain a set of "
+#~ "configuration time generated strings (insertsql, deletesql, updatesql "
+#~ "etc.). The mapping tags <literal>&lt;sql-insert&gt;</literal>, "
+#~ "<literal>&lt;sql-delete&gt;</literal>, and <literal>&lt;sql-update&gt;</"
+#~ "literal> override these strings:"
+#~ msgstr ""
+#~ "Hibernate3 能够使用定制的 SQL 语句来执行 create，update 和 delete 操作。"
+#~ "在 Hibernate 中，持久化的类和集合已经包含了一套配置期产生的语句"
+#~ "（insertsql，deletesql，updatesql 等等），这些映射标记 <literal>&lt;sql-"
+#~ "insert&gt;</literal>，<literal>&lt;sql-delete&gt;</literal> 和 "
+#~ "<literal>&lt;sql-update&gt;</literal> 重载了这些语句。 "
+
+#~ msgid ""
+#~ "Stored procedures are supported if the <literal>callable</literal> "
+#~ "attribute is set:"
+#~ msgstr "如果设定 <literal>callable</literal>，则能够支持存储过程了。"
+
+#~ msgid ""
+#~ "The order of the positional parameters is vital, as they must be in the "
+#~ "same sequence as Hibernate expects them."
+#~ msgstr ""
+#~ "参数的位置顺序是非常重要的，他们必须和 Hibernate 所期待的顺序相同。 "
+
+#~ msgid ""
+#~ "You can also declare your own SQL (or HQL) queries for entity loading:"
+#~ msgstr "你可能需要声明你自己的 SQL（或 HQL）来装载实体："
+
+#, fuzzy
+#~ msgid ""
+#~ "<![CDATA[<class name=\"Person\">\n"
+#~ "    <id name=\"id\">\n"
+#~ "        <generator class=\"increment\"/>\n"
+#~ "    </id>\n"
+#~ "    <property name=\"name\" not-null=\"true\"/>\n"
+#~ "    <sql-insert callable=\"true\">{call createPerson (?, ?)}</sql-"
+#~ "insert>\n"
+#~ "    <sql-delete callable=\"true\">{? = call deletePerson (?)}</sql-"
+#~ "delete>\n"
+#~ "    <sql-update callable=\"true\">{? = call updatePerson (?, ?)}</sql-"
+#~ "update>\n"
+#~ "</class>]]>"
+#~ msgstr ""
+#~ "&lt;class name=\"Person\"&gt;\n"
+#~ "    &lt;id name=\"id\"&gt;\n"
+#~ "        &lt;generator class=\"increment\"/&gt;\n"
+#~ "    &lt;/id&gt;\n"
+#~ "    &lt;property name=\"name\" not-null=\"true\"/&gt;\n"
+#~ "    &lt;sql-insert callable=\"true\"&gt;{call createPerson (?, ?)}&lt;/"
+#~ "sql-insert&gt;\n"
+#~ "    &lt;sql-delete callable=\"true\"&gt;{? = call deletePerson (?)}&lt;/"
+#~ "sql-delete&gt;\n"
+#~ "    &lt;sql-update callable=\"true\"&gt;{? = call updatePerson (?, ?)}"
+#~ "&lt;/sql-update&gt;\n"
+#~ "&lt;/class&gt;"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   # translation of Collection_Mapping.po to
+# Xi Huang <xhuang@redhat.com>, 2006.
+# Xi HUANG <xhuang@redhat.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: Collection_Mapping\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2010-02-11T05:38:15\n"
+"PO-Revision-Date: 2010-03-16 10:03+1000\n"
+"Last-Translator: Xi HUANG <xhuang@redhat.com>\n"
+"Language-Team:  <en@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#. Tag: title
+#, no-c-format
+msgid "HQL: The Hibernate Query Language"
+msgstr "HQL: Hibernate 查询语言"
+
+#. Tag: para
+#, no-c-format
+msgid "Hibernate uses a powerful query language (HQL) that is similar in appearance to SQL. Compared with SQL, however, HQL is fully object-oriented and understands notions like inheritance, polymorphism and association."
+msgstr "Hibernate 配备了一种非常强大的查询语言，这种语言看上去很像 SQL。但是不要被语法结构上的相似所迷惑，HQL 是非常有意识的被设计为完全面向对象的查询，它可以理解如继承、多态和关联之类的概念。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Case Sensitivity"
+msgstr "大小写敏感性问题"
+
+#. Tag: para
+#, no-c-format
+msgid "With the exception of names of Java classes and properties, queries are case-insensitive. So <literal>SeLeCT</literal> is the same as <literal>sELEct</literal> is the same as <literal>SELECT</literal>, but <literal>org.hibernate.eg.FOO</literal> is not <literal>org.hibernate.eg.Foo</literal>, and <literal>foo.barSet</literal> is not <literal>foo.BARSET</literal>."
+msgstr "除了 Java 类与属性的名称外，查询语句对大小写并不敏感。 所以 <literal>SeLeCT</literal> 与 <literal>sELEct</literal> 以及 <literal>SELECT</literal> 是相同的，但是 <literal>org.hibernate.eg.FOO</literal> 并不等价于 <literal>org.hibernate.eg.Foo</literal> 并且 <literal>foo.barSet</literal> 也不等价于 <literal>foo.BARSET</literal>。 "
+
+#. Tag: para
+#, no-c-format
+msgid "This manual uses lowercase HQL keywords. Some users find queries with uppercase keywords more readable, but this convention is unsuitable for queries embedded in Java code."
+msgstr "本手册中的 HQL 关键字将使用小写字母。很多用户发现使用完全大写的关键字会使查询语句的可读性更强，但我们发现，当把查询语句嵌入到 Java 语句中的时候使用大写关键字比较难看。"
+
+#. Tag: title
+#, no-c-format
+msgid "The from clause"
+msgstr "from 子句"
+
+#. Tag: para
+#, no-c-format
+msgid "The simplest possible Hibernate query is of the form:"
+msgstr "Hibernate 中最简单的查询语句的形式如下："
+
+#. Tag: para
+#, no-c-format
+msgid "This returns all instances of the class <literal>eg.Cat</literal>. You do not usually need to qualify the class name, since <literal>auto-import</literal> is the default. For example:"
+msgstr "该子句简单的返回 <literal>eg.Cat</literal> 类的所有实例。通常我们不需要使用类的全限定名，因为  <literal>auto-import</literal>（自动引入）是缺省的情况。所以我们几乎只使用如下的简单写法： "
+
+#. Tag: para
+#, no-c-format
+msgid "In order to refer to the <literal>Cat</literal> in other parts of the query, you will need to assign an <emphasis>alias</emphasis>. For example:"
+msgstr "为了在这个查询的其他部分里引用 <literal>Cat</literal>，你将需要分配一个<emphasis>别名</emphasis>。例如："
+
+#. Tag: para
+#, no-c-format
+msgid "This query assigns the alias <literal>cat</literal> to <literal>Cat</literal> instances, so you can use that alias later in the query. The <literal>as</literal> keyword is optional. You could also write:"
+msgstr "这个语句把别名 <literal>cat</literal> 指定给类<literal>Cat</literal> 的实例，这样我们就可以在随后的查询中使用此别名了。关键字 <literal>as</literal> 是可选的，我们也可以这样写： "
+
+#. Tag: para
+#, no-c-format
+msgid "Multiple classes can appear, resulting in a cartesian product or \"cross\" join."
+msgstr "子句中可以同时出现多个类，其查询结果是产生一个笛卡儿积或产生跨表的连接。 "
+
+#. Tag: para
+#, no-c-format
+msgid "It is good practice to name query aliases using an initial lowercase as this is consistent with Java naming standards for local variables (e.g. <literal>domesticCat</literal>)."
+msgstr "查询语句中别名的开头部分小写被认为是实践中的好习惯，这样做与 Java 变量的命名标准保持了一致（比如，<literal>domesticCat</literal>）。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Associations and joins"
+msgstr "关联（Association）与连接（Join）"
+
+#. Tag: para
+#, no-c-format
+msgid "You can also assign aliases to associated entities or to elements of a collection of values using a <literal>join</literal>. For example:"
+msgstr "我们也可以为相关联的实体甚至是对一个集合中的全部元素指定一个别名，这时要使用关键字 <literal>join</literal>。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The supported join types are borrowed from ANSI SQL:"
+msgstr "受支持的连接类型是从 ANSI SQL 中借鉴来的："
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>inner join</literal>"
+msgstr "<literal>inner join</literal>"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>left outer join</literal>"
+msgstr "<literal>left outer join</literal>"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>right outer join</literal>"
+msgstr "<literal>right outer join</literal>"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>full join</literal> (not usually useful)"
+msgstr "<literal>full join</literal>（全连接，并不常用）"
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>inner join</literal>, <literal>left outer join</literal> and <literal>right outer join</literal> constructs may be abbreviated."
+msgstr "语句 <literal>inner join</literal>，<literal>left outer join</literal> 以及 <literal>right outer join</literal> 可以简写。"
+
+#. Tag: para
+#, no-c-format
+msgid "You may supply extra join conditions using the HQL <literal>with</literal> keyword."
+msgstr "通过 HQL 的 <literal>with</literal> 关键字，你可以提供额外的 join 条件。"
+
+#. Tag: para
+#, no-c-format
+msgid "A \"fetch\" join allows associations or collections of values to be initialized along with their parent objects using a single select. This is particularly useful in the case of a collection. It effectively overrides the outer join and lazy declarations of the mapping file for associations and collections. See <xref linkend=\"performance-fetching\" /> for more information."
+msgstr "还有，一个 \"fetch\" 连接允许仅仅使用一个选择语句就将相关联的对象或一组值的集合随着他们的父对象的初始化而被初始化，这种方法在使用到集合的情况下尤其有用，对于关联和集合来说，它有效的代替了映射文件中的外联接与延迟声明（lazy declarations）。查看 <xref linkend=\"performance-fetching\" /> 以获得等多的信息。 "
+
+#. Tag: para
+#, no-c-format
+msgid "A fetch join does not usually need to assign an alias, because the associated objects should not be used in the <literal>where</literal> clause (or any other clause). The associated objects are also not returned directly in the query results. Instead, they may be accessed via the parent object. The only reason you might need an alias is if you are recursively join fetching a further collection:"
+msgstr "一个 fetch 连接通常不需要被指定别名，因为相关联的对象不应当被用在 <literal>where</literal> 子句（或其它任何子句）中。同时，相关联的对象并不在查询的结果中直接返回，但可以通过他们的父对象来访问到他们。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>fetch</literal> construct cannot be used in queries called using <literal>iterate()</literal> (though <literal>scroll()</literal> can be used). <literal>Fetch</literal> should be used together with <literal>setMaxResults()</literal> or <literal>setFirstResult()</literal>, as these operations are based on the result rows which usually contain duplicates for eager collection fetching, hence, the number of rows is not what you would expect. <literal>Fetch</literal> should also not be used together with impromptu <literal>with</literal> condition. It is possible to create a cartesian product by join fetching more than one collection in a query, so take care in this case. Join fetching multiple collection roles can produce unexpected results for bag mappings, so user discretion is advised when formulating queries in this case. Finally, note that <literal>full join fetch</literal> and <literal>right join fetch</literal> are not meaningful."
+msgstr "假若使用 <literal>iterate()</literal> 来调用查询，请注意 <literal>fetch</literal> 构造是不能使用的（<literal>scroll()</literal> 可以使用）。<literal>fetch</literal> 也不应该与 <literal>setMaxResults()</literal> 或 <literal>setFirstResult()</literal> 共用，这是因为这些操作是基于结果集的，而在预先抓取集合类时可能包含重复的数据，也就是说无法预先知道精确的行数。<literal>fetch</literal> 还不能与独立的 <literal>with</literal> 条件一起使用。通过在一次查询中 fetch 多个集合，可以制造出笛卡尔积，因此请多加注意。对 bag 映射来说，同时 join fetch 多个集合角色可能在某些情况下给出并非预期的结果，也请小心。最后注意，使用 <literal>full join fetch</literal> 与 <literal>right join fetch</literal> 是没有意义的。 "
+
+#. Tag: para
+#, no-c-format
+msgid "If you are using property-level lazy fetching (with bytecode instrumentation), it is possible to force Hibernate to fetch the lazy properties in the first query immediately using <literal>fetch all properties</literal>."
+msgstr "如果你使用属性级别的延迟获取（lazy fetching）（这是通过重新编写字节码实现的），可以使用  <literal>fetch all properties</literal> 来强制 Hibernate 立即取得那些原本需要延迟加载的属性（在第一个查询中）。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Forms of join syntax"
+msgstr "join 语法的形式"
+
+#. Tag: para
+#, no-c-format
+msgid "HQL supports two forms of association joining: <literal>implicit</literal> and <literal>explicit</literal>."
+msgstr "HQL 支持两种关联 join 的形式：<literal>implicit（隐式）</literal> 与 <literal>explicit（显式）</literal>。"
+
+#. Tag: para
+#, no-c-format
+msgid "The queries shown in the previous section all use the <literal>explicit</literal> form, that is, where the join keyword is explicitly used in the from clause. This is the recommended form."
+msgstr "上一节中给出的查询都是使用 <literal>explicit（显式）</literal>形式的，其中 form 子句中明确给出了 join 关键字。这是建议使用的方式。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>implicit</literal> form does not use the join keyword. Instead, the associations are \"dereferenced\" using dot-notation. <literal>implicit</literal> joins can appear in any of the HQL clauses. <literal>implicit</literal> join result in inner joins in the resulting SQL statement."
+msgstr "<literal>implicit（隐式）</literal>形式不使用 join 关键字。关联使用\"点号\"来进行“引用”。<literal>implicit</literal> join 可以在任何 HQL 子句中出现。<literal>implicit</literal> join 在最终的 SQL 语句中以 inner join 的方式出现。"
+
+#. Tag: title
+#, no-c-format
+msgid "Referring to identifier property"
+msgstr "引用 identifier 属性 "
+
+#. Tag: para
+#, no-c-format
+msgid "There are 2 ways to refer to an entity's identifier property:"
+msgstr "通常有两种方法来引用实体的 identifier 属性： "
+
+#. Tag: para
+#, no-c-format
+msgid "The special property (lowercase) <literal>id</literal> may be used to reference the identifier property of an entity <emphasis>provided that the entity does not define a non-identifier property named id</emphasis>."
+msgstr "特殊属性（lowercase）<literal>id</literal> 可以用来引用实体的 identifier 属性 <emphasis>假设这个实体没有定义用 non-identifier 属性命名的 id</emphasis>。 "
+
+#. Tag: para
+#, no-c-format
+msgid "If the entity defines a named identifier property, you can use that property name."
+msgstr "如果这个实体定义了 identifier 属性，你可以使用属性名。 "
+
+#. Tag: para
+#, no-c-format
+msgid "References to composite identifier properties follow the same naming rules. If the entity has a non-identifier property named id, the composite identifier property can only be referenced by its defined named. Otherwise, the special <literal>id</literal> property can be used to reference the identifier property."
+msgstr "对组合 identifier 属性的引用遵循相同的命名规则。如果实体有一个 non-identifier 属性命名的 id，这个组合 identifier 属性只能用自己定义的名字来引用；否则，特殊 <literal>id</literal> 属性可以用来引用 identifier 属性。 "
+
+#. Tag: pa

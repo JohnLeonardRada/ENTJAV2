@@ -1,0 +1,334 @@
+tityBinder, org.hibernate.cfg.Mappings, java.util.Map)">buildPropertyHolder</A></B>(org.hibernate.annotations.common.reflection.XClass&nbsp;clazzToProcess,
+                    <A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;persistentClass,
+                    <A HREF="../../../../org/hibernate/cfg/annotations/EntityBinder.html" title="class in org.hibernate.cfg.annotations">EntityBinder</A>&nbsp;entityBinder,
+                    <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;org.hibernate.annotations.common.reflection.XClass,<A HREF="../../../../org/hibernate/cfg/InheritanceState.html" title="class in org.hibernate.cfg">InheritanceState</A>&gt;&nbsp;inheritanceStatePerClass)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;<A HREF="../../../../org/hibernate/engine/ResultSetMappingDefinition.html" title="class in org.hibernate.engine">ResultSetMappingDefinition</A></CODE></FONT></TD>
+<TD><CODE><B>ResultSetMappingBinder.</B><B><A HREF="../../../../org/hibernate/cfg/ResultSetMappingBinder.html#buildResultSetMappingDefinition(org.dom4j.Element, java.lang.String, org.hibernate.cfg.Mappings)">buildResultSetMappingDefinition</A></B>(org.dom4j.Element&nbsp;resultSetElem,
+                                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path,
+                                <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build a ResultSetMappingDefinition given a containing element for the "return-XXX" elements</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B>Ejb3JoinColumn.</B><B><A HREF="../../../../org/hibernate/cfg/Ejb3JoinColumn.html#checkReferencedColumnsType(org.hibernate.cfg.Ejb3JoinColumn[], org.hibernate.mapping.PersistentClass, org.hibernate.cfg.Mappings)">checkReferencedColumnsType</A></B>(<A HREF="../../../../org/hibernate/cfg/Ejb3JoinColumn.html" title="class in org.hibernate.cfg">Ejb3JoinColumn</A>[]&nbsp;columns,
+                           <A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;referencedEntity,
+                           <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>HbmBinder.</B><B><A HREF="../../../../org/hibernate/cfg/HbmBinder.html#createClassProperties(org.dom4j.Element, org.hibernate.mapping.PersistentClass, org.hibernate.cfg.Mappings, java.util.Map)">createClassProperties</A></B>(org.dom4j.Element&nbsp;node,
+                      <A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;persistentClass,
+                      <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&nbsp;inheritedMetas)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>HbmBinder.</B><B><A HREF="../../../../org/hibernate/cfg/HbmBinder.html#createClassProperties(org.dom4j.Element, org.hibernate.mapping.PersistentClass, org.hibernate.cfg.Mappings, java.util.Map, org.hibernate.mapping.UniqueKey, boolean, boolean, boolean)">createClassProperties</A></B>(org.dom4j.Element&nbsp;node,
+                      <A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;persistentClass,
+                      <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&nbsp;inheritedMetas,
+                      <A HREF="../../../../org/hibernate/mapping/UniqueKey.html" title="class in org.hibernate.mapping">UniqueKey</A>&nbsp;uniqueKey,
+                      boolean&nbsp;mutable,
+                      boolean&nbsp;nullable,
+                      boolean&nbsp;naturalId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../org/hibernate/mapping/Component.html" title="class in org.hibernate.mapping">Component</A></CODE></FONT></TD>
+<TD><CODE><B>AnnotationBinder.</B><B><A HREF="../../../../org/hibernate/cfg/AnnotationBinder.html#createComponent(org.hibernate.cfg.PropertyHolder, org.hibernate.cfg.PropertyData, boolean, boolean, org.hibernate.cfg.Mappings)">createComponent</A></B>(<A HREF="../../../../org/hibernate/cfg/PropertyHolder.html" title="interface in org.hibernate.cfg">PropertyHolder</A>&nbsp;propertyHolder,
+                <A HREF="../../../../org/hibernate/cfg/PropertyData.html" title="interface in org.hibernate.cfg">PropertyData</A>&nbsp;inferredData,
+                boolean&nbsp;isComponentEmbedded,
+                boolean&nbsp;isIdentifierMapper,
+                <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>BinderHelper.</B><B><A HREF="../../../../org/hibernate/cfg/BinderHelper.html#createSyntheticPropertyReference(org.hibernate.cfg.Ejb3JoinColumn[], org.hibernate.mapping.PersistentClass, org.hibernate.mapping.PersistentClass, org.hibernate.mapping.Value, boolean, org.hibernate.cfg.Mappings)">createSyntheticPropertyReference</A></B>(<A HREF="../../../../org/hibernate/cfg/Ejb3JoinColumn.html" title="class in org.hibernate.cfg">Ejb3JoinColumn</A>[]&nbsp;columns,
+                                 <A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;ownerEntity,
+                                 <A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;associatedEntity,
+                                 <A HREF="../../../../org/hibernate/mapping/Value.html" title="interface in org.hibernate.mapping">Value</A>&nbsp;value,
+                                 boolean&nbsp;inverse,
+                                 <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../org/hibernate/mapping/Component.html" title="class in org.hibernate.mapping">Component</A></CODE></FONT></TD>
+<TD><CODE><B>AnnotationBinder.</B><B><A HREF="../../../../org/hibernate/cfg/AnnotationBinder.html#fillComponent(org.hibernate.cfg.PropertyHolder, org.hibernate.cfg.PropertyData, org.hibernate.cfg.AccessType, boolean, org.hibernate.cfg.annotations.EntityBinder, boolean, boolean, boolean, org.hibernate.cfg.Mappings, java.util.Map)">fillComponent</A></B>(<A HREF="../../../../org/hibernate/cfg/PropertyHolder.html" title="interface in org.hibernate.cfg">PropertyHolder</A>&nbsp;propertyHolder,
+              <A HREF="../../../../org/hibernate/cfg/PropertyData.html" title="interface in org.hibernate.cfg">PropertyData</A>&nbsp;inferredData,
+              <A HREF="../../../../org/hibernate/cfg/AccessType.html" title="enum in org.hibernate.cfg">AccessType</A>&nbsp;propertyAccessor,
+              boolean&nbsp;isNullable,
+              <A HREF="../../../../org/hibernate/cfg/annotations/EntityBinder.html" title="class in org.hibernate.cfg.annotations">EntityBinder</A>&nbsp;entityBinder,
+              boolean&nbsp;isComponentEmbedded,
+              boolean&nbsp;isIdentifierMapper,
+              boolean&nbsp;inSecondPass,
+              <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;org.hibernate.annotations.common.reflection.XClass,<A HREF="../../../../org/hibernate/cfg/InheritanceState.html" title="class in org.hibernate.cfg">InheritanceState</A>&gt;&nbsp;inheritanceStatePerClass)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../org/hibernate/mapping/Component.html" title="class in org.hibernate.mapping">Component</A></CODE></FONT></TD>
+<TD><CODE><B>AnnotationBinder.</B><B><A HREF="../../../../org/hibernate/cfg/AnnotationBinder.html#fillComponent(org.hibernate.cfg.PropertyHolder, org.hibernate.cfg.PropertyData, org.hibernate.cfg.PropertyData, org.hibernate.cfg.AccessType, boolean, org.hibernate.cfg.annotations.EntityBinder, boolean, boolean, boolean, org.hibernate.cfg.Mappings, java.util.Map)">fillComponent</A></B>(<A HREF="../../../../org/hibernate/cfg/PropertyHolder.html" title="interface in org.hibernate.cfg">PropertyHolder</A>&nbsp;propertyHolder,
+              <A HREF="../../../../org/hibernate/cfg/PropertyData.html" title="interface in org.hibernate.cfg">PropertyData</A>&nbsp;inferredData,
+              <A HREF="../../../../org/hibernate/cfg/PropertyData.html" title="interface in org.hibernate.cfg">PropertyData</A>&nbsp;baseInferredData,
+              <A HREF="../../../../org/hibernate/cfg/AccessType.html" title="enum in org.hibernate.cfg">AccessType</A>&nbsp;propertyAccessor,
+              boolean&nbsp;isNullable,
+              <A HREF="../../../../org/hibernate/cfg/annotations/EntityBinder.html" title="class in org.hibernate.cfg.annotations">EntityBinder</A>&nbsp;entityBinder,
+              boolean&nbsp;isComponentEmbedded,
+              boolean&nbsp;isIdentifierMapper,
+              boolean&nbsp;inSecondPass,
+              <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;org.hibernate.annotations.common.reflection.XClass,<A HREF="../../../../org/hibernate/cfg/InheritanceState.html" title="class in org.hibernate.cfg">InheritanceState</A>&gt;&nbsp;inheritanceStatePerClass)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<TD><CODE><B>BinderHelper.</B><B><A HREF="../../../../org/hibernate/cfg/BinderHelper.html#findColumnOwner(org.hibernate.mapping.PersistentClass, java.lang.String, org.hibernate.cfg.Mappings)">findColumnOwner</A></B>(<A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;persistentClass,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;columnName,
+                <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find the column owner (ie PersistentClass or Join) of columnName.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B>HbmBinder.</B><B><A HREF="../../../../org/hibernate/cfg/HbmBinder.html#getClassName(java.lang.String, org.hibernate.cfg.Mappings)">getClassName</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;unqualifiedName,
+             <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;model)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B>HbmBinder.</B><B><A HREF="../../../../org/hibernate/cfg/HbmBinder.html#getEntityName(org.dom4j.Element, org.hibernate.cfg.Mappings)">getEntityName</A></B>(org.dom4j.Element&nbsp;elem,
+              <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;model)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>HbmBinder.</B><B><A HREF="../../../../org/hibernate/cfg/HbmBinder.html#getExtendsNeeded(org.hibernate.util.xml.XmlDocument, org.hibernate.cfg.Mappings)">getExtendsNeeded</A></B>(<A HREF="../../../../org/hibernate/util/xml/XmlDocument.html" title="interface in org.hibernate.util.xml">XmlDocument</A>&nbsp;metadataXml,
+                 <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For the given document, locate all extends attributes which refer to
+ entities (entity-name or class-name) not defined within said document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../org/hibernate/mapping/MappedSuperclass.html" title="class in org.hibernate.mapping">MappedSuperclass</A></CODE></FONT></TD>
+<TD><CODE><B>BinderHelper.</B><B><A HREF="../../../../org/hibernate/cfg/BinderHelper.html#getMappedSuperclassOrNull(org.hibernate.annotations.common.reflection.XClass, java.util.Map, org.hibernate.cfg.Mappings)">getMappedSuperclassOrNull</A></B>(org.hibernate.annotations.common.reflection.XClass&nbsp;declaringClass,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;org.hibernate.annotations.common.reflection.XClass,<A HREF="../../../../org/hibernate/cfg/InheritanceState.html" title="class in org.hibernate.cfg">InheritanceState</A>&gt;&nbsp;inheritanceStatePerClass,
+                          <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B>ToOneBinder.</B><B><A HREF="../../../../org/hibernate/cfg/ToOneBinder.html#getReferenceEntityName(org.hibernate.cfg.PropertyData, org.hibernate.cfg.Mappings)">getReferenceEntityName</A></B>(<A HREF="../../../../org/hibernate/cfg/PropertyData.html" title="interface in org.hibernate.cfg">PropertyData</A>&nbsp;propertyData,
+                       <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B>ToOneBinder.</B><B><A HREF="../../../../org/hibernate/cfg/ToOneBinder.html#getReferenceEntityName(org.hibernate.cfg.PropertyData, org.hibernate.annotations.common.reflection.XClass, org.hibernate.cfg.Mappings)">getReferenceEntityName</A></B>(<A HREF="../../../../org/hibernate/cfg/PropertyData.html" title="interface in org.hibernate.cfg">PropertyData</A>&nbsp;propertyData,
+                       org.hibernate.annotations.common.reflection.XClass&nbsp;targetEntity,
+                       <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.hibernate.annotations.common.reflection.XClass</CODE></FONT></TD>
+<TD><CODE><B>ToOneBinder.</B><B><A HREF="../../../../org/hibernate/cfg/ToOneBinder.html#getTargetEntity(org.hibernate.cfg.PropertyData, org.hibernate.cfg.Mappings)">getTargetEntity</A></B>(<A HREF="../../../../org/hibernate/cfg/PropertyData.html" title="interface in org.hibernate.cfg">PropertyData</A>&nbsp;propertyData,
+                <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AnnotationBinder.</B><B><A HREF="../../../../org/hibernate/cfg/AnnotationBinder.html#isDefault(org.hibernate.annotations.common.reflection.XClass, org.hibernate.cfg.Mappings)">isDefault</A></B>(org.hibernate.annotations.common.reflection.XClass&nbsp;clazz,
+          <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>BinderHelper.</B><B><A HREF="../../../../org/hibernate/cfg/BinderHelper.html#makeIdGenerator(org.hibernate.mapping.SimpleValue, java.lang.String, java.lang.String, org.hibernate.cfg.Mappings, java.util.Map)">makeIdGenerator</A></B>(<A HREF="../../../../org/hibernate/mapping/SimpleValue.html" title="class in org.hibernate.mapping">SimpleValue</A>&nbsp;id,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;generatorType,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;generatorName,
+                <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="../../../../org/hibernate/mapping/IdGenerator.html" title="class in org.hibernate.mapping">IdGenerator</A>&gt;&nbsp;localGenerators)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply an id generator to a SimpleValue</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Ejb3Column.</B><B><A HREF="../../../../org/hibernate/cfg/Ejb3Column.html#setMappings(org.hibernate.cfg.Mappings)">setMappings</A></B>(<A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../../org/hibernate/cfg/package-summary.html">org.hibernate.cfg</A> with parameters of type <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/AbstractPropertyHolder.html#AbstractPropertyHolder(java.lang.String, org.hibernate.cfg.PropertyHolder, org.hibernate.annotations.common.reflection.XClass, org.hibernate.cfg.Mappings)">AbstractPropertyHolder</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path,
+                       <A HREF="../../../../org/hibernate/cfg/PropertyHolder.html" title="interface in org.hibernate.cfg">PropertyHolder</A>&nbsp;parent,
+                       org.hibernate.annotations.common.reflection.XClass&nbsp;clazzToProcess,
+                       <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/ClassPropertyHolder.html#ClassPropertyHolder(org.hibernate.mapping.PersistentClass, org.hibernate.annotations.common.reflection.XClass, org.hibernate.cfg.annotations.EntityBinder, org.hibernate.cfg.Mappings, java.util.Map)">ClassPropertyHolder</A></B>(<A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;persistentClass,
+                    org.hibernate.annotations.common.reflection.XClass&nbsp;clazzToProcess,
+                    <A HREF="../../../../org/hibernate/cfg/annotations/EntityBinder.html" title="class in org.hibernate.cfg.annotations">EntityBinder</A>&nbsp;entityBinder,
+                    <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;org.hibernate.annotations.common.reflection.XClass,<A HREF="../../../../org/hibernate/cfg/InheritanceState.html" title="class in org.hibernate.cfg">InheritanceState</A>&gt;&nbsp;inheritanceStatePerClass)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/ClassPropertyHolder.html#ClassPropertyHolder(org.hibernate.mapping.PersistentClass, org.hibernate.annotations.common.reflection.XClass, java.util.Map, org.hibernate.cfg.Mappings, java.util.Map)">ClassPropertyHolder</A></B>(<A HREF="../../../../org/hibernate/mapping/PersistentClass.html" title="class in org.hibernate.mapping">PersistentClass</A>&nbsp;persistentClass,
+                    org.hibernate.annotations.common.reflection.XClass&nbsp;clazzToProcess,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="../../../../org/hibernate/mapping/Join.html" title="class in org.hibernate.mapping">Join</A>&gt;&nbsp;joins,
+                    <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;org.hibernate.annotations.common.reflection.XClass,<A HREF="../../../../org/hibernate/cfg/InheritanceState.html" title="class in org.hibernate.cfg">InheritanceState</A>&gt;&nbsp;inheritanceStatePerClass)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/CollectionPropertyHolder.html#CollectionPropertyHolder(org.hibernate.mapping.Collection, java.lang.String, org.hibernate.annotations.common.reflection.XClass, org.hibernate.annotations.common.reflection.XProperty, org.hibernate.cfg.PropertyHolder, org.hibernate.cfg.Mappings)">CollectionPropertyHolder</A></B>(<A HREF="../../../../org/hibernate/mapping/Collection.html" title="class in org.hibernate.mapping">Collection</A>&nbsp;collection,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path,
+                         org.hibernate.annotations.common.reflection.XClass&nbsp;clazzToProcess,
+                         org.hibernate.annotations.common.reflection.XProperty&nbsp;property,
+                         <A HREF="../../../../org/hibernate/cfg/PropertyHolder.html" title="interface in org.hibernate.cfg">PropertyHolder</A>&nbsp;parentPropertyHolder,
+                         <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/CollectionSecondPass.html#CollectionSecondPass(org.hibernate.cfg.Mappings, org.hibernate.mapping.Collection)">CollectionSecondPass</A></B>(<A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+                     <A HREF="../../../../org/hibernate/mapping/Collection.html" title="class in org.hibernate.mapping">Collection</A>&nbsp;collection)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/CollectionSecondPass.html#CollectionSecondPass(org.hibernate.cfg.Mappings, org.hibernate.mapping.Collection, java.util.Map)">CollectionSecondPass</A></B>(<A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+                     <A HREF="../../../../org/hibernate/mapping/Collection.html" title="class in org.hibernate.mapping">Collection</A>&nbsp;collection,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&nbsp;inheritedMetas)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/ComponentPropertyHolder.html#ComponentPropertyHolder(org.hibernate.mapping.Component, java.lang.String, org.hibernate.cfg.PropertyData, org.hibernate.cfg.PropertyHolder, org.hibernate.cfg.Mappings)">ComponentPropertyHolder</A></B>(<A HREF="../../../../org/hibernate/mapping/Component.html" title="class in org.hibernate.mapping">Component</A>&nbsp;component,
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path,
+                        <A HREF="../../../../org/hibernate/cfg/PropertyData.html" title="interface in org.hibernate.cfg">PropertyData</A>&nbsp;inferredData,
+                        <A HREF="../../../../org/hibernate/cfg/PropertyHolder.html" title="interface in org.hibernate.cfg">PropertyHolder</A>&nbsp;parent,
+                        <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/CopyIdentifierComponentSecondPass.html#CopyIdentifierComponentSecondPass(org.hibernate.mapping.Component, java.lang.String, org.hibernate.cfg.Ejb3JoinColumn[], org.hibernate.cfg.Mappings)">CopyIdentifierComponentSecondPass</A></B>(<A HREF="../../../../org/hibernate/mapping/Component.html" title="class in org.hibernate.mapping">Component</A>&nbsp;comp,
+                                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;referencedEntityName,
+                                  <A HREF="../../../../org/hibernate/cfg/Ejb3JoinColumn.html" title="class in org.hibernate.cfg">Ejb3JoinColumn</A>[]&nbsp;joinColumns,
+                                  <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/IndexColumn.html#IndexColumn(boolean, java.lang.String, int, int, int, java.lang.String, boolean, boolean, boolean, boolean, java.lang.String, java.util.Map, org.hibernate.cfg.PropertyHolder, org.hibernate.cfg.Mappings)">IndexColumn</A></B>(boolean&nbsp;isImplicit,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;sqlType,
+            int&nbsp;length,
+            int&nbsp;precision,
+            int&nbsp;scale,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+            boolean&nbsp;nullable,
+            boolean&nbsp;unique,
+            boolean&nbsp;insertable,
+            boolean&nbsp;updatable,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;secondaryTableName,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="../../../../org/hibernate/mapping/Join.html" title="class in org.hibernate.mapping">Join</A>&gt;&nbsp;joins,
+            <A HREF="../../../../org/hibernate/cfg/PropertyHolder.html" title="interface in org.hibernate.cfg">PropertyHolder</A>&nbsp;propertyHolder,
+            <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/IndexOrUniqueKeySecondPass.html#IndexOrUniqueKeySecondPass(java.lang.String, org.hibernate.cfg.Ejb3Column, org.hibernate.cfg.Mappings)">IndexOrUniqueKeySecondPass</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;indexName,
+                           <A HREF="../../../../org/hibernate/cfg/Ejb3Column.html" title="class in org.hibernate.cfg">Ejb3Column</A>&nbsp;column,
+                           <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build an index</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../org/hibernate/cfg/IndexOrUniqueKeySecondPass.html#IndexOrUniqueKeySecondPass(java.lang.String, org.hibernate.cfg.Ejb3Column, org.hibernate.cfg.Mappings, boolean)">IndexOrUniqueKeySecondPass</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;indexName,
+                           <A HREF="../../../../org/hibernate/cfg/Ejb3Column.html" title="class in org.hibernate.cfg">Ejb3Column</A>&nbsp;column,
+                           <A HREF="../../../../org/hibernate/cfg/Mappings.html" title="interface in org.hibernate.cfg">Mappings</A>&nbsp;mappings,
+          

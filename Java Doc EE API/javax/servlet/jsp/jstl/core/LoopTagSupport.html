@@ -1,0 +1,372 @@
+phases:"
+msgstr "通常情况下，结束 <literal>Session</literal> 包含了四个不同的阶段： "
+
+#. Tag: para
+#, no-c-format
+msgid "flush the session"
+msgstr "同步 session（flush，刷出到磁盘）"
+
+#. Tag: para
+#, no-c-format
+msgid "commit the transaction"
+msgstr "提交事务"
+
+#. Tag: para
+#, no-c-format
+msgid "close the session"
+msgstr "关闭 session"
+
+#. Tag: para
+#, no-c-format
+msgid "handle exceptions"
+msgstr "处理异常"
+
+#. Tag: para
+#, no-c-format
+msgid "We discussed Flushing the session earlier, so we will now have a closer look at transaction demarcation and exception handling in both managed and non-managed environments."
+msgstr "session 的同步（flush，刷出）前面已经讨论过了，我们现在进一步考察在托管和非托管环境下的事务声明和异常处理。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Non-managed environment"
+msgstr "非托管环境"
+
+#. Tag: para
+#, no-c-format
+msgid "If a Hibernate persistence layer runs in a non-managed environment, database connections are usually handled by simple (i.e., non-DataSource) connection pools from which Hibernate obtains connections as needed. The session/transaction handling idiom looks like this:"
+msgstr "如果 Hibernat 持久层运行在一个非托管环境中，数据库连接通常由 Hibernate 的简单（即非 DataSource）连接池机制 来处理。session/transaction 处理方式如下所示： "
+
+#. Tag: para
+#, no-c-format
+msgid "You do not have to <literal>flush()</literal> the <literal>Session</literal> explicitly: the call to <literal>commit()</literal> automatically triggers the synchronization depending on the <link linkend=\"objectstate-flushing\">FlushMode</link> for the session. A call to <literal>close()</literal> marks the end of a session. The main implication of <literal>close()</literal> is that the JDBC connection will be relinquished by the session. This Java code is portable and runs in both non-managed and JTA environments."
+msgstr "你不需要显式 <literal>flush()</literal> <literal>Session</literal> — 对 <literal>commit()</literal> 的调用会自动触发 session 的同步（取决于 session 的 <xref linkend=\"objectstate-flushing\" />）。调用 <literal>close()</literal> 标志 session 的结束。<literal>close()</literal> 方法重要的暗示是，<literal>session</literal> 释放了 JDBC 连接。这段 Java 代码在非托管环境下和 JTA 环境下都可以运行。 "
+
+#. Tag: para
+#, no-c-format
+msgid "As outlined earlier, a much more flexible solution is Hibernate's built-in \"current session\" context management:"
+msgstr "更加灵活的方案是 Hibernate 内置的 \"current session\" 上下文管理，前文已经讲过： "
+
+#. Tag: para
+#, no-c-format
+msgid "You will not see these code snippets in a regular application; fatal (system) exceptions should always be caught at the \"top\". In other words, the code that executes Hibernate calls in the persistence layer, and the code that handles <literal>RuntimeException</literal> (and usually can only clean up and exit), are in different layers. The current context management by Hibernate can significantly simplify this design by accessing a <literal>SessionFactory</literal>. Exception handling is discussed later in this chapter."
+msgstr "你很可能从未在一个通常的应用程序的业务代码中见过这样的代码片断：致命的（系统）异常应该总是 在应用程序“顶层”被捕获。换句话说，执行 Hibernate 调用的代码（在持久层）和处理 <literal>RuntimeException</literal> 异常的代码（通常只能清理和退出应用程序）应该在不同 的应用程序逻辑层。Hibernate 的当前上下文管理可以极大地简化这一设计，你所有的一切就是 <literal>SessionFactory</literal>。异常处理将在本章稍后进行讨论。 "
+
+#. Tag: para
+#, no-c-format
+msgid "You should select <literal>org.hibernate.transaction.JDBCTransactionFactory</literal>, which is the default, and for the second example select <literal>\"thread\"</literal> as your <literal>hibernate.current_session_context_class</literal>."
+msgstr "请注意，你应该选择 <literal>org.hibernate.transaction.JDBCTransactionFactory</literal> （这是默认选项），对第二个例子来说，<literal>hibernate.current_session_context_class</literal>应该是 <literal>\"thread\"</literal>。"
+
+#. Tag: title
+#, no-c-format
+msgid "Using JTA"
+msgstr "使用 JTA"
+
+#. Tag: para
+#, no-c-format
+msgid "If your persistence layer runs in an application server (for example, behind EJB session beans), every datasource connection obtained by Hibernate will automatically be part of the global JTA transaction. You can also install a standalone JTA implementation and use it without EJB. Hibernate offers two strategies for JTA integration."
+msgstr "如果你的持久层运行在一个应用服务器中（例如，在 EJB session beans 的后面），Hibernate 获取的每个数据源连接将自动成为全局 JTA 事务的一部分。你可以安装一个独立的 JTA 实现，使用它而不使用 EJB。Hibernate 提供了两种策略进行 JTA 集成。 "
+
+#. Tag: para
+#, no-c-format
+msgid "If you use bean-managed transactions (BMT), Hibernate will tell the application server to start and end a BMT transaction if you use the <literal>Transaction</literal> API. The transaction management code is identical to the non-managed environment."
+msgstr "如果你使用 bean 管理事务（BMT），可以通过使用 Hibernate 的 <literal>Transaction</literal> API 来告诉应用服务器启动和结束 BMT 事务。因此，事务管理代码和在非托管环境下是一样的。 "
+
+#. Tag: para
+#, no-c-format
+msgid "If you want to use a transaction-bound <literal>Session</literal>, that is, the <literal>getCurrentSession()</literal> functionality for easy context propagation, use the JTA <literal>UserTransaction</literal> API directly:"
+msgstr "如果你希望使用与事务绑定的 <literal>Session</literal>，也就是使用 <literal>getCurrentSession()</literal> 来简化上下文管理，你将不得不直接使用 JTA  <literal>UserTransaction</literal> API。 "
+
+#. Tag: para
+#, no-c-format
+msgid "With CMT, transaction demarcation is completed in session bean deployment descriptors, not programmatically. The code is reduced to:"
+msgstr "在 CMT 方式下，事务声明是在 session bean 的部署描述符中，而不需要编程。因此，代码被简化为："
+
+#. Tag: para
+#, no-c-format
+msgid "In a CMT/EJB, even rollback happens automatically. An unhandled <literal>RuntimeException</literal> thrown by a session bean method tells the container to set the global transaction to rollback. <emphasis>You do not need to use the Hibernate <literal>Transaction</literal> API at all with BMT or CMT, and you get automatic propagation of the \"current\" Session bound to the transaction.</emphasis>"
+msgstr "在 CMT/EJB 中甚至会自动 rollback，因为假若有未捕获的 <literal>RuntimeException</literal> 从 session bean 方法中抛出，这就会通知容器把全局事务回滚。<emphasis>这就意味着，在 BMT 或者 CMT 中，你根本就不需要使用 Hibernate <literal>Transaction</literal> API，你自动得到了绑定到事务的“当前” Session。</emphasis>"
+
+#. Tag: para
+#, no-c-format
+msgid "When configuring Hibernate's transaction factory, choose <literal>org.hibernate.transaction.JTATransactionFactory</literal> if you use JTA directly (BMT), and <literal>org.hibernate.transaction.CMTTransactionFactory</literal> in a CMT session bean. Remember to also set <literal>hibernate.transaction.manager_lookup_class</literal>. Ensure that your <literal>hibernate.current_session_context_class</literal> is either unset (backwards compatibility), or is set to <literal>\"jta\"</literal>."
+msgstr "注意，当你配置 Hibernate 的 transaction factory 的时候，在直接使用 JTA 的时候（BMT），你应该选择 <literal>org.hibernate.transaction.JTATransactionFactory</literal>，在 CMT session bean 中选择 <literal>org.hibernate.transaction.CMTTransactionFactory</literal>。记得也要设置 <literal>hibernate.transaction.manager_lookup_class</literal>。还有，确认你的 <literal>hibernate.current_session_context_class</literal> 未设置（为了向下兼容），或者设置为 <literal>\"jta\"</literal>。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>getCurrentSession()</literal> operation has one downside in a JTA environment. There is one caveat to the use of <literal>after_statement</literal> connection release mode, which is then used by default. Due to a limitation of the JTA spec, it is not possible for Hibernate to automatically clean up any unclosed <literal>ScrollableResults</literal> or <literal>Iterator</literal> instances returned by <literal>scroll()</literal> or <literal>iterate()</literal>. You <emphasis>must</emphasis> release the underlying database cursor by calling <literal>ScrollableResults.close()</literal> or <literal>Hibernate.close(Iterator)</literal> explicitly from a <literal>finally</literal> block. Most applications can easily avoid using <literal>scroll()</literal> or <literal>iterate()</literal> from the JTA or CMT code.)"
+msgstr "<literal>getCurrentSession()</literal>在 JTA 环境中有一个弊端。对 <literal>after_statement</literal> 连接释放方式有一个警告，这是被默认使用的。因为 JTA 规范的一个很愚蠢的限制，Hibernate 不可能自动清理任何未关闭的 <literal>ScrollableResults</literal> 或者<literal>Iterator</literal>，它们是由 <literal>scroll()</literal> 或 <literal>iterate()</literal> 产生的。你 <emphasis>must</emphasis> 通过在 <literal>finally</literal> 块中，显式调用 <literal>ScrollableResults.close()</literal> 或者 <literal>Hibernate.close(Iterator)</literal> 方法来释放底层数据库游标。（当然，大部分程序完全可以很容易的避免在 JTA 或 CMT 代码中出现 <literal>scroll()</literal> 或 <literal>iterate()</literal>。） "
+
+#. Tag: title
+#, no-c-format
+msgid "Exception handling"
+msgstr "异常处理"
+
+#. Tag: para
+#, no-c-format
+msgid "If the <literal>Session</literal> throws an exception, including any <literal>SQLException</literal>, immediately rollback the database transaction, call <literal>Session.close()</literal> and discard the <literal>Session</literal> instance. Certain methods of <literal>Session</literal> will <emphasis>not</emphasis> leave the session in a consistent state. No exception thrown by Hibernate can be treated as recoverable. Ensure that the <literal>Session</literal> will be closed by calling <literal>close()</literal> in a <literal>finally</literal> block."
+msgstr "如果 <literal>Session</literal> 抛出异常（包括任何 <literal>SQLException</literal>），你应该立即回滚数据库事务，调用 <literal>Session.close()</literal> ，丢弃该  <literal>Session</literal> 实例。<literal>Session</literal> 的某些方法可能会导致 session 处于不一致的状态。所有由 Hibernate 抛出的异常都视为不可以恢复的。确保在  <literal>finally</literal> 代码块中调用 <literal>close()</literal> 方法，以关闭掉  <literal>Session</literal>。"
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>HibernateException</literal>, which wraps most of the errors that can occur in a Hibernate persistence layer, is an unchecked exception. It was not in older versions of Hibernate. In our opinion, we should not force the application developer to catch an unrecoverable exception at a low layer. In most systems, unchecked and fatal exceptions are handled in one of the first frames of the method call stack (i.e., in higher layers) and either an error message is presented to the application user or some other appropriate action is taken. Note that Hibernate might also throw other unchecked exceptions that are not a <literal>HibernateException</literal>. These are not recoverable and appropriate action should be taken."
+msgstr "<literal>HibernateException</literal> 是一个非检查期异常（这不同于 Hibernate 老的版本），它封装了 Hibernate 持久层可能出现的大多数错误。我们的观点是，不应该强迫应用程序开发人员 在底层捕获无法恢复的异常。在大多数软件系统中，非检查期异常和致命异常都是在相应方法调用 的堆栈的顶层被处理的（也就是说，在软件上面的逻辑层），并且提供一个错误信息给应用软件的用户 （或者采取其他某些相应的操作）。请注意，Hibernate 也有可能抛出其他并不属于 <literal>HibernateException</literal> 的非检查期异常。这些异常同样也是无法恢复的，应该 采取某些相应的操作去处理。"
+
+#. Tag: para
+#, no-c-format
+msgid "Hibernate wraps <literal>SQLException</literal>s thrown while interacting with the database in a <literal>JDBCException</literal>. In fact, Hibernate will attempt to convert the exception into a more meaningful subclass of <literal>JDBCException</literal>. The underlying <literal>SQLException</literal> is always available via <literal>JDBCException.getCause()</literal>. Hibernate converts the <literal>SQLException</literal> into an appropriate <literal>JDBCException</literal> subclass using the <literal>SQLExceptionConverter</literal> attached to the <literal>SessionFactory</literal>. By default, the <literal>SQLExceptionConverter</literal> is defined by the configured dialect. However, it is also possible to plug in a custom implementation. See the javadocs for the <literal>SQLExceptionConverterFactory</literal> class for details. The standard <literal>JDBCException</literal> subtypes are:"
+msgstr "在和数据库进行交互时，Hibernate 把捕获的 <literal>SQLException</literal> 封装为 Hibernate 的  <literal>JDBCException</literal>。事实上，Hibernate 尝试把异常转换为更有实际含义的 <literal>JDBCException</literal> 异常的子类。底层的 <literal>SQLException</literal> 可以通过 <literal>JDBCException.getCause()</literal> 来得到。Hibernate 通过使用关联到  <literal>SessionFactory</literal> 上的 <literal>SQLExceptionConverter</literal> 来把 <literal>SQLException</literal> 转换为一个对应的 <literal>JDBCException</literal> 异常的子类。默认情况下，<literal>SQLExceptionConverter</literal> 可以通过配置 dialect 选项指定；此外，也可以使用用户自定义的实现类（参考 javadocs <literal>SQLExceptionConverterFactory</literal> 类来了解详情）。标准的 <literal>JDBCException</literal> 子类型是： "
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>JDBCConnectionException</literal>: indicates an error with the underlying JDBC communication."
+msgstr "<literal>JDBCConnectionException</literal>：指明底层的 JDBC 通讯出现错误。"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>SQLGrammarException</literal>: indicates a grammar or syntax problem with the issued SQL."
+msgstr "<literal>SQLGrammarException</literal>：指明发送的 SQL 语句的语法或者格式错误。"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>ConstraintViolationException</literal>: indicates some form of integrity constraint violation."
+msgstr "<literal>ConstraintViolationException</literal>：指明某种类型的约束违例错误"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>LockAcquisitionException</literal>: indicates an error acquiring a lock level necessary to perform the requested operation."
+msgstr "<literal>LockAcquisitionException</literal>：指明了在执行请求操作时，获取所需的锁级别时出现的错误。"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>GenericJDBCException</literal>: a generic exception which did not fall into any of the other categories."
+msgstr "<literal>GenericJDBCException</literal>：不属于任何其他种类的原生异常。"
+
+#. Tag: title
+#, no-c-format
+msgid "Transaction timeout"
+msgstr "事务超时"
+
+#. Tag: para
+#, no-c-format
+msgid "An important feature provided by a managed environment like EJB, that is never provided for non-managed code, is transaction timeout. Transaction timeouts ensure that no misbehaving transaction can indefinitely tie up resources while returning no response to the user. Outside a managed (JTA) environment, Hibernate cannot fully provide this functionality. However, Hibernate can at least control data access operations, ensuring that database level deadlocks and queries with huge result sets are limited by a defined timeout. In a managed environment, Hibernate can delegate transaction timeout to JTA. This functionality is abstracted by the Hibernate <literal>Transaction</literal> object."
+msgstr "EJB 这样的托管环境有一项极为重要的特性，而它从未在非托管环境中提供过，那就是事务超时。在出现错误的事务行为的时候，超时可以确保不会无限挂起资源、对用户没有交代。在托管（JTA）环境之外，Hibernate 无法完全提供这一功能。但是，Hiberante 至少可以控制数据访问，确保数据库级别的死锁，和返回巨大结果集的查询被限定在一个规定的时间内。在托管环境中，Hibernate 会把事务超时转交给 JTA。这一功能通过 Hibernate <literal>Transaction</literal> 对象进行抽象。 "
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>setTimeout()</literal> cannot be called in a CMT bean, where transaction timeouts must be defined declaratively."
+msgstr "注意 <literal>setTimeout()</literal> 不应该在 CMT bean 中调用，此时事务超时值应该是被声明式定义的。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Optimistic concurrency control"
+msgstr "乐观并发控制（Optimistic concurrency control）"
+
+#. Tag: para
+#, no-c-format
+msgid "The only approach that is consistent with high concurrency and high scalability, is optimistic concurrency control with versioning. Version checking uses version numbers, or timestamps, to detect conflicting updates and to prevent lost updates. Hibernate provides three possible approaches to writing application code that uses optimistic concurrency. The use cases we discuss are in the context of long conversations, but version checking also has the benefit of preventing lost updates in single database transactions."
+msgstr "唯一能够同时保持高并发和高可伸缩性的方法就是使用带版本化的乐观并发控制。版本检查使用版本号、 或者时间戳来检测更新冲突（并且防止更新丢失）。Hibernate 为使用乐观并发控制的代码提供了三种可 能的方法，应用程序在编写这些代码时，可以采用它们。我们已经在前面应用程序对话那部分展示了 乐观并发控制的应用场景，此外，在单个数据库事务范围内，版本检查也提供了防止更新丢失的好处。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Application version checking"
+msgstr "应用程序级别的版本检查（Application version checking）"
+
+#. Tag: para
+#, no-c-format
+msgid "In an implementation without much help from Hibernate, each interaction with the database occurs in a new <literal>Session</literal> and the developer is responsible for reloading all persistent instances from the database before manipulating them. The application is forced to carry out its own version checking to ensure conversation transaction isolation. This approach is the least efficient in terms of database access. It is the approach most similar to entity EJBs."
+msgstr "未能充分利用 Hibernate 功能的实现代码中，每次和数据库交互都需要一个新的  <literal>Session</literal>，而且开发人员必须在显示数据之前从数据库中重新载入所有的持久化对象实例。这种方式迫使应用程序自己实现版本检查来确保对话事务的隔离，从数据访问的角度来说是最低效的。这种使用方式和 entity EJB 最相似。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>version</literal> property is mapped using <literal>&lt;version&gt;</literal>, and Hibernate will automatically increment it during flush if the entity is dirty."
+msgstr "<literal>version</literal> 属性使用 <literal>&lt;version&gt;</literal> 来映射，如果对象是脏数据，在同步的时候，Hibernate 会自动增加版本号。"
+
+#. Tag: para
+#, no-c-format
+msgid "If you are operating in a low-data-concurrency environment, and do not require version checking, you can use this approach and skip the version check. In this case, <emphasis>last commit wins</emphasis> is the default strategy for long conversations. Be aware that this might confuse the users of the application, as they might experience lost updates without error messages or a chance to merge conflicting changes."
+msgstr "当然，如果你的应用是在一个低数据并发环境下，并不需要版本检查的话，你照样可以使用这种方式，只不过跳过版本检查就是了。在这种情况下，<emphasis>最晚提交生效</emphasis> （<emphasis>last commit wins</emphasis>）就是你的长对话的默认处理策略。请记住这种策略可能会让应用软件的用户感到困惑，因为他们有可能会碰上更新丢失掉却没有出错信息，或者需要合并更改冲突的情况。 "
+
+#. Tag: para
+#, no-c-format
+msgid "Manual version checking is only feasible in trivial circumstances and not practical for most applications. Often not only single instances, but complete graphs of modified objects, have to be checked. Hibernate offers automatic version checking with either an extended <literal>Session</literal> or detached instances as the design paradigm."
+msgstr "很明显，手工进行版本检查只适合于某些软件规模非常小的应用场景，对于大多数软件应用场景来说并不现实。通常情况下，不仅是单个对象实例需要进行版本检查，整个被修改过的关联对象图也都需要进行版本检查。作为标准设计范例，Hibernate 使用扩展周期的 <literal>Session</literal> 的方式，或者脱管对象实例的方式来提供自动版本检查。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Extended session and automatic versioning"
+msgstr "扩展周期的 session 和自动版本化"
+
+#. Tag: para
+#, no-c-format
+msgid "A single <literal>Session</literal> instance and its persistent instances that are used for the whole conversation are known as <emphasis>session-per-conversation</emphasis>. Hibernate checks instance versions at flush time, throwing an exception if concurrent modification is detected. It is up to the developer to catch and handle this exception. Common options are the opportunity for the user to merge changes or to restart the business conversation with non-stale data."
+msgstr "单个 <literal>Session</literal> 实例和它所关联的所有持久化对象实例都被用于整个对话，这被称为 <emphasis>session-per-conversation</emphasis>。Hibernate 在同步的时候进行对象实例的版本检查，如果检测到并发修改则抛出异常。由开发人员来决定是否需要捕获和处理这个异常（通常的抉择是给用户 提供一个合并更改，或者在无脏数据情况下重新进行业务对话的机会）。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>Session</literal> is disconnected from any underlying JDBC connection when waiting for user interaction. This approach is the most efficient in terms of database access. The application does not version check or reattach detached instances, nor does it have to reload instances in every database transaction."
+msgstr "在等待用户交互的时候， <literal>Session</literal> 断开底层的 JDBC 连接。这种方式以数据库访问的角度来说是最高效的方式。应用程序不需要关心版本检查或脱管对象实例的重新关联，在每个数据库事务中，应用程序也不需要载入读取对象实例。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>foo</literal> object knows which <literal>Session</literal> it was loaded in. Beginning a new database transaction on an old session obtains a new connection and resumes the session. Committing a database transaction disconnects a session from the JDBC connection and returns the connection to the pool. After reconnection, to force a version check on data you are not updating, you can call <literal>Session.lock()</literal> with <literal>LockMode.READ</literal> on any objects that might have been updated by another transaction. You do not need to lock any data that you <emphasis>are</emphasis> updating. Usually you would set <literal>FlushMode.MANUAL</literal> on an extended <literal>Session</literal>, so that only the last database transaction cycle is allowed to actually persist all modifications made in this conversation. Only this last database transaction will include the <literal>flush()</literal> operation, and then <literal>close()</literal> the session to end the conversation."
+msgstr "<literal>foo</literal> 对象知道它是在哪个 <literal>Session</literal> 中被装入的。在一个旧 session 中开启一个新的数据库事务，会导致 session 获取一个新的连接，并恢复 session 的功能。将数据库事务提交，使得 session 从 JDBC 连接断开，并将此连接交还给连接池。在重新连接之后，要强制对你没有更新的数据进行一次版本检查，你可以对所有可能被其他事务修改过的对象，使用参数 <literal>LockMode.READ</literal> 来调用 <literal>Session.lock()</literal>。你不用 lock 任何你<emphasis>正在</emphasis>更新的数据。一般你会在扩展的 <literal>Session</literal> 上设置 <literal>FlushMode.NEVER</literal>，因此只有最后一个数据库事务循环才会真正的把整个对话中发生的修改发送到数据库。因此，只有这最后一次数据库事务才会包含 <literal>flush()</literal> 操作，然后在整个对话结束后，还要 <literal>close()</literal> 这个 session。 "
+
+#. Tag: para
+#, no-c-format
+msgid "This pattern is problematic if the <literal>Session</literal> is too big to be stored during user think time (for example, an <literal>HttpSession</literal> should be kept as small as possible). As the <literal>Session</literal> is also the first-level cache and contains all loaded objects, we can probably use this strategy only for a few request/response cycles. Use a <literal>Session</literal> only for a single conversation as it will soon have stale data."
+msgstr "如果在用户思考的过程中，<literal>Session</literal> 因为太大了而不能保存，那么这种模式是有问题的。举例来说，一个 <literal>HttpSession</literal> 应该尽可能的小。由于  <literal>Session</literal> 是一级缓存，并且保持了所有被载入过的对象，因此我们只应该在那些少量的 request/response 情况下使用这种策略。你应该只把一个 <literal>Session</literal> 用于单个对话，因为它很快就会出现脏数据。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Note"
+msgstr "注意"
+
+#. Tag: para
+#, no-c-format
+msgid "Earlier versions of Hibernate required explicit disconnection and reconnection of a <literal>Session</literal>. These methods are deprecated, as beginning and ending a transaction has the same effect."
+msgstr "注意，早期的 Hibernate 版本需要明确的对 <literal>Session</literal> 进行 disconnect 和 reconnect。这些方法现在已经过时了，打开事务和关闭事务会起到同样的效果。"
+
+#. Tag: para
+#, no-c-format
+msgid "Keep the disconnected <literal>Session</literal> close to the persistence layer. Use an EJB stateful session bean to hold the <literal>Session</literal> in a three-tier environment. Do not transfer it to the web layer, or even serialize it to a separate tier, to store it in the <literal>HttpSession</literal>."
+msgstr "此外，也请注意，你应该让与数据库连接断开的 <literal>Session</literal> 对持久层保持关闭状态。换句话说，在三层环境中，使用有状态的 EJB session bean 来持 有<literal>Session</literal>， 而不要把它传递到 web 层（甚至把它序列化到一个单独的层），保存在 <literal>HttpSession</literal> 中。 "
+
+#. Tag: para
+#, no-c-format
+msgid "The extended session pattern, or <emphasis>session-per-conversation</emphasis>, is more difficult to implement with automatic current session context management. You need to supply your own implementation of the <literal>CurrentSessionContext</literal> for this. See the Hibernate Wiki for examples."
+msgstr "扩展 session 模式，或者被称为<emphasis>每次对话一个session（session-per-conversation）</emphasis>，自动管理当前 session 上下文联用的时候会更困难。你需要提供你自己的 <literal>CurrentSessionContext</literal> 实现。请参阅 Hibernate Wiki 以获得示例。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Detached objects and automatic versioning"
+msgstr "脱管对象（deatched object）和自动版本化"
+
+#. Tag: para
+#, no-c-format
+msgid "Each interaction with the persistent store occurs in a new <literal>Session</literal>. However, the same persistent instances are reused for each interaction with the database. The application manipulates the state of detached instances originally loaded in another <literal>Session</literal> and then reattaches them using <literal>Session.update()</literal>, <literal>Session.saveOrUpdate()</literal>, or <literal>Session.merge()</literal>."
+msgstr "这种方式下，与持久化存储的每次交互都发生在一个新的 <literal>Session</literal> 中。然而，同一持久化对象实例可以在多次与数据库的交互中重用。应用程序操纵脱管对象实例 的状态，这个脱管对象实例最初是在另一个 <literal>Session</literal> 中载入的，然后调用 <literal>Session.update()</literal>，<literal>Session.saveOrUpdate()</literal>，或者  <literal>Session.merge()</literal> 来重新关联该对象实例。"
+
+#. Tag: para
+#, no-c-format
+msgid "Again, Hibernate will check instance versions during flush, throwing an exception if conflicting updates occurred."
+msgstr "Hibernate 会再一次在同步的时候检查对象实例的版本，如果发生更新冲突，就抛出异常。 "
+
+#. Tag: para
+#, no-c-format
+msgid "You can also call <literal>lock()</literal> instead of <literal>update()</literal>, and use <literal>LockMode.READ</literal> (performing a version check and bypassing all caches) if you are sure that the object has not been modified."
+msgstr "如果你确信对象没有被修改过，你也可以调用 <literal>lock()</literal> 来设置  <literal>LockMode.READ</literal>（绕过所有的缓存，执行版本检查），从而取代  <literal>update()</literal> 操作。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Customizing automatic versioning"
+msgstr "定制自动版本化行为"
+
+#. Tag: para
+#, no-c-format
+msgid "You can disable Hibernate's automatic version increment for particular properties and collections by setting the <literal>optimistic-lock</literal> mapping attribute to <literal>false</literal>. Hibernate will then no longer increment versions if the property is dirty."
+msgstr "对于特定的属性和集合，通过为它们设置映射属性 <literal>optimistic-lock</literal> 的值为 <literal>false</literal>，来禁止 Hibernate 的版本自动增加。这样的话，如果该属性脏数据，Hibernate 将不再增加版本号。 "
+
+#. Tag: para
+#, no-c-format
+msgid "Legacy database schemas are often static and cannot be modified. Or, other applications might access the same database and will not know how to handle version numbers or even timestamps. In both cases, versioning cannot rely on a particular column in a table. To force a version check with a comparison of the state of all fields in a row but without a version or timestamp property mapping, turn on <literal>optimistic-lock=\"all\"</literal> in the <literal>&lt;class&gt;</literal> mapping. This conceptually only works if Hibernate can compare the old and the new state (i.e., if you use a single long <literal>Session</literal> and not session-per-request-with-detached-objects)."
+msgstr "遗留系统的数据库 Schema 通常是静态的，不可修改的。或者，其他应用程序也可能访问同一数据库，根本无法得知如何处理版本号，甚至时间戳。在以上的所有场景中，实现版本化不能依靠数据库表的某个特定列。在 <literal>&lt;class&gt;</literal> 的映射中设置  <literal>optimistic-lock=\"all\"</literal> 可以在没有版本或者时间戳属性映射的情况下实现版本检查，此时 Hibernate 将比较一行记录的每个字段的状态。请注意，只有当 Hibernate 能够比较新旧状态的情况下，这种方式才能生效，也就是说，你必须使用单个长生命周期 <literal>Session</literal> 模式，而不能使用 session-per-request-with-detached-objects 模式。 "
+
+#. Tag: para
+#, no-c-format
+msgid "Concurrent modification can be permitted in instances where the changes that have been made do not overlap. If you set <literal>optimistic-lock=\"dirty\"</literal> when mapping the <literal>&lt;class&gt;</literal>, Hibernate will only compare dirty fields during flush."
+msgstr "有些情况下，只要更改不发生交错，并发修改也是允许的。当你在 <literal>&lt;class&gt;</literal> 的映射中设置 <literal>optimistic-lock=\"dirty\"</literal>，Hibernate 在同步的时候将只比较有脏数据的字段。 "
+
+#. Tag: para
+#, no-c-format
+msgid "In both cases, with dedicated version/timestamp columns or with a full/dirty field comparison, Hibernate uses a single <literal>UPDATE</literal> statement, with an appropriate <literal>WHERE</literal> clause, per entity to execute the version check and update the information. If you use transitive persistence to cascade reattachment to associated entities, Hibernate may execute unnecessary updates. This is usually not a problem, but <emphasis>on update</emphasis> triggers in the database might be executed even when no changes have been made to detached instances. You can customize this behavior by setting <literal>select-before-update=\"true\"</literal> in the <literal>&lt;class&gt;</literal> mapping, forcing Hibernate to <literal>SELECT</literal> the instance to ensure that changes did occur before updating the row."
+msgstr "在以上所有场景中，不管是专门设置一个版本/时间戳列，还是进行全部字段/脏数据字段比较，Hibernate 都会针对每个实体对象发送一条 <literal>UPDATE</literal>（带有相应的 <literal>WHERE</literal> 语句 ）的 SQL 语句来执行版本检查和数据更新。如果你对关联实体 设置级联关系使用传播性持久化（transitive persistence），那么 Hibernate 可能会执行不必 要的update语句。这通常不是个问题，但是数据库里面对 <emphasis>on update</emphasis> 点火 的触发器可能在脱管对象没有任何更改的情况下被触发。因此，你可以在 <literal>&lt;class&gt;</literal> 的映射中，通过设置<literal>select-before-update=\"true\"</literal> 来定制这一行为，强制 Hibernate  <literal>SELECT</literal> 这个对象实例，从而保证，在更新记录之前，对象的确是被修改过。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Pessimistic locking"
+msgstr "悲观锁定（Pessimistic Locking） "
+
+#. Tag: para
+#, no-c-format
+msgid "It is not intended that users spend much time worrying about locking strategies. It is usually enough to specify an isolation level for the JDBC connections and then simply let the database do all the work. However, advanced users may wish to obtain exclusive pessimistic locks or re-obtain locks at the start of a new transaction."
+msgstr "用户其实并不需要花很多精力去担心锁定策略的问题。通常情况下，只要为 JDBC 连接指定一下隔离级别，然后让数据库去搞定一切就够了。然而，高级用户有时候希望进行一个排它的悲观锁定，或者在一个新的事务启动的时候，重新进行锁定。 "
+
+#. Tag: para
+#, no-c-format
+msgid "Hibernate will always use the locking mechanism of the database; it never lock objects in memory."
+msgstr "Hibernate 总是使用数据库的锁定机制，从不在内存中锁定对象。"
+
+#. Tag: para
+#, no-c-format
+msgid "The <literal>LockMode</literal> class defines the different lock levels that can be acquired by Hibernate. A lock is obtained by the following mechanisms:"
+msgstr "类 <literal>LockMode</literal> 定义了 Hibernate 所需的不同的锁定级别。一个锁定可以通过以下的机制来设置："
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>LockMode.WRITE</literal> is acquired automatically when Hibernate updates or inserts a row."
+msgstr "当 Hibernate 更新或者插入一行记录的时候，锁定级别自动设置为 <literal>LockMode.WRITE</literal>。"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>LockMode.UPGRADE</literal> can be acquired upon explicit user request using <literal>SELECT ... FOR UPDATE</literal> on databases which support that syntax."
+msgstr "当用户显式的使用数据库支持的 SQL 格式 <literal>SELECT ... FOR UPDATE</literal> 发送 SQL 的时候，锁定级别设置为 <literal>LockMode.UPGRADE</literal>。 "
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>LockMode.UPGRADE_NOWAIT</literal> can be acquired upon explicit user request using a <literal>SELECT ... FOR UPDATE NOWAIT</literal> under Oracle."
+msgstr "当用户显式的使用 Oracle 数据库的 SQL 语句 <literal>SELECT ... FOR UPDATE NOWAIT</literal> 的时候，锁定级别设置 <literal>LockMode.UPGRADE_NOWAIT</literal>。 "
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>LockMode.READ</literal> is acquired automatically when Hibernate reads data under Repeatable Read or Serializable isolation level. It can be re-acquired by explicit user request."
+msgstr "当 Hibernate 在“可重复读”或者是“序列化”数据库隔离级别下读取数据的时候，锁定模式自动设置为 <literal>LockMode.READ</literal>。这种模式也可以通过用户显式指定进行设置。 "
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>LockMode.NONE</literal> represents the absence of a lock. All objects switch to this lock mode at the end of a <literal>Transaction</literal>. Objects associated with the session via a call to <literal>update()</literal> or <literal>saveOrUpdate()</literal> also start out in this lock mode."
+msgstr "<literal>LockMode.NONE</literal> 代表无需锁定。在 <literal>Transaction</literal> 结束时， 所有的对象都切换到该模式上来。与 session 相关联的对象通过调用 <literal>update()</literal> 或者 <literal>saveOrUpdate()</literal> 脱离该模式。"
+
+#. Tag: para
+#, no-c-format
+msgid "The \"explicit user request\" is expressed in one of the following ways:"
+msgstr "\"显式的用户指定\"可以通过以下几种方式之一来表示："
+
+#. Tag: para
+#, no-c-format
+msgid "A call to <literal>Session.load()</literal>, specifying a <literal>LockMode</literal>."
+msgstr "调用 <literal>Session.load()</literal> 的时候指定<literal>锁定模式（LockMode）</literal>。"
+
+#. Tag: para
+#, no-c-format
+msgid "A call to <literal>Session.lock()</literal>."
+msgstr "调用 <literal>Session.lock()</literal>。"
+
+#. Tag: para
+#, no-c-format
+msgid "A call to <literal>Query.setLockMode()</literal>."
+msgstr "调用 <literal>Query.setLockMode()</literal>。"
+
+#. Tag: para
+#, no-c-format
+msgid "If <literal>Session.load()</literal> is called with <literal>UPGRADE</literal> or <literal>UPGRADE_NOWAIT</literal>, and the requested object was not yet loaded by the session, the object is loaded using <literal>SELECT ... FOR UPDATE</literal>. If <literal>load()</literal> is called for an object that is already loaded with a less restrictive lock than the one requested, Hibernate calls <literal>lock()</literal> for that object."
+msgstr "如果在 <literal>UPGRADE</literal> 或者 <literal>UPGRADE_NOWAIT</literal> 锁定模式下调用 <literal>Session.load()</literal>，并且要读取的对象尚未被 session 载入过，那么对象通过 <literal>SELECT ... FOR UPDATE</literal> 这样的 SQL 语句被载入。如果为一个对象调用  <literal>load()</literal> 方法时，该对象已经在另一个较少限制的锁定模式下被载入了，那么  Hibernate 就对该对象调用 <literal>lock()</literal> 方法。"
+
+#. Tag: para
+#, no-c-format
+msgid "<literal>Session.lock()</literal> performs a version number check if the specified lock mode is <literal>READ</literal>, <literal>UPGRADE</literal> or <literal>UPGRADE_NOWAIT</literal>. In the case of <literal>UPGRADE</literal> or <literal>UPGRADE_NOWAIT</literal>, <literal>SELECT ... FOR UPDATE</literal> is used."
+msgstr "如果指定的锁定模式是 <literal>READ</literal>，<literal>UPGRADE</literal> 或  <literal>UPGRADE_NOWAIT</literal>，那么 <literal>Session.lock()</literal> 就执行版本号检查。（在 <literal>UPGRADE</literal> 或者 <literal>UPGRADE_NOWAIT</literal> 锁定模式下，执行 <literal>SELECT ... FOR UPDATE</literal>这样的SQL语句。）"
+
+#. Tag: para
+#, no-c-format
+msgid "If the requested lock mode is not supported by the database, Hibernate uses an appropriate alternate mode instead of throwing an exception. This ensures that applications are portable."
+msgstr "如果数据库不支持用户设置的锁定模式，Hibernate 将使用适当的替代模式（而不是扔出异常）。这一点可以确保应用程序的可移植性。 "
+
+#. Tag: title
+#, no-c-format
+msgid "Connection release modes"
+msgstr "连接释放模式（Connection Release Modes） "
+
+#. Tag: para
+#, no-c-format
+msgid "One of the legacies of Hibernate 2.x JDBC connection management meant that a <literal>Session</literal> would obtain a connection when it was first required and then maintain that connection until the session was closed. Hibernate 3.x introduced the notion of connection release modes that would instruct a session how to handle its JDBC connections. The following discussion is pertinent only to connections provided through a configured <literal>ConnectionProvider</literal>. User-supplied connections are outside the breadth of this discussion. The different release modes are identified by the enumerated values of <literal>org.hibernate.ConnectionReleaseMode</literal>:"
+msgstr "Hibernate 关于 JDBC 连接管理的旧（2.x）行为是，<literal>Session</literal> 在第一次需要的时候获取一个连接，在 session 关闭之前一直会�

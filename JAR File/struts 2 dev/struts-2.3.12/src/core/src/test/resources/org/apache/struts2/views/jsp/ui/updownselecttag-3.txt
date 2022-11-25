@@ -1,0 +1,9 @@
+lerBinding_HotbarButtonCount_Button9_Description" "Isto define o número de botões que irão aparecer no teu menu de atalhos."
+	"ControllerBinding_HotbarButtonCount_Button12" "Número de botões no menu de atalhos - 12"
+	"ControllerBinding_HotbarButtonCount_Button12_Description" "Isto define o número de botões que irão aparecer no teu menu de atalhos."
+	"ControllerBinding_HotbarButtonCount_Button13" "Número de botões no menu de atalhos - 13"
+	"ControllerBinding_HotbarButtonCount_Button13_Description" "Isto define o número de botões que irão aparecer no teu menu de atalhos."
+	"ControllerBinding_HotbarButtonCount_Button16" "Número de botões no menu de atalhos - 16"
+	"ControllerBinding_HotbarButtonCount_Button16_Description" "Isto define o número de botões que irão aparecer no teu menu de atalhos."
+	"ControllerBinding_HotbarPosX" "Posição horizontal do menu de atalhos"
+	"ControllerBinding_HotbarPosX_Description" "Isto determina onde é que o menu de atalhos aparece no ecrã. E
